@@ -46,5 +46,7 @@ private:
 	/*  User Variables              */
 	Surface background = "trasa.bmp";
 	Car car;
+
+	int timer = 0;
 	/********************************/
 };

@@ -31,27 +31,25 @@ void Car::update()
 		break;
 	case DOWN:
 		yPos += (int)velocity;
+		break;
+	case LEFT:
+		xPos -= (int)velocity;
+		break;
+	case UP:
+		yPos -= (int)velocity;
 	default:
 		break;
 	}
 }
 
-void Car::speedup()
+void Car::speedup(bool faster)
 {
-	velocity += speed;
+	faster?
+		velocity += speed:
+		velocity -= speed;
 }
 
 void Car::draw(Graphics & gfx) const
 {
 	gfx.drawRectDim(xPos, yPos, width, height, c);
-	switch (dir)
-	{
-	case RIGHT:
-		gfx.drawRectDim(xPos, yPos, width, height, c);
-		break;
-	case DOWN:
-		gfx.drawRectDim(xPos, yPos, height, width, c);
-	default:
-		break;
-	}
 }

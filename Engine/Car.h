@@ -12,13 +12,13 @@ public:
 	void turnLeft();
 	void turnRight();
 	void update();
-	void speedup();
+	void speedup(bool faster = true);
 	void draw(Graphics& gfx) const;
 private:
 	float velocity;
 	float speed;//speedup rate
 	int xPos, yPos;
-	static constexpr int width = 100;
+	static constexpr int width = 25;
 	static constexpr int height = 25;
 	int dir;
 	Color c;

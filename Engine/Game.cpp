@@ -47,18 +47,27 @@ void Game::UpdateModel()
 	}
 	else if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
-		
+		car.speedup(false);
 	}
 	else if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
-		//delta_loc = { -1,0 };
+		if (timer > 4)
+		{
+			car.turnLeft();
+			timer = 0;
+		}
 	}
 	else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
-		car.turnRight();
+		if (timer > 4)
+		{
+			car.turnRight();
+			timer = 0;
+		}
 	}
 
 	car.update();
+	timer++;
 }
 
 void Game::ComposeFrame()
