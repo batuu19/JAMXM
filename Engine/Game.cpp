@@ -25,8 +25,9 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	car(100,100,Colors::Cyan)
+	car(70,70,Colors::Cyan)
 {
+	//gfx.drawSprite(0, 0, background);
 }
 
 void Game::Go()
@@ -39,10 +40,29 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	
+
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		car.speedup();
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		//delta_loc = { -1,0 };
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		car.turnRight();
+	}
+
+	car.update();
 }
 
 void Game::ComposeFrame()
 {
+	gfx.drawSprite(0, 0, background);
 	car.draw(gfx);
 }

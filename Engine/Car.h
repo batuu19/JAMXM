@@ -9,15 +9,18 @@ class Car
 public:
 	Car(int startX, int startY, Color c);
 
-	void update(Direction newDir);
+	void turnLeft();
+	void turnRight();
 	void update();
+	void speedup();
 	void draw(Graphics& gfx) const;
 private:
 	float velocity;
+	float speed;//speedup rate
 	int xPos, yPos;
 	static constexpr int width = 100;
 	static constexpr int height = 25;
-	Direction dir;
+	int dir;
 	Color c;
 
 
