@@ -307,7 +307,7 @@ void Graphics::BeginFrame()
 	memset( pSysBuffer,0u,sizeof( Color ) * Graphics::ScreenHeight * Graphics::ScreenWidth );
 }
 
-void Graphics::PutPixel( int x,int y,Color c )
+void Graphics::putPixel( int x,int y,Color c )
 {
 	assert( x >= 0 );
 	assert( x < int( Graphics::ScreenWidth ) );
@@ -331,7 +331,7 @@ void Graphics::drawRect(int x0, int y0, int x1, int y1, Color c)
 	{
 		for (int x = x0; x < x1; ++x)
 		{
-			PutPixel(x, y, c);
+			putPixel(x, y, c);
 		}
 	}
 }
@@ -345,7 +345,7 @@ void Graphics::drawSprite(int x, int y, const Surface & s)
 	{
 		for (int sx = 0; sx < width; sx++)
 		{
-			PutPixel(x + sx, y + sy, s.getPixel(sx, sy));
+			putPixel(x + sx, y + sy, s.getPixel(sx, sy));
 		}
 	}
 }

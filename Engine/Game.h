@@ -25,6 +25,8 @@
 #include "Graphics.h"
 #include "Surface.h"
 #include "Car.h"
+#include "FrameTimer.h"
+#include "Map.h"
 
 class Game
 {
@@ -44,8 +46,9 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	Surface background = "trasa.bmp";
+	Map map;
 	Car car;
+	FrameTimer ft;
 
 	int timer = 0;
 	/********************************/

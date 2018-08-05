@@ -53,11 +53,11 @@ public:
 	Graphics& operator=( const Graphics& ) = delete;
 	void EndFrame();
 	void BeginFrame();
-	void PutPixel( int x,int y,int r,int g,int b )
+	void putPixel( int x,int y,int r,int g,int b )
 	{
-		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
+		putPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
-	void PutPixel( int x,int y,Color c );
+	void putPixel( int x,int y,Color c );
 
 	void drawRect(int x0, int y0, int x1, int y1, Color c);
 	void drawRectDim(int x0, int y0, int width, int height, Color c)
