@@ -24,7 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	car(100,100,Colors::Cyan)
 {
 }
 
@@ -38,9 +39,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	
 }
 
 void Game::ComposeFrame()
 {
-	gfx.drawSprite(0, 0, surf);
+	car.draw(gfx);
 }

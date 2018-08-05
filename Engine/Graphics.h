@@ -58,6 +58,12 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
+
+	void drawRect(int x0, int y0, int x1, int y1, Color c);
+	void drawRectDim(int x0, int y0, int width, int height, Color c)
+	{
+		drawRect(x0, y0, x0 + width, y0 + height, c);
+	}
 	void drawSprite(int x, int y, const Surface& s);
 	~Graphics();
 private:

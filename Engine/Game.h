@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Surface.h"
+#include "Car.h"
 
 class Game
 {
@@ -43,6 +44,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	Surface surf = Surface( "prostokat.bmp" );
+	Surface background = "trasa.bmp";
+	Car car;
 	/********************************/
 };
