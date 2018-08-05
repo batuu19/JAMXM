@@ -64,6 +64,7 @@ public:
 	{
 		drawRect(x0, y0, x0 + width, y0 + height, c);
 	}
+	void draw45Rect(int x0, int y0, int up, int down, Color c);
 	void drawSprite(int x, int y, const Surface& s);
 	~Graphics();
 private:

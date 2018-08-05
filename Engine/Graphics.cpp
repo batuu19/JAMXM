@@ -336,6 +336,37 @@ void Graphics::drawRect(int x0, int y0, int x1, int y1, Color c)
 	}
 }
 
+
+//todo
+void Graphics::draw45Rect(int x0, int y0, int up, int down, Color c)
+{
+	int startx = x0;
+	int starty = y0;
+	int i;
+	int j = 0;
+	while (j < down)
+	{
+
+		i = 0;
+		while (i < up)
+		{
+			putPixel(startx + i, starty - i, c);
+			i++;
+		}
+		i = 0;
+		startx++;
+		while (i < up)
+		{
+			putPixel(startx + i, starty - i, c);
+			i++;
+		}
+		starty++;
+		j++;
+	}
+
+	
+}
+
 void Graphics::drawSprite(int x, int y, const Surface & s)
 {
 	const int width = s.getWidth();
