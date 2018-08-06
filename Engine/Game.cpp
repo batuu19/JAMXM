@@ -74,5 +74,5 @@ void Game::ComposeFrame()
 {
 	map.draw();
 	car.draw(gfx);
-
+	//test
 }
