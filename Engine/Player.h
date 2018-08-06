@@ -13,8 +13,8 @@ private:
 	Car car;
 	
 	FrameTimer ft;
-	float leftTurn = 0.0f;
-	float rightTurn = 0.0f;
-	const float turnRate = 0.5f;
 
+	const float turnRate = 0.2f;
+	float leftTurn = turnRate;
+	float rightTurn = turnRate;
 };

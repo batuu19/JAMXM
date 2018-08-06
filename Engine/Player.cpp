@@ -20,17 +20,26 @@ void Player::update(Keyboard & kbd)
 	}
 	else if (kbd.KeyIsPressed(VK_LEFT))
 	{
-
-		//todo slower
-		car.turnLeft();
+		if (leftTurn >= turnRate)
+		{
+			car.turnLeft();
+			leftTurn = 0.0f;
+		}
+		
 	}
 	else if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		//todo slower
-		car.turnRight();
+		if (rightTurn >= turnRate)
+		{
+			car.turnRight();
+			rightTurn = 0.0f;
+		}
 	}
 
 	car.update();
+
+	leftTurn += dt;
+	rightTurn += dt;
 }
 
 void Player::draw(Graphics & gfx)
