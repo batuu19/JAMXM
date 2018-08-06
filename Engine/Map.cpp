@@ -9,10 +9,11 @@ Map::Map(Graphics & gfx)
 {
 }
 
-Map::Map(const std::string & filename, Graphics & gfx)
+Map::Map(const Config & config, Graphics & gfx)
 	:
 	gfx(gfx)
 {
+	std::string filename = config.getMapFilename();
 	std::ifstream file(filename, std::ios::binary); BITMAPFILEHEADER bmFileHeader;
 	file.read(reinterpret_cast<char*>(&bmFileHeader), sizeof(bmFileHeader));
 

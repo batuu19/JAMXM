@@ -2,6 +2,7 @@
 
 #include "Colors.h"
 #include "Graphics.h"
+#include "Config.h"
 #include <fstream>
 #include <assert.h>
 
@@ -11,7 +12,7 @@ class Map
 {
 public:
 	Map(Graphics&);
-	Map(const std::string& filename,Graphics&);
+	Map(const Config&,Graphics&);
 	Map(const Map&);
 	Map& operator=(const Map&) = delete;
 	~Map();

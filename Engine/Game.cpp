@@ -25,8 +25,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	map("trasa.bmp",gfx),
-	player(Car(70,70,Colors::Cyan))
+	map(config,gfx),
+	player(Car(config))
 {
 }
 

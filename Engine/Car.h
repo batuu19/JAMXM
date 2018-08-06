@@ -3,6 +3,7 @@
 #include "Graphics.h"
 #include "Directions.h"
 #include "FrameTimer.h"
+#include "Config.h"
 #include <math.h>
 #include <algorithm>
 
@@ -10,7 +11,7 @@ class Car
 {
 
 public:
-	Car(int startX, int startY, Color c);
+	Car(Config&);
 
 	void turnLeft();
 	void turnRight();
@@ -19,16 +20,16 @@ public:
 	void draw(Graphics& gfx) const;
 private:
 	float xPos, yPos;
-	float velocity = 0.0f;
-	float speed = 0.4f;;//speedup rate
+	float velocity;
+	float speed;//speedup rate
+	float maxVel;
 	int dir = RIGHT;
 	Color c;
 	const int width = 25;
 	const int height = 25;
-	const float maxVel = 7.0f;
 
 	FrameTimer ft;
-	const float turnRate = 0.18f;
-	float leftTurn = turnRate;
-	float rightTurn = turnRate;
+	float turnRate;
+	float leftTurn;
+	float rightTurn;
 };

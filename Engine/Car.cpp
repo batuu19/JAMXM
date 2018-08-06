@@ -1,11 +1,18 @@
 #include "Car.h"
 
-Car::Car(int startX, int startY, Color c)
-	:
-	xPos(startX),
-	yPos(startY),
-	c(c)
+Car::Car(Config& config)
 {
+	xPos = (float)config.getCarStartXPos();
+	yPos = (float)config.getCarStartYPos();
+	velocity = config.getCarStartVelocity();
+	speed = config.getCarSpeed();
+	dir = config.getCarStartDir();
+	c = config.getCarColor();
+	maxVel = config.getCarMaxVelocity();
+
+	turnRate = config.getCarTurnRate();
+	leftTurn = 0.0f;
+	rightTurn = 0.0f;
 }
 
 void Car::turnLeft()
@@ -101,10 +108,10 @@ void Car::draw(Graphics & gfx) const
 
 	if (dir % 2)
 	{
-		const float newWidth = (float)width / (float)sqrt(2);
-		const float newHeight = (float)height / (float)sqrt(2);
-		gfx.draw45Rect(xPos, yPos, newWidth, newHeight, c);
+		const int newWidth = (int)((float)width / (float)sqrt(2));
+		const int newHeight = (int)((float)height / (float)sqrt(2));
+		gfx.draw45Rect((int)xPos, (int)yPos, newWidth, newHeight, c);
 	}
 	else
-		gfx.drawRectDim(xPos, yPos, width, height, c);
+		gfx.drawRectDim((int)xPos, (int)yPos, width, height, c);
 }

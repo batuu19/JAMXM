@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "Map.h"
 #include "Player.h"
+#include "Config.h"
 
 class Game
 {
@@ -44,6 +45,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	Config config = "config.txt";
 	Map map;
 	Player player;
 	

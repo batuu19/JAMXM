@@ -1,0 +1,16 @@
+[Car start pos]
+70 70
+[Car start direction]
+right
+[Car start velocity]
+0
+[Car speed]
+0.4
+[Car max velocity]
+6
+[Car turn rate]
+0.18
+[Car color]
+0 255 255
+[Map file name]
+trasa.bmp
