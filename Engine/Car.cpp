@@ -6,7 +6,7 @@ Car::Car(int startX, int startY, Color c)
 	yPos(startY),
 	c(c)
 {
-	velocity = 2.0f;
+	velocity = 0.0f;
 	speed = 0.4f;
 	dir = RIGHT;
 }
@@ -74,5 +74,4 @@ void Car::draw(Graphics & gfx) const
 	dir % 2 ?
 		gfx.draw45Rect(xPos, yPos, newWidth, newHeight, c) :
 		gfx.drawRectDim(xPos, yPos, width, height, c);
-
 }

@@ -26,7 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	map("trasa2.bmp",gfx),
-	car(70,70,Colors::Cyan)
+	player(Car(70,70,Colors::Cyan))
 {
 }
 
@@ -41,38 +41,12 @@ void Game::Go()
 void Game::UpdateModel()
 {
 
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		car.speedup();
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		car.speedup(false);
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		if (timer > 4)
-		{
-			car.turnLeft();
-			timer = 0;
-		}
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		if (timer > 4)
-		{
-			car.turnRight();
-			timer = 0;
-		}
-	}
-
-	car.update();
-	timer++;
+	player.update(wnd.kbd);
 }
 
 void Game::ComposeFrame()
 {
-	map.draw();
-	car.draw(gfx);
+	//map.draw();
+	player.draw(gfx);
 	//test
 }

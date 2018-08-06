@@ -23,10 +23,8 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
-#include "Surface.h"
-#include "Car.h"
-#include "FrameTimer.h"
 #include "Map.h"
+#include "Player.h"
 
 class Game
 {
@@ -47,9 +45,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Map map;
-	Car car;
-	FrameTimer ft;
-
-	int timer = 0;
+	Player player;
+	
 	/********************************/
 };
