@@ -25,10 +25,9 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	map("trasa.bmp",gfx),
+	map("trasa2.bmp",gfx),
 	car(70,70,Colors::Cyan)
 {
-	//gfx.drawSprite(0, 0, background);
 }
 
 void Game::Go()
@@ -73,9 +72,7 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	/*map.draw();
-	car.draw(gfx);*/
+	map.draw();
+	car.draw(gfx);
 
-	gfx.draw45Rect(100, 100, 50, 50, Colors::White);
-	gfx.drawRectDim(200, 200, 200, 200, Colors::White);
 }

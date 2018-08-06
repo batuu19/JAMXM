@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include "Directions.h"
+#include <math.h>
 
 class Car
 {
