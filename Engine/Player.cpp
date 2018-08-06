@@ -20,20 +20,12 @@ void Player::update(Keyboard & kbd)
 	}
 	else if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		if (leftTurn >= turnRate)
-		{
-			car.turnLeft();
-			leftTurn = 0.0f;
-		}
+		car.turnLeft();
 		
 	}
 	else if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		if (rightTurn >= turnRate)
-		{
-			car.turnRight();
-			rightTurn = 0.0f;
-		}
+		car.turnRight();
 	}
 
 	car.update();

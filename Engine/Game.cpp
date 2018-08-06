@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	map("trasa2.bmp",gfx),
+	map("trasa.bmp",gfx),
 	player(Car(70,70,Colors::Cyan))
 {
 }
@@ -46,7 +46,7 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	//map.draw();
+	map.draw();
 	player.draw(gfx);
 	//test
 }

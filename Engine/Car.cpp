@@ -10,12 +10,25 @@ Car::Car(int startX, int startY, Color c)
 
 void Car::turnLeft()
 {
-	dir = (dir - 1 + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
+	const float dt = ft.mark();
+	if (leftTurn >= turnRate)
+	{
+		dir = (dir - 1 + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
+		leftTurn = 0.0f;
+	}
+	leftTurn += dt;
 }
 
 void Car::turnRight()
 {
-	dir = (dir + 1) % DIRECTIONS_COUNT;
+	const float dt = ft.mark();
+
+	if (rightTurn >= turnRate)
+	{
+		dir = (dir + 1) % DIRECTIONS_COUNT;
+		rightTurn = 0.0f;
+	}
+	rightTurn += dt;
 }
 
 
@@ -70,6 +83,8 @@ void Car::update()
 			break;
 		}
 	}
+
+	velocity = std::min(maxVel, std::max(0.0f,velocity));
 }
 
 void Car::speedup(bool faster)
