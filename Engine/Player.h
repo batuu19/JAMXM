@@ -11,10 +11,5 @@ public:
 	void draw(Graphics &);
 private:
 	Car car;
-	
-	FrameTimer ft;
 
-	const float turnRate = 0.2f;
-	float leftTurn = turnRate;
-	float rightTurn = turnRate;
 };

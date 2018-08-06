@@ -48,5 +48,4 @@ void Game::ComposeFrame()
 {
 	map.draw();
 	player.draw(gfx);
-	//test
 }

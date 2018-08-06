@@ -96,10 +96,15 @@ void Car::speedup(bool faster)
 
 void Car::draw(Graphics & gfx) const
 {
-	const float newWidth = (float)width / (float)sqrt(2);
-	const float newHeight = (float)height / (float)sqrt(2);
 
-	dir % 2 ?
-		gfx.draw45Rect(xPos, yPos, newWidth, newHeight, c) :
+	//todo
+
+	if (dir % 2)
+	{
+		const float newWidth = (float)width / (float)sqrt(2);
+		const float newHeight = (float)height / (float)sqrt(2);
+		gfx.draw45Rect(xPos, yPos, newWidth, newHeight, c);
+	}
+	else
 		gfx.drawRectDim(xPos, yPos, width, height, c);
 }

@@ -8,7 +8,6 @@ Player::Player( Car & car)
 
 void Player::update(Keyboard & kbd)
 {
-	const float dt = ft.mark();
 
 	if (kbd.KeyIsPressed(VK_UP))
 	{
@@ -29,9 +28,6 @@ void Player::update(Keyboard & kbd)
 	}
 
 	car.update();
-
-	leftTurn += dt;
-	rightTurn += dt;
 }
 
 void Player::draw(Graphics & gfx)
