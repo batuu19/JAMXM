@@ -16,12 +16,12 @@ public:
 	void speedup(bool faster = true);
 	void draw(Graphics& gfx) const;
 private:
-	float velocity;
-	float speed;//speedup rate
-	int xPos, yPos;
+	float velocity = 0.0f;
+	float speed = 0.4f;;//speedup rate
+	float xPos, yPos;
 	static constexpr int width = 25;
 	static constexpr int height = 25;
-	int dir;
+	int dir = RIGHT;
 	Color c;
 
 

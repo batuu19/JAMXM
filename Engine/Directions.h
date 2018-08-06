@@ -9,3 +9,4 @@ static constexpr int DOWN_LEFT = 5;
 static constexpr int LEFT = 6;
 static constexpr int UP_LEFT = 7;
 static constexpr int DIRECTIONS_COUNT= 8;
+

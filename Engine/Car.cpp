@@ -6,9 +6,6 @@ Car::Car(int startX, int startY, Color c)
 	yPos(startY),
 	c(c)
 {
-	velocity = 0.0f;
-	speed = 0.4f;
-	dir = RIGHT;
 }
 
 void Car::turnLeft()
@@ -24,38 +21,54 @@ void Car::turnRight()
 
 void Car::update()
 {
-	switch (dir)
+
+	bool isSimpleDir = !(dir % 2);
+
+	if (isSimpleDir)
 	{
-	case UP:
-		yPos -= (int)velocity;
-		break;
-	case UP_RIGHT:
-		yPos -= (int)velocity;
-		xPos += (int)velocity;
-		break;
-	case RIGHT:
-		xPos += (int)velocity;
-		break;
-	case DOWN_RIGHT:
-		xPos += (int)velocity;
-		yPos += (int)velocity;
-		break;
-	case DOWN:
-		yPos += (int)velocity;
-		break;
-	case DOWN_LEFT:
-		yPos += (int)velocity;
-		xPos -= (int)velocity;
-		break;
-	case LEFT:
-		xPos -= (int)velocity;
-		break;
-	case UP_LEFT:
-		xPos -= (int)velocity;
-		yPos -= (int)velocity;
-		break;
-	default:
-		break;
+		switch (dir)
+		{
+		case UP:
+			yPos -= (int)velocity;
+			break;
+		case RIGHT:
+			xPos += (int)velocity;
+			break;
+		case DOWN:
+			yPos += (int)velocity;
+			break;
+		case LEFT:
+			xPos -= (int)velocity;
+			break;
+		default:
+			break;
+		}
+	}
+	else
+	{
+		//round up? (ceil)
+		int newVelocity = (int)(velocity / sqrt(2) );
+		switch (dir)
+		{
+		case UP_RIGHT:
+			yPos -= newVelocity;
+			xPos += newVelocity;
+			break;
+		case DOWN_RIGHT:
+			xPos += newVelocity;
+			yPos += newVelocity;
+			break;
+		case DOWN_LEFT:
+			yPos += newVelocity;
+			xPos -= newVelocity;
+			break;
+		case UP_LEFT:
+			xPos -= newVelocity;
+			yPos -= newVelocity;
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -68,8 +81,8 @@ void Car::speedup(bool faster)
 
 void Car::draw(Graphics & gfx) const
 {
-	const float newWidth = (float)width * (float)sqrt(2) / 2.0f;
-	const float newHeight = (float)height * (float)sqrt(2) / 2.0f;
+	const float newWidth = (float)width / (float)sqrt(2);
+	const float newHeight = (float)height / (float)sqrt(2);
 
 	dir % 2 ?
 		gfx.draw45Rect(xPos, yPos, newWidth, newHeight, c) :
