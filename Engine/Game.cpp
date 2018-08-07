@@ -28,6 +28,7 @@ Game::Game( MainWindow& wnd )
 	map(config,gfx),
 	player(Car(config))
 {
+	Debug::clear();
 }
 
 void Game::Go()

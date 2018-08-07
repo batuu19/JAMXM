@@ -70,9 +70,5 @@ void Map::draw()
 
 void Map::putPixel(int x, int y, Color c)
 {
-	assert(x >= 0);
-	assert(x < int(Graphics::ScreenWidth));
-	assert(y >= 0);
-	assert(y < int(Graphics::ScreenHeight));
 	pPixels[y* gfx.ScreenWidth + x] = c;
 }

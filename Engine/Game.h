@@ -26,6 +26,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Config.h"
+#include "Debug.h"
 
 class Game
 {
