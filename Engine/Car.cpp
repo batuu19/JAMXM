@@ -103,15 +103,40 @@ void Car::speedup(bool faster)
 
 void Car::draw(Graphics & gfx) const
 {
+	drawCar(gfx);
+}
 
-	//todo
+void Car::drawCar(Graphics & gfx) const
+{
+	if (isSimpleDirection(dir))
+	{
 
-	if (dir % 2)
+		gfx.drawRectDim((int)xPos, (int)yPos, width, height, c);
+		switch (dir)
+		{
+		case RIGHT:
+		{
+
+			break;
+		}
+			
+		case LEFT:
+
+			break;
+		case DOWN:
+
+			break;
+		case UP:
+
+			break;
+		default:
+			break;
+		}
+	}
+	else
 	{
 		const int newWidth = (int)((float)width / (float)sqrt(2));
 		const int newHeight = (int)((float)height / (float)sqrt(2));
 		gfx.draw45Rect((int)xPos, (int)yPos, newWidth, newHeight, c);
 	}
-	else
-		gfx.drawRectDim((int)xPos, (int)yPos, width, height, c);
 }

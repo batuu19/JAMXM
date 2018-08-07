@@ -17,7 +17,7 @@ public:
 	void turnRight();
 	void update();
 	void speedup(bool faster = true);
-	void draw(Graphics& gfx) const;
+	void draw(Graphics&) const;
 private:
 	float xPos, yPos;
 	float velocity;
@@ -32,4 +32,6 @@ private:
 	float turnRate;
 	float leftTurn;
 	float rightTurn;
+
+	void drawCar(Graphics &) const;
 };

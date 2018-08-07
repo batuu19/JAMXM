@@ -15,4 +15,6 @@ void Debug::writeMessage(std::string message, std::string filename)
 	char* dt = asctime(gmtm);
 
 	out << dt <<message <<"\n";
+
+	//add additional info?
 }

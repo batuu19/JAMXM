@@ -1,4 +1,0 @@
-Tue Aug  7 10:12:59 2018
-Error: ale ogolnie wszystko ok
-Tue Aug  7 10:12:59 2018
-Warning: test test
