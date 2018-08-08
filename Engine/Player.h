@@ -2,6 +2,7 @@
 #include "Keyboard.h"
 #include "Car.h"
 #include "FrameTimer.h"
+#include "Debug.h"
 
 class Player
 {

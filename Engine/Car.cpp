@@ -53,7 +53,7 @@ Car::Car(const Car & rhs)
 	yPos(rhs.yPos),
 	velocity(rhs.velocity),
 	speed(rhs.speed),
-	maxVel(rhs.velocity),
+	maxVel(rhs.maxVel),
 	dir(rhs.dir),
 	c(rhs.c),
 	width(rhs.width),
@@ -82,7 +82,7 @@ void Car::turnLeft()
 	const float dt = ft.mark();
 	if (leftTurn >= turnRate)
 	{
-		dir = (dir - 1 + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
+		dir = (dir - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
 		leftTurn = 0.0f;
 	}
 	leftTurn += dt;
@@ -94,12 +94,11 @@ void Car::turnRight()
 
 	if (rightTurn >= turnRate)
 	{
-		dir = (dir + 1) % DIRECTIONS_COUNT;
+		dir = (dir + turnValue) % DIRECTIONS_COUNT;
 		rightTurn = 0.0f;
 	}
 	rightTurn += dt;
 }
-
 
 void Car::update()
 {
@@ -167,6 +166,15 @@ void Car::draw(Graphics & gfx) const
 	drawCar(gfx);
 }
 
+std::string Car::getDebugInfo() const
+{
+	std::stringstream ss;
+
+	ss << "x=" << xPos << " y=" << yPos << " vel=" << velocity << " maxVel=" << maxVel;
+
+	return ss.str();
+}
+
 //TODO: 
 void Car::drawCar(Graphics & gfx) const
 {
@@ -174,30 +182,35 @@ void Car::drawCar(Graphics & gfx) const
 	Color paddingColor = Colors::Red;
 	if (isSimpleDirection(dir))
 	{
-		switch (dir)
+		//warning conversion from float to int
+		for (int i = 0; i < height; i++)//y
 		{
-		case UP:
-			//warning conversion from float to int
-			for (int y = 0; y <  height; y++)
+			for (int j = 0; j < width; j++)//x
 			{
-				for (int x = 0; x < width; x++)
+				//switch here? and if
+				switch (dir)
 				{
-					//switch here
-					gfx.putPixel(x + xPos, y + yPos, pPixels[y * width + x]);
+				case UP:
+					gfx.putPixel(j + xPos,height - i + yPos , pPixels[i * width + j]);
+					break;
+				case RIGHT:
+					gfx.putPixel(i + xPos, j + yPos, pPixels[i * width + j]);
+					break;
+				case LEFT:
+					gfx.putPixel(width - i + xPos, j + yPos, pPixels[i * width + j]);
+					break;
+				case DOWN:
+					gfx.putPixel(j + xPos, i + yPos, pPixels[i * width + j]);
+					break;
+				default:
+					break;
 				}
 			}
-			break;
-		case RIGHT:
-			break;
-		case LEFT:			
-			break;
-		case DOWN:
-			break;
-		default:
-			break;
 		}
+	
 
 	}
+	//TODO: NOT SIMPLE DIRECTIONS TO DO
 	else
 	{
 		const int newWidth = (int)((float)width / (float)sqrt(2));

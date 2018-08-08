@@ -7,6 +7,7 @@
 #include <math.h>
 #include <algorithm>
 #include <assert.h>
+#include <sstream>
 
 class Car
 {
@@ -22,6 +23,8 @@ public:
 	void update();
 	void speedup(bool faster = true);
 	void draw(Graphics&) const;
+
+	std::string getDebugInfo() const;
 private:
 	float xPos, yPos;
 	float velocity;
@@ -38,6 +41,7 @@ private:
 	float turnRate;
 	float leftTurn = 0.0f;
 	float rightTurn = 0.0f;
+	int turnValue = 2;//how many directions at once
 
 	void drawCar(Graphics &) const;
 };

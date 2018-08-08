@@ -27,6 +27,11 @@ void Player::update(Keyboard & kbd)
 	{
 		car.turnRight();
 	}
+	
+	if (kbd.KeyIsPressed(VK_SPACE))
+	{
+		Debug::writeMessage(car.getDebugInfo());
+	}
 
 	car.update();
 }

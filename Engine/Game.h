@@ -49,8 +49,7 @@ private:
 	/*  User Variables              */
 	Config config = "config.txt";
 	Map map;
-	//Player player;
-	Car car;
+	Player player;
 
 	bool pressed = false;
 	

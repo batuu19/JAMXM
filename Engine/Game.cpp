@@ -26,8 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	map(config,gfx),
-	//player(Car(config))
-	car(config)
+	player(Car(config))
 {
 	Debug::clear();
 }
@@ -43,7 +42,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 
-	//player.update(wnd.kbd);
+	player.update(wnd.kbd);
 
 	//to sprawdzania wymiarów
 	//int x, y;
@@ -70,7 +69,6 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	map.draw();
-	//player.draw(gfx);
-	car.draw(gfx);
+	player.draw(gfx);
 	
 }
