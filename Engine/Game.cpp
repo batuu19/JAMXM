@@ -26,7 +26,8 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	map(config,gfx),
-	player(Car(config))
+	//player(Car(config))
+	car(config)
 {
 	Debug::clear();
 }
@@ -42,11 +43,34 @@ void Game::Go()
 void Game::UpdateModel()
 {
 
-	player.update(wnd.kbd);
+	//player.update(wnd.kbd);
+
+	//to sprawdzania wymiarów
+	//int x, y;
+
+	//if (wnd.mouse.LeftIsPressed())
+	//{
+	//	if(!pressed)
+	//	{
+	//		x = wnd.mouse.GetPosX();
+	//		y = wnd.mouse.GetPosY();
+
+	//		std::stringstream ss;
+	//		ss << "Mouse at " << x << " " << y;
+	//		Debug::writeInfo(ss.str());
+
+	//		pressed = true;
+	//	}
+	//	
+	//}
+	//else 
+	//	pressed = false;
 }
 
 void Game::ComposeFrame()
 {
 	map.draw();
-	player.draw(gfx);
+	//player.draw(gfx);
+	car.draw(gfx);
+	
 }

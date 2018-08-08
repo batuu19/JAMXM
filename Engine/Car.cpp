@@ -11,8 +11,70 @@ Car::Car(Config& config)
 	maxVel = config.getCarMaxVelocity();
 
 	turnRate = config.getCarTurnRate();
-	leftTurn = 0.0f;
-	rightTurn = 0.0f;
+
+	//loading image
+	//TODO: class for images
+	std::string filename = config.getCarImageFileName();
+
+	std::ifstream file(filename, std::ios::binary);
+
+	BITMAPFILEHEADER bmFileHeader;
+	file.read(reinterpret_cast<char*>(&bmFileHeader), sizeof(bmFileHeader));
+
+	BITMAPINFOHEADER bmInfoHeader;
+	file.read(reinterpret_cast<char*>(&bmInfoHeader), sizeof(bmInfoHeader));
+
+	assert(bmInfoHeader.biBitCount == 24);
+	assert(bmInfoHeader.biCompression == BI_RGB);
+
+	width = bmInfoHeader.biWidth;
+	height = bmInfoHeader.biHeight;
+
+	pPixels = new Color[width * height];
+
+	file.seekg(bmFileHeader.bfOffBits);
+	const int padding = (4 - (width * 3) % 4) % 4;
+
+
+	//TODO: better loading, from car's back to front
+	for (int y = height - 1; y >= 0; y--)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			pPixels[y* width + x] = Color(file.get(), file.get(), file.get());
+		}
+		file.seekg(padding, std::ios::cur);
+	}
+}
+
+Car::Car(const Car & rhs)
+	:
+	xPos(rhs.xPos),
+	yPos(rhs.yPos),
+	velocity(rhs.velocity),
+	speed(rhs.speed),
+	maxVel(rhs.velocity),
+	dir(rhs.dir),
+	c(rhs.c),
+	width(rhs.width),
+	height(rhs.height),
+	pPixels(new Color[width * height]),
+	ft(rhs.ft),
+	turnRate(rhs.turnRate)
+
+{
+	const int nPixels = width * height;
+	for (int i = 0; i < nPixels; i++)
+	{
+		pPixels[i] = rhs.pPixels[i];
+	}
+}
+
+
+Car::~Car()
+{
+	delete[] pPixels;
+	pPixels = nullptr;
 }
 
 void Car::turnLeft()
@@ -41,7 +103,6 @@ void Car::turnRight()
 
 void Car::update()
 {
-
 	bool isSimpleDir = !(dir % 2);
 
 	if (isSimpleDir)
@@ -113,93 +174,24 @@ void Car::drawCar(Graphics & gfx) const
 	Color paddingColor = Colors::Red;
 	if (isSimpleDirection(dir))
 	{
-		int fixedX, fixedY, dX, dY;//delta X | delta Y
-
-		//gfx.drawRectDim((int)xPos, (int)yPos, width, height, c);
 		switch (dir)
 		{
-		case RIGHT:
-			fixedX = xPos - width / 2;
-			fixedY = yPos - height / 2;
-
-			for (int y = fixedY; y < fixedY + height; y++)
+		case UP:
+			//warning conversion from float to int
+			for (int y = 0; y <  height; y++)
 			{
-				int x = fixedX;
-				while (x < fixedX + width - padding)
+				for (int x = 0; x < width; x++)
 				{
-					gfx.putPixel(x, y, c);
-					x++;
+					//switch here
+					gfx.putPixel(x + xPos, y + yPos, pPixels[y * width + x]);
 				}
-				while (x < fixedX + width)
-				{
-					gfx.putPixel(x, y, paddingColor);
-					x++;
-				}
-
 			}
-
 			break;
-			
-		case LEFT:
-			fixedX = xPos + width / 2;
-			fixedY = yPos - height / 2;
-
-			for (int y = fixedY; y < fixedY + height; y++)
-			{
-				int x = fixedX;
-				while (x > fixedX - width + padding)
-				{
-					gfx.putPixel(x, y, c);
-					x--;
-				}
-				while (x > fixedX - width)
-				{
-					gfx.putPixel(x, y, paddingColor);
-					x--;
-				}
-
-			}
-			
+		case RIGHT:
+			break;
+		case LEFT:			
 			break;
 		case DOWN:
-			fixedX = xPos - width / 2;
-			fixedY = yPos - height / 2;
-			for (int x = fixedX; x < fixedX + width; x++)
-			{
-				int y = fixedY;
-				while (y < fixedY + height - padding)
-				{
-					gfx.putPixel(x, y, c);
-					y++;
-				}
-				while (y < fixedY + height)
-				{
-					gfx.putPixel(x, y, paddingColor);
-					y++;
-				}
-			}
-
-			break;
-		case UP:
-			fixedX = xPos - width / 2;
-			fixedY = yPos + height / 2;
-
-			for (int x = fixedX; x < fixedX + width; x++)
-			{
-				int y = fixedY;
-				while (y > fixedY - height + padding)
-				{
-					gfx.putPixel(x, y, c);
-					y--;
-				}
-				while (y > fixedY - height)
-				{
-					gfx.putPixel(x, y, paddingColor);
-					y--;
-				}
-			}
-
-
 			break;
 		default:
 			break;

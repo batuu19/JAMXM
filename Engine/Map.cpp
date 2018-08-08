@@ -14,7 +14,8 @@ Map::Map(const Config & config, Graphics & gfx)
 	gfx(gfx)
 {
 	std::string filename = config.getMapFilename();
-	std::ifstream file(filename, std::ios::binary); BITMAPFILEHEADER bmFileHeader;
+	std::ifstream file(filename, std::ios::binary); 
+	BITMAPFILEHEADER bmFileHeader;
 	file.read(reinterpret_cast<char*>(&bmFileHeader), sizeof(bmFileHeader));
 
 	BITMAPINFOHEADER bmInfoHeader;
@@ -53,7 +54,7 @@ Map::Map(const Map & rhs)
 
 Map::~Map()
 {
-	delete pPixels;
+	delete[] pPixels;
 	pPixels = nullptr;
 }
 

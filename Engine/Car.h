@@ -6,12 +6,16 @@
 #include "Config.h"
 #include <math.h>
 #include <algorithm>
+#include <assert.h>
 
 class Car
 {
 
 public:
 	Car(Config&);
+	Car (const Car&);
+	Car& operator=(const Car&) = delete;
+	~Car();
 
 	void turnLeft();
 	void turnRight();
@@ -23,15 +27,17 @@ private:
 	float velocity;
 	float speed;//speedup rate
 	float maxVel;
-	int dir = RIGHT;
+	int dir = UP;
 	Color c;
-	const int width = 25;
-	const int height = 25;
+	int width;
+	int height;
+
+	Color* pPixels = nullptr;
 
 	FrameTimer ft;
 	float turnRate;
-	float leftTurn;
-	float rightTurn;
+	float leftTurn = 0.0f;
+	float rightTurn = 0.0f;
 
 	void drawCar(Graphics &) const;
 };

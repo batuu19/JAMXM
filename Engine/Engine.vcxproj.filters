@@ -155,9 +155,18 @@
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="trasa.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="auto.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="config.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="debug.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

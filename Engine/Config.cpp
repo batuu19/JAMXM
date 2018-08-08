@@ -42,6 +42,10 @@ Config::Config(std::string filename)
 			in >> r >> g >> b;
 			carColor = Color(r, g, b);
 		}
+		else if (line == "[Car image file name]")
+		{
+			in >> carImageFileName;
+		}
 		else
 		{
 			//TODO: do this?
@@ -88,6 +92,11 @@ float Config::getCarTurnRate() const
 Color Config::getCarColor() const
 {
 	return carColor;
+}
+
+std::string Config::getCarImageFileName() const
+{
+	return carImageFileName;
 }
 
 std::string Config::getMapFilename() const

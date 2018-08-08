@@ -19,6 +19,7 @@
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #pragma once
+#include <sstream>
 
 #include "Keyboard.h"
 #include "Mouse.h"
@@ -48,7 +49,10 @@ private:
 	/*  User Variables              */
 	Config config = "config.txt";
 	Map map;
-	Player player;
+	//Player player;
+	Car car;
+
+	bool pressed = false;
 	
 	/********************************/
 };

@@ -17,7 +17,10 @@ public:
 	float getCarMaxVelocity() const;
 	float getCarTurnRate() const;
 	Color getCarColor() const;
+	std::string getCarImageFileName() const;
+
 	std::string getMapFilename() const;
+	
 private:
 
 	//Car
@@ -29,6 +32,7 @@ private:
 	float carMaxVelocity;
 	float carTurnRate;
 	Color carColor;
+	std::string  carImageFileName;
 
 	//Map
 	std::string mapFileneme;

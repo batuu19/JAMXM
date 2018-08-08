@@ -1,7 +1,7 @@
 [Car start pos]
 70 70
 [Car start direction]
-right
+up
 [Car start velocity]
 0
 [Car speed]
@@ -14,3 +14,5 @@ right
 0 255 255
 [Map file name]
 trasa.bmp
+[Car image file name]
+auto.bmp
