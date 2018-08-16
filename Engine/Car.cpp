@@ -178,63 +178,53 @@ std::string Car::getDebugInfo() const
 //TODO: 
 void Car::drawCar(Graphics & gfx) const
 {
-	int padding = 5;
-	Color paddingColor = Colors::Red;
-	if (isSimpleDirection(dir))
+	for (int i = 0; i < height; i++)//y
 	{
-		//warning conversion from float to int
-		for (int i = 0; i < height; i++)//y
+		for (int j = 0; j < width; j++)//x
 		{
-			for (int j = 0; j < width; j++)//x
+			const int pos = i * width + j;
+			if (isSimpleDirection(dir))
 			{
-				//switch here? and if
+				
 				switch (dir)
 				{
 				case UP:
-					gfx.putPixel(j + xPos,height - i + yPos , pPixels[i * width + j]);
+					gfx.putPixel(j + xPos, height - i + yPos, pPixels[pos]);
 					break;
 				case RIGHT:
-					gfx.putPixel(i + xPos, j + yPos, pPixels[i * width + j]);
+					gfx.putPixel(i + xPos, j + yPos, pPixels[pos]);
 					break;
 				case LEFT:
-					gfx.putPixel(width - i + xPos, j + yPos, pPixels[i * width + j]);
+					gfx.putPixel(width - i + xPos, j + yPos, pPixels[pos]);
 					break;
 				case DOWN:
-					gfx.putPixel(j + xPos, i + yPos, pPixels[i * width + j]);
+					gfx.putPixel(j + xPos, i + yPos, pPixels[pos]);
 					break;
 				default:
 					break;
-				}
-			}
-		}
-	
+				}//switch
+			}//if simple
+			else
+			{
+				switch (dir)
+				{
+				case UP_RIGHT:
+					gfx.putPixel(i + j + xPos, i + j + yPos, pPixels[pos]);
+					break;
+				case DOWN_RIGHT:
 
-	}
-	//TODO: NOT SIMPLE DIRECTIONS TO DO
-	else
-	{
-		const int newWidth = (int)((float)width / (float)sqrt(2));
-		const int newHeight = (int)((float)height / (float)sqrt(2));
-		gfx.draw45Rect((int)xPos, (int)yPos, newWidth, newHeight, c);
-		switch (dir)
-		{
-		case UP_RIGHT:
-		{
+					break;
 
-			break;
-		}
-		case DOWN_RIGHT:
+				case DOWN_LEFT:
 
-			break;
+					break;
+				case UP_LEFT:
 
-		case DOWN_LEFT:
-
-			break;
-		case UP_LEFT:
-
-			break;
-		default:
-			break;
-		}
-	}
+					break;
+				default:
+					break;
+				}//switch
+			}//else !simple
+		}//for j
+	}//for i
 }

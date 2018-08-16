@@ -41,7 +41,7 @@ private:
 	float turnRate;
 	float leftTurn = 0.0f;
 	float rightTurn = 0.0f;
-	int turnValue = 2;//how many directions at once
+	int turnValue = 1;//how many directions at once
 
 	void drawCar(Graphics &) const;
 };
