@@ -175,7 +175,8 @@ std::string Car::getDebugInfo() const
 	return ss.str();
 }
 
-//TODO: 
+//TODO: different images for every car rotation
+//TODO: use sprite drawing
 void Car::drawCar(Graphics & gfx) const
 {
 	for (int i = 0; i < height; i++)//y

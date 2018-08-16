@@ -26,7 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	map(config,gfx),
-	player(Car(config))
+	surf("auto.bmp")
 {
 	Debug::clear();
 }
@@ -42,9 +42,9 @@ void Game::Go()
 void Game::UpdateModel()
 {
 
-	player.update(wnd.kbd);
+	//player.update(wnd.kbd);
 
-	//to sprawdzania wymiarów
+	//do sprawdzania wymiarów
 	//int x, y;
 
 	//if (wnd.mouse.LeftIsPressed())
@@ -69,6 +69,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	map.draw();
-	player.draw(gfx);
+	//player.draw(gfx);
+	gfx.drawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { 0,35,0,68 }, gfx.getScreenRect(),surf);
 	
 }
