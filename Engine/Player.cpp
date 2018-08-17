@@ -3,7 +3,6 @@
 Player::Player( Car & car)
 	:
 	car(car)
-	//here copying
 {
 }
 

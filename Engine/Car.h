@@ -8,15 +8,13 @@
 #include <algorithm>
 #include <assert.h>
 #include <sstream>
+#include "Surface.h"
 
 class Car
 {
 
 public:
 	Car(Config&);
-	Car (const Car&);
-	Car& operator=(const Car&) = delete;
-	~Car();
 
 	void turnLeft();
 	void turnRight();
@@ -31,11 +29,8 @@ private:
 	float speed;//speedup rate
 	float maxVel;
 	int dir = UP;
-	Color c;
-	int width;
-	int height;
 
-	Color* pPixels = nullptr;
+	Surface sprites;
 
 	FrameTimer ft;
 	float turnRate;

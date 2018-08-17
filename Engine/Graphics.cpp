@@ -386,6 +386,16 @@ void Graphics::drawSpriteNonChroma(int x, int y, RectI srcRect, const RectI & cl
 	}
 }
 
+void Graphics::drawSprite(int x, int y, const Surface & s, Color chroma)
+{
+	drawSprite(x, y, s.getRect(), s, chroma);
+}
+
+void Graphics::drawSprite(int x, int y, const RectI & srcRect, const Surface & s, Color chroma)
+{
+	drawSprite(x, y, srcRect, getScreenRect(), s, chroma);
+}
+
 void Graphics::drawSprite(int x, int y, RectI srcRect, const RectI & clip, const Surface & s, Color chroma)
 {
 	assert(srcRect.left >= 0);

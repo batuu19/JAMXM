@@ -68,7 +68,12 @@ public:
 	void drawSpriteNonChroma(int x, int y, const Surface& s);
 	void drawSpriteNonChroma(int x, int y, const RectI& srcRect, const Surface& s);
 	void drawSpriteNonChroma(int x, int y, RectI srcRect, const RectI& clip, const Surface& s);
+
+
+	void drawSprite(int x, int y, const Surface& s, Color chroma = Colors::Magenta);
+	void drawSprite(int x, int y, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta);
 	void drawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
+	//TODO HERE? : draw (mirror reflection)
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

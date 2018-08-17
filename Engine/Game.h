@@ -49,8 +49,7 @@ private:
 	/*  User Variables              */
 	Config config = "config.txt";
 	Map map;
-
-	Surface surf;
+	Player player;
 
 	bool pressed = false;
 	
