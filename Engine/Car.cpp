@@ -58,11 +58,12 @@ void Car::turnRight()
 	rightTurn += dt;
 }
 
+//TODO: 
 void Car::update()
 {
 	bool isSimpleDir = !(dir % 2);
 
-	if (isSimpleDir)
+	if (dir % 4 == 0)
 	{
 		switch (dir)
 		{
@@ -82,10 +83,11 @@ void Car::update()
 			break;
 		}
 	}
-	else
+	else if(dir % 2 == 0)
 	{
 		//round up? (ceil)
-		int newVelocity = (int)(velocity / sqrt(2) );
+		//TODO: simplify?
+		float newVelocity = velocity / sqrt(2) ;
 		switch (dir)
 		{
 		case UP_RIGHT:
@@ -102,6 +104,49 @@ void Car::update()
 			break;
 		case UP_LEFT:
 			xPos -= newVelocity;
+			yPos -= newVelocity;
+			break;
+		default:
+			break;
+		}
+	}
+	else
+	{
+		//TODO: simplify?
+		float newVelocity = velocity * 2 / sqrt(5);
+		switch (dir)
+		{
+
+		case 1:
+			xPos += newVelocity / 2;
+			yPos -= newVelocity;
+			break;
+		case 3:
+			xPos += newVelocity;
+			yPos -= newVelocity / 2;
+			break;
+		case 5:
+			xPos += newVelocity;
+			yPos += newVelocity / 2;
+			break;
+		case 7:
+			xPos += newVelocity / 2;
+			yPos += newVelocity;
+			break;
+		case 9:
+			xPos -= newVelocity / 2;
+			yPos += newVelocity;
+			break;
+		case 11:
+			xPos -= newVelocity;
+			yPos += newVelocity / 2;
+			break;
+		case 13:
+			xPos -= newVelocity;
+			yPos -= newVelocity / 2;
+			break;
+		case 15:
+			xPos -= newVelocity / 2;
 			yPos -= newVelocity;
 			break;
 		default:

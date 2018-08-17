@@ -21,5 +21,4 @@ static constexpr int UP_LEFT = 14;
 //15
 static constexpr int DIRECTIONS_COUNT= 16;
 
-bool isSimpleDirection(int direction);
 int getDirection(std::string name);

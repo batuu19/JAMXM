@@ -1,7 +1,7 @@
 [Car start pos]
 170 170
 [Car start direction]
-left
+up
 [Car start velocity]
 0
 [Car speed]
@@ -9,7 +9,7 @@ left
 [Car max velocity]
 6
 [Car turn rate]
-0.3
+0.1
 [Car color]
 0 255 255
 [Map file name]

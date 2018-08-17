@@ -25,6 +25,7 @@ public:
 
 	std::string getDebugInfo() const;
 private:
+	//TODO: change to vei2
 	float xPos, yPos;
 	float velocity;
 	float speed;//speedup rate

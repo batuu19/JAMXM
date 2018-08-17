@@ -1,10 +1,5 @@
 #include "Directions.h"
 
-bool isSimpleDirection(int direction)
-{
-	return !(direction % 4);
-}
-
 int getDirection(std::string name)
 {
 	std::transform(name.begin(), name.end(), name.begin(), ::tolower);
