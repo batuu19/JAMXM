@@ -8,9 +8,31 @@ Car::Car(Config& config)
 	speed(config.getCarSpeed()),
 	maxVel(config.getCarMaxVelocity()),
 	dir(config.getCarStartDir()),
-	sprites(config.getCarImageFileName()),
 	turnRate(config.getCarTurnRate())
 {
+	Surface allCars(config.getCarImageFileName());
+
+	sprites.emplace_back(allCars.getPart({ 0,70,0,70 }));//UP
+
+	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }));
+	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }));//UP_RIGHT
+	sprites.emplace_back(allCars.getPart({ 210,280,0,70 }));
+	sprites.emplace_back(allCars.getPart({ 280,350,0,70 }));//RIGHT
+
+	sprites.emplace_back(allCars.getPart({ 210,280,0,70 }).rotateVertically());
+	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }).rotateVertically());//DOWN_RIGHT
+	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }).rotateVertically());
+	sprites.emplace_back(allCars.getPart({ 0,70,0,70 }).rotateVertically());//DOWN
+
+	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }).rotateVertAndHor());
+	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }).rotateVertAndHor());//DOWN_LEFT
+	sprites.emplace_back(allCars.getPart({ 210,280,0,70 }).rotateVertAndHor());
+
+	sprites.emplace_back(allCars.getPart({ 280,350,0,70 }).rotateHorizontally());//LEFT
+	sprites.emplace_back(allCars.getPart({ 210,280,0,70 }).rotateHorizontally());
+	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }).rotateHorizontally());//UP_LEFT
+	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }).rotateHorizontally());
+
 }
 
 void Car::turnLeft()
@@ -115,25 +137,5 @@ std::string Car::getDebugInfo() const
 //TODO: different images for every car rotation
 void Car::drawCar(Graphics & gfx) const
 {
-	RectI srcRect;
-	switch (dir)
-	{
-	case 0://UP
-		srcRect = { 0,70,0,70 };
-		break;
-	case 1:
-		srcRect = { 70,140,0,70 };
-		break;
-	case 2://UP_RIGHT
-		srcRect = { 140,210,0,70 };
-		break;
-	case 3:
-		srcRect = { 210,280,0,70 };
-		break;
-
-	default:
-		srcRect = { 0,70,0,70 };
-		break;
-	}
-	gfx.drawSprite(xPos, yPos, srcRect, sprites);
+	gfx.drawSprite(xPos, yPos, sprites[dir]);
 }

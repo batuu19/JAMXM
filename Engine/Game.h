@@ -53,7 +53,6 @@ private:
 
 	bool pressed = false;
 
-	Surface test, test2;
 	
 	/********************************/
 };

@@ -26,9 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	map(config,gfx),
-	player(Car(config)),
-	test(config.getCarImageFileName()),
-	test2(test.getPart({0,70,0,70}).rotateVertically())
+	player(Car(config))
 {
 	Debug::clear();
 }
@@ -71,7 +69,5 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	map.draw();
-	//player.draw(gfx);
-	gfx.drawSprite(100, 100, test);
-	gfx.drawSprite(100, 200, test2);
+	player.draw(gfx);
 }

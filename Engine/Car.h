@@ -9,6 +9,7 @@
 #include <assert.h>
 #include <sstream>
 #include "Surface.h"
+#include <vector>
 
 class Car
 {
@@ -30,7 +31,7 @@ private:
 	float maxVel;
 	int dir = UP;
 
-	Surface sprites;
+	std::vector<Surface> sprites;
 
 	FrameTimer ft;
 	float turnRate;
