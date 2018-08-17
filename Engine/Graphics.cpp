@@ -354,9 +354,9 @@ void Graphics::drawSpriteNonChroma(int x, int y, const RectI & srcRect, const Su
 void Graphics::drawSpriteNonChroma(int x, int y, RectI srcRect, const RectI & clip, const Surface & s)
 {
 	assert(srcRect.left >= 0);
-	assert(srcRect.right <= s.getWidth);
+	assert(srcRect.right <= s.getWidth());
 	assert(srcRect.top >= 0);
-	assert(srcRect.bottom <= s.getHeight);
+	assert(srcRect.bottom <= s.getHeight());
 
 	if (x < clip.left)
 	{
@@ -399,9 +399,9 @@ void Graphics::drawSprite(int x, int y, const RectI & srcRect, const Surface & s
 void Graphics::drawSprite(int x, int y, RectI srcRect, const RectI & clip, const Surface & s, Color chroma)
 {
 	assert(srcRect.left >= 0);
-	assert(srcRect.right <= s.getWidth);
+	assert(srcRect.right <= s.getWidth());
 	assert(srcRect.top >= 0);
-	assert(srcRect.bottom <= s.getHeight);
+	assert(srcRect.bottom <= s.getHeight());
 
 	if (x < clip.left)
 	{

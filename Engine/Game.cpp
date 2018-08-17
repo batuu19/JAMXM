@@ -28,7 +28,7 @@ Game::Game( MainWindow& wnd )
 	map(config,gfx),
 	player(Car(config)),
 	test(config.getCarImageFileName()),
-	test2(test.rotateVertAndHor())
+	test2(test.getPart({0,70,0,70}).rotateVertically())
 {
 	Debug::clear();
 }

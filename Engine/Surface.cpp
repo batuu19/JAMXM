@@ -96,6 +96,12 @@ void Surface::putPixel(int x, int y, Color c)
 	pPixels[y * width + x] = c;
 }
 
+void Surface::putPixel(int i, Color c)
+{
+	assert(i < width * height);
+	pPixels[i] = c;
+}
+
 Color Surface::getPixel(int x, int y) const
 {
 	assert(x >= 0);
@@ -103,6 +109,12 @@ Color Surface::getPixel(int x, int y) const
 	assert(y >= 0);
 	assert(y < height);
 	return pPixels[y * width + x];
+}
+
+Color Surface::getPixel(int i) const
+{
+	assert(i < width * height);
+	return pPixels[i];
 }
 
 int Surface::getWidth() const
@@ -168,5 +180,22 @@ Surface Surface::rotateVertAndHor() const
 
 	Surface surf(width, height, newPPixels);
 	delete newPPixels;
+	return surf;
+}
+
+Surface Surface::getPart(const RectI & srcRect) const
+{
+	int width = srcRect.getWidth();
+	int height = srcRect.getHeight();
+	Surface surf(width, height);
+
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			surf.pPixels[y*width + x] = pPixels[(y + srcRect.top)* this->width + (x + srcRect.left)];
+		}
+	}
+
 	return surf;
 }
