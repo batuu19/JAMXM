@@ -248,7 +248,7 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="auto.bmp" />
+    <Image Include="car.bmp" />
     <Image Include="Chili.ico" />
     <Image Include="trasa.bmp" />
   </ItemGroup>

@@ -112,8 +112,21 @@ std::string Car::getDebugInfo() const
 }
 
 //TODO: different images for every car rotation
-//TODO: use sprite drawing
 void Car::drawCar(Graphics & gfx) const
 {
-	gfx.drawSprite(xPos, yPos, sprites);
+	RectI srcRect;
+	switch (dir)
+	{
+	case UP:
+		srcRect = { 0,70,0,70 };
+		break;
+	case UP_RIGHT:
+		srcRect = { 140,210,0,70 };
+		break;
+
+	default:
+		srcRect = { 0,70,0,70 };
+		break;
+	}
+	gfx.drawSprite(xPos, yPos, srcRect, sprites);
 }

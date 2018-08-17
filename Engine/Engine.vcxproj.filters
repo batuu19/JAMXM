@@ -170,7 +170,7 @@
     <Image Include="trasa.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="auto.bmp">
+    <Image Include="car.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

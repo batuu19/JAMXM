@@ -15,4 +15,4 @@ right
 [Map file name]
 trasa.bmp
 [Car image file name]
-auto.bmp
+car.bmp
