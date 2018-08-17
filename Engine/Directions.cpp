@@ -2,7 +2,7 @@
 
 bool isSimpleDirection(int direction)
 {
-	return !(direction % 2);
+	return !(direction % 4);
 }
 
 int getDirection(std::string name)

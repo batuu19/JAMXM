@@ -42,6 +42,18 @@ Surface::Surface(int width, int height)
 {
 }
 
+Surface::Surface(int width, int height, Color * pPixels)
+	:
+	width(width),
+	height(height),
+	pPixels(new Color[width*height])
+{
+	for (int i = 0; i < width*height; i++)
+	{
+		this->pPixels[i] = pPixels[i];
+	}
+}
+
 Surface::Surface(const Surface & rhs)
 	:
 	Surface(rhs.width, rhs.height)
@@ -106,4 +118,55 @@ int Surface::getHeight() const
 RectI Surface::getRect() const
 {
 	return{ 0,width,0,height };
+}
+
+Surface Surface::rotateVertically() const
+{
+	int nPixels = width * height;
+	Color* newPPixels = new Color[nPixels];
+
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			newPPixels[(height - y - 1)*width + x] = pPixels[y*width + x];
+		}
+	}
+
+	Surface surf(width,height, newPPixels);
+	delete newPPixels;
+	return surf;
+}
+
+Surface Surface::rotateHorizontally() const
+{
+	int nPixels = width * height;
+	Color* newPPixels = new Color[nPixels];
+
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			newPPixels[y*width + (width - x - 1)] = pPixels[y*width + x];
+		}
+	}
+
+	Surface surf(width, height, newPPixels);
+	delete newPPixels;
+	return surf;
+}
+
+Surface Surface::rotateVertAndHor() const
+{
+	int nPixels = width * height;
+	Color* newPPixels = new Color[nPixels];
+
+	for (int i = 0; i < nPixels; i++)
+	{
+		newPPixels[nPixels - i - 1] = pPixels[i];
+	}
+
+	Surface surf(width, height, newPPixels);
+	delete newPPixels;
+	return surf;
 }

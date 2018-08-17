@@ -88,6 +88,7 @@ void Car::update()
 	}
 
 	velocity = std::min(maxVel, std::max(0.0f,velocity));
+
 }
 
 void Car::speedup(bool faster)
@@ -117,11 +118,17 @@ void Car::drawCar(Graphics & gfx) const
 	RectI srcRect;
 	switch (dir)
 	{
-	case UP:
+	case 0://UP
 		srcRect = { 0,70,0,70 };
 		break;
-	case UP_RIGHT:
+	case 1:
+		srcRect = { 70,140,0,70 };
+		break;
+	case 2://UP_RIGHT
 		srcRect = { 140,210,0,70 };
+		break;
+	case 3:
+		srcRect = { 210,280,0,70 };
 		break;
 
 	default:

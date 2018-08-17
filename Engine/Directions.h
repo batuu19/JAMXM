@@ -3,15 +3,23 @@
 #include<cctype>
 #include<algorithm>
 
-static constexpr int UP = 0;	
-static constexpr int UP_RIGHT = 1;
-static constexpr int RIGHT = 2;
-static constexpr int DOWN_RIGHT = 3;
-static constexpr int DOWN = 4;
-static constexpr int DOWN_LEFT = 5;
-static constexpr int LEFT = 6;
-static constexpr int UP_LEFT = 7;
-static constexpr int DIRECTIONS_COUNT= 8;
+static constexpr int UP = 0;
+//1
+static constexpr int UP_RIGHT = 2;
+//3
+static constexpr int RIGHT = 4;
+//5
+static constexpr int DOWN_RIGHT = 6;
+//7
+static constexpr int DOWN = 8;
+//9
+static constexpr int DOWN_LEFT = 10;
+//11
+static constexpr int LEFT = 12;
+//13
+static constexpr int UP_LEFT = 14;
+//15
+static constexpr int DIRECTIONS_COUNT= 16;
 
 bool isSimpleDirection(int direction);
 int getDirection(std::string name);

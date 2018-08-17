@@ -52,6 +52,8 @@ private:
 	Player player;
 
 	bool pressed = false;
+
+	Surface test, test2;
 	
 	/********************************/
 };

@@ -1,7 +1,7 @@
 [Car start pos]
 170 170
 [Car start direction]
-right
+up
 [Car start velocity]
 0
 [Car speed]
