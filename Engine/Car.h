@@ -35,6 +35,7 @@ private:
 	std::vector<Surface> sprites;
 
 	FrameTimer ft;
+	//make it dependent on velocity
 	float turnRate;
 	float leftTurn = 0.0f;
 	float rightTurn = 0.0f;

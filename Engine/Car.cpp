@@ -33,6 +33,8 @@ Car::Car(Config& config)
 	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }).rotateHorizontally());//UP_LEFT
 	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }).rotateHorizontally());
 
+	sprites.shrink_to_fit();
+
 }
 
 void Car::turnLeft()
@@ -58,7 +60,7 @@ void Car::turnRight()
 	rightTurn += dt;
 }
 
-//TODO: 
+//TODO: simplify
 void Car::update()
 {
 	bool isSimpleDir = !(dir % 2);

@@ -8,7 +8,6 @@ Player::Player( Car & car)
 
 void Player::update(Keyboard & kbd)
 {
-	//jako u¿ytkownik chcia³bym móc skrêcaæ podczas przyspieszenia
 	if (kbd.KeyIsPressed(VK_UP))
 	{
 		car.speedup();
@@ -17,7 +16,7 @@ void Player::update(Keyboard & kbd)
 	{
 		car.speedup(false);
 	}
-	else if (kbd.KeyIsPressed(VK_LEFT))
+	if (kbd.KeyIsPressed(VK_LEFT))
 	{
 		car.turnLeft();
 		

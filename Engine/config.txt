@@ -1,13 +1,13 @@
 [Car start pos]
-170 170
+150 150
 [Car start direction]
-up
+right
 [Car start velocity]
 0
 [Car speed]
-0.4
+0.1
 [Car max velocity]
-6
+12
 [Car turn rate]
 0.1
 [Car color]
