@@ -17,5 +17,6 @@ public:
 private:
 	Surface mapSprite;
 	//width and height same as window
-	Graphics& gfx;
-};
+	Graphics& gfx
+	;}
+;

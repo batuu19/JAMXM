@@ -10,28 +10,36 @@ Car::Car(Config& config)
 	dir(config.getCarStartDir()),
 	turnRate(config.getCarTurnRate())
 {
+	RectI frames[] = {
+	{ 0,70,0,70 },
+	{ 70,140,0,70 },
+	{ 140,210,0,70 },
+	{ 210,280,0,70 },
+	{ 280,350,0,70 } 
+	};
+
 	Surface allCars(config.getCarImageFileName());
 
-	sprites.emplace_back(allCars.getPart({ 0,70,0,70 }));//UP
+	sprites.emplace_back(allCars.getPart(frames[0]));//UP
 
-	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }));
-	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }));//UP_RIGHT
-	sprites.emplace_back(allCars.getPart({ 210,280,0,70 }));
-	sprites.emplace_back(allCars.getPart({ 280,350,0,70 }));//RIGHT
+	sprites.emplace_back(allCars.getPart(frames[1]));
+	sprites.emplace_back(allCars.getPart(frames[2]));//UP_RIGHT
+	sprites.emplace_back(allCars.getPart(frames[3]));
+	sprites.emplace_back(allCars.getPart(frames[4]));//RIGHT
 
-	sprites.emplace_back(allCars.getPart({ 210,280,0,70 }).rotateVertically());
-	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }).rotateVertically());//DOWN_RIGHT
-	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }).rotateVertically());
-	sprites.emplace_back(allCars.getPart({ 0,70,0,70 }).rotateVertically());//DOWN
+	sprites.emplace_back(allCars.getPart(frames[3]).rotateVertically());
+	sprites.emplace_back(allCars.getPart(frames[2]).rotateVertically());//DOWN_RIGHT
+	sprites.emplace_back(allCars.getPart(frames[1]).rotateVertically());
+	sprites.emplace_back(allCars.getPart(frames[0]).rotateVertically());//DOWN
 
-	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }).rotateVertAndHor());
-	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }).rotateVertAndHor());//DOWN_LEFT
-	sprites.emplace_back(allCars.getPart({ 210,280,0,70 }).rotateVertAndHor());
+	sprites.emplace_back(allCars.getPart(frames[1]).rotateVertAndHor());
+	sprites.emplace_back(allCars.getPart(frames[2]).rotateVertAndHor());//DOWN_LEFT
+	sprites.emplace_back(allCars.getPart(frames[3]).rotateVertAndHor());
 
-	sprites.emplace_back(allCars.getPart({ 280,350,0,70 }).rotateHorizontally());//LEFT
-	sprites.emplace_back(allCars.getPart({ 210,280,0,70 }).rotateHorizontally());
-	sprites.emplace_back(allCars.getPart({ 140,210,0,70 }).rotateHorizontally());//UP_LEFT
-	sprites.emplace_back(allCars.getPart({ 70,140,0,70 }).rotateHorizontally());
+	sprites.emplace_back(allCars.getPart(frames[4]).rotateHorizontally());//LEFT
+	sprites.emplace_back(allCars.getPart(frames[3]).rotateHorizontally());
+	sprites.emplace_back(allCars.getPart(frames[2]).rotateHorizontally());//UP_LEFT
+	sprites.emplace_back(allCars.getPart(frames[1]).rotateHorizontally());
 
 	sprites.shrink_to_fit();
 
