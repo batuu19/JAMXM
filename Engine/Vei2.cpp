@@ -57,3 +57,8 @@ int Vei2::GetLengthSq() const
 {
 	return x * x + y * y;
 }
+//
+//Vei2::operator Vec2()
+//{
+//	return{ (float)x,(float)y };
+//}

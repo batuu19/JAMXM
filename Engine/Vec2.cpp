@@ -7,6 +7,13 @@ Vec2::Vec2(float x_in, float y_in)
 {
 }
 
+Vec2::Vec2(int x_in, int y_in)
+	:
+	x((float)x_in),
+	y((float)y_in)
+{
+}
+
 Vec2 Vec2::operator+(const Vec2& rhs) const
 {
 	return Vec2(x + rhs.x, y + rhs.y);
@@ -60,4 +67,9 @@ Vec2 Vec2::getNormalized() const
 		return *this * (1.0f / len);
 	}
 	return *this;
+}
+
+Vec2::operator Vei2() const
+{
+	return{ (int)x,(int)y };
 }

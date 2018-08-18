@@ -1,5 +1,5 @@
 #pragma once
-
+//Make Vei and Vec in the same file?
 class Vei2
 {
 public:
@@ -15,6 +15,8 @@ public:
 	Vei2& operator/=( int rhs );
 	float GetLength() const;
 	int GetLengthSq() const;
+/*
+	explicit operator Vec2();*/
 public:
 	int x;
 	int y;

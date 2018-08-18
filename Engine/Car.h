@@ -10,6 +10,7 @@
 #include <sstream>
 #include "Surface.h"
 #include <vector>
+#include "Vec2.h"
 
 class Car
 {
@@ -25,9 +26,8 @@ public:
 
 	std::string getDebugInfo() const;
 private:
-	//TODO: change to vei2
-	float xPos, yPos;
-	float velocity;
+	Vec2 pos;
+	Vec2 vel;
 	float speed;//speedup rate
 	float maxVel;
 	int dir = UP;
