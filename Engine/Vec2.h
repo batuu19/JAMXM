@@ -9,11 +9,16 @@ public:
 	Vec2(float x_in, float y_in);
 	Vec2(int x_in, int y_in);
 	Vec2 operator+(const Vec2& rhs) const;
+	Vec2 operator+(const float rhs) const;
 	Vec2& operator+=(const Vec2& rhs);
+	Vec2& operator+=(const float rhs);
+	float operator*(const Vec2& rhs) const;//dot product
 	Vec2 operator*(float rhs) const;
 	Vec2& operator*=(float rhs);
 	Vec2 operator-(const Vec2& rhs) const;
+	Vec2 operator-(const float rhs) const;
 	Vec2& operator-=(const Vec2& rhs);
+	Vec2& operator-=(const float rhs);
 	float getLength() const;
 	float getLengthSq() const;
 	Vec2& normalize();
@@ -26,4 +31,4 @@ public:
 public:
 };
 
-//const Vec2 zeroVec{ 0.0f,0.0f };
+const Vec2 zeroVec{ 0.0f,0.0f };

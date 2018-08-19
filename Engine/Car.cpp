@@ -9,6 +9,7 @@ Car::Car(Config& config)
 	dir(config.getCarStartDir()),
 	turnRate(config.getCarTurnRate())
 {
+	//TODO: make class for this
 	RectI frames[] = {
 	{ 0,70,0,70 },
 	{ 70,140,0,70 },
@@ -67,21 +68,39 @@ void Car::turnRight()
 	rightTurn += dt;
 }
 
-//TODO: simplify
+//TODO: make it work on Vec
 void Car::update()
 {
+
+	vel.x = std::min(maxVel, std::max(-maxVel, vel.x));
+	vel.y = std::min(maxVel, std::max(-maxVel, vel.y));
+
 	pos += vel;
-
-	vel.x = std::min(maxVel, std::max(0.0f, vel.x));
-	vel.y = std::min(maxVel, std::max(0.0f, vel.y));
-
 }
 
 void Car::speedup(bool faster)
 {
-	faster?
-		vel *= speed:
-		vel *= 1.0f - speed;
+	//done wrong
+	//TODO: do it using dot product
+	float speedFactor = faster ? speed : -speed;
+
+	switch (dir)
+	{
+	case 0://UP
+		vel -= {0.0f,speedFactor};
+		break;
+	case 4://RIGHT
+		vel += {speedFactor,0.0f};
+		break;
+	case 8://DOWN
+		vel += {0.0f, speedFactor};
+		break;
+	case 12://LEFT
+		vel -= {speedFactor, 0.0f};
+		break;
+	default:
+		break;
+	}
 }
 
 void Car::draw(Graphics & gfx) const
