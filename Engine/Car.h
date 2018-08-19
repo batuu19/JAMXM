@@ -11,11 +11,13 @@
 #include "Surface.h"
 #include <vector>
 #include "Vec2.h"
+#include "SpriteContainer.h"
 
 class Car
 {
 
 public:
+	//TODO: without config
 	Car(Config&);
 
 	void turnLeft();
@@ -34,7 +36,7 @@ private:
 	int dir = UP;
 	Config& config;
 
-	std::vector<Surface> sprites;
+	SpriteContainer sprites;
 
 	FrameTimer ft;
 	//make it dependent on velocity

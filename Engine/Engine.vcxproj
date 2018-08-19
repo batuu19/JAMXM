@@ -145,6 +145,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Directions.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="SpriteContainer.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vei2.h" />
@@ -182,6 +184,7 @@
     <ClCompile Include="RectF.cpp" />
     <ClCompile Include="RectI.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpriteContainer.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vei2.cpp" />
