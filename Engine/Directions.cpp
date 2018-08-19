@@ -23,11 +23,3 @@ int getDirection(std::string name)
 	else 
 		return -1;
 }
-
-void normalizeDirectionVectors()
-{
-	for (auto vec : directionVec)
-	{
-		vec.normalize();
-	}
-}

@@ -29,8 +29,6 @@ Game::Game( MainWindow& wnd )
 	player(Car(config))
 {
 	Debug::clear();
-	//TODO: do that better
-	normalizeDirectionVectors();
 }
 
 void Game::Go()

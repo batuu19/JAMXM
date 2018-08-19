@@ -3,11 +3,11 @@
 [Car start direction]
 right
 [Car start velocity]
-0
+2
 [Car speed]
-0.1
+0.3
 [Car max velocity]
-12
+6
 [Car turn rate]
 0.1
 [Car color]

@@ -31,6 +31,10 @@ void Player::update(Keyboard & kbd)
 		Debug::writeMessage(car.getDebugInfo());
 	}
 
+	if (kbd.KeyIsPressed('R'))
+	{
+		car.reset();
+	}
 	car.update();
 }
 
