@@ -13,6 +13,7 @@
 #include "Vec2.h"
 #include "SpriteContainer.h"
 
+//TODO: add collision using RectI
 class Car
 {
 
@@ -47,7 +48,7 @@ private:
 
 	void drawCar(Graphics &) const;
 
-	//TODO: move that from there
+	//TODO: move that from there. to other class?
 	std::vector<Vec2> directionVec =
 	{
 		{ 0.0f,-1.0f },//up

@@ -158,6 +158,7 @@
     <ClInclude Include="RectF.h" />
     <ClInclude Include="RectI.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Rocket.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteContainer.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RectF.cpp" />
     <ClCompile Include="RectI.cpp" />
+    <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteContainer.cpp" />
     <ClCompile Include="Surface.cpp" />
@@ -257,6 +259,10 @@
   <ItemGroup>
     <Image Include="car.bmp" />
     <Image Include="Chili.ico" />
+    <Image Include="Sprites\car.bmp" />
+    <Image Include="Sprites\rocket1.bmp" />
+    <Image Include="Sprites\rocket2.bmp" />
+    <Image Include="Sprites\trasa.bmp" />
     <Image Include="trasa.bmp" />
   </ItemGroup>
   <ItemGroup>

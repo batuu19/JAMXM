@@ -13,6 +13,10 @@ right
 [Car color]
 0 255 255
 [Map file name]
-trasa.bmp
+Sprites/trasa.bmp
 [Car image file name]
-car.bmp
+Sprites/car.bmp
+[Rocket velocity]
+15
+[Rocket image file name]
+Sprites/rocket.bmp

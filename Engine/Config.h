@@ -20,7 +20,11 @@ public:
 	std::string getCarImageFileName() const;
 
 	std::string getMapFilename() const;
+
+	float getRocketVelocity() const;
+	std::string getRocketImageFileName() const;
 	
+	//maybe just make this public?
 private:
 
 	//Car
@@ -36,6 +40,10 @@ private:
 
 	//Map
 	std::string mapFileneme;
+
+	//Rocket
+	float rocketVelocity;
+	std::string rocketImageFileName;
 
 };
 

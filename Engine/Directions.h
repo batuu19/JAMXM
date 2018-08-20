@@ -24,3 +24,4 @@ static constexpr int UP_LEFT = 14;
 static constexpr int DIRECTIONS_COUNT= 16;
 
 int getDirection(std::string name);
+

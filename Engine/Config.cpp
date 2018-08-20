@@ -46,6 +46,14 @@ Config::Config(std::string filename)
 		{
 			in >> carImageFileName;
 		}
+		else if (line == "Rocket velocity")
+		{
+			in >> rocketVelocity;
+		}
+		else if (line == "Rocket image file")
+		{
+			in >> rocketImageFileName;
+		}
 		else
 		{
 			//TODO: do this?
@@ -102,4 +110,14 @@ std::string Config::getCarImageFileName() const
 std::string Config::getMapFilename() const
 {
 	return mapFileneme;
+}
+
+float Config::getRocketVelocity() const
+{
+	return rocketVelocity;
+}
+
+std::string Config::getRocketImageFileName() const
+{
+	return rocketImageFileName;
 }

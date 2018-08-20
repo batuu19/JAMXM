@@ -102,6 +102,9 @@
     <ClInclude Include="SpriteContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Rocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -170,6 +173,9 @@
     <ClCompile Include="SpriteContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rocket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -192,6 +198,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="car.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Sprites\car.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Sprites\rocket1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Sprites\rocket2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Sprites\trasa.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
