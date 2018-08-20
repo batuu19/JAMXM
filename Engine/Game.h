@@ -51,6 +51,8 @@ private:
 	Map map;
 	Player player;
 
+	Sound sndMusic = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
+
 	bool pressed = false;
 
 	

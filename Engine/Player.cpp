@@ -1,8 +1,8 @@
 #include "Player.h"
 
-Player::Player( Car & car)
+Player::Player(Car & car)
 	:
-	car(car)
+	car(std::move(car))
 {
 }
 

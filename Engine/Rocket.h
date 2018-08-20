@@ -3,6 +3,7 @@
 #include "SpriteContainer.h"
 #include "Graphics.h"
 #include "Directions.h"
+#include "SoundEffect.h"
 
 class Rocket
 {
@@ -16,5 +17,4 @@ private:
 	VecF2 vel;
 	//will not be compatibile with Entity
 	Surface sprite;
-
 };

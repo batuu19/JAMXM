@@ -12,6 +12,7 @@
 #include "BMath.h"
 #include "SpriteContainer.h"
 #include "Rocket.h"
+#include "SoundEffect.h"
 
 //TODO: add collision using RectI
 class Car
@@ -38,13 +39,13 @@ public:
 	//collision
 	RectF getRect() const;
 private:
+	int dir;
 	VecF2 pos;
 	VecF2 vel;
 	int width;
 	int height;
 	float speed;//speedup rate
 	float maxVel;
-	int dir;
 
 	SpriteContainer sprites;
 
@@ -55,6 +56,7 @@ private:
 	float leftTurn = 0.f;
 	float rightTurn = 0.f;
 	int turnValue = 1;//how many directions at once
+	Sound sndFriction = Sound( L"sound\\game\\friction.wav" );
 
 	void drawCar(Graphics &) const;
 
@@ -67,6 +69,7 @@ private:
 	FrameTimer shootTimer;
 	float shootRate = 0.1f;
 	float lastShot = 0.f;
+	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );
 
 	//collision
 };

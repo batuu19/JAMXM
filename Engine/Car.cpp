@@ -5,6 +5,7 @@ Car::Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirectio
 	std::string spriteFilename, int spriteWidth, int spriteHeight, int spritesRows, int spritesLines)
 	:
 	pos(pos),
+	vel(vectorsNormalized[dir] * startVel),
 	dir(startDirection),
 	speed(speed),
 	maxVel(maxVel),
@@ -15,8 +16,7 @@ Car::Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirectio
 	rocketVel(rocketVel),
 	width(spriteWidth),
 	height(spriteHeight),
-	sprites(spriteFilename, spritesRows, spritesLines, width, height),
-	vel(vectorsNormalized[dir] * startVel)
+	sprites(spriteFilename, spritesRows, spritesLines, width, height)
 {
 }
 
@@ -27,6 +27,7 @@ void Car::turnLeft()
 	{
 		dir = (dir - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
 		leftTurn = 0.f;
+		sndFriction.Play();
 	}
 	leftTurn += dt;
 
@@ -41,6 +42,7 @@ void Car::turnRight()
 	{
 		dir = (dir + turnValue) % DIRECTIONS_COUNT;
 		rightTurn = 0.f;
+		sndFriction.Play();
 	}
 	rightTurn += dt;
 
@@ -90,6 +92,7 @@ void Car::shoot()
 	{
 		rocketsFired.emplace_back(pos,vectorsNormalized[dir] * rocketVel,rocketSprites[dir]);
 		lastShot = 0.f;
+		sndRocketShot.Play();
 	}
 	
 	lastShot += dt;

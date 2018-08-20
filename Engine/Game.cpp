@@ -43,6 +43,7 @@ Game::Game(MainWindow& wnd)
 		))
 {
 	Debug::clear();
+	sndMusic.Play();
 }
 
 void Game::Go()
