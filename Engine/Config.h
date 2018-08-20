@@ -23,9 +23,6 @@ public:
 
 	float getRocketVelocity() const;
 	std::string getRocketImageFileName() const;
-	
-	//maybe just make this public?
-private:
 
 	//Car
 	int carStartXPos;

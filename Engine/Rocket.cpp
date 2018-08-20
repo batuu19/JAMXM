@@ -1,27 +1,16 @@
 #include "Rocket.h"
 
-Rocket::Rocket(const Config & config, int x, int y, int dir)
-	:
-	pos(x, y),
-	dir(dir),
-	sprites(config.getRocketImageFileName(),5,1,35,35),
-	vel(vectorsNormalized[dir] * config.getRocketVelocity())
-{
-}
-
-Rocket::Rocket(const Config & config, VecF2 pos, int dir)
+Rocket::Rocket(VecF2 pos, VecF2 vel, Surface sprite)
 	:
 	pos(pos),
-	dir(dir),
-	sprites(config.getRocketImageFileName(), 5, 1, 35, 35),
-	vel(vectorsNormalized[dir] * config.getRocketVelocity())
-
+	vel(vel),
+	sprite(sprite)
 {
 }
 
 void Rocket::draw(Graphics & gfx) const
 {
-	gfx.drawSprite((VecI2)pos, sprites[dir]);
+	gfx.drawSprite((VecI2)pos, sprite);
 }
 
 void Rocket::update()

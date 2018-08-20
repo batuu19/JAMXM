@@ -22,7 +22,7 @@ public:
 	}
 	Rect(const Vec2<T>& topLeft, T width, T height)
 		:
-		Rect(topLeft, topLeft + Vec2(width, height))
+		Rect(topLeft, topLeft + Vec2<T>(width, height))
 	{
 	}
 	bool IsOverlappingWith(const Rect& other) const

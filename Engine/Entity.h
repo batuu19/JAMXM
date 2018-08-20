@@ -5,15 +5,21 @@
 #include <vector>
 #include "Surface.h"
 #include "Directions.h"
+#include "SpriteContainer.h"
 
 //for car and rocket
 //TODO: what about explosion and other?
 class Entity
 {
 public:
+	Entity(int x, int y, std::string spriteFileName);
+	Entity(Config &);
 
 protected:
 	VecF2 pos;
-	std::vector<Surface> sprites;
+	SpriteContainer sprites;
 	int dir;
+
+	int width;
+	int height;
 };

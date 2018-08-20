@@ -1,16 +1,23 @@
 #include "Car.h"
 
-Car::Car(const Config& config)
+Car::Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirection, float turnRate,
+	float rocketVel,std::string rocketSpriteFilename, int rocketWidth, int rocketHeight,
+	std::string spriteFilename, int spriteWidth, int spriteHeight, int spritesRows, int spritesLines)
 	:
-	pos(config.getCarStartXPos(), config.getCarStartYPos()),
-	speed(config.getCarSpeed()),
-	maxVel(config.getCarMaxVelocity()),
-	dir(config.getCarStartDir()),
-	turnRate(config.getCarTurnRate()),
-	config(config),
-	sprites(config.getCarImageFileName(),5,1,70,70)
+	pos(pos),
+	dir(startDirection),
+	vel(vectorsNormalized[dir] * startVel),
+	speed(speed),
+	maxVel(maxVel),
+	turnRate(turnRate),
+	rocketWidth(rocketWidth),
+	rocketHeight(rocketHeight),
+	rocketSprites(rocketSpriteFilename,spritesRows,spritesLines,rocketWidth,rocketHeight),
+	rocketVel(rocketVel),
+	width(spriteWidth),
+	height(spriteHeight),
+	sprites(spriteFilename, spritesRows, spritesLines, width, height)
 {
-	vel = { 0.0f,0.0f };
 }
 
 void Car::turnLeft()
@@ -51,13 +58,11 @@ void Car::update()
 
 void Car::speedup(bool faster)
 {
-	float speedFactor = faster ? speed : -speed;
-	const float actualVelSq = vel.getLengthSq();
-	//TODO: that's bad, can't stop when max or 0 vel
-	if(actualVelSq < maxVel * maxVel && actualVelSq >= 0)
-		vel += vectorsNormalized[dir] * speedFactor;
-
-
+	float value = vel * vectorsNormalized[dir];
+	if(value < maxVel  && faster)
+		vel += vectorsNormalized[dir] * speed;
+	else if (value > -maxVel  && !faster)
+		vel += vectorsNormalized[dir] * -speed;
 }
 
 void Car::draw(Graphics & gfx) const
@@ -71,10 +76,9 @@ void Car::draw(Graphics & gfx) const
 
 void Car::reset()
 {
-	pos.x = (float)config.getCarStartXPos();
-	pos.y = (float)config.getCarStartYPos();
-	dir = config.getCarStartDir();
-	vel = { 0.0f,0.0f };
+	pos = { 0.f,0.f };
+	dir = RIGHT;
+	vel = { 0.f,0.f };
 
 	rocketsFired.clear();
 }
@@ -84,11 +88,16 @@ void Car::shoot()
 	const float dt = shootTimer.mark();
 	if (lastShot >= shootRate)
 	{
-		rocketsFired.emplace_back(config, pos, dir);
+		rocketsFired.emplace_back(pos,vectorsNormalized[dir] * rocketVel,rocketSprites[dir]);
 		lastShot = 0.f;
 	}
 	
 	lastShot += dt;
+}
+
+RectF Car::getRect() const
+{
+	return RectF(pos,width,height);
 }
 
 std::string Car::getDebugInfo() const
@@ -106,75 +115,3 @@ void Car::drawCar(Graphics & gfx) const
 {
 	gfx.drawSprite((VecI2)pos, sprites[dir]);
 }
-
-/*
-
-template<typename T>
-inline Rect<T>::Rect(T left_in, T right_in, T top_in, T bottom_in)
-:
-left(left_in),
-right(right_in),
-top(top_in),
-bottom(bottom_in)
-{
-}
-
-template<typename T>
-inline Rect<T>::Rect(const Vec2 & topLeft, const Vec2 & bottomRight)
-:
-Rect(topLeft.x, bottomRight.x, topLeft.y, bottomRight.y)
-{
-}
-
-template<typename T>
-inline Rect<T>::Rect(const Vec2 & topLeft, T width, T height)
-:
-Rect(topLeft, topLeft + Vec2(width, height))
-{
-}
-
-template<typename T>
-inline bool Rect<T>::IsOverlappingWith(const Rect & other) const
-{
-return right > other.left && left < other.right
-&& bottom > other.top && top < other.bottom;
-}
-
-template<typename T>
-inline bool Rect<T>::IsContainedBy(const Rect & other) const
-{
-return left >= other.left && right <= other.right &&
-top >= other.top && bottom <= other.bottom;
-}
-
-template<typename T>
-inline Rect Rect<T>::FromCenter(const Vec2 & center, T halfWidth, T halfHeight)
-{
-const Vec2 half(halfWidth, halfHeight);
-return Rect(center - half, center + half);
-}
-
-template<typename T>
-inline Rect Rect<T>::GetExpanded(T offset) const
-{
-return Rect(left - offset, right + offset, top - offset, bottom + offset);
-}
-
-template<typename T>
-inline Vec2 Rect<T>::GetCenter() const
-{
-return Vec2((left + right) / (T)2, (top + bottom) / (T)2);
-}
-
-template<typename T>
-inline T Rect<T>::getWidth() const
-{
-return right - left;
-}
-
-template<typename T>
-inline T Rect<T>::getHeight() const
-{
-return down - up;
-}
-*/

@@ -3,7 +3,7 @@
 [Car start direction]
 right
 [Car start velocity]
-2
+0
 [Car speed]
 0.3
 [Car max velocity]

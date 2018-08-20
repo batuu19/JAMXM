@@ -3,7 +3,6 @@
 #include "Graphics.h"
 #include "Directions.h"
 #include "FrameTimer.h"
-#include "Config.h"
 #include <math.h>
 #include <algorithm>
 #include <assert.h>
@@ -20,7 +19,9 @@ class Car
 
 public:
 	//TODO: without config
-	Car(const Config&);
+	Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirection, float turnRate,
+		float rocketVel, std::string rocketSpriteFilename, int rocketWidth, int rocketHeight,
+		std::string spriteFilename, int spriteWidth, int spriteHeight, int spritesRows = 5, int spritesLines = 1);
 
 	void turnLeft();
 	void turnRight();
@@ -29,18 +30,25 @@ public:
 	void draw(Graphics&) const;
 	void reset();
 
-	void shoot();
 	std::string getDebugInfo() const;
+
+	//rocket
+	void shoot();
+
+	//collision
+	RectF getRect() const;
 private:
 	VecF2 pos;
 	VecF2 vel;
+	int width;
+	int height;
 	float speed;//speedup rate
 	float maxVel;
 	int dir;
-	const Config& config;
 
 	SpriteContainer sprites;
 
+	//turning
 	FrameTimer turnTimer;
 	//make it dependent on velocity
 	float turnRate;
@@ -50,8 +58,15 @@ private:
 
 	void drawCar(Graphics &) const;
 
+	//rocket
+	SpriteContainer rocketSprites;
+	int rocketWidth;
+	int rocketHeight;
+	float rocketVel;
 	std::vector<Rocket> rocketsFired;
 	FrameTimer shootTimer;
 	float shootRate = 0.1f;
 	float lastShot = 0.f;
+
+	//collision
 };

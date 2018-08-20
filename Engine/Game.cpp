@@ -27,7 +27,20 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	config("config.txt"),
 	map(config, gfx),
-	player(Car(config))
+	player(
+		Car(
+	VecF2((float)config.carStartXPos,(float)config.carStartYPos ),
+	config.carStartVelocity,
+	config.carSpeed,
+	config.carMaxVelocity,
+	config.carStartDir,
+	config.carTurnRate,
+	config.rocketVelocity,
+	config.rocketImageFileName,
+	35,35,
+	config.carImageFileName,
+	70,70
+		))
 {
 	Debug::clear();
 }

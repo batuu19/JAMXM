@@ -1,7 +1,7 @@
 #include "SpriteContainer.h"
 
 SpriteContainer::SpriteContainer(const Surface& surf, int rows, int lines,
-					int height, int width, bool rotateAtCreate)
+					int width, int height, bool rotateAtCreate)
 	:
 	rows(rows),
 	lines(lines),
