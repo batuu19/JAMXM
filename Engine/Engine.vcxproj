@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BMath.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
@@ -163,10 +164,9 @@
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteContainer.h" />
     <ClInclude Include="Surface.h" />
-    <ClInclude Include="Vec2.h" />
-    <ClInclude Include="Vei2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BMath.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Config.cpp" />
@@ -188,8 +188,6 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteContainer.cpp" />
     <ClCompile Include="Surface.cpp" />
-    <ClCompile Include="Vec2.cpp" />
-    <ClCompile Include="Vei2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">

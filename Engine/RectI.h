@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vei2.h"
+#include "BMath.h"
 
 class RectI
 {

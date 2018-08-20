@@ -1,7 +1,15 @@
 #pragma once
-#include <cmath>
-#include "Vei2.h"
-//Make Vei and Vec in the same file?
+#include <math.h>
+#include <algorithm>
+
+template<typename T>
+T sq(T x){	return x*x;}
+
+class Vec2;
+class Vei2;
+///Vector Float
+
+
 class Vec2
 {
 public:
@@ -32,3 +40,25 @@ public:
 };
 
 const Vec2 zeroVec{ 0.0f,0.0f };
+///Vector Int
+
+class Vei2
+{
+public:
+	Vei2() = default;
+	Vei2(int x_in, int y_in);
+	Vei2 operator+(const Vei2& rhs) const;
+	Vei2& operator+=(const Vei2& rhs);
+	Vei2 operator*(int rhs) const;
+	Vei2& operator*=(int rhs);
+	Vei2 operator-(const Vei2& rhs) const;
+	Vei2& operator-=(const Vei2& rhs);
+	Vei2 operator/(int rhs) const;
+	Vei2& operator/=(int rhs);
+	float GetLength() const;
+	int GetLengthSq() const;
+	explicit operator Vec2();
+public:
+	int x;
+	int y;
+};

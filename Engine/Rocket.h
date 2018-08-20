@@ -1,6 +1,6 @@
 #pragma once
 #include "Config.h"
-#include "Vec2.h"
+#include "BMath.h"
 #include "SpriteContainer.h"
 #include "Graphics.h"
 #include "Directions.h"

@@ -56,6 +56,8 @@ void Car::speedup(bool faster)
 	//TODO: that's bad, can't stop when max or 0 vel
 	if(actualVelSq < maxVel * maxVel && actualVelSq >= 0)
 		vel += vectorsNormalized[dir] * speedFactor;
+
+
 }
 
 void Car::draw(Graphics & gfx) const

@@ -10,7 +10,7 @@
 #include <sstream>
 #include "Surface.h"
 #include <vector>
-#include "Vec2.h"
+#include "BMath.h"
 #include "SpriteContainer.h"
 #include "Rocket.h"
 

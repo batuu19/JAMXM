@@ -3,7 +3,7 @@
 #include<cctype>
 #include<algorithm>
 #include<vector>
-#include "Vec2.h"
+#include "BMath.h"
 
 static constexpr int UP = 0;
 //1
