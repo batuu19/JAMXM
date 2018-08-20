@@ -8,7 +8,8 @@
 class Rocket
 {
 public:
-	Rocket(Config&,int x, int y, int dir);
+	Rocket(const Config&,int x, int y, int dir);
+	Rocket(const Config&, Vec2 pos, int dir);
 
 	void draw(Graphics&) const;
 	void update();

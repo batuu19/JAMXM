@@ -1,6 +1,6 @@
 #include "Car.h"
 
-Car::Car(Config& config)
+Car::Car(const Config& config)
 	:
 	pos(config.getCarStartXPos(), config.getCarStartYPos()),
 	speed(config.getCarSpeed()),
@@ -10,11 +10,6 @@ Car::Car(Config& config)
 	config(config),
 	sprites(config.getCarImageFileName(),5,1,70,70)
 {
-	
-	for (auto& v : directionVec)
-	{
-		v.normalize();
-	}
 	vel = { 0.0f,0.0f };
 }
 
@@ -28,7 +23,7 @@ void Car::turnLeft()
 	}
 	leftTurn += dt;
 
-	vel = directionVec[dir] * (vel * directionVec[dir]);
+	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
 }
 
 void Car::turnRight()
@@ -42,11 +37,15 @@ void Car::turnRight()
 	}
 	rightTurn += dt;
 
-	vel = directionVec[dir] * (vel * directionVec[dir]);
+	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
 }
 
 void Car::update()
 {	
+	for (auto &r : rocketsFired)
+	{
+		r.update();
+	}
 	pos += vel;
 }
 
@@ -56,12 +55,16 @@ void Car::speedup(bool faster)
 	const float actualVelSq = vel.getLengthSq();
 	//TODO: that's bad, can't stop when max or 0 vel
 	if(actualVelSq < maxVel * maxVel && actualVelSq >= 0)
-		vel +=  directionVec[dir] * speedFactor;
+		vel += vectorsNormalized[dir] * speedFactor;
 }
 
 void Car::draw(Graphics & gfx) const
 {
 	drawCar(gfx);
+	for (auto r : rocketsFired)
+	{
+		r.draw(gfx);
+	}
 }
 
 void Car::reset()
@@ -70,6 +73,13 @@ void Car::reset()
 	pos.y = (float)config.getCarStartYPos();
 	dir = config.getCarStartDir();
 	vel = { 0.0f,0.0f };
+
+	rocketsFired.clear();
+}
+
+void Car::shoot()
+{
+	rocketsFired.emplace_back( config,pos,dir );
 }
 
 std::string Car::getDebugInfo() const

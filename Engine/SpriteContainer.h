@@ -5,7 +5,7 @@
 class SpriteContainer
 {
 public:
-	SpriteContainer(const Surface& allCars, int rows, int lines,int height,int width, bool rotateAtCreate = true);
+	SpriteContainer(const Surface& surf, int rows, int lines,int height,int width, bool rotateAtCreate = true);
 
 	Surface& operator[](int i);
 	const Surface& operator[](int i) const;

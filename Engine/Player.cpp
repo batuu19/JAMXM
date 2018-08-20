@@ -35,6 +35,10 @@ void Player::update(Keyboard & kbd)
 	{
 		car.reset();
 	}
+	if (kbd.KeyIsPressed(VK_CONTROL))
+	{
+		car.shoot();
+	}
 	car.update();
 }
 

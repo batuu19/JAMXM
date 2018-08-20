@@ -21,12 +21,13 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ),
-	map(config,gfx),
-	player(Car(config))
+	wnd(wnd),
+	gfx(wnd),
+	map(config, gfx),
+	player(Car(config)),
+	rocket(config, Vec2(400, 400),RIGHT)
 {
 	Debug::clear();
 }
@@ -43,7 +44,7 @@ void Game::UpdateModel()
 {
 
 	player.update(wnd.kbd);
-
+	rocket.update();
 	//do sprawdzania wymiarów
 	//int x, y;
 
@@ -69,5 +70,6 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	map.draw();
+	rocket.draw(gfx);
 	player.draw(gfx);
 }

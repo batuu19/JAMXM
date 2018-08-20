@@ -12,6 +12,7 @@
 #include <vector>
 #include "Vec2.h"
 #include "SpriteContainer.h"
+#include "Rocket.h"
 
 //TODO: add collision using RectI
 class Car
@@ -19,7 +20,7 @@ class Car
 
 public:
 	//TODO: without config
-	Car(Config&);
+	Car(const Config&);
 
 	void turnLeft();
 	void turnRight();
@@ -28,14 +29,15 @@ public:
 	void draw(Graphics&) const;
 	void reset();
 
+	void shoot();
 	std::string getDebugInfo() const;
 private:
 	Vec2 pos;
 	Vec2 vel;
 	float speed;//speedup rate
 	float maxVel;
-	int dir = UP;
-	Config& config;
+	int dir;
+	const Config& config;
 
 	SpriteContainer sprites;
 
@@ -48,24 +50,5 @@ private:
 
 	void drawCar(Graphics &) const;
 
-	//TODO: move that from there. to other class?
-	std::vector<Vec2> directionVec =
-	{
-		{ 0.0f,-1.0f },//up
-		{ 1.0f,-2.0f },
-		{ 1.0f,-1.0f },//up_right
-		{ 2.0f,-1.0f },
-		{ 2.0f,0.0f },//right
-		{ 2.0f,1.0f },
-		{ 1.0f,1.0f },//down_right
-		{ 1.0f,2.0f },
-		{ 0.0f,2.0f },//down
-		{ -1.0f,2.0f },
-		{ -1.0f,1.0f },//down_left
-		{ -2.0f,1.0f },
-		{ -2.0f,0.0f },//left
-		{ -2.0f,-1.0f },
-		{ -1.0f,-1.0f },//up_left
-		{ -1.0f,-2.0f },
-	};
+	std::vector<Rocket> rocketsFired;
 };

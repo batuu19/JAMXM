@@ -25,3 +25,42 @@ static constexpr int DIRECTIONS_COUNT= 16;
 
 int getDirection(std::string name);
 
+const std::vector<Vec2> directionVec =
+{
+	{ 0.0f,-1.0f },//up
+	{ 1.0f,-2.0f },
+	{ 1.0f,-1.0f },//up_right
+	{ 2.0f,-1.0f },
+	{ 2.0f,0.0f },//right
+	{ 2.0f,1.0f },
+	{ 1.0f,1.0f },//down_right
+	{ 1.0f,2.0f },
+	{ 0.0f,2.0f },//down
+	{ -1.0f,2.0f },
+	{ -1.0f,1.0f },//down_left
+	{ -2.0f,1.0f },
+	{ -2.0f,0.0f },//left
+	{ -2.0f,-1.0f },
+	{ -1.0f,-1.0f },//up_left
+	{ -1.0f,-2.0f },
+};
+
+const std::vector<Vec2> vectorsNormalized =
+{
+	{directionVec[0].getNormalized() },
+	{directionVec[1].getNormalized() },
+	{directionVec[2].getNormalized() },
+	{directionVec[3].getNormalized() },
+	{directionVec[4].getNormalized() },
+	{directionVec[5].getNormalized() },
+	{directionVec[6].getNormalized() },
+	{directionVec[7].getNormalized() },
+	{directionVec[8].getNormalized() },
+	{directionVec[9].getNormalized() },
+	{directionVec[10].getNormalized()},
+	{directionVec[11].getNormalized()},
+	{directionVec[12].getNormalized()},
+	{directionVec[13].getNormalized()},
+	{directionVec[14].getNormalized()},
+	{directionVec[15].getNormalized()}
+};

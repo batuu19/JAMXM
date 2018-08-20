@@ -46,11 +46,11 @@ Config::Config(std::string filename)
 		{
 			in >> carImageFileName;
 		}
-		else if (line == "Rocket velocity")
+		else if (line == "[Rocket velocity]")
 		{
 			in >> rocketVelocity;
 		}
-		else if (line == "Rocket image file")
+		else if (line == "[Rocket image file name]")
 		{
 			in >> rocketImageFileName;
 		}
