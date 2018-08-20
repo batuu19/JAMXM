@@ -12,9 +12,11 @@
 class Entity
 {
 public:
-	Entity(int x, int y, std::string spriteFileName);
-	Entity(Config &);
+	Entity(VecF2 pos, std::string spriteFileName);
 
+	void update();
+	void draw(Graphics&) const;
+	void getRect();
 protected:
 	VecF2 pos;
 	SpriteContainer sprites;

@@ -6,7 +6,6 @@ Car::Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirectio
 	:
 	pos(pos),
 	dir(startDirection),
-	vel(vectorsNormalized[dir] * startVel),
 	speed(speed),
 	maxVel(maxVel),
 	turnRate(turnRate),
@@ -16,7 +15,8 @@ Car::Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirectio
 	rocketVel(rocketVel),
 	width(spriteWidth),
 	height(spriteHeight),
-	sprites(spriteFilename, spritesRows, spritesLines, width, height)
+	sprites(spriteFilename, spritesRows, spritesLines, width, height),
+	vel(vectorsNormalized[dir] * startVel)
 {
 }
 

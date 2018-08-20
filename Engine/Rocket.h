@@ -14,6 +14,7 @@ public:
 private:
 	VecF2 pos;
 	VecF2 vel;
+	//will not be compatibile with Entity
 	Surface sprite;
 
 };
