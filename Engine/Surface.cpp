@@ -183,7 +183,7 @@ Surface Surface::rotateVertAndHor() const
 	return surf;
 }
 
-Surface Surface::getPart(const RectI & srcRect) const
+Surface Surface::getPart(const RectI& srcRect) const
 {
 	int width = srcRect.getWidth();
 	int height = srcRect.getHeight();

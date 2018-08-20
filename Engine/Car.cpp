@@ -15,11 +15,11 @@ Car::Car(const Config& config)
 
 void Car::turnLeft()
 {
-	const float dt = ft.mark();
+	const float dt = turnTimer.mark();
 	if (leftTurn >= turnRate)
 	{
 		dir = (dir - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
-		leftTurn = 0.0f;
+		leftTurn = 0.f;
 	}
 	leftTurn += dt;
 
@@ -28,12 +28,12 @@ void Car::turnLeft()
 
 void Car::turnRight()
 {
-	const float dt = ft.mark();
+	const float dt = turnTimer.mark();
 
 	if (rightTurn >= turnRate)
 	{
 		dir = (dir + turnValue) % DIRECTIONS_COUNT;
-		rightTurn = 0.0f;
+		rightTurn = 0.f;
 	}
 	rightTurn += dt;
 
@@ -81,7 +81,14 @@ void Car::reset()
 
 void Car::shoot()
 {
-	rocketsFired.emplace_back( config,pos,dir );
+	const float dt = shootTimer.mark();
+	if (lastShot >= shootRate)
+	{
+		rocketsFired.emplace_back(config, pos, dir);
+		lastShot = 0.f;
+	}
+	
+	lastShot += dt;
 }
 
 std::string Car::getDebugInfo() const
@@ -97,5 +104,77 @@ std::string Car::getDebugInfo() const
 
 void Car::drawCar(Graphics & gfx) const
 {
-	gfx.drawSprite((Vei2)pos, sprites[dir]);
+	gfx.drawSprite((VecI2)pos, sprites[dir]);
 }
+
+/*
+
+template<typename T>
+inline Rect<T>::Rect(T left_in, T right_in, T top_in, T bottom_in)
+:
+left(left_in),
+right(right_in),
+top(top_in),
+bottom(bottom_in)
+{
+}
+
+template<typename T>
+inline Rect<T>::Rect(const Vec2 & topLeft, const Vec2 & bottomRight)
+:
+Rect(topLeft.x, bottomRight.x, topLeft.y, bottomRight.y)
+{
+}
+
+template<typename T>
+inline Rect<T>::Rect(const Vec2 & topLeft, T width, T height)
+:
+Rect(topLeft, topLeft + Vec2(width, height))
+{
+}
+
+template<typename T>
+inline bool Rect<T>::IsOverlappingWith(const Rect & other) const
+{
+return right > other.left && left < other.right
+&& bottom > other.top && top < other.bottom;
+}
+
+template<typename T>
+inline bool Rect<T>::IsContainedBy(const Rect & other) const
+{
+return left >= other.left && right <= other.right &&
+top >= other.top && bottom <= other.bottom;
+}
+
+template<typename T>
+inline Rect Rect<T>::FromCenter(const Vec2 & center, T halfWidth, T halfHeight)
+{
+const Vec2 half(halfWidth, halfHeight);
+return Rect(center - half, center + half);
+}
+
+template<typename T>
+inline Rect Rect<T>::GetExpanded(T offset) const
+{
+return Rect(left - offset, right + offset, top - offset, bottom + offset);
+}
+
+template<typename T>
+inline Vec2 Rect<T>::GetCenter() const
+{
+return Vec2((left + right) / (T)2, (top + bottom) / (T)2);
+}
+
+template<typename T>
+inline T Rect<T>::getWidth() const
+{
+return right - left;
+}
+
+template<typename T>
+inline T Rect<T>::getHeight() const
+{
+return down - up;
+}
+*/

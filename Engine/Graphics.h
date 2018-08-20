@@ -25,7 +25,7 @@
 #include "ChiliException.h"
 #include "Colors.h"
 #include "Surface.h"
-#include "RectI.h"
+#include "Rect.h"
 
 class Graphics
 {
@@ -68,15 +68,15 @@ public:
 	void drawSpriteNonChroma(int x, int y, const Surface& s);
 	void drawSpriteNonChroma(int x, int y, const RectI& srcRect, const Surface& s);
 	void drawSpriteNonChroma(int x, int y, RectI srcRect, const RectI& clip, const Surface& s);
-	void drawSpriteNonChroma(const Vei2& pos, const Surface& s)
+	void drawSpriteNonChroma(const VecI2& pos, const Surface& s)
 	{
 		drawSpriteNonChroma(pos.x, pos.y, s);
 	}
-	void drawSpriteNonChroma(const Vei2& pos, const RectI& srcRect, const Surface& s)
+	void drawSpriteNonChroma(const VecI2& pos, const RectI& srcRect, const Surface& s)
 	{
 		drawSpriteNonChroma(pos.x, pos.y, srcRect, s);
 	}
-	void drawSpriteNonChroma(const Vei2& pos, RectI srcRect, const RectI& clip, const Surface& s)
+	void drawSpriteNonChroma(const VecI2& pos, RectI srcRect, const RectI& clip, const Surface& s)
 	{
 		drawSpriteNonChroma(pos.x, pos.y, srcRect, clip, s);
 	}
@@ -85,15 +85,15 @@ public:
 	void drawSprite(int x, int y, const Surface& s, Color chroma = Colors::Magenta);
 	void drawSprite(int x, int y, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta);
 	void drawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
-	void drawSprite(const Vei2& pos, const Surface& s, Color chroma = Colors::Magenta)
+	void drawSprite(const VecI2& pos, const Surface& s, Color chroma = Colors::Magenta)
 	{
 		drawSprite(pos.x, pos.y, s, chroma);
 	}
-	void drawSprite(const Vei2& pos, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta)
+	void drawSprite(const VecI2& pos, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta)
 	{
 		drawSprite(pos.x, pos.y, srcRect, s, chroma);
 	}
-	void drawSprite(const Vei2& pos, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta)
+	void drawSprite(const VecI2& pos, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta)
 	{
 		drawSprite(pos.x, pos.y, srcRect, clip, s, chroma);
 	}

@@ -32,8 +32,8 @@ public:
 	void shoot();
 	std::string getDebugInfo() const;
 private:
-	Vec2 pos;
-	Vec2 vel;
+	VecF2 pos;
+	VecF2 vel;
 	float speed;//speedup rate
 	float maxVel;
 	int dir;
@@ -41,14 +41,17 @@ private:
 
 	SpriteContainer sprites;
 
-	FrameTimer ft;
+	FrameTimer turnTimer;
 	//make it dependent on velocity
 	float turnRate;
-	float leftTurn = 0.0f;
-	float rightTurn = 0.0f;
+	float leftTurn = 0.f;
+	float rightTurn = 0.f;
 	int turnValue = 1;//how many directions at once
 
 	void drawCar(Graphics &) const;
 
 	std::vector<Rocket> rocketsFired;
+	FrameTimer shootTimer;
+	float shootRate = 0.1f;
+	float lastShot = 0.f;
 };

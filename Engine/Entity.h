@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Graphics.h"
-#include "Vec2.h"
+#include "BMath.h"
 #include <vector>
 #include "Surface.h"
 #include "Directions.h"
@@ -13,7 +13,7 @@ class Entity
 public:
 
 protected:
-	Vec2 pos;
+	VecF2 pos;
 	std::vector<Surface> sprites;
 	int dir;
 };

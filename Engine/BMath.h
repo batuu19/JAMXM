@@ -5,60 +5,97 @@
 template<typename T>
 T sq(T x){	return x*x;}
 
-class Vec2;
-class Vei2;
-///Vector Float
-
-
+template<typename T>
 class Vec2
 {
 public:
 	Vec2() = default;
-	Vec2(float x_in, float y_in);
-	Vec2(int x_in, int y_in);
-	Vec2 operator+(const Vec2& rhs) const;
-	Vec2 operator+(const float rhs) const;
-	Vec2& operator+=(const Vec2& rhs);
-	Vec2& operator+=(const float rhs);
-	float operator*(const Vec2& rhs) const;//dot product
-	Vec2 operator*(float rhs) const;
-	Vec2& operator*=(float rhs);
-	Vec2 operator-(const Vec2& rhs) const;
-	Vec2 operator-(const float rhs) const;
-	Vec2& operator-=(const Vec2& rhs);
-	Vec2& operator-=(const float rhs);
-	float getLength() const;
-	float getLengthSq() const;
-	Vec2& normalize();
-	Vec2 getNormalized() const;
-	explicit operator Vei2() const;
-public:
-	float x;
-	float y;
+	Vec2(T x_in, T y_in) 
+		:
+		x(x_in),
+		y(y_in)
+	{
+	}
+	Vec2(const Vec2<float>& src)
+		:
+		x((T)src.x),
+		y((T)src.y)
+	{
+	}
+	Vec2 operator+(const Vec2& rhs) const
+	{
+		return Vec2(x + rhs.x, y + rhs.y);
+	}
+	Vec2 operator+(const T rhs) const
+	{
+		return Vec2(x + rhs, y + rhs);
+	}
+	Vec2& operator+=(const Vec2& rhs)
+	{
+		return *this = *this + rhs;
+	}
+	Vec2& operator+=(const T rhs)
+	{
+		return *this = *this + rhs;
+	}
+	T operator*(const Vec2& rhs) const//dot product
+	{
+		return x * rhs.x + y * rhs.y;
+	}
+	Vec2 operator*(T rhs) const
+	{
+		return Vec2(x * rhs, y * rhs);
+	}
+	Vec2& operator*=(T rhs)
+	{
+		return *this = *this * rhs;
+	}
+	Vec2 operator-(const Vec2& rhs) const
+	{
+		return Vec2(x - rhs.x, y - rhs.y);
+	}
 
+	Vec2 operator-(const T rhs) const
+	{
+		return Vec2(x - rhs, y - rhs);
+	}
+	Vec2& operator-=(const Vec2& rhs)
+	{
+		return *this = *this - rhs;
+	}
+	Vec2& operator-=(const T rhs)
+	{
+		return *this = *this - rhs;
+	}
+	T getLength() const
+	{
+		return (T)std::sqrt(getLengthSq());
+	}
+	T getLengthSq() const
+	{
+		return x * x + y * y;
+	}
+	Vec2& normalize()
+	{
+		return *this = getNormalized();
+	}
+	Vec2 getNormalized() const
+	{
+		const T len = getLength();
+		if (len != (T)0)
+		{
+			return *this * ((T)1 / len);
+		}
+		return *this;
+	}
+	static Vec2 getZeroVec()
+	{
+		return Vec2((T)0, (T)0);
+	}
 public:
+	T x;
+	T y;
 };
 
-const Vec2 zeroVec{ 0.0f,0.0f };
-///Vector Int
-
-class Vei2
-{
-public:
-	Vei2() = default;
-	Vei2(int x_in, int y_in);
-	Vei2 operator+(const Vei2& rhs) const;
-	Vei2& operator+=(const Vei2& rhs);
-	Vei2 operator*(int rhs) const;
-	Vei2& operator*=(int rhs);
-	Vei2 operator-(const Vei2& rhs) const;
-	Vei2& operator-=(const Vei2& rhs);
-	Vei2 operator/(int rhs) const;
-	Vei2& operator/=(int rhs);
-	float GetLength() const;
-	int GetLengthSq() const;
-	explicit operator Vec2();
-public:
-	int x;
-	int y;
-};
+typedef Vec2<int> VecI2;
+typedef Vec2<float> VecF2;

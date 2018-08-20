@@ -9,7 +9,7 @@ Rocket::Rocket(const Config & config, int x, int y, int dir)
 {
 }
 
-Rocket::Rocket(const Config & config, Vec2 pos, int dir)
+Rocket::Rocket(const Config & config, VecF2 pos, int dir)
 	:
 	pos(pos),
 	dir(dir),
@@ -21,7 +21,7 @@ Rocket::Rocket(const Config & config, Vec2 pos, int dir)
 
 void Rocket::draw(Graphics & gfx) const
 {
-	gfx.drawSprite((Vei2)pos, sprites[dir]);
+	gfx.drawSprite((VecI2)pos, sprites[dir]);
 }
 
 void Rocket::update()

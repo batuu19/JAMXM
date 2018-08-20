@@ -156,8 +156,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="RectF.h" />
-    <ClInclude Include="RectI.h" />
+    <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Rocket.h" />
     <ClInclude Include="Sound.h" />
@@ -166,7 +165,6 @@
     <ClInclude Include="Surface.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BMath.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Config.cpp" />
@@ -182,8 +180,6 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RectF.cpp" />
-    <ClCompile Include="RectI.cpp" />
     <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteContainer.cpp" />

@@ -25,9 +25,9 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
+	config("config.txt"),
 	map(config, gfx),
-	player(Car(config)),
-	rocket(config, Vec2(400, 400),RIGHT)
+	player(Car(config))
 {
 	Debug::clear();
 }
@@ -44,7 +44,6 @@ void Game::UpdateModel()
 {
 
 	player.update(wnd.kbd);
-	rocket.update();
 	//do sprawdzania wymiarów
 	//int x, y;
 
@@ -70,6 +69,5 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	map.draw();
-	rocket.draw(gfx);
 	player.draw(gfx);
 }

@@ -2,7 +2,7 @@
 
 #include "Colors.h"
 #include <string>
-#include "RectI.h"
+#include "Rect.h"
 
 //pPixels[y*width + x];
 class Surface

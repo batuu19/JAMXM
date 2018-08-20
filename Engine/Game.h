@@ -47,11 +47,10 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	Config config = "config.txt";
+	Config config;
 	Map map;
 	Player player;
 
-	Rocket rocket;
 	bool pressed = false;
 
 	

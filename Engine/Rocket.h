@@ -9,13 +9,13 @@ class Rocket
 {
 public:
 	Rocket(const Config&,int x, int y, int dir);
-	Rocket(const Config&, Vec2 pos, int dir);
+	Rocket(const Config&, VecF2 pos, int dir);
 
 	void draw(Graphics&) const;
 	void update();
 private:
-	Vec2 pos;
-	Vec2 vel;
+	VecF2 pos;
+	VecF2 vel;
 	int dir;
 
 	//or do just one surface?

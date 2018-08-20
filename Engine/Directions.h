@@ -25,7 +25,7 @@ static constexpr int DIRECTIONS_COUNT= 16;
 
 int getDirection(std::string name);
 
-const std::vector<Vec2> directionVec =
+const std::vector<VecF2> directionVec =
 {
 	{ 0.0f,-1.0f },//up
 	{ 1.0f,-2.0f },
@@ -45,7 +45,7 @@ const std::vector<Vec2> directionVec =
 	{ -1.0f,-2.0f },
 };
 
-const std::vector<Vec2> vectorsNormalized =
+const std::vector<VecF2> vectorsNormalized =
 {
 	{directionVec[0].getNormalized() },
 	{directionVec[1].getNormalized() },
