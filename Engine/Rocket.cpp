@@ -13,7 +13,7 @@ void Rocket::draw(Graphics & gfx) const
 	gfx.drawSprite((VecI2)pos, sprite);
 }
 
-void Rocket::update()
+void Rocket::update(float dt)
 {
 	pos += vel;
 }

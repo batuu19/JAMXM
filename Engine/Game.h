@@ -19,16 +19,7 @@
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #pragma once
-#include <sstream>
-
-#include "Keyboard.h"
-#include "Mouse.h"
-#include "Graphics.h"
-#include "Map.h"
-#include "Player.h"
-#include "Config.h"
-#include "Debug.h"
-#include "Entity.h"
+#include "World.h"
 
 class Game
 {
@@ -48,17 +39,9 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	Config config;
-	Map map;
-	Player player;
+	
+	FrameTimer ft;
+	World world;
 
-	Sound sndMusic = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
-	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
-
-	bool pause = false;
-
-	bool muted = false;
-	bool musicPlay = true;
-	Entity wreck;
 	/********************************/
 };

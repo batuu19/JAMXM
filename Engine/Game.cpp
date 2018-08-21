@@ -25,26 +25,8 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	config("config.txt"),
-	map(config, gfx),
-	player(
-		Car(
-			VecF2((float)config.carStartXPos, (float)config.carStartYPos),
-			config.carStartVelocity,
-			config.carSpeed,
-			config.carMaxVelocity,
-			config.carStartDir,
-			config.carTurnRate,
-			config.rocketVelocity,
-			config.rocketImageFileName,
-			35, 35,
-			config.carImageFileName,
-			70, 70
-		)),
-	wreck(VecF2(650.f, 300.f), "sprites\\wreck.bmp", 80, 140, 1, 1)
+	world(gfx.getScreenRect())
 {
-	Debug::clear();
-	if(musicPlay)sndMusic.Play();
 }
 
 void Game::Go()
@@ -57,55 +39,12 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (!pause)
-	{
-		auto& rContainer = player.car.getRocketContainer();
-		std::vector<int> rocketsToRemove;
-		auto pred = [this](Rocket r) {return r.getRect().IsOverlappingWith(wreck.getRect()); };
-
-
-		for (int i = 0; i < rContainer.size(); i++)
-		{
-			if (pred(rContainer[i]))
-			{
-				sndBoom.Play();
-				rocketsToRemove.push_back(i);
-			}
-		}
-
-		for (int i : rocketsToRemove)
-		{
-			rContainer.erase(rContainer.begin() + i);
-		}
-
-		player.update(wnd.kbd);
-		wreck.update();
-
-	}
-	//TODO: prevent from keeping pressed
-	if (wnd.kbd.KeyIsPressed(VK_SPACE))pause = !pause;
-
-	if (wnd.kbd.KeyIsPressed('M'))
-	{
-		if (muted)
-			SoundSystem::SetMasterVolume(1.0f);
-		else
-			SoundSystem::SetMasterVolume(0.0f);
-		muted = !muted;
-	}
-	if (wnd.kbd.KeyIsPressed('P'))
-	{
-		if (musicPlay)
-			sndMusic.StopAll();
-		else
-			sndMusic.Play();
-		musicPlay = !musicPlay;
-	}
+	const float dt = ft.mark();
+	world.handleInput(wnd.kbd, wnd.mouse);
+	world.update(dt);
 }
 
 void Game::ComposeFrame()
 {
-	map.draw();
-	wreck.draw(gfx);
-	player.draw(gfx);
+	world.draw(gfx);
 }

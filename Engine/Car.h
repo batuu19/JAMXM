@@ -13,21 +13,20 @@
 #include "SpriteContainer.h"
 #include "Rocket.h"
 #include "SoundEffect.h"
+#include "Keyboard.h"
+#include "Mouse.h"
 
 //TODO: add collision using RectI
 class Car
 {
 
 public:
-	//TODO: without config
-	Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirection, float turnRate,
-		float rocketVel, std::string rocketSpriteFilename, int rocketWidth, int rocketHeight,
-		std::string spriteFilename, int spriteWidth, int spriteHeight, int spritesRows = 5, int spritesLines = 1);
-
+	Car(VecF2 pos, int startDirection);
+	Car(VecI2 pos, int startDirection);
 	//make functors?
 	void turnLeft();
 	void turnRight();
-	void update();
+	void update(float dt);
 	void speedup(bool faster = true);
 	void draw(Graphics&) const;
 	void reset();
@@ -40,38 +39,35 @@ public:
 
 	//collision
 	const RectF& getRect() const;
+
 private:
 	int dir;
 	VecF2 pos;
-	VecF2 vel;
-	int width;
-	int height;
-	float speed;//speedup rate
-	float maxVel;
+	VecF2 vel = { 0.f,0.f };
+	int width = 70;
+	int height = 70;
+	float speed = 0.3f;//speedup rate
+	float maxVel = 6.f;
 
-	SpriteContainer sprites;
+	SpriteContainer sprites = SpriteContainer({"sprites\\car.bmp"},5,1,width,height);
 
-	//turning
-	FrameTimer turnTimer;
 	//make it dependent on velocity
-	float turnRate;
-	float leftTurn = 0.f;
-	float rightTurn = 0.f;
+	float turnRate = 0.1f;
+	float leftTurnTime = 0.f;
+	float rightTurnTime = 0.f;
 	int turnValue = 1;//how many directions at once
 	Sound sndFriction = Sound( L"sound\\game\\friction.wav" );
-	FrameTimer turnSoundTimer;
-	float turnSoundRate;
-	float turnSound = 0.f;
+	float turnSoundRate = turnRate * 3.1f;
+	float turnSoundTime = 0.f;
 
 	void drawCar(Graphics &) const;
 
 	//rocket
-	SpriteContainer rocketSprites;
-	int rocketWidth;
-	int rocketHeight;
-	float rocketVel;
+	int rocketWidth = 35;
+	int rocketHeight = 35;
+	SpriteContainer rocketSprites = SpriteContainer({ "sprites//rocket1.bmp" }, 5, 1, rocketWidth, rocketHeight);
+	float rocketVel = 12;
 	std::vector<Rocket> rocketsFired;
-	FrameTimer shootTimer;
 	float shootRate = 0.1f;
 	float lastShot = 0.f;
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );

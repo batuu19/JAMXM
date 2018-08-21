@@ -17,7 +17,7 @@ Entity::Entity(VecF2 pos, int dir, std::string spriteFileName, int spriteWidth, 
 {
 }
 
-void Entity::update()
+void Entity::update(float dt)
 {
 	if (sprites.getSize() < 0)throw std::exception("no sprites");
 	if (dir > sprites.getSize())throw std::exception("wrong dir");

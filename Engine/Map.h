@@ -11,12 +11,9 @@
 class Map
 {
 public:
-	Map(Graphics&);
-	Map(const Config&,Graphics&);
-	void draw();
+	Map() = default;
+	void draw(Graphics&) const;
 private:
-	Surface mapSprite;
-	//width and height same as window
-	Graphics& gfx
+	Surface mapSprite = "sprites\\trasa.bmp";
 	;}
 ;

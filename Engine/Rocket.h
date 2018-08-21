@@ -11,7 +11,7 @@ public:
 	Rocket(VecF2 pos,VecF2 vel, Surface sprite);
 
 	void draw(Graphics&) const;
-	void update();
+	void update(float dt);
 	const RectF& getRect() const;
 private:
 	VecF2 pos;

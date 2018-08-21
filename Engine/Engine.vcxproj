@@ -151,7 +151,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="Level.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mouse.h" />
@@ -163,6 +162,7 @@
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteContainer.h" />
     <ClInclude Include="Surface.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
@@ -185,6 +185,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteContainer.cpp" />
     <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
