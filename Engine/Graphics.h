@@ -25,6 +25,7 @@
 #include "ChiliException.h"
 #include "Colors.h"
 #include "Surface.h"
+#include "Rect.h"
 
 class Graphics
 {
@@ -64,8 +65,38 @@ public:
 	{
 		drawRect(x0, y0, x0 + width, y0 + height, c);
 	}
-	void draw45Rect(int x0, int y0, int up, int down, Color c);
-	void drawSprite(int x, int y, const Surface& s);
+	void drawSpriteNonChroma(int x, int y, const Surface& s);
+	void drawSpriteNonChroma(int x, int y, const RectI& srcRect, const Surface& s);
+	void drawSpriteNonChroma(int x, int y, RectI srcRect, const RectI& clip, const Surface& s);
+	void drawSpriteNonChroma(const VecI2& pos, const Surface& s)
+	{
+		drawSpriteNonChroma(pos.x, pos.y, s);
+	}
+	void drawSpriteNonChroma(const VecI2& pos, const RectI& srcRect, const Surface& s)
+	{
+		drawSpriteNonChroma(pos.x, pos.y, srcRect, s);
+	}
+	void drawSpriteNonChroma(const VecI2& pos, RectI srcRect, const RectI& clip, const Surface& s)
+	{
+		drawSpriteNonChroma(pos.x, pos.y, srcRect, clip, s);
+	}
+
+
+	void drawSprite(int x, int y, const Surface& s, Color chroma = Colors::Magenta);
+	void drawSprite(int x, int y, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta);
+	void drawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
+	void drawSprite(const VecI2& pos, const Surface& s, Color chroma = Colors::Magenta)
+	{
+		drawSprite(pos.x, pos.y, s, chroma);
+	}
+	void drawSprite(const VecI2& pos, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta)
+	{
+		drawSprite(pos.x, pos.y, srcRect, s, chroma);
+	}
+	void drawSprite(const VecI2& pos, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta)
+	{
+		drawSprite(pos.x, pos.y, srcRect, clip, s, chroma);
+	}
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;
@@ -84,4 +115,5 @@ private:
 public:
 	static constexpr int ScreenWidth = 800;
 	static constexpr int ScreenHeight = 600;
+	static RectI getScreenRect();
 };

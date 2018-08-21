@@ -2,7 +2,8 @@
 
 #include "Colors.h"
 #include "Graphics.h"
-#include <fstream>
+#include "Config.h"
+#include "Surface.h"
 #include <assert.h>
 
 //open maps during game not at beginning 
@@ -11,14 +12,11 @@ class Map
 {
 public:
 	Map(Graphics&);
-	Map(const std::string& filename,Graphics&);
-	Map(const Map&);
-	Map& operator=(const Map&) = delete;
-	~Map();
+	Map(const Config&,Graphics&);
 	void draw();
 private:
-	Color* pPixels = nullptr;
+	Surface mapSprite;
 	//width and height same as window
-	Graphics& gfx;
-	void putPixel(int x, int y, Color c);
-};
+	Graphics& gfx
+	;}
+;

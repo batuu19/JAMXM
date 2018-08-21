@@ -21,13 +21,29 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ),
-	map("trasa2.bmp",gfx),
-	car(70,70,Colors::Cyan)
+	wnd(wnd),
+	gfx(wnd),
+	config("config.txt"),
+	map(config, gfx),
+	player(
+		Car(
+	VecF2((float)config.carStartXPos,(float)config.carStartYPos ),
+	config.carStartVelocity,
+	config.carSpeed,
+	config.carMaxVelocity,
+	config.carStartDir,
+	config.carTurnRate,
+	config.rocketVelocity,
+	config.rocketImageFileName,
+	35,35,
+	config.carImageFileName,
+	70,70
+		))
 {
+	Debug::clear();
+	sndMusic.Play();
 }
 
 void Game::Go()
@@ -41,38 +57,31 @@ void Game::Go()
 void Game::UpdateModel()
 {
 
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		car.speedup();
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		car.speedup(false);
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		if (timer > 4)
-		{
-			car.turnLeft();
-			timer = 0;
-		}
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		if (timer > 4)
-		{
-			car.turnRight();
-			timer = 0;
-		}
-	}
+	player.update(wnd.kbd);
+	//do sprawdzania wymiarów
+	//int x, y;
 
-	car.update();
-	timer++;
+	//if (wnd.mouse.LeftIsPressed())
+	//{
+	//	if(!pressed)
+	//	{
+	//		x = wnd.mouse.GetPosX();
+	//		y = wnd.mouse.GetPosY();
+
+	//		std::stringstream ss;
+	//		ss << "Mouse at " << x << " " << y;
+	//		Debug::writeInfo(ss.str());
+
+	//		pressed = true;
+	//	}
+	//	
+	//}
+	//else 
+	//	pressed = false;
 }
 
 void Game::ComposeFrame()
 {
 	map.draw();
-	car.draw(gfx);
-
+	player.draw(gfx);
 }

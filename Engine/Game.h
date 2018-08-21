@@ -19,14 +19,15 @@
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #pragma once
+#include <sstream>
 
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
-#include "Surface.h"
-#include "Car.h"
-#include "FrameTimer.h"
 #include "Map.h"
+#include "Player.h"
+#include "Config.h"
+#include "Debug.h"
 
 class Game
 {
@@ -46,10 +47,14 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	Config config;
 	Map map;
-	Car car;
-	FrameTimer ft;
+	Player player;
 
-	int timer = 0;
+	Sound sndMusic = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
+
+	bool pressed = false;
+
+	
 	/********************************/
 };

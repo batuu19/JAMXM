@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CallingConvention>VectorCall</CallingConvention>
       <MinimalRebuild>false</MinimalRebuild>
@@ -136,13 +136,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BMath.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="Directions.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
@@ -151,14 +155,21 @@
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Rocket.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="SpriteContainer.h" />
     <ClInclude Include="Surface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Directions.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -168,7 +179,10 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpriteContainer.cpp" />
     <ClCompile Include="Surface.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -237,7 +251,17 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="car.bmp" />
     <Image Include="Chili.ico" />
+    <Image Include="Sprites\car.bmp" />
+    <Image Include="Sprites\rocket1.bmp" />
+    <Image Include="Sprites\rocket2.bmp" />
+    <Image Include="Sprites\trasa.bmp" />
+    <Image Include="trasa.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="config.txt" />
+    <Text Include="debug.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

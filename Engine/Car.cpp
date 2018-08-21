@@ -1,78 +1,120 @@
 #include "Car.h"
 
-Car::Car(int startX, int startY, Color c)
+Car::Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirection, float turnRate,
+	float rocketVel,std::string rocketSpriteFilename, int rocketWidth, int rocketHeight,
+	std::string spriteFilename, int spriteWidth, int spriteHeight, int spritesRows, int spritesLines)
 	:
-	xPos(startX),
-	yPos(startY),
-	c(c)
+	pos(pos),
+	vel(vectorsNormalized[dir] * startVel),
+	dir(startDirection),
+	speed(speed),
+	maxVel(maxVel),
+	turnRate(turnRate),
+	rocketWidth(rocketWidth),
+	rocketHeight(rocketHeight),
+	rocketSprites(rocketSpriteFilename,spritesRows,spritesLines,rocketWidth,rocketHeight),
+	rocketVel(rocketVel),
+	width(spriteWidth),
+	height(spriteHeight),
+	sprites(spriteFilename, spritesRows, spritesLines, width, height)
 {
-	velocity = 2.0f;
-	speed = 0.4f;
-	dir = RIGHT;
 }
 
 void Car::turnLeft()
 {
-	dir = (dir - 1 + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
+	const float dt = turnTimer.mark();
+	if (leftTurn >= turnRate)
+	{
+		dir = (dir - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
+		leftTurn = 0.f;
+		sndFriction.Play();
+	}
+	leftTurn += dt;
+
+	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
 }
 
 void Car::turnRight()
 {
-	dir = (dir + 1) % DIRECTIONS_COUNT;
+	const float dt = turnTimer.mark();
+
+	if (rightTurn >= turnRate)
+	{
+		dir = (dir + turnValue) % DIRECTIONS_COUNT;
+		rightTurn = 0.f;
+		sndFriction.Play();
+	}
+	rightTurn += dt;
+
+	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
 }
 
-
 void Car::update()
-{
-	switch (dir)
+{	
+	for (auto &r : rocketsFired)
 	{
-	case UP:
-		yPos -= (int)velocity;
-		break;
-	case UP_RIGHT:
-		yPos -= (int)velocity;
-		xPos += (int)velocity;
-		break;
-	case RIGHT:
-		xPos += (int)velocity;
-		break;
-	case DOWN_RIGHT:
-		xPos += (int)velocity;
-		yPos += (int)velocity;
-		break;
-	case DOWN:
-		yPos += (int)velocity;
-		break;
-	case DOWN_LEFT:
-		yPos += (int)velocity;
-		xPos -= (int)velocity;
-		break;
-	case LEFT:
-		xPos -= (int)velocity;
-		break;
-	case UP_LEFT:
-		xPos -= (int)velocity;
-		yPos -= (int)velocity;
-		break;
-	default:
-		break;
+		r.update();
 	}
+	pos += vel;
 }
 
 void Car::speedup(bool faster)
 {
-	faster?
-		velocity += speed:
-		velocity -= speed;
+	float value = vel * vectorsNormalized[dir];
+	if(value < maxVel  && faster)
+		vel += vectorsNormalized[dir] * speed;
+	else if (value > -maxVel  && !faster)
+		vel += vectorsNormalized[dir] * -speed;
 }
 
 void Car::draw(Graphics & gfx) const
 {
-	const float newWidth = (float)width * (float)sqrt(2) / 2.0f;
-	const float newHeight = (float)height * (float)sqrt(2) / 2.0f;
+	drawCar(gfx);
+	for (auto r : rocketsFired)
+	{
+		r.draw(gfx);
+	}
+}
 
-	dir % 2 ?
-		gfx.draw45Rect(xPos, yPos, newWidth, newHeight, c) :
-		gfx.drawRectDim(xPos, yPos, width, height, c);
+void Car::reset()
+{
+	pos = { 0.f,0.f };
+	dir = RIGHT;
+	vel = { 0.f,0.f };
 
+	rocketsFired.clear();
+}
+
+void Car::shoot()
+{
+	const float dt = shootTimer.mark();
+	if (lastShot >= shootRate)
+	{
+		rocketsFired.emplace_back(pos,vectorsNormalized[dir] * rocketVel,rocketSprites[dir]);
+		lastShot = 0.f;
+		sndRocketShot.Play();
+	}
+	
+	lastShot += dt;
+}
+
+RectF Car::getRect() const
+{
+	return RectF(pos,width,height);
+}
+
+std::string Car::getDebugInfo() const
+{
+	std::stringstream ss;
+
+	ss  << "x=" << pos.x << " y=" << pos.y 
+	    << " velX=" << vel.x << " velY=" << vel.y 
+		<< " maxVel=" << maxVel;
+
+	return ss.str();
+}
+
+void Car::drawCar(Graphics & gfx) const
+{
+	gfx.drawSprite((VecI2)pos, sprites[dir]);
 }

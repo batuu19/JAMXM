@@ -1,0 +1,22 @@
+[Car start pos]
+150 150
+[Car start direction]
+right
+[Car start velocity]
+0
+[Car speed]
+0.3
+[Car max velocity]
+6
+[Car turn rate]
+0.1
+[Car color]
+0 255 255
+[Map file name]
+Sprites/moon.bmp
+[Car image file name]
+Sprites/car.bmp
+[Rocket velocity]
+14
+[Rocket image file name]
+Sprites/rocket1.bmp
