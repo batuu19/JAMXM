@@ -26,7 +26,7 @@ void Player::update(Keyboard & kbd)
 		car.turnRight();
 	}
 	
-	if (kbd.KeyIsPressed(VK_SPACE))
+	if (kbd.KeyIsPressed(VK_RETURN))
 	{
 		Debug::writeMessage(car.getDebugInfo());
 	}
@@ -45,4 +45,9 @@ void Player::update(Keyboard & kbd)
 void Player::draw(Graphics & gfx)
 {
 	car.draw(gfx);
+}
+
+const RectF& Player::getRect() const
+{
+	return car.getRect();
 }

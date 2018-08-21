@@ -28,7 +28,7 @@ void Entity::draw(Graphics & gfx) const
 	gfx.drawSprite(pos,sprites[dir]);
 }
 
-RectF Entity::getRect()
+const RectF& Entity::getRect() const
 {
 	return RectF(pos, sprites[dir].getWidth(), sprites[dir].getHeight());
 }

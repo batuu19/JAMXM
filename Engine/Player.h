@@ -10,7 +10,9 @@ public:
 	Player(Car & car);
 	void update(Keyboard &);
 	void draw(Graphics &);
-private:
+	const RectF& getRect() const;
+
 	Car car;
+private:
 
 };

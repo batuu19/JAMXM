@@ -12,6 +12,7 @@ public:
 
 	void draw(Graphics&) const;
 	void update();
+	const RectF& getRect() const;
 private:
 	VecF2 pos;
 	VecF2 vel;

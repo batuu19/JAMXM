@@ -20,7 +20,7 @@ public:
 
 	void update();
 	void draw(Graphics&) const;
-	RectF getRect();
+	const RectF& getRect() const;
 protected:
 	VecF2 pos;
 	const SpriteContainer sprites;

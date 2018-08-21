@@ -36,9 +36,10 @@ public:
 
 	//rocket
 	void shoot();
+	std::vector<Rocket>& getRocketContainer();
 
 	//collision
-	RectF getRect() const;
+	const RectF& getRect() const;
 private:
 	int dir;
 	VecF2 pos;
@@ -71,7 +72,7 @@ private:
 	float rocketVel;
 	std::vector<Rocket> rocketsFired;
 	FrameTimer shootTimer;
-	float shootRate = 0.7f;
+	float shootRate = 0.1f;
 	float lastShot = 0.f;
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );
 

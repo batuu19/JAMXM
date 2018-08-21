@@ -17,3 +17,8 @@ void Rocket::update()
 {
 	pos += vel;
 }
+
+const RectF & Rocket::getRect() const
+{
+	return RectF(pos, sprite.getWidth(), sprite.getWidth());
+}

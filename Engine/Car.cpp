@@ -113,7 +113,12 @@ void Car::shoot()
 	lastShot += dt;
 }
 
-RectF Car::getRect() const
+std::vector<Rocket>& Car::getRocketContainer()
+{
+	return rocketsFired;
+}
+
+const RectF& Car::getRect() const
 {
 	return RectF(pos,width,height);
 }

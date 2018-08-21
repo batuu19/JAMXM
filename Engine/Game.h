@@ -53,10 +53,12 @@ private:
 	Player player;
 
 	Sound sndMusic = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
+	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 
-	bool pressed = false;
+	bool pause = false;
 
-	
+	bool muted = false;
+	bool musicPlay = true;
 	Entity wreck;
 	/********************************/
 };
