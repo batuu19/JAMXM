@@ -28,6 +28,7 @@
 #include "Player.h"
 #include "Config.h"
 #include "Debug.h"
+#include "Entity.h"
 
 class Game
 {
@@ -56,5 +57,6 @@ private:
 	bool pressed = false;
 
 	
+	Entity wreck;
 	/********************************/
 };

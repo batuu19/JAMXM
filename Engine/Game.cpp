@@ -29,21 +29,22 @@ Game::Game(MainWindow& wnd)
 	map(config, gfx),
 	player(
 		Car(
-	VecF2((float)config.carStartXPos,(float)config.carStartYPos ),
-	config.carStartVelocity,
-	config.carSpeed,
-	config.carMaxVelocity,
-	config.carStartDir,
-	config.carTurnRate,
-	config.rocketVelocity,
-	config.rocketImageFileName,
-	35,35,
-	config.carImageFileName,
-	70,70
-		))
+			VecF2((float)config.carStartXPos, (float)config.carStartYPos),
+			config.carStartVelocity,
+			config.carSpeed,
+			config.carMaxVelocity,
+			config.carStartDir,
+			config.carTurnRate,
+			config.rocketVelocity,
+			config.rocketImageFileName,
+			35, 35,
+			config.carImageFileName,
+			70, 70
+		)),
+	wreck(VecF2(650.f, 300.f), "sprites\\wreck.bmp", 80, 140, 1, 1)
 {
 	Debug::clear();
-	sndMusic.Play();
+	//sndMusic.Play();
 }
 
 void Game::Go()
@@ -56,32 +57,13 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-
 	player.update(wnd.kbd);
-	//do sprawdzania wymiarów
-	//int x, y;
-
-	//if (wnd.mouse.LeftIsPressed())
-	//{
-	//	if(!pressed)
-	//	{
-	//		x = wnd.mouse.GetPosX();
-	//		y = wnd.mouse.GetPosY();
-
-	//		std::stringstream ss;
-	//		ss << "Mouse at " << x << " " << y;
-	//		Debug::writeInfo(ss.str());
-
-	//		pressed = true;
-	//	}
-	//	
-	//}
-	//else 
-	//	pressed = false;
+	wreck.update();
 }
 
 void Game::ComposeFrame()
 {
 	map.draw();
+	wreck.draw(gfx);
 	player.draw(gfx);
 }

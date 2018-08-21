@@ -158,6 +158,9 @@
     <ClCompile Include="Rocket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -192,6 +195,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Sprites\trasa.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Sprites\wreck.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

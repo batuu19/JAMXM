@@ -10,6 +10,7 @@ Car::Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirectio
 	speed(speed),
 	maxVel(maxVel),
 	turnRate(turnRate),
+	turnSoundRate(turnRate * 3.1f),
 	rocketWidth(rocketWidth),
 	rocketHeight(rocketHeight),
 	rocketSprites(rocketSpriteFilename,spritesRows,spritesLines,rocketWidth,rocketHeight),
@@ -23,13 +24,20 @@ Car::Car(VecF2 pos, float startVel, float speed, float maxVel, int startDirectio
 void Car::turnLeft()
 {
 	const float dt = turnTimer.mark();
+	const float dts = turnSoundTimer.mark();
 	if (leftTurn >= turnRate)
 	{
 		dir = (dir - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
 		leftTurn = 0.f;
-		sndFriction.Play();
+		if (turnSound >= turnSoundRate)
+		{
+			sndFriction.Play();
+			turnSound = 0.f;
+		}
+		
 	}
 	leftTurn += dt;
+	turnSound += dts;
 
 	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
 }
@@ -37,14 +45,20 @@ void Car::turnLeft()
 void Car::turnRight()
 {
 	const float dt = turnTimer.mark();
+	const float dts = turnSoundTimer.mark();
 
 	if (rightTurn >= turnRate)
 	{
 		dir = (dir + turnValue) % DIRECTIONS_COUNT;
 		rightTurn = 0.f;
-		sndFriction.Play();
+		if (turnSound >= turnSoundRate)
+		{
+			sndFriction.Play();
+			turnSound = 0.f;
+		}
 	}
 	rightTurn += dt;
+	turnSound += dts;
 
 	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
 }
@@ -74,6 +88,7 @@ void Car::draw(Graphics & gfx) const
 	{
 		r.draw(gfx);
 	}
+
 }
 
 void Car::reset()

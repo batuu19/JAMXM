@@ -1,0 +1,34 @@
+#include "Entity.h"
+
+
+Entity::Entity(VecF2 pos, std::string spriteFileName, int spriteWidth, int spriteHeight, int spritesRows, int spritesLines)
+	:
+	pos(pos),
+	sprites(spriteFileName, spritesRows, spritesLines, spriteWidth, spriteHeight),
+	dir(0)
+{
+}
+
+Entity::Entity(VecF2 pos, int dir, std::string spriteFileName, int spriteWidth, int spriteHeight, int spritesRows, int spritesLines)
+	:
+	pos(pos),
+	sprites(spriteFileName, spritesRows, spritesLines, spriteWidth, spriteHeight),
+	dir(dir)
+{
+}
+
+void Entity::update()
+{
+	if (sprites.getSize() < 0)throw std::exception("no sprites");
+	if (dir > sprites.getSize())throw std::exception("wrong dir");
+}
+
+void Entity::draw(Graphics & gfx) const
+{
+	gfx.drawSprite(pos,sprites[dir]);
+}
+
+RectF Entity::getRect()
+{
+	return RectF(pos, sprites[dir].getWidth(), sprites[dir].getHeight());
+}

@@ -61,6 +61,10 @@ public:
 	void putPixel( int x,int y,Color c );
 
 	void drawRect(int x0, int y0, int x1, int y1, Color c);
+	void drawRect(RectI rect,Color c) 
+	{
+		drawRect(rect.left, rect.top, rect.right, rect.bottom, c);
+	}
 	void drawRectDim(int x0, int y0, int width, int height, Color c)
 	{
 		drawRect(x0, y0, x0 + width, y0 + height, c);

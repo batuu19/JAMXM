@@ -32,7 +32,7 @@ SpriteContainer::SpriteContainer(const Surface& surf, int rows, int lines,
 		right = width;
 	}
 	//for example car
-	if (rotateAtCreate)
+	if (rotateAtCreate && rows == 5 && lines == 1)
 	{
 		sprites.emplace_back(surf.getPart(frames[0]));//UP
 

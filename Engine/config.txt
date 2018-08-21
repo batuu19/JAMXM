@@ -13,10 +13,10 @@ right
 [Car color]
 0 255 255
 [Map file name]
-Sprites/moon.bmp
+sprites/moon.bmp
 [Car image file name]
-Sprites/car.bmp
+sprites/car.bmp
 [Rocket velocity]
-14
+7
 [Rocket image file name]
 Sprites/rocket1.bmp
