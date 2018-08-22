@@ -15,7 +15,7 @@ void Rocket::draw(Graphics & gfx) const
 
 void Rocket::update(float dt)
 {
-	pos += vel;
+	pos += vel * dt;
 }
 
 const RectF & Rocket::getRect() const

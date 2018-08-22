@@ -15,5 +15,6 @@ private:
 	Car& car;
 	Car::TurnDirection nextTurn = Car::TurnDirection::None;
 	bool shooting = false;
+	Car::Speedup speedup = Car::Speedup::None;
 
 };

@@ -15,8 +15,31 @@ Car::Car(VecI2 pos, int startDirection, std::vector<Rocket>& rockets)
 {
 }
 
+void Car::update(float dt, TurnDirection nextTurn)
+{
+	//TODO: one turn time
+	rightTurnTime += dt;
+	leftTurnTime += dt;
+	turnSoundTime += dt;
+	lastShot += dt;
+	for (auto &r : rocketsFired)
+	{
+		r.update(dt);
+	}
+	if (nextTurn == TurnDirection::Right)
+	{
+		turnRight(dt);
+	}
+	else if (nextTurn == TurnDirection::Left)
+	{
+		turnLeft(dt);
+	}
+	pos += vel * dt;
+}
+
 void Car::turnLeft(float dt)
 {
+
 	if (leftTurnTime >= turnRate)
 	{
 		dir = (dir - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
@@ -28,9 +51,6 @@ void Car::turnLeft(float dt)
 		}
 		
 	}
-	leftTurnTime += dt;
-	turnSoundTime += dt;
-
 	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
 }
 
@@ -46,36 +66,17 @@ void Car::turnRight(float dt)
 			turnSoundTime = 0.f;
 		}
 	}
-	rightTurnTime += dt;
-	turnSoundTime += dt;
 
 	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
 }
 
-void Car::update(float dt, TurnDirection nextTurn)
-{	
-	for (auto &r : rocketsFired)
-	{
-		r.update(dt);
-	}
-	if (nextTurn == TurnDirection::Right)
-	{
-		turnRight(dt);
-	}
-	else if (nextTurn == TurnDirection::Left)
-	{
-		turnLeft(dt);
-	}
-	pos += vel;
-}
-
-void Car::speedup(bool faster)
+void Car::speedup(float dt, Speedup speedupFlag)
 {
 	float value = vel * vectorsNormalized[dir];
-	if(value < maxVel  && faster)
-		vel += vectorsNormalized[dir] * speed;
-	else if (value > -maxVel  && !faster)
-		vel += vectorsNormalized[dir] * -speed;
+	if(value < maxVel  && (speedupFlag == Speedup::Faster))
+		vel += vectorsNormalized[dir] * speed * dt;
+	else if (value > -maxVel  && (speedupFlag == Speedup::Slower))
+		vel += vectorsNormalized[dir] * -speed * dt;
 }
 
 void Car::draw(Graphics & gfx) const
@@ -106,7 +107,6 @@ void Car::shoot(float dt)
 		sndRocketShot.Play();
 	}
 	
-	lastShot += dt;
 }
 
 const RectF& Car::getRect() const

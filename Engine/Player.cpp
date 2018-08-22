@@ -8,13 +8,17 @@ Player::Player(Car& car)
 
 void Player::update(float dt)
 {
-	car.update(dt);
 	car.update(dt,nextTurn);
 	nextTurn = Car::TurnDirection::None;
 	if (shooting)
 	{
 		car.shoot(dt);
 		shooting = false;
+	}
+	if (speedup < Car::Speedup::None)
+	{
+		car.speedup(dt, speedup);
+		speedup = Car::Speedup::None;
 	}
 }
 
@@ -33,11 +37,11 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 {
 	if (kbd.KeyIsPressed(VK_UP))
 	{
-		car.speedup();
+		speedup = Car::Speedup::Faster;
 	}
 	else if (kbd.KeyIsPressed(VK_DOWN))
 	{
-		car.speedup(false);
+		speedup = Car::Speedup::Slower;
 	}
 	if (kbd.KeyIsPressed(VK_LEFT))
 	{
