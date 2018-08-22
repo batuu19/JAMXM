@@ -9,6 +9,13 @@ Player::Player(Car car)
 void Player::update(float dt)
 {
 	car.update(dt);
+	car.update(dt,nextTurn);
+	nextTurn = Car::TurnDirection::None;
+	if (shooting)
+	{
+		car.shoot(dt);
+		shooting = false;
+	}
 }
 
 void Player::draw(Graphics & gfx) const
@@ -34,12 +41,12 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 	}
 	if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		car.turnLeft();
+		nextTurn = Car::TurnDirection::Left;
 
 	}
 	else if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		car.turnRight();
+		nextTurn = Car::TurnDirection::Right;
 	}
 
 	if (kbd.KeyIsPressed(VK_RETURN))
@@ -53,6 +60,6 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 	}
 	if (kbd.KeyIsPressed(VK_CONTROL))
 	{
-		car.shoot();
+		shooting = true;
 	}
 }

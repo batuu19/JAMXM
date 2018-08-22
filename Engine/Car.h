@@ -24,9 +24,12 @@ public:
 	Car(VecF2 pos, int startDirection);
 	Car(VecI2 pos, int startDirection);
 	//make functors?
-	void turnLeft();
-	void turnRight();
-	void update(float dt);
+	enum class TurnDirection {
+		Right,
+		Left,
+		None
+	};
+	void update(float dt,TurnDirection nextTurn = TurnDirection::None);
 	void speedup(bool faster = true);
 	void draw(Graphics&) const;
 	void reset();
@@ -34,7 +37,7 @@ public:
 	std::string getDebugInfo() const;
 
 	//rocket
-	void shoot();
+	void shoot(float dt);
 	std::vector<Rocket>& getRocketContainer();
 
 	//collision
@@ -52,6 +55,8 @@ private:
 	SpriteContainer sprites = SpriteContainer({"sprites\\car.bmp"},5,1,width,height);
 
 	//make it dependent on velocity
+	void turnLeft(float dt);
+	void turnRight(float dt);
 	float turnRate = 0.1f;
 	float leftTurnTime = 0.f;
 	float rightTurnTime = 0.f;

@@ -9,11 +9,12 @@ World::World(const RectI & screenRect)
 
 void World::handleInput(Keyboard & kbd, Mouse & mouse)
 {
+	player.handleInput(kbd, mouse);
 }
 
 void World::update(float dt)
 {
-	//player.update(dt);
+	player.update(dt);
 }
 
 void World::draw(Graphics & gfx) const
