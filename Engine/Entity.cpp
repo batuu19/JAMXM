@@ -32,3 +32,8 @@ const RectF& Entity::getRect() const
 {
 	return RectF(pos, sprites[dir].getWidth(), sprites[dir].getHeight());
 }
+
+RectF Entity::getHitbox() const
+{
+	return RectF(pos, sprites[dir].getWidth(), sprites[dir].getHeight());
+}

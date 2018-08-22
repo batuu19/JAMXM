@@ -20,7 +20,10 @@ public:
 
 	void update(float dt);
 	void draw(Graphics&) const;
+
 	const RectF& getRect() const;
+	//TODO: fix - more accurate hitbox
+	RectF getHitbox() const;
 protected:
 	VecF2 pos;
 	const SpriteContainer sprites;

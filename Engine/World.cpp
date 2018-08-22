@@ -2,9 +2,11 @@
 
 World::World(const RectI & screenRect)
 	:
-	player({ VecF2(150.f,150.f), RIGHT }),
+	car( VecF2(150.f,150.f), RIGHT ,rockets),
+	player(car),
 	wreck(VecF2(650.f, 300.f), "sprites\\wreck.bmp", 80, 140, 1, 1)
 {
+	bgm.Play(1.f, 0.35f);
 }
 
 void World::handleInput(Keyboard & kbd, Mouse & mouse)
@@ -15,13 +17,26 @@ void World::handleInput(Keyboard & kbd, Mouse & mouse)
 void World::update(float dt)
 {
 	player.update(dt);
+
+	auto pred = [this](Rocket& r) {return r.getHitbox().IsOverlappingWith(wreck.getHitbox()); };
+	std::vector<int> indices;
+	for (int i = 0; i < rockets.size(); i++)
+	{
+		if (pred(rockets[i]))
+		{
+			indices.push_back(i);
+			sndBoom.Play();
+		}
+	}
+
+	for (int i : indices)rockets.erase(rockets.begin() + i);
 }
 
 void World::draw(Graphics & gfx) const
 {
 	map.draw(gfx);
-	player.draw(gfx);
 	wreck.draw(gfx);
+	player.draw(gfx);
 }
 
 const Map & World::getMapConst() const

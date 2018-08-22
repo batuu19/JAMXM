@@ -21,8 +21,8 @@ class Car
 {
 
 public:
-	Car(VecF2 pos, int startDirection);
-	Car(VecI2 pos, int startDirection);
+	Car(VecF2 pos, int startDirection, std::vector<Rocket>& rockets);
+	Car(VecI2 pos, int startDirection, std::vector<Rocket>& rockets);
 	//make functors?
 	enum class TurnDirection {
 		Right,
@@ -38,10 +38,11 @@ public:
 
 	//rocket
 	void shoot(float dt);
-	std::vector<Rocket>& getRocketContainer();
 
 	//collision
 	const RectF& getRect() const;
+	//TODO: fix - more accurate hitbox
+	RectF getHitbox() const;
 
 private:
 	int dir;
@@ -72,7 +73,7 @@ private:
 	int rocketHeight = 35;
 	SpriteContainer rocketSprites = SpriteContainer({ "sprites//rocket1.bmp" }, 5, 1, rocketWidth, rocketHeight);
 	float rocketVel = 12;
-	std::vector<Rocket> rocketsFired;
+	std::vector<Rocket>& rocketsFired;
 	float shootRate = 0.1f;
 	float lastShot = 0.f;
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );

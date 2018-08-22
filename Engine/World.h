@@ -16,8 +16,11 @@ public:
 	const Entity& getWreckConst() const;
 private:
 	Map map;
+	std::vector<Rocket> rockets;
+	Car car;
 	Player player;
 	Entity wreck;
 
-	Sound bgm = Sound(L"sound\\music\\music.wav");
+	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
+	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 };

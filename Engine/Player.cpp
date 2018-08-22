@@ -1,8 +1,8 @@
 #include "Player.h"
 
-Player::Player(Car car)
+Player::Player(Car& car)
 	:
-	car(std::move(car))
+	car(car)
 {
 }
 
@@ -62,4 +62,9 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 	{
 		shooting = true;
 	}
+}
+
+const Car & Player::getCarConst() const
+{
+	return car;
 }

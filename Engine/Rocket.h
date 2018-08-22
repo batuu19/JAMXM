@@ -12,7 +12,10 @@ public:
 
 	void draw(Graphics&) const;
 	void update(float dt);
+
 	const RectF& getRect() const;
+	//TODO: fix - more accurate hitbox
+	RectF getHitbox() const;
 private:
 	VecF2 pos;
 	VecF2 vel;

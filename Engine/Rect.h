@@ -15,6 +15,15 @@ public:
 		bottom(bottom_in)
 	{
 	}
+	template<typename S>
+	Rect(Rect<S> rhs)
+		:
+		left((T)rhs.left),
+		right((T)rhs.right),
+		top((T)rhs.top),
+		bottom((T)rhs.bottom)
+	{
+	}
 	Rect(const Vec2<T>& topLeft, const Vec2<T>& bottomRight)
 		:
 		Rect(topLeft.x, bottomRight.x, topLeft.y, bottomRight.y)
@@ -56,6 +65,18 @@ public:
 	T getHeight() const
 	{
 		return bottom - top;
+	}
+	Rect& DisplaceBy(const Vec2<T>& d)
+	{
+		left += d.x;
+		right += d.x;
+		top += d.y;
+		bottom += d.y;
+		return *this;
+	}
+	Rect GetDisplacedBy(const Vec2<T>& d) const
+	{
+		return Rect(*this).DisplaceBy(d);
 	}
 public:
 	T left;

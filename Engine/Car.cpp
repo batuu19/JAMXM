@@ -1,15 +1,17 @@
 #include "Car.h"
 
-Car::Car(VecF2 pos, int startDirection)
+Car::Car(VecF2 pos, int startDirection, std::vector<Rocket>& rockets)
 	:
 	pos(pos),
-	dir(startDirection)
+	dir(startDirection),
+	rocketsFired(rockets)
 {
 }
-Car::Car(VecI2 pos, int startDirection)
+Car::Car(VecI2 pos, int startDirection, std::vector<Rocket>& rockets)
 	:
 	pos((float)pos.x,(float)pos.y),
-	dir(startDirection)
+	dir(startDirection),
+	rocketsFired(rockets)
 {
 }
 
@@ -107,12 +109,12 @@ void Car::shoot(float dt)
 	lastShot += dt;
 }
 
-std::vector<Rocket>& Car::getRocketContainer()
+const RectF& Car::getRect() const
 {
-	return rocketsFired;
+	return RectF(pos,width,height);
 }
 
-const RectF& Car::getRect() const
+RectF Car::getHitbox() const
 {
 	return RectF(pos,width,height);
 }
