@@ -17,6 +17,7 @@ void World::handleInput(Keyboard & kbd, Mouse & mouse)
 void World::update(float dt)
 {
 	player.update(dt);
+	explosion.update(dt);
 
 	auto pred = [this](Rocket& r) {return r.getHitbox().IsOverlappingWith(wreck.getHitbox()); };
 	std::vector<int> indices;
@@ -26,6 +27,7 @@ void World::update(float dt)
 		{
 			indices.push_back(i);
 			sndBoom.Play();
+			explosion.play(rockets[i].getPosConst());
 		}
 	}
 
@@ -37,6 +39,7 @@ void World::draw(Graphics & gfx) const
 	map.draw(gfx);
 	wreck.draw(gfx);
 	player.draw(gfx);
+	explosion.draw(gfx);
 }
 
 const Map & World::getMapConst() const

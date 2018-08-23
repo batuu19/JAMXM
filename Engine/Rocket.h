@@ -16,6 +16,7 @@ public:
 	const RectF& getRect() const;
 	//TODO: fix - more accurate hitbox
 	RectF getHitbox() const;
+	const VecF2& getPosConst() const;
 private:
 	VecF2 pos;
 	VecF2 vel;

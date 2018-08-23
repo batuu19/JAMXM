@@ -27,3 +27,8 @@ RectF Rocket::getHitbox() const
 {
 	return RectF(pos, sprite.getWidth(), sprite.getWidth());
 }
+
+const VecF2 & Rocket::getPosConst() const
+{
+	return pos;
+}
