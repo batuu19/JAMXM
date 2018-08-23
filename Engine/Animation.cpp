@@ -1,22 +1,17 @@
 #include "Animation.h"
 
-Animation::Animation(std::string filename, int frames, int frameWidth, int frameHeight, float frameTime)
+Animation::Animation(VecI2 pos,std::string filename, int frames, int frameWidth, int frameHeight, float frameTime)
 	:
+	pos(pos),
 	sprites({ filename }, frames, 1, frameWidth, frameHeight, false),
 	frameTimer(frameTime),
 	allFrames(frames)
 {
 }
 
-void Animation::play(VecI2 pos)
-{
-	active = true;
-	this->pos = pos;
-}
-
 void Animation::update(float dt)
 {
-	if (active)
+	if (!endOfAnimation)
 	{
 		time += dt;
 		if (time > frameTimer)
@@ -26,7 +21,7 @@ void Animation::update(float dt)
 			if (activeFrame >= allFrames)
 			{
 				activeFrame = 0;
-				active = false;
+				endOfAnimation = true;
 			}
 		}
 	}
@@ -35,8 +30,13 @@ void Animation::update(float dt)
 
 void Animation::draw(Graphics & gfx) const
 {
-	if (active)
+	if (!endOfAnimation)
 	{
 		gfx.drawSprite(pos, sprites[activeFrame]);
 	}
+}
+
+bool Animation::isEnded() const
+{
+	return endOfAnimation;
 }

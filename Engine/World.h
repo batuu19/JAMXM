@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "Sound.h"
 #include "Animation.h"
+#include "BUtils.h"
 class World
 {
 public:
@@ -21,8 +22,8 @@ private:
 	Car car;
 	Player player;
 	Entity wreck;
-	Animation explosion = Animation("sprites\\explosion\\explosion.bmp",6,40,40);
+	std::vector<Animation> animations;
 
-	Sound bgm = Sound(L"sound\\mcMusic.wav",Sound::LoopType::AutoFullSound);
-	Sound sndBoom = Sound(L"sound\\mcSteveHurt.wav");
+	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
+	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 };

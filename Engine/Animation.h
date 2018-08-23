@@ -5,17 +5,19 @@
 class Animation
 {
 public:
-	Animation(std::string filename,int frames, int frameWidth,int frameHeight,float frameTime = 0.1f);
-	void play(VecI2 pos);
+	Animation(VecI2 pos,std::string filename,int frames, int frameWidth,int frameHeight,float frameTime = 0.1f);
 	void update(float dt);
 	void draw(Graphics&) const;
+
+	bool isEnded() const;
 private:
 	SpriteContainer sprites;
 	float frameTimer;
 	float time = 0.f;
-	bool active = false;
 	VecI2 pos = { 0,0 };
 	int activeFrame = 0;
 	int allFrames;
+
+	bool endOfAnimation = false;
 
 };
