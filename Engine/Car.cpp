@@ -46,7 +46,7 @@ void Car::turnLeft(float dt)
 		leftTurnTime = 0.f;
 		if (turnSoundTime >= turnSoundRate)
 		{
-			sndFriction.Play();
+			//sndFriction.Play();
 			turnSoundTime = 0.f;
 		}
 		
@@ -62,7 +62,7 @@ void Car::turnRight(float dt)
 		rightTurnTime = 0.f;
 		if (turnSoundTime >= turnSoundRate)
 		{
-			sndFriction.Play();
+			//sndFriction.Play();
 			turnSoundTime = 0.f;
 		}
 	}

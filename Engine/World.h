@@ -23,6 +23,6 @@ private:
 	Entity wreck;
 	Animation explosion = Animation("sprites\\explosion\\explosion.bmp",6,40,40);
 
-	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
-	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
+	Sound bgm = Sound(L"sound\\mcMusic.wav",Sound::LoopType::AutoFullSound);
+	Sound sndBoom = Sound(L"sound\\mcSteveHurt.wav");
 };
