@@ -2,11 +2,12 @@
 
 World::World(const RectI & screenRect)
 	:
-	car( VecF2(150.f,150.f), RIGHT ,rockets),
+	car(VecF2(400.f, 300.f), RIGHT, rockets),
 	player(car),
-	wreck(VecF2(300.f, 300.f), "sprites\\wreck_65x137.bmp", 65, 137, 1, 1)
+	wreck(VecF2(300.f, 300.f), "sprites\\wreck_65x137.bmp", 65, 137, 1, 1),
+	centerRect(300, 500, 200, 400)
 {
-	bgm.Play(1.f, 0.35f);
+	//bgm.Play(1.f, 0.35f);
 }
 
 void World::handleInput(Keyboard & kbd, Mouse & mouse)
@@ -48,6 +49,10 @@ void World::update(float dt)
 	{
 		car.bounceBack();
 	}
+
+	VecF2 center = VecF2( 400.f,300.f ) - camera.pos;
+	if (getDistanceSq(car, center) > 11400)
+		camera.move((-(center - car.getPosConst())).getNormalized());
 }
 
 void World::draw(Graphics & gfx) const

@@ -95,7 +95,7 @@ void Car::draw(Graphics & gfx, VecF2 cameraPos) const
 
 void Car::reset()
 {
-	pos = { 0.f,0.f };
+	pos = { 400.f,300.f };
 	dir = RIGHT;
 	vel = { 0.f,0.f };
 
@@ -117,6 +117,11 @@ const VecF2 & Car::getVelConst() const
 	return vel;
 }
 
+const VecF2 & Car::getPosConst() const
+{
+	return pos;
+}
+
 void Car::shoot(float dt)
 {
 	if (lastShot >= shootRate)
@@ -128,14 +133,15 @@ void Car::shoot(float dt)
 	
 }
 
-const RectF& Car::getRect() const
-{
-	return RectF(pos,width,height);
-}
 
 RectF Car::getHitbox() const
 {
 	return RectF(pos,width,height);
+}
+
+int Car::getDir() const
+{
+	return dir;
 }
 
 std::string Car::getDebugInfo() const

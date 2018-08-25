@@ -8,7 +8,6 @@ public:
 	void update(float dt);
 	void draw(Graphics &) const;
 	void draw(Graphics&, VecF2 cameraPos) const;
-	const RectF& getRect() const;
 	void handleInput(Keyboard&, Mouse&);
 	const Car& getCarConst() const;
 

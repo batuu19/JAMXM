@@ -75,6 +75,14 @@ public:
 	{
 		return *this = *this - rhs;
 	}
+	bool operator==(const Vec2& rhs)
+	{
+		return rhs.x == x && rhs.y == rhs.y;
+	}
+	bool operator!=(const Vec2& rhs)
+	{
+		return !((*this) == rhs);
+	}
 	T getLength() const
 	{
 		return (T)std::sqrt(getLengthSq());
@@ -108,4 +116,10 @@ template<typename T>
 Vec2<T> getZeroVec()
 {
 	return{ (T)0,(T)0 };
+}
+
+template<typename T,typename S>
+S getDistanceSq(const T& obj, const Vec2<S>& point)
+{
+	return (obj.getPosConst() - point).getLengthSq();
 }

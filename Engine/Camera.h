@@ -8,9 +8,11 @@ class Camera
 public:
 	Camera() = default;
 	void handleInput(Keyboard&);
+	void move(int dir);
+	void move(const VecF2& dir);
 	void update(float dt);
 	VecF2 pos = getZeroVec<float>();
-	int nextDir = -1;//-1 -> no direction
 private:
 	float cameraMoveSpeed = 200.f;
+	VecF2 nextDir = { 0.f,0.f };
 };

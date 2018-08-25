@@ -4,24 +4,38 @@ void Camera::handleInput(Keyboard& kbd)
 {
 	if (kbd.KeyIsPressed('D'))
 	{
-		nextDir = RIGHT;
+		nextDir = vectorsNormalized[RIGHT];
 	}
 	if (kbd.KeyIsPressed('A'))
 	{
-		nextDir = LEFT;
+		nextDir = vectorsNormalized[LEFT];
 	}
 	if (kbd.KeyIsPressed('S'))
 	{
-		nextDir = DOWN;
+		nextDir = vectorsNormalized[DOWN];
 	}
 	if (kbd.KeyIsPressed('W'))
 	{
-		nextDir = UP;
+		nextDir = vectorsNormalized[UP];
 	}
+}
+
+void Camera::move(int dir)
+{
+	nextDir = vectorsNormalized[dir];
+}
+
+void Camera::move(const VecF2& dir)
+{
+	nextDir = dir;
 }
 
 void Camera::update(float dt)
 {
-	pos -= vectorsNormalized[nextDir] * dt * cameraMoveSpeed;
-	nextDir = -1;
+	if (nextDir != VecF2(0.f, 0.f))
+	{
+		pos -= nextDir * dt * cameraMoveSpeed;
+		nextDir = { 0.f,0.f };
+	}
+	
 }

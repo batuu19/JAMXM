@@ -43,16 +43,17 @@ public:
 	void bounceBack();
 
 	const VecF2& getVelConst() const;
+	const VecF2& getPosConst() const;
 
 	std::string getDebugInfo() const;
 
 	//rocket
 	void shoot(float dt);
 
-	//collision
-	const RectF& getRect() const;
 	//TODO: fix - more accurate hitbox
 	RectF getHitbox() const;
+
+	int getDir() const;
 
 private:
 	int dir;
