@@ -11,16 +11,19 @@ World::World(const RectI & screenRect)
 
 void World::handleInput(Keyboard & kbd, Mouse & mouse)
 {
+	camera.handleInput(kbd);
 	player.handleInput(kbd, mouse);
 
 	if (kbd.KeyIsPressed('R'))
 	{
 		animations.clear();
+		camera.pos = { 0.f,0.f };
 	}
 }
 
 void World::update(float dt)
 {
+	camera.update(dt);
 	player.update(dt);
 	for (auto& a : animations)a.update(dt);
 
@@ -49,10 +52,10 @@ void World::update(float dt)
 
 void World::draw(Graphics & gfx) const
 {
-	map.draw(gfx);
-	wreck.draw(gfx);
-	player.draw(gfx);
-	for (auto a : animations)a.draw(gfx);
+	map.draw(gfx, camera.pos);
+	wreck.draw(gfx, camera.pos);
+	player.draw(gfx, camera.pos);
+	for (auto a : animations)a.draw(gfx, camera.pos);
 }
 
 const Map & World::getMapConst() const

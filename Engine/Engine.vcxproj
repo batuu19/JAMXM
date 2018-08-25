@@ -139,6 +139,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BMath.h" />
     <ClInclude Include="BUtils.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Config.cpp" />

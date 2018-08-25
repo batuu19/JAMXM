@@ -81,12 +81,16 @@ void Car::speedup(float dt, Speedup speedupFlag)
 
 void Car::draw(Graphics & gfx) const
 {
-	drawCar(gfx);
+	draw(gfx, { 0.f,0.f });
+}
+
+void Car::draw(Graphics & gfx, VecF2 cameraPos) const
+{
+	drawCar(gfx,cameraPos);
 	for (auto r : rocketsFired)
 	{
-		r.draw(gfx);
+		r.draw(gfx,cameraPos);
 	}
-
 }
 
 void Car::reset()
@@ -145,7 +149,7 @@ std::string Car::getDebugInfo() const
 	return ss.str();
 }
 
-void Car::drawCar(Graphics & gfx) const
+void Car::drawCar(Graphics & gfx,VecF2 cameraPos) const
 {
-	gfx.drawSprite((VecI2)pos, sprites[dir]);
+	gfx.drawSprite(pos + cameraPos, sprites[dir]);
 }

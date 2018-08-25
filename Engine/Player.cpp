@@ -27,6 +27,11 @@ void Player::draw(Graphics & gfx) const
 	car.draw(gfx);
 }
 
+void Player::draw(Graphics & gfx, VecF2 cameraPos) const
+{
+	car.draw(gfx,cameraPos);
+}
+
 const RectF& Player::getRect() const
 {
 	return car.getRect();

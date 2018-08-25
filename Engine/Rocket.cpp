@@ -10,7 +10,12 @@ Rocket::Rocket(VecF2 pos, VecF2 vel, Surface sprite)
 
 void Rocket::draw(Graphics & gfx) const
 {
-	gfx.drawSprite((VecI2)pos, sprite);
+	draw(gfx, { 0.f,0.f });
+}
+
+void Rocket::draw(Graphics & gfx, VecF2 cameraPos) const
+{
+	gfx.drawSprite(pos + cameraPos, sprite);
 }
 
 void Rocket::update(float dt)

@@ -32,9 +32,14 @@ void Animation::update(float dt)
 
 void Animation::draw(Graphics & gfx) const
 {
+	draw(gfx, { 0.f,0.f });
+}
+
+void Animation::draw(Graphics & gfx, VecF2 cameraPos) const
+{
 	if (!endOfAnimation)
 	{
-		gfx.drawSprite(pos, sprites[activeFrame]);
+		gfx.drawSprite(pos + cameraPos, sprites[activeFrame]);
 	}
 }
 

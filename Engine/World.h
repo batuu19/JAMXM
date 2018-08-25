@@ -6,6 +6,7 @@
 #include "Sound.h"
 #include "Animation.h"
 #include "BUtils.h"
+#include "Camera.h"
 class World
 {
 public:
@@ -17,6 +18,7 @@ public:
 	const Player& getPlayerConst() const;
 	const Entity& getWreckConst() const;
 private:
+	Camera camera;
 	Map map;
 	std::vector<Rocket> rockets;
 	Car car;

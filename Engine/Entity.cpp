@@ -25,7 +25,12 @@ void Entity::update(float dt)
 
 void Entity::draw(Graphics & gfx) const
 {
-	gfx.drawSprite(pos,sprites[dir]);
+	draw(gfx, { 0.f,0.f });
+}
+
+void Entity::draw(Graphics & gfx, VecF2 cameraPos) const
+{
+	gfx.drawSprite(pos + cameraPos, sprites[dir]);
 }
 
 const RectF& Entity::getRect() const

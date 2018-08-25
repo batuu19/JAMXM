@@ -37,6 +37,7 @@ public:
 	void update(float dt,TurnDirection nextTurn = TurnDirection::None);
 	void speedup(float dt, Speedup speedupFlag = Speedup::Faster);
 	void draw(Graphics&) const;
+	void draw(Graphics&, VecF2 cameraPos) const;
 	void reset();
 	void stop();
 	void bounceBack();
@@ -75,7 +76,7 @@ private:
 	float turnSoundRate = turnRate * 3.1f;
 	float turnSoundTime = 0.f;
 
-	void drawCar(Graphics &) const;
+	void drawCar(Graphics &,VecF2 cameraPos) const;
 
 	//rocket
 	int rocketWidth = 35;

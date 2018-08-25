@@ -2,5 +2,10 @@
 
 void Map::draw(Graphics& gfx) const
 {
-	gfx.drawSpriteNonChroma(0, 0, mapSprite);
+	draw(gfx, { 0.f,0.f });
+}
+
+void Map::draw(Graphics & gfx, VecF2 cameraPos) const
+{
+	gfx.drawSprite(pos + cameraPos, mapSprite);
 }

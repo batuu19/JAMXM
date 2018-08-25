@@ -20,6 +20,7 @@ public:
 
 	void update(float dt);
 	void draw(Graphics&) const;
+	void draw(Graphics&, VecF2 cameraPos) const;
 
 	const RectF& getRect() const;
 	//TODO: fix - more accurate hitbox

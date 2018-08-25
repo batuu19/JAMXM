@@ -11,6 +11,7 @@ public:
 	Rocket(VecF2 pos,VecF2 vel, Surface sprite);
 
 	void draw(Graphics&) const;
+	void draw(Graphics&, VecF2 cameraPos) const;
 	void update(float dt);
 
 	const RectF& getRect() const;

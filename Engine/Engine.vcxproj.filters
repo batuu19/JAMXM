@@ -114,6 +114,9 @@
     <ClInclude Include="BUtils.h">
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -180,6 +183,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
