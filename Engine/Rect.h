@@ -46,7 +46,7 @@ public:
 	}
 	static Rect fromCenter(const Vec2<T>& center, T halfWidth, T halfHeight)
 	{
-		const Vec2 half(halfWidth, halfHeight);
+		const Vec2<T> half(halfWidth, halfHeight);
 		return Rect(center - half, center + half);
 	}
 	Rect getExpanded(T offset) const

@@ -15,6 +15,7 @@ void World::handleInput(Keyboard & kbd, Mouse & mouse)
 	camera.handleInput(kbd);
 	player.handleInput(kbd, mouse);
 
+	//reseting
 	if (kbd.KeyIsPressed('R'))
 	{
 		animations.clear();
@@ -28,6 +29,7 @@ void World::update(float dt)
 	player.update(dt);
 	for (auto& a : animations)a.update(dt);
 
+	//rockets exploding on wreck
 	std::vector<int> indices;
 	for (int i = 0; i < rockets.size(); i++)
 	{
@@ -45,14 +47,17 @@ void World::update(float dt)
 
 	remove_erase_if(animations, [](Animation a) {return a.isEnded(); });
 
+	//car bouncing of wreck
 	if (checkCollision(car, wreck))
 	{
 		car.bounceBack();
 	}
 
-	VecF2 center = VecF2( 400.f,300.f ) - camera.pos;
-	if (getDistanceSq(car, center) > 11400)
-		camera.move((-(center - car.getPosConst())).getNormalized());
+	//camera following car
+	const VecF2 center = VecF2( 400.f,300.f ) - camera.pos;
+	if (getDistanceSq(car, center) * car.getVelConst().getLengthSq() > 800000000.f)
+		camera.move((car.getPosConst() - center).getNormalized());
+
 }
 
 void World::draw(Graphics & gfx) const
@@ -61,6 +66,8 @@ void World::draw(Graphics & gfx) const
 	wreck.draw(gfx, camera.pos);
 	player.draw(gfx, camera.pos);
 	for (auto a : animations)a.draw(gfx, camera.pos);
+
+	gfx.drawRect(RectI::fromCenter({ 400,300 }, 10, 10),Colors::Red);
 }
 
 const Map & World::getMapConst() const

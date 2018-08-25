@@ -51,7 +51,7 @@ public:
 	{
 		return *this = *this * rhs;
 	}
-	Vec2 operator-()
+	Vec2 operator-() const
 	{
 		Vec2 v;
 		v.x = -x;

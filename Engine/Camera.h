@@ -13,6 +13,6 @@ public:
 	void update(float dt);
 	VecF2 pos = getZeroVec<float>();
 private:
-	float cameraMoveSpeed = 200.f;
+	float cameraMoveSpeed = 270.f;
 	VecF2 nextDir = { 0.f,0.f };
 };
