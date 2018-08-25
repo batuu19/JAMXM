@@ -5,9 +5,10 @@
 class Animation
 {
 public:
-	Animation(VecI2 pos,std::string filename,int frames, int frameWidth,int frameHeight,float frameTime = 0.1f);
+	Animation(VecI2 pos,std::string filename,int frames, int frameWidth,int frameHeight,bool looping = false,float frameTime = 0.1f);
 	void update(float dt);
 	void draw(Graphics&) const;
+	void stop();
 
 	bool isEnded() const;
 private:
@@ -19,5 +20,6 @@ private:
 	int allFrames;
 
 	bool endOfAnimation = false;
+	bool looping;
 
 };

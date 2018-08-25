@@ -14,6 +14,6 @@ public:
 	Map() = default;
 	void draw(Graphics&) const;
 private:
-	Surface mapSprite = "sprites\\trasa.bmp";
+	Surface mapSprite = "sprites\\road_800x600.bmp";
 	;}
 ;

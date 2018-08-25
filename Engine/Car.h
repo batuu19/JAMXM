@@ -38,6 +38,7 @@ public:
 	void speedup(float dt, Speedup speedupFlag = Speedup::Faster);
 	void draw(Graphics&) const;
 	void reset();
+	const VecF2& getVelConst() const;
 
 	std::string getDebugInfo() const;
 
@@ -55,10 +56,10 @@ private:
 	VecF2 vel = { 0.f,0.f };
 	int width = 70;
 	int height = 70;
-	float speed = 1700.f;//speedup rate
-	float maxVel = 600.f;
+	float speed = 600.f;//speedup rate
+	float maxVel = 300.f;
 
-	SpriteContainer sprites = SpriteContainer({"sprites\\car.bmp"},5,1,width,height);
+	SpriteContainer sprites = SpriteContainer({"sprites\\car_350x70.bmp"},5,1,width,height);
 
 	//make it dependent on velocity
 	void turnLeft(float dt);
@@ -76,8 +77,8 @@ private:
 	//rocket
 	int rocketWidth = 35;
 	int rocketHeight = 35;
-	SpriteContainer rocketSprites = SpriteContainer({ "sprites//rocket1.bmp" }, 5, 1, rocketWidth, rocketHeight);
-	float rocketVel = 1200.f;
+	SpriteContainer rocketSprites = SpriteContainer({ "sprites//small_rocket_175x35.bmp" }, 5, 1, rocketWidth, rocketHeight);
+	float rocketVel = 900.f;
 	std::vector<Rocket>& rocketsFired;
 	float shootRate = 0.3f;
 	float lastShot = shootRate;

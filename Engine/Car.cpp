@@ -98,6 +98,11 @@ void Car::reset()
 	rocketsFired.clear();
 }
 
+const VecF2 & Car::getVelConst() const
+{
+	return vel;
+}
+
 void Car::shoot(float dt)
 {
 	if (lastShot >= shootRate)
