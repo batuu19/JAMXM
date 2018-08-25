@@ -98,6 +98,16 @@ void Car::reset()
 	rocketsFired.clear();
 }
 
+void Car::stop()
+{
+	vel = getZeroVec<float>();
+}
+
+void Car::bounceBack()
+{
+	vel = -vel;
+}
+
 const VecF2 & Car::getVelConst() const
 {
 	return vel;

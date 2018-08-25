@@ -51,6 +51,13 @@ public:
 	{
 		return *this = *this * rhs;
 	}
+	Vec2 operator-()
+	{
+		Vec2 v;
+		v.x = -x;
+		v.y = -y;
+		return v;
+	}
 	Vec2 operator-(const Vec2& rhs) const
 	{
 		return Vec2(x - rhs.x, y - rhs.y);
@@ -89,10 +96,6 @@ public:
 		}
 		return *this;
 	}
-	static Vec2 getZeroVec()
-	{
-		return Vec2((T)0, (T)0);
-	}
 public:
 	T x;
 	T y;
@@ -100,3 +103,9 @@ public:
 
 typedef Vec2<int> VecI2;
 typedef Vec2<float> VecF2;
+
+template<typename T>
+Vec2<T> getZeroVec()
+{
+	return{ (T)0,(T)0 };
+}

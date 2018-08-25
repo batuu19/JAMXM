@@ -10,3 +10,9 @@ void remove_erase_if(Container& container, Pred pred)
 	// erase garbage husk element at end
 	container.erase(new_end, container.end());
 }
+
+template<typename T,typename S>
+bool checkCollision(const T& first, const S& second)
+{
+	return first.getHitbox().isOverlappingWith(second.getHitbox());
+}

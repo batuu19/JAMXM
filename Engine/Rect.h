@@ -34,26 +34,26 @@ public:
 		Rect(topLeft, topLeft + Vec2<T>(width, height))
 	{
 	}
-	bool IsOverlappingWith(const Rect& other) const
+	bool isOverlappingWith(const Rect& other) const
 	{
 		return right > other.left && left < other.right
 			&& bottom > other.top && top < other.bottom;
 	}
-	bool IsContainedBy(const Rect& other) const
+	bool isContainedBy(const Rect& other) const
 	{
 		return left >= other.left && right <= other.right &&
 			top >= other.top && bottom <= other.bottom;
 	}
-	static Rect FromCenter(const Vec2<T>& center, T halfWidth, T halfHeight)
+	static Rect fromCenter(const Vec2<T>& center, T halfWidth, T halfHeight)
 	{
 		const Vec2 half(halfWidth, halfHeight);
 		return Rect(center - half, center + half);
 	}
-	Rect GetExpanded(T offset) const
+	Rect getExpanded(T offset) const
 	{
 		return Rect(left - offset, right + offset, top - offset, bottom + offset);
 	}
-	Vec2<T> GetCenter() const
+	Vec2<T> getCenter() const
 	{
 		return Vec2((left + right) / (T)2, (top + bottom) / (T)2);
 	}
@@ -66,7 +66,7 @@ public:
 	{
 		return bottom - top;
 	}
-	Rect& DisplaceBy(const Vec2<T>& d)
+	Rect& displaceBy(const Vec2<T>& d)
 	{
 		left += d.x;
 		right += d.x;
@@ -74,9 +74,9 @@ public:
 		bottom += d.y;
 		return *this;
 	}
-	Rect GetDisplacedBy(const Vec2<T>& d) const
+	Rect getDisplacedBy(const Vec2<T>& d) const
 	{
-		return Rect(*this).DisplaceBy(d);
+		return Rect(*this).displaceBy(d);
 	}
 public:
 	T left;

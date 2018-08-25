@@ -24,11 +24,10 @@ void World::update(float dt)
 	player.update(dt);
 	for (auto& a : animations)a.update(dt);
 
-	auto pred = [this](Rocket& r) {return r.getHitbox().IsOverlappingWith(wreck.getHitbox()); };
 	std::vector<int> indices;
 	for (int i = 0; i < rockets.size(); i++)
 	{
-		if (pred(rockets[i]))
+		if (checkCollision(rockets[i], wreck))
 		{
 			indices.push_back(i);
 			sndBoom.Play();
@@ -41,6 +40,11 @@ void World::update(float dt)
 	for (int i : indices)rockets.erase(rockets.begin() + i);
 
 	remove_erase_if(animations, [](Animation a) {return a.isEnded(); });
+
+	if (checkCollision(car, wreck))
+	{
+		car.bounceBack();
+	}
 }
 
 void World::draw(Graphics & gfx) const

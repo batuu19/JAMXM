@@ -38,6 +38,9 @@ public:
 	void speedup(float dt, Speedup speedupFlag = Speedup::Faster);
 	void draw(Graphics&) const;
 	void reset();
+	void stop();
+	void bounceBack();
+
 	const VecF2& getVelConst() const;
 
 	std::string getDebugInfo() const;
@@ -59,7 +62,7 @@ private:
 	float speed = 600.f;//speedup rate
 	float maxVel = 300.f;
 
-	SpriteContainer sprites = SpriteContainer({"sprites\\car_350x70.bmp"},5,1,width,height);
+	SpriteContainer sprites = SpriteContainer({"sprites\\cars\\car_black_350x70.bmp"},5,1,width,height);
 
 	//make it dependent on velocity
 	void turnLeft(float dt);
