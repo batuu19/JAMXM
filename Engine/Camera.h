@@ -7,6 +7,7 @@ class Camera
 {
 public:
 	Camera() = default;
+	Camera(const Camera&) = delete;
 	void handleInput(Keyboard&);
 	void move(int dir);
 	void move(const VecF2& dir);

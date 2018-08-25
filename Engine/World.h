@@ -11,6 +11,7 @@ class World
 {
 public:
 	World(const RectI& screenRect);
+	World(const World&) = delete;
 	void handleInput(Keyboard&, Mouse&);
 	void update(float dt);
 	void draw(Graphics&) const;

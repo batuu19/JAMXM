@@ -17,6 +17,7 @@ public:
 		std::string spriteFileName, int spriteWidth, int spriteHeight, int spritesRows = 5, int spritesLines = 1);
 	Entity(VecF2 pos,int dir,
 		std::string spriteFileName, int spriteWidth, int spriteHeight, int spritesRows = 5, int spritesLines = 1);
+	Entity(const Entity&) = delete;
 
 	void update(float dt);
 	void draw(Graphics&) const;

@@ -7,13 +7,6 @@ Car::Car(VecF2 pos, int startDirection, std::vector<Rocket>& rockets)
 	rocketsFired(rockets)
 {
 }
-Car::Car(VecI2 pos, int startDirection, std::vector<Rocket>& rockets)
-	:
-	pos((float)pos.x,(float)pos.y),
-	dir(startDirection),
-	rocketsFired(rockets)
-{
-}
 
 void Car::update(float dt, TurnDirection nextTurn)
 {
@@ -87,7 +80,7 @@ void Car::draw(Graphics & gfx) const
 void Car::draw(Graphics & gfx, VecF2 cameraPos) const
 {
 	drawCar(gfx,cameraPos);
-	for (auto r : rocketsFired)
+	for (auto& r : rocketsFired)
 	{
 		r.draw(gfx,cameraPos);
 	}
@@ -126,7 +119,8 @@ void Car::shoot(float dt)
 {
 	if (lastShot >= shootRate)
 	{
-		rocketsFired.emplace_back(pos,vectorsNormalized[dir] * rocketVel,rocketSprites[dir]);
+		Rocket toPush(pos, vectorsNormalized[dir] * rocketVel, rocketSprites[dir] );
+		rocketsFired.push_back(std::move(toPush));
 		lastShot = 0.f;
 		sndRocketShot.Play();
 	}

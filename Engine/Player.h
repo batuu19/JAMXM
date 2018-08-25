@@ -5,6 +5,7 @@ class Player
 {
 public:
 	Player(Car& car);
+	Player(const Player&) = delete;
 	void update(float dt);
 	void draw(Graphics &) const;
 	void draw(Graphics&, VecF2 cameraPos) const;

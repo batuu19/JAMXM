@@ -45,7 +45,7 @@ void World::update(float dt)
 
 	for (int i : indices)rockets.erase(rockets.begin() + i);
 
-	remove_erase_if(animations, [](Animation a) {return a.isEnded(); });
+	remove_erase_if(animations, [](Animation& a) {return a.isEnded(); });
 
 	//car bouncing of wreck
 	if (checkCollision(car, wreck))
@@ -65,9 +65,9 @@ void World::draw(Graphics & gfx) const
 	map.draw(gfx, camera.pos);
 	wreck.draw(gfx, camera.pos);
 	player.draw(gfx, camera.pos);
-	for (auto a : animations)a.draw(gfx, camera.pos);
+	for (auto& a : animations)a.draw(gfx, camera.pos);
 
-	gfx.drawRect(RectI::fromCenter({ 400,300 }, 10, 10),Colors::Red);
+	//gfx.drawRect(RectI::fromCenter({ 400,300 }, 10, 10),Colors::Red);
 }
 
 const Map & World::getMapConst() const

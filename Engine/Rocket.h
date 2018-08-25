@@ -9,6 +9,9 @@ class Rocket
 {
 public:
 	Rocket(VecF2 pos,VecF2 vel, Surface sprite);
+	Rocket(const Rocket&) = delete;
+	Rocket(Rocket&&) = default;
+	Rocket& operator=(const Rocket&) = default;
 
 	void draw(Graphics&) const;
 	void draw(Graphics&, VecF2 cameraPos) const;

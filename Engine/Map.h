@@ -13,6 +13,7 @@ class Map
 {
 public:
 	Map() = default;
+	Map(const Map&) = delete;
 	void draw(Graphics&) const;
 	void draw(Graphics&, VecF2 cameraPos) const;
 private:

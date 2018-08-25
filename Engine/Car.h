@@ -22,7 +22,7 @@ class Car
 
 public:
 	Car(VecF2 pos, int startDirection, std::vector<Rocket>& rockets);
-	Car(VecI2 pos, int startDirection, std::vector<Rocket>& rockets);
+	Car(const Car&) = delete;
 	//make functors?
 	enum class TurnDirection {
 		Right,
@@ -88,6 +88,4 @@ private:
 	float shootRate = 0.3f;
 	float lastShot = shootRate;
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );
-
-	//collision
 };
