@@ -22,10 +22,10 @@ public:
 	void update(float dt);
 	void draw(Graphics&) const;
 	void draw(Graphics&, VecF2 cameraPos) const;
+	void reset();
 
 	void damage(float amount);
 	bool isDead() const;
-	const RectF& getRect() const;
 	//TODO: fix - more accurate hitbox
 	RectF getHitbox() const;
 protected:

@@ -37,7 +37,7 @@ void Rocket::update(float dt)
 
 RectF Rocket::getHitbox() const
 {
-	return RectF(pos, sprite.getWidth(), sprite.getWidth());
+	return RectF(pos, (float)sprite.getWidth(), (float)sprite.getWidth());
 }
 
 const VecF2 & Rocket::getPosConst() const
@@ -50,7 +50,7 @@ int Rocket::getType() const
 	return type;
 }
 
-int Rocket::getAttack() const
+float Rocket::getAttack() const
 {
 	return attackValue;
 }

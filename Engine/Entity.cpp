@@ -34,6 +34,12 @@ void Entity::draw(Graphics & gfx, VecF2 cameraPos) const
 		gfx.drawSprite(pos - cameraPos, sprites[dir]);
 }
 
+void Entity::reset()
+{
+	HP = 300.f;
+	dead = false;
+}
+
 void Entity::damage(float amount)
 {
 	HP -= amount;
@@ -46,12 +52,7 @@ bool Entity::isDead() const
 	return dead;
 }
 
-const RectF& Entity::getRect() const
-{
-	return RectF(pos, sprites[dir].getWidth(), sprites[dir].getHeight());
-}
-
 RectF Entity::getHitbox() const
 {
-	return RectF(pos, sprites[dir].getWidth(), sprites[dir].getHeight());
+	return RectF(pos, (float)sprites[dir].getWidth(), (float)sprites[dir].getHeight());
 }

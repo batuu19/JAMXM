@@ -8,7 +8,7 @@ World::World(const RectI & screenRect)
 	screenRect(screenRect),
 	mapRect(map.getRect())
 {
-	//bgm.Play(1.f, 0.35f);
+	bgm.Play(1.f, 0.35f);
 }
 
 void World::handleInput(Keyboard & kbd, Mouse & mouse)
@@ -21,6 +21,7 @@ void World::handleInput(Keyboard & kbd, Mouse & mouse)
 	{
 		animations.clear();
 		camera.pos = { 0.f,0.f };
+		wreck.reset();
 	}
 }
 
@@ -56,7 +57,7 @@ void World::update(float dt)
 	remove_erase_if(animations, [](Animation& a) {return a.isEnded(); });
 
 	//car bouncing of wreck
-	if (checkCollision(car, wreck))
+	if (!wreck.isDead() && checkCollision(car, wreck))
 		car.bounceBack();
 
 	
@@ -70,10 +71,10 @@ void World::update(float dt)
 		)
 		camera.move((car.getPosConst() - center).getNormalized());
 	//don't let camera off map
-	if (camera.pos.x < mapRect.left)camera.pos.x = mapRect.left;
-	if (camera.pos.x + screenRect.right > mapRect.right)camera.pos.x = mapRect.right - screenRect.right;
-	if (camera.pos.y < mapRect.top)camera.pos.y = mapRect.top;
-	if (camera.pos.y + screenRect.bottom > mapRect.bottom)camera.pos.y = mapRect.bottom - screenRect.bottom;
+	if (camera.pos.x < mapRect.left)camera.pos.x = (float)mapRect.left;
+	if (camera.pos.x + screenRect.right > mapRect.right)camera.pos.x = (float)(mapRect.right - screenRect.right);
+	if (camera.pos.y < mapRect.top)camera.pos.y = (float)mapRect.top;
+	if (camera.pos.y + screenRect.bottom > mapRect.bottom)camera.pos.y = (float)(mapRect.bottom - screenRect.bottom);
 
 
 }
