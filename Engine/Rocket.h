@@ -21,10 +21,12 @@ public:
 	RectF getHitbox() const;
 	const VecF2& getPosConst() const;
 	int getType() const;
+	int getAttack() const;
 private:
 	VecF2 pos;
 	VecF2 vel;
 	int type;
+	float attackValue;
 
 	Surface sprite;
 };

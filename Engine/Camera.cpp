@@ -34,7 +34,7 @@ void Camera::update(float dt)
 {
 	if (nextDir != VecF2(0.f, 0.f))
 	{
-		pos -= nextDir * dt * cameraMoveSpeed;
+		pos += nextDir * dt * cameraMoveSpeed;
 		nextDir = { 0.f,0.f };
 	}
 	

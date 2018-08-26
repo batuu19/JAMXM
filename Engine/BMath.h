@@ -123,3 +123,13 @@ S getDistanceSq(const T& obj, const Vec2<S>& point)
 {
 	return (obj.getPosConst() - point).getLengthSq();
 }
+
+template<typename T>
+Vec2<T> getInBounds(const Vec2<T>& point, const Vec2<T>& leftBound, const Vec2<T>& rightBound)
+{
+	if (point < leftBound)
+		return leftBound;
+	if (point > rightBound)
+		return rightBound;
+	return point;
+}

@@ -23,6 +23,8 @@ public:
 	void draw(Graphics&) const;
 	void draw(Graphics&, VecF2 cameraPos) const;
 
+	void damage(float amount);
+	bool isDead() const;
 	const RectF& getRect() const;
 	//TODO: fix - more accurate hitbox
 	RectF getHitbox() const;
@@ -30,6 +32,8 @@ protected:
 	VecF2 pos;
 	const SpriteContainer sprites;
 	int dir;
+	float HP = 300.f;
+	bool dead = false;
 
 	int width;
 	int height;

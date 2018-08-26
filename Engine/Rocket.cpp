@@ -7,6 +7,17 @@ Rocket::Rocket(VecF2 pos, VecF2 vel, Surface sprite,int type)
 	sprite(sprite),
 	type(type)
 {
+	switch (type)
+	{
+	case 0:
+		attackValue = 30.f;
+		break;
+	case 1:
+		attackValue = 60.f;
+		break;
+	default:
+		break;
+	}
 }
 
 void Rocket::draw(Graphics & gfx) const
@@ -37,4 +48,9 @@ const VecF2 & Rocket::getPosConst() const
 int Rocket::getType() const
 {
 	return type;
+}
+
+int Rocket::getAttack() const
+{
+	return attackValue;
 }

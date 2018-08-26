@@ -39,7 +39,7 @@ void Animation::draw(Graphics & gfx, VecF2 cameraPos) const
 {
 	if (!endOfAnimation)
 	{
-		gfx.drawSprite(pos + cameraPos, sprites[activeFrame]);
+		gfx.drawSprite(pos - cameraPos, sprites[activeFrame]);
 	}
 }
 

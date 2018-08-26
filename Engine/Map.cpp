@@ -7,5 +7,10 @@ void Map::draw(Graphics& gfx) const
 
 void Map::draw(Graphics & gfx, VecF2 cameraPos) const
 {
-	gfx.drawSprite(pos + cameraPos, mapSprite);
+	gfx.drawSprite(pos - cameraPos, mapSprite);
+}
+
+const RectI& Map::getRect() const
+{
+	return mapSprite.getRect();
 }

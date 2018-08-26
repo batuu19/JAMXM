@@ -30,7 +30,20 @@ void Entity::draw(Graphics & gfx) const
 
 void Entity::draw(Graphics & gfx, VecF2 cameraPos) const
 {
-	gfx.drawSprite(pos + cameraPos, sprites[dir]);
+	if(!dead)
+		gfx.drawSprite(pos - cameraPos, sprites[dir]);
+}
+
+void Entity::damage(float amount)
+{
+	HP -= amount;
+	if (HP <= 0.f)
+		dead = true;
+}
+
+bool Entity::isDead() const
+{
+	return dead;
 }
 
 const RectF& Entity::getRect() const

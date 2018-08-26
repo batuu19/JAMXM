@@ -30,6 +30,6 @@ private:
 	bool musicPlaying = true;
 	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 
-	RectI centerRect;
-
+	RectI screenRect;
+	RectI mapRect;
 };

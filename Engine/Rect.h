@@ -44,6 +44,11 @@ public:
 		return left >= other.left && right <= other.right &&
 			top >= other.top && bottom <= other.bottom;
 	}
+	bool contains(const Vec2<T> point) const
+	{
+		return left <= point.x && right >= point.x &&
+			top <= point.y && bottom >= point.y;
+	}
 	static Rect fromCenter(const Vec2<T>& center, T halfWidth, T halfHeight)
 	{
 		const Vec2<T> half(halfWidth, halfHeight);
@@ -55,9 +60,8 @@ public:
 	}
 	Vec2<T> getCenter() const
 	{
-		return Vec2((left + right) / (T)2, (top + bottom) / (T)2);
+		return Vec2<T>((left + right) / (T)2, (top + bottom) / (T)2);
 	}
-
 	T getWidth() const
 	{
 		return right - left;
