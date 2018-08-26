@@ -8,7 +8,7 @@
 class Rocket
 {
 public:
-	Rocket(VecF2 pos,VecF2 vel, Surface sprite);
+	Rocket(VecF2 pos,VecF2 vel, Surface sprite,int type);
 	Rocket(const Rocket&) = delete;
 	Rocket(Rocket&&) = default;
 	Rocket& operator=(const Rocket&) = default;
@@ -17,13 +17,14 @@ public:
 	void draw(Graphics&, VecF2 cameraPos) const;
 	void update(float dt);
 
-	const RectF& getRect() const;
 	//TODO: fix - more accurate hitbox
 	RectF getHitbox() const;
 	const VecF2& getPosConst() const;
+	int getType() const;
 private:
 	VecF2 pos;
 	VecF2 vel;
-	//will not be compatibile with Entity
+	int type;
+
 	Surface sprite;
 };

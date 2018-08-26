@@ -38,7 +38,9 @@ void World::update(float dt)
 			indices.push_back(i);
 			sndBoom.Play();
 			const VecI2 rocketPos = rockets[i].getPosConst();
-			animations.emplace_back(rocketPos, "sprites\\big_explosion_336x55.bmp", 6, 336/6, 55);
+			const int rocketType = rockets[i].getType();
+			if (rocketType == 0)animations.emplace_back(rocketPos, "sprites\\small_explosion_240x40.bmp", 6, 240 / 6, 40);
+			else if (rocketType == 1)animations.emplace_back(rocketPos, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
 			animations.emplace_back(rocketPos, "sprites\\small_fire_80x24.bmp", 4, 20, 24, true);
 		}
 	}

@@ -6,6 +6,8 @@ Car::Car(VecF2 pos, int startDirection, std::vector<Rocket>& rockets)
 	dir(startDirection),
 	rocketsFired(rockets)
 {
+	rocketSprites.emplace_back(Surface("sprites//small_rocket_175x35.bmp"), 5, 1, 35, 35);
+	rocketSprites.emplace_back(Surface("sprites//big_rocket_125x20.bmp"), 5, 1, 25, 20);
 }
 
 void Car::update(float dt, TurnDirection nextTurn)
@@ -115,11 +117,22 @@ const VecF2 & Car::getPosConst() const
 	return pos;
 }
 
+void Car::changeWeapon()
+{
+	changeWeapon(static_cast<WeaponType>((static_cast<int>(weaponType) + 1) % static_cast<int>(WeaponType::WEAPON_COUNT)));//next weapon
+}
+
+void Car::changeWeapon(WeaponType weapon)
+{
+	weaponType = weapon;
+	sndWeaponChange.Play();
+}
 void Car::shoot(float dt)
 {
-	if (lastShot >= shootRate)
+	const int i_weapon = static_cast<int>(weaponType);
+	if (lastShot >= shootRate[i_weapon])
 	{
-		Rocket toPush(pos, vectorsNormalized[dir] * rocketVel, rocketSprites[dir] );
+		Rocket toPush(pos, vectorsNormalized[dir] * rocketVel[i_weapon], rocketSprites[i_weapon].get(dir),i_weapon);
 		rocketsFired.push_back(std::move(toPush));
 		lastShot = 0.f;
 		sndRocketShot.Play();
@@ -130,7 +143,7 @@ void Car::shoot(float dt)
 
 RectF Car::getHitbox() const
 {
-	return RectF(pos,width,height);
+	return RectF(pos,(float)width,(float)height);
 }
 
 int Car::getDir() const

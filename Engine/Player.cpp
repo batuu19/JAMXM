@@ -36,6 +36,17 @@ void Player::draw(Graphics & gfx, VecF2 cameraPos) const
 //TODO: better
 void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 {
+	//for one key at once
+	while (!kbd.KeyIsEmpty())
+	{
+		const Keyboard::Event e = kbd.ReadKey();
+
+		if (e.IsPress())
+		{
+			if (e.GetCode() == 'Q')
+				car.changeWeapon();
+		}
+	}
 	if (kbd.KeyIsPressed(VK_UP))
 	{
 		speedup = Car::Speedup::Faster;
@@ -73,3 +84,4 @@ const Car & Player::getCarConst() const
 {
 	return car;
 }
+

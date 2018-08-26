@@ -1,15 +1,7 @@
 #pragma once
 
-#include "Graphics.h"
-#include "Directions.h"
-#include "FrameTimer.h"
-#include <math.h>
-#include <algorithm>
 #include <assert.h>
 #include <sstream>
-#include "Surface.h"
-#include <vector>
-#include "BMath.h"
 #include "SpriteContainer.h"
 #include "Rocket.h"
 #include "SoundEffect.h"
@@ -48,6 +40,15 @@ public:
 	std::string getDebugInfo() const;
 
 	//rocket
+	enum class WeaponType
+	{
+		SMALL_ROCKET,
+		BIG_ROCKET,
+		WEAPON_COUNT
+	};
+	void changeWeapon();
+	void changeWeapon(WeaponType weapon);
+	Sound sndWeaponChange = Sound(L"sound//game//reload.wav");
 	void shoot(float dt);
 
 	//TODO: fix - more accurate hitbox
@@ -80,12 +81,12 @@ private:
 	void drawCar(Graphics &,VecF2 cameraPos) const;
 
 	//rocket
-	int rocketWidth = 35;
-	int rocketHeight = 35;
-	SpriteContainer rocketSprites = SpriteContainer({ "sprites//small_rocket_175x35.bmp" }, 5, 1, rocketWidth, rocketHeight);
-	float rocketVel = 900.f;
+	WeaponType weaponType = WeaponType::SMALL_ROCKET;
+	std::vector<SpriteContainer> rocketSprites;
+
+	std::vector<float> rocketVel = { 700.f,400.f };
 	std::vector<Rocket>& rocketsFired;
-	float shootRate = 0.3f;
-	float lastShot = shootRate;
+	std::vector<float> shootRate = { 0.23f,0.45f };
+	float lastShot = shootRate[0];
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );
 };

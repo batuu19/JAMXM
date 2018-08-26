@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "Entity.h"
 #include "Map.h"
-#include "Sound.h"
 #include "Animation.h"
 #include "BUtils.h"
 #include "Camera.h"
@@ -28,7 +27,9 @@ private:
 	std::vector<Animation> animations;
 
 	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
+	bool musicPlaying = true;
 	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 
 	RectI centerRect;
+
 };

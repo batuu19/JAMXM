@@ -1,10 +1,11 @@
 #include "Rocket.h"
 
-Rocket::Rocket(VecF2 pos, VecF2 vel, Surface sprite)
+Rocket::Rocket(VecF2 pos, VecF2 vel, Surface sprite,int type)
 	:
 	pos(pos),
 	vel(vel),
-	sprite(sprite)
+	sprite(sprite),
+	type(type)
 {
 }
 
@@ -23,11 +24,6 @@ void Rocket::update(float dt)
 	pos += vel * dt;
 }
 
-const RectF & Rocket::getRect() const
-{
-	return RectF(pos, sprite.getWidth(), sprite.getWidth());
-}
-
 RectF Rocket::getHitbox() const
 {
 	return RectF(pos, sprite.getWidth(), sprite.getWidth());
@@ -36,4 +32,9 @@ RectF Rocket::getHitbox() const
 const VecF2 & Rocket::getPosConst() const
 {
 	return pos;
+}
+
+int Rocket::getType() const
+{
+	return type;
 }
