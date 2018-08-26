@@ -24,6 +24,10 @@ static constexpr int UP_LEFT = 14;
 static constexpr int DIRECTIONS_COUNT= 16;
 
 int getDirection(std::string name);
+inline int getOpposite(int dir)
+{
+	return (dir + 8) % 16;
+}
 
 const std::vector<VecF2> directionVec =
 {

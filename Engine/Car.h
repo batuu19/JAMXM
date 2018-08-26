@@ -32,7 +32,7 @@ public:
 	void draw(Graphics&, VecF2 cameraPos) const;
 	void reset();
 	void stop();
-	void bounceBack();
+	void bounceBack(bool forceBounce = false);
 
 	const VecF2& getVelConst() const;
 	const VecF2& getPosConst() const;

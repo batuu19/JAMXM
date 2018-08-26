@@ -117,6 +117,9 @@
     <ClInclude Include="SpriteContainer.h">
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
+    <ClInclude Include="UFO.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -186,6 +189,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UFO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

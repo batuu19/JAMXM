@@ -21,7 +21,13 @@ void remove_erase_if(Container& container, Pred pred)
 }
 
 template<typename T,typename S>
-bool checkCollision(const T& first, const S& second)
+bool colliding(const T& first, const S& second)
 {
 	return first.getHitbox().isOverlappingWith(second.getHitbox());
+}
+
+template<typename T,typename S>
+bool collidingWithBounds(const T& object, Rect<S> rect)
+{
+	return object.getHitbox().isContainedBy(rect);
 }

@@ -13,7 +13,7 @@ Rocket::Rocket(VecF2 pos, VecF2 vel, Surface sprite,int type)
 		attackValue = 30.f;
 		break;
 	case 1:
-		attackValue = 60.f;
+		attackValue = 100.f;
 		break;
 	default:
 		break;

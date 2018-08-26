@@ -6,6 +6,7 @@
 #include "Animation.h"
 #include "BUtils.h"
 #include "Camera.h"
+#include "UFO.h"
 class World
 {
 public:
@@ -25,6 +26,7 @@ private:
 	Player player;
 	Entity wreck;
 	std::vector<Animation> animations;
+	UFO ufo;
 
 	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
 	bool musicPlaying = true;

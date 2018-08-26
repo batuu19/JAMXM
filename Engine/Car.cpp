@@ -102,9 +102,10 @@ void Car::stop()
 	vel = getZeroVec<float>();
 }
 
-void Car::bounceBack()
+void Car::bounceBack(bool forceBounce)
 {
 	vel = -vel;
+	if (forceBounce)vel += vectorsNormalized[getOpposite(dir)] *  200.f;
 }
 
 const VecF2 & Car::getVelConst() const
