@@ -66,6 +66,8 @@ void World::update(float dt)
 					animations.emplace_back(rocketPos - VecF2{ 3.f, 4.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
 					animations.emplace_back(rocketPos - VecF2{ 36.f, 11.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
 					animations.emplace_back(rocketPos - VecF2{ 32.f, 2.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
+
+					animations.emplace_back(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35,true);
 				}
 				break;
 

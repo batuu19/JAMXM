@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include <random>
 #include "Directions.h"
+#include "SpriteContainer.h"
 
 class UFO
 {
@@ -28,5 +29,9 @@ private:
 
 	float changeDirectionTimer = 4.f;
 	float lastChanged = 0.f;
-	Surface sprite = { "sprites\\UFO.bmp" };
+	float animTimer = 0.1f;
+	float animTime = 0.f;
+	int framesCount = 8;
+	int activeFrame = 0;
+	SpriteContainer sprite = SpriteContainer({ "sprites\\ufo\\ufo3.bmp"},4,2,80,80,false );
 };

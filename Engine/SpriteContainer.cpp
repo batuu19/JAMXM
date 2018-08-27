@@ -23,11 +23,11 @@ SpriteContainer::SpriteContainer(const Surface& surf, int rows, int lines,
 		for (int x = 0; x < rows; x++)
 		{
 			frames[y*rows + x] = { left,right,up,down };
-			left += 2 * width;
-			std::swap(left, right);
+			left += width;
+			right += width;
 		}
-		down += 2 * height;
-		std::swap(up, down);
+		down += height;
+		up += height;
 		left = 0;
 		right = width;
 	}
@@ -63,10 +63,10 @@ SpriteContainer::SpriteContainer(const Surface& surf, int rows, int lines,
 	{
 		for (int i = 0; i < framesCount; i++)
 		{
-			sprites.emplace_back(surf.getPart(frames[i]));
+			sprites.push_back(surf.getPart(frames[i]));
 		}
 	}
-	delete frames;
+	delete[] frames;
 }
 
 Surface & SpriteContainer::operator[](int i)

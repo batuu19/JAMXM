@@ -15,14 +15,19 @@ void UFO::update(float dt)
 		dir = dirD(rng);
 		lastChanged = 0.f;
 	}
-
+	animTime += dt;
+	if (animTime > animTimer)
+	{
+		activeFrame = (activeFrame + 1) % framesCount;
+		animTime = 0.f;
+	}
 	pos += vectorsNormalized[dir] * vel * dt;
 }
 
 void UFO::draw(Graphics & gfx,const VecF2& cameraPos) const
 {
 	if(!dead)
-		gfx.drawSprite(pos - cameraPos, sprite);
+		gfx.drawSprite(pos - cameraPos, sprite[activeFrame]);
 }
 
 void UFO::bounceBack()
@@ -44,7 +49,7 @@ bool UFO::damage(float amount)
 
 RectF UFO::getHitbox() const
 {
-	return RectF(pos, (float)sprite.getWidth(), (float)sprite.getHeight());
+	return RectF(pos, 70.f, 70.f);
 }
 
 bool UFO::isDead() const
