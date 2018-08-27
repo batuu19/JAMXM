@@ -17,14 +17,12 @@ public:
 	void draw(Graphics&) const;
 	const Map& getMapConst() const;
 	const Player& getPlayerConst() const;
-	const Entity& getWreckConst() const;
 private:
 	Camera camera;
 	Map map;
 	std::vector<Rocket> rockets;
 	Car car;
 	Player player;
-	Entity wreck;
 	std::vector<Animation> animations;
 	UFO ufo;
 

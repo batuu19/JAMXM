@@ -4,7 +4,6 @@ World::World(const RectI & screenRect)
 	:
 	car(VecF2(400.f, 300.f), RIGHT, rockets),
 	player(car),
-	wreck(VecF2(300.f, 300.f), "sprites\\wreck_65x137.bmp", 65, 137, 1, 1),
 	screenRect(screenRect),
 	mapRect(map.getRect())
 {
@@ -21,7 +20,6 @@ void World::handleInput(Keyboard & kbd, Mouse & mouse)
 	{
 		animations.clear();
 		camera.pos = { 0.f,0.f };
-		wreck.reset();
 	}
 }
 
@@ -37,8 +35,7 @@ void World::update(float dt)
 	for (int i = 0; i < rockets.size(); i++)
 	{
 		int object = 0;
-		if (!wreck.isDead() && colliding(rockets[i], wreck)) object = 1;
-		else if (!ufo.isDead() && colliding(rockets[i], ufo))object = 2;
+		if (!ufo.isDead() && colliding(rockets[i], ufo))object = 2;
 		if (object > 0)
 		{
 			indices.push_back(i);
@@ -52,9 +49,6 @@ void World::update(float dt)
 			const float attack = rockets[i].getAttack();
 			switch (object)
 			{
-			case 1:
-				wreck.damage(attack);
-				break;
 			case 2:
 				if (ufo.damage(attack))
 				{
@@ -85,10 +79,6 @@ void World::update(float dt)
 
 	remove_erase_if(animations, [](Animation& a) {return a.isEnded(); });
 
-	//car bouncing of wreck
-	if (!wreck.isDead() && colliding(car, wreck))
-		car.bounceBack();
-
 	//car bouncing of map bounds
 	if (!collidingWithBounds(car,mapRect))
 		car.bounceBack();
@@ -115,7 +105,6 @@ void World::update(float dt)
 void World::draw(Graphics & gfx) const
 {
 	map.draw(gfx, camera.pos);
-	wreck.draw(gfx, camera.pos);
 	player.draw(gfx, camera.pos);
 	for (auto& a : animations)a.draw(gfx, camera.pos);
 	ufo.draw(gfx,camera.pos);
@@ -131,9 +120,4 @@ const Map & World::getMapConst() const
 const Player & World::getPlayerConst() const
 {
 	return player;
-}
-
-const Entity & World::getWreckConst() const
-{
-	return wreck;
 }
