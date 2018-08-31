@@ -8,23 +8,17 @@ Player::Player(Car& car)
 
 void Player::update(float dt)
 {
-	car.update(dt,nextTurn);
-	nextTurn = Car::TurnDirection::None;
-	if (shooting)
-	{
-		car.shoot(dt);
-		shooting = false;
-	}
-	if (speedup < Car::Speedup::None)
+	car.update(dt);
+	//if (shooting)
+	//{
+	//	car.shoot(dt);
+	//	shooting = false;
+	//}
+	/*if (speedup < Car::Speedup::None)
 	{
 		car.speedup(dt, speedup);
 		speedup = Car::Speedup::None;
-	}
-}
-
-void Player::draw(Graphics & gfx) const
-{
-	car.draw(gfx);
+	}*/
 }
 
 void Player::draw(Graphics & gfx, VecF2 cameraPos) const
@@ -57,12 +51,11 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 	}
 	if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		nextTurn = Car::TurnDirection::Left;
-
+		car.turnLeft();
 	}
 	else if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		nextTurn = Car::TurnDirection::Right;
+		car.turnRight();
 	}
 
 	if (kbd.KeyIsPressed(VK_RETURN))

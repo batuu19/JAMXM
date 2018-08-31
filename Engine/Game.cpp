@@ -40,6 +40,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	const float dt = ft.mark();
+	//const float dt = (float)(1.f / 60.f);
 	world.handleInput(wnd.kbd, wnd.mouse);
 	world.update(dt);
 }

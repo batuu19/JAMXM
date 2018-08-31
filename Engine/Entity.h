@@ -13,14 +13,9 @@
 class Entity
 {
 public:
-	Entity(VecF2 pos,
-		std::string spriteFileName, int spriteWidth, int spriteHeight, int spritesRows = 5, int spritesLines = 1);
-	Entity(VecF2 pos,int dir,
-		std::string spriteFileName, int spriteWidth, int spriteHeight, int spritesRows = 5, int spritesLines = 1);
-	Entity(const Entity&) = delete;
+	//Entity(const Entity&) = delete;
 
-	void update(float dt);
-	void draw(Graphics&) const;
+	virtual void update(float dt);
 	void draw(Graphics&, VecF2 cameraPos) const;
 	void reset();
 
@@ -28,13 +23,15 @@ public:
 	bool isDead() const;
 	//TODO: fix - more accurate hitbox
 	RectF getHitbox() const;
+	const VecF2& getPosConst() const;
 protected:
-	VecF2 pos;
-	const SpriteContainer sprites;
-	int dir;
-	float HP = 300.f;
-	bool dead = false;
+	Entity(VecF2 pos, int spriteState, SpriteContainer, VecF2 vel = { 0.f,0.f }, float HP = 300.f,float speed = 0.f, float maxVel = 0.f);
 
-	int width;
-	int height;
+	VecF2 pos;
+	VecF2 vel;
+	const SpriteContainer sprites;
+	float speed;
+	float maxVel;
+	int spriteState;
+	float HP;
 };

@@ -1,58 +1,49 @@
 #include "Entity.h"
 
-
-Entity::Entity(VecF2 pos, std::string spriteFileName, int spriteWidth, int spriteHeight, int spritesRows, int spritesLines)
-	:
-	pos(pos),
-	sprites(spriteFileName, spritesRows, spritesLines, spriteWidth, spriteHeight),
-	dir(0)
-{
-}
-
-Entity::Entity(VecF2 pos, int dir, std::string spriteFileName, int spriteWidth, int spriteHeight, int spritesRows, int spritesLines)
-	:
-	pos(pos),
-	sprites(spriteFileName, spritesRows, spritesLines, spriteWidth, spriteHeight),
-	dir(dir)
-{
-}
-
 void Entity::update(float dt)
 {
-	if (sprites.getSize() < 0)throw std::exception("no sprites");
-	if (dir > sprites.getSize())throw std::exception("wrong dir");
-}
-
-void Entity::draw(Graphics & gfx) const
-{
-	draw(gfx, { 0.f,0.f });
+	pos += vel * dt;
 }
 
 void Entity::draw(Graphics & gfx, VecF2 cameraPos) const
 {
-	if(!dead)
-		gfx.drawSprite(pos - cameraPos, sprites[dir]);
+	if(!isDead())
+		gfx.drawSprite(pos - cameraPos, sprites[spriteState]);
 }
 
 void Entity::reset()
 {
 	HP = 300.f;
-	dead = false;
 }
 
 void Entity::damage(float amount)
-{
-	HP -= amount;
-	if (HP <= 0.f)
-		dead = true;
+{ 
+	if(HP > 0)HP -= amount;
 }
 
 bool Entity::isDead() const
 {
-	return dead;
+	return HP <= 0;
 }
 
 RectF Entity::getHitbox() const
 {
-	return RectF(pos, (float)sprites[dir].getWidth(), (float)sprites[dir].getHeight());
+	return RectF(pos, (float)sprites[spriteState].getWidth(), (float)sprites[spriteState].getHeight());
+}
+
+const VecF2 & Entity::getPosConst() const
+{
+	return pos;
+}
+
+Entity::Entity(VecF2 pos, int spriteState, SpriteContainer sprites, VecF2 vel, float HP, float speed, float maxVel)
+	:
+	pos(pos),
+	vel(vel),
+	spriteState(spriteState),
+	sprites(sprites),
+	speed(speed),
+	maxVel(maxVel),
+	HP(HP)
+{
 }

@@ -1,56 +1,31 @@
 #include "Rocket.h"
 
-Rocket::Rocket(VecF2 pos, VecF2 vel, Surface sprite,int type)
-	:
-	pos(pos),
-	vel(vel),
-	sprite(sprite),
-	type(type)
-{
-	switch (type)
-	{
-	case 0:
-		attackValue = 30.f;
-		break;
-	case 1:
-		attackValue = 100.f;
-		break;
-	default:
-		break;
-	}
-}
-
-void Rocket::draw(Graphics & gfx) const
-{
-	draw(gfx, { 0.f,0.f });
-}
-
-void Rocket::draw(Graphics & gfx, VecF2 cameraPos) const
-{
-	gfx.drawSprite(pos + cameraPos, sprite);
-}
-
-void Rocket::update(float dt)
-{
-	pos += vel * dt;
-}
-
-RectF Rocket::getHitbox() const
-{
-	return RectF(pos, (float)sprite.getWidth(), (float)sprite.getWidth());
-}
-
-const VecF2 & Rocket::getPosConst() const
-{
-	return pos;
-}
-
-int Rocket::getType() const
-{
-	return type;
-}
-
 float Rocket::getAttack() const
 {
 	return attackValue;
 }
+
+float Rocket::getShootRate() const
+{
+	return shootRate;
+}
+
+Rocket::Rocket(VecF2 pos,int spriteState, VecF2 vel, SpriteContainer sprites, float attackValue,float shootRate)
+	:
+	Entity(pos, spriteState, sprites,vel),
+	attackValue(attackValue),
+	shootRate(shootRate)
+{
+}
+
+BigRocket::BigRocket(VecF2 pos, int dir)
+	:
+	Rocket(pos, dir, (vectorsNormalized[dir] * 700.f), SpriteContainer({ "sprites//big_rocket_125x20.bmp" }, 5, 1, 25, 20),40.f,0.23f)
+{
+}
+
+SmallRocket::SmallRocket(VecF2 pos, int dir)
+	:
+	Rocket(pos, dir, (vectorsNormalized[dir] * 400.f), SpriteContainer({ "sprites//small_rocket_175x35.bmp" }, 5, 1, 35, 35),100.f,0.45f )
+{}
+

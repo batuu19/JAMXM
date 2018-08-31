@@ -2,86 +2,80 @@
 
 Car::Car(VecF2 pos, int startDirection, std::vector<Rocket>& rockets)
 	:
-	pos(pos),
-	dir(startDirection),
+	Entity(pos, startDirection, SpriteContainer({ "Sprites\\cars\\car_black_350x70.bmp" }, 5, 1, 70, 70), { 100.f,100.f }, 1000.f, 600.f, 300.f),
 	rocketsFired(rockets)
 {
-	rocketSprites.emplace_back(Surface("sprites//small_rocket_175x35.bmp"), 5, 1, 35, 35);
-	rocketSprites.emplace_back(Surface("sprites//big_rocket_125x20.bmp"), 5, 1, 25, 20);
 }
 
-void Car::update(float dt, TurnDirection nextTurn)
+void Car::update(float dt)
 {
 	//TODO: one turn time
-	rightTurnTime += dt;
-	leftTurnTime += dt;
-	turnSoundTime += dt;
-	lastShot += dt;
-	for (auto &r : rocketsFired)
-	{
-		r.update(dt);
-	}
-	if (nextTurn == TurnDirection::Right)
-	{
-		turnRight(dt);
-	}
-	else if (nextTurn == TurnDirection::Left)
-	{
-		turnLeft(dt);
-	}
-	pos += vel * dt;
+	//rightTurnTime += dt;
+	//leftTurnTime += dt;
+	//turnSoundTime += dt;
+	//lastShot += dt;
+	//for (auto &r : rocketsFired)
+	//{
+	//	r.update(dt);
+	//}
+	//if (nextTurn == TurnDirection::Right)
+	//{
+	//	if (rightTurnTime >= turnRate)
+	//	{
+	//		spriteState = (spriteState + turnValue) % DIRECTIONS_COUNT;
+	//		rightTurnTime = 0.f;
+	//		if (turnSoundTime >= turnSoundRate)
+	//		{
+	//			sndFriction.Play();
+	//			turnSoundTime = 0.f;
+	//		}
+	//		vel = vectorsNormalized[spriteState] * (vel * vectorsNormalized[spriteState]);
+	//	}
+	//	nextTurn = TurnDirection::None;
+	//}
+	//else if (nextTurn == TurnDirection::Left)
+	//{
+	//	if (leftTurnTime >= turnRate)
+	//	{
+	//		spriteState = (spriteState - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
+	//		leftTurnTime = 0.f;
+	//		if (turnSoundTime >= turnSoundRate)
+	//		{
+	//			sndFriction.Play();
+	//			turnSoundTime = 0.f;
+	//		}
+
+	//		vel = vectorsNormalized[spriteState] * (vel * vectorsNormalized[spriteState]);
+	//	}
+	//	nextTurn = TurnDirection::None;
+	//}
+
+	Entity::update(dt);
 }
 
-void Car::turnLeft(float dt)
+void Car::turnLeft()
 {
-
-	if (leftTurnTime >= turnRate)
-	{
-		dir = (dir - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
-		leftTurnTime = 0.f;
-		if (turnSoundTime >= turnSoundRate)
-		{
-			sndFriction.Play();
-			turnSoundTime = 0.f;
-		}
-		
-	}
-	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
+	nextTurn = TurnDirection::Left;
 }
 
-void Car::turnRight(float dt)
+void Car::turnRight()
 {
-	if (rightTurnTime >= turnRate)
-	{
-		dir = (dir + turnValue) % DIRECTIONS_COUNT;
-		rightTurnTime = 0.f;
-		if (turnSoundTime >= turnSoundRate)
-		{
-			sndFriction.Play();
-			turnSoundTime = 0.f;
-		}
-	}
-
-	vel = vectorsNormalized[dir] * (vel * vectorsNormalized[dir]);
+	nextTurn = TurnDirection::Right;
 }
 
 void Car::speedup(float dt, Speedup speedupFlag)
 {
-	float value = vel * vectorsNormalized[dir];
+	float value = vel * vectorsNormalized[spriteState];
 	if(value < maxVel  && (speedupFlag == Speedup::Faster))
-		vel += vectorsNormalized[dir] * speed * dt;
+		vel += vectorsNormalized[spriteState] * speed * dt;
 	else if (value > -maxVel  && (speedupFlag == Speedup::Slower))
-		vel += vectorsNormalized[dir] * -speed * dt;
+		vel += vectorsNormalized[spriteState] * -speed * dt;
 }
 
-void Car::draw(Graphics & gfx) const
-{
-	draw(gfx, { 0.f,0.f });
-}
 
 void Car::draw(Graphics & gfx, VecF2 cameraPos) const
 {
-	drawCar(gfx,cameraPos);
+	Entity::draw(gfx, cameraPos);
 	for (auto& r : rocketsFired)
 	{
 		r.draw(gfx,cameraPos);
@@ -91,7 +85,7 @@ void Car::draw(Graphics & gfx, VecF2 cameraPos) const
 void Car::reset()
 {
 	pos = { 400.f,300.f };
-	dir = RIGHT;
+	spriteState = RIGHT;
 	vel = { 0.f,0.f };
 
 	rocketsFired.clear();
@@ -105,7 +99,7 @@ void Car::stop()
 void Car::bounceBack(bool forceBounce)
 {
 	vel = -vel;
-	if (forceBounce)vel += vectorsNormalized[getOpposite(dir)] *  200.f;
+	if (forceBounce)vel += vectorsNormalized[getOpposite(spriteState)] *  200.f;
 }
 
 const VecF2 & Car::getVelConst() const
@@ -120,36 +114,17 @@ const VecF2 & Car::getPosConst() const
 
 void Car::changeWeapon()
 {
-	changeWeapon(static_cast<WeaponType>((static_cast<int>(weaponType) + 1) % static_cast<int>(WeaponType::WEAPON_COUNT)));//next weapon
+	rocketType = static_cast<RocketType>((static_cast<int>(rocketType) + 1) % rocketCount);//next weapon
 }
 
-void Car::changeWeapon(WeaponType weapon)
-{
-	weaponType = weapon;
-	sndWeaponChange.Play();
-}
 void Car::shoot(float dt)
 {
-	const int i_weapon = static_cast<int>(weaponType);
-	if (lastShot >= shootRate[i_weapon])
-	{
-		Rocket toPush(pos, vectorsNormalized[dir] * rocketVel[i_weapon], rocketSprites[i_weapon].get(dir),i_weapon);
-		rocketsFired.push_back(std::move(toPush));
-		lastShot = 0.f;
-		sndRocketShot.Play();
-	}
-	
-}
-
-
-RectF Car::getHitbox() const
-{
-	return RectF(pos,(float)width,(float)height);
+	rocketsFired.push_back(BigRocket(pos, spriteState));
 }
 
 int Car::getDir() const
 {
-	return dir;
+	return spriteState;
 }
 
 std::string Car::getDebugInfo() const
@@ -161,9 +136,4 @@ std::string Car::getDebugInfo() const
 		<< " maxVel=" << maxVel;
 
 	return ss.str();
-}
-
-void Car::drawCar(Graphics & gfx,VecF2 cameraPos) const
-{
-	gfx.drawSprite(pos + cameraPos, sprites[dir]);
 }

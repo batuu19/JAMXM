@@ -4,29 +4,27 @@
 #include "Graphics.h"
 #include "Directions.h"
 #include "SoundEffect.h"
+#include "Entity.h"
 
-class Rocket
+class Rocket : public Entity
 {
 public:
-	Rocket(VecF2 pos,VecF2 vel, Surface sprite,int type);
-	Rocket(const Rocket&) = delete;
-	Rocket(Rocket&&) = default;
-	Rocket& operator=(const Rocket&) = default;
-
-	void draw(Graphics&) const;
-	void draw(Graphics&, VecF2 cameraPos) const;
-	void update(float dt);
-
-	//TODO: fix - more accurate hitbox
-	RectF getHitbox() const;
-	const VecF2& getPosConst() const;
-	int getType() const;
 	float getAttack() const;
-private:
-	VecF2 pos;
-	VecF2 vel;
-	int type;
+	float getShootRate() const;
+	Rocket(VecF2 pos, int spriteState, VecF2 vel, SpriteContainer sprites, float attackValue, float shootRate);
+protected: 
 	float attackValue;
+	float shootRate;
+};
 
-	Surface sprite;
+class BigRocket : public Rocket
+{
+public:
+	BigRocket(VecF2 pos,int dir);
+};
+
+class SmallRocket : public Rocket
+{
+public:
+	SmallRocket(VecF2 pos,int dir);
 };
