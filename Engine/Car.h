@@ -23,7 +23,7 @@ public:
 	};
 	void update(float dt) override;
 	void speedup(float dt, Speedup speedupFlag = Speedup::Faster);
-	void draw(Graphics&, VecF2 cameraPos) const;
+	void draw(Graphics&, const VecF2& cameraPos) const override;
 	void reset();
 	void stop();
 	void bounceBack(bool forceBounce = false);

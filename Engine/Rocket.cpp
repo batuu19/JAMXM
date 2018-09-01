@@ -14,12 +14,22 @@ Rocket::Rocket(const VecF2& pos,int spriteState, const VecF2& vel, const SpriteC
 
 BigRocket::BigRocket(VecF2 pos, int dir)
 	:
-	Rocket(pos, dir, (vectorsNormalized[dir] * 300.f), SpriteContainer({ "sprites//big_rocket_125x20.bmp" }, 5, 1, 25, 20), 100.f)
+	Rocket(pos, dir, (vectorsNormalized[dir] * 400.f), SpriteContainer({ "sprites//big_rocket_125x20.bmp" }, 5, 1, 25, 20), 100.f)
 {
+}
+
+Animation BigRocket::getBoomAnim() const
+{
+	return Animation(pos, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
 }
 
 SmallRocket::SmallRocket(VecF2 pos, int dir)
 	:
-	Rocket(pos, dir, (vectorsNormalized[dir] * 500.f), SpriteContainer({ "sprites//small_rocket_175x35.bmp" }, 5, 1, 35, 35), 40.f)
+	Rocket(pos, dir, (vectorsNormalized[dir] * 550.f), SpriteContainer({ "sprites//small_rocket_175x35.bmp" }, 5, 1, 35, 35), 40.f)
 {}
+
+Animation SmallRocket::getBoomAnim() const
+{
+	return Animation(pos, "sprites\\small_explosion_240x40.bmp", 6, 240 / 6, 40);
+}
 

@@ -5,7 +5,8 @@ World::World(const RectI & screenRect)
 	car(VecF2(400.f, 300.f), RIGHT, rockets),
 	player(car),
 	screenRect(screenRect),
-	mapRect(map.getRect())
+	mapRect(map.getRect()),
+	ufo(VecF2(500.f,700.f),rng)
 {
 	bgm.Play(1.f, 0.35f);
 }
@@ -40,40 +41,20 @@ void World::update(float dt)
 	std::vector<int> indices;
 	for (int i = 0; i < rockets.size(); i++)
 	{
-		int object = 0;
-		if (!ufo.isDead() && rockets[i] != nullptr && colliding(*rockets[i], ufo))object = 2;
-		if (object > 0)
+		if (!ufo.isDead() && rockets[i] != nullptr && colliding(*rockets[i], ufo))
 		{
 			indices.push_back(i);
 			sndBoom.Play();
-			const VecI2& rocketPos = rockets[i]->getPosConst();
-			/*
-			const int rocketType = rockets[i].getType(); 
-			if (rocketType == 0)animations.emplace_back(rocketPos, "sprites\\small_explosion_240x40.bmp", 6, 240 / 6, 40);
-			else if (rocketType == 1)animations.emplace_back(rocketPos, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
-			if (object == 1)animations.emplace_back(rocketPos, "sprites\\small_fire_80x24.bmp", 4, 20, 24, true);*/
+			const VecI2 rocketPos = rockets[i]->getPosConst();
+
+			animations.push_back(rockets[i]->getBoomAnim());
 
 			const float attack = rockets[i]->getAttack();
-			switch (object)
+			if (ufo.damage(attack))
 			{
-			case 2:
-				if (ufo.damage(attack))
-				{
-					animations.emplace_back(rocketPos + VecF2{ 11.f, 27.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
-					animations.emplace_back(rocketPos + VecF2{ 3.f, 4.f}, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
-					animations.emplace_back(rocketPos + VecF2{ 36.f, 11.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
-					animations.emplace_back(rocketPos + VecF2{ 32.f, 2.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
-					animations.emplace_back(rocketPos - VecF2{ 11.f, 27.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
-					animations.emplace_back(rocketPos - VecF2{ 3.f, 4.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
-					animations.emplace_back(rocketPos - VecF2{ 36.f, 11.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
-					animations.emplace_back(rocketPos - VecF2{ 32.f, 2.f }, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
+				makeBigBoom(10, rocketPos, 70, rng, animations);
 
-					animations.emplace_back(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35,true);
-				}
-				break;
-
-			default:
-				break;
+				animations.emplace_back(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35, true);
 			}
 		}
 
@@ -82,7 +63,11 @@ void World::update(float dt)
 
 	}
 
-	for (int i : indices)remove_element(rockets, i);
+	for (int i : indices)
+	{
+		delete rockets[i];
+		remove_element(rockets, i);
+	}
 
 	remove_erase_if(animations, [](Animation& a) {return a.isEnded(); });
 

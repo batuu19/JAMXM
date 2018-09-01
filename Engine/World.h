@@ -20,6 +20,7 @@ public:
 	const Map& getMapConst() const;
 	const Player& getPlayerConst() const;
 private:
+	mutable std::mt19937 rng = std::mt19937(std::random_device{}());
 	Camera camera;
 	Map map;
 	std::vector<Rocket*> rockets;

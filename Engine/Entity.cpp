@@ -5,7 +5,7 @@ void Entity::update(float dt)
 	pos += vel * dt;
 }
 
-void Entity::draw(Graphics & gfx, VecF2 cameraPos) const
+void Entity::draw(Graphics & gfx, const VecF2& cameraPos) const
 {
 	if(!isDead())
 		gfx.drawSprite(pos - cameraPos, sprites[spriteState]);
@@ -16,9 +16,10 @@ void Entity::reset()
 	HP = 300.f;
 }
 
-void Entity::damage(float amount)
+bool Entity::damage(float amount)
 { 
 	if(HP > 0)HP -= amount;
+	return HP <= 0;
 }
 
 bool Entity::isDead() const
@@ -47,3 +48,4 @@ Entity::Entity(const VecF2 & pos, int spriteState, const SpriteContainer & sprit
 	HP(HP)
 {
 }
+

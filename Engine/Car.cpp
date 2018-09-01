@@ -73,7 +73,7 @@ void Car::speedup(float dt, Speedup speedupFlag)
 }
 
 
-void Car::draw(Graphics & gfx, VecF2 cameraPos) const
+void Car::draw(Graphics & gfx, const VecF2& cameraPos) const
 {
 	Entity::draw(gfx, cameraPos);
 	for (auto r : rocketsFired)
@@ -115,6 +115,7 @@ const VecF2 & Car::getPosConst() const
 void Car::changeWeapon()
 {
 	rocketType = static_cast<RocketType>((static_cast<int>(rocketType) + 1) % rocketCount);//next weapon
+	sndWeaponChange.Play();
 }
 
 void Car::shoot(float dt)

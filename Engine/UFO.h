@@ -5,27 +5,19 @@
 #include <random>
 #include "Directions.h"
 #include "SpriteContainer.h"
+#include "Entity.h"
 
-class UFO
+class UFO : public Entity
 {
 public:
-	UFO();
-	void update(float dt);
-	void draw(Graphics&,const VecF2& cameraPos) const;
+	UFO(const VecF2& pos,std::mt19937& rng);
+	void update(float dt) override;
 
 	void bounceBack();
-	bool damage(float amount);//return true if destroyed
-	RectF getHitbox() const;
-	bool isDead() const;
 
 private:
-	std::mt19937 rng = std::mt19937(std::random_device{}());
-	std::uniform_int_distribution<int> dirD;
-	VecF2 pos = { 500.f,200.f };
-	float vel = 80.f;
-	int dir;
-	float HP = 400.f;
-	bool dead = false;
+	mutable std::mt19937 rng;
+	mutable std::uniform_int_distribution<int> dirD;
 
 	float changeDirectionTimer = 4.f;
 	float lastChanged = 0.f;
@@ -33,5 +25,6 @@ private:
 	float animTime = 0.f;
 	int framesCount = 8;
 	int activeFrame = 0;
-	SpriteContainer sprite = SpriteContainer({ "sprites\\ufo\\ufo3.bmp"},4,2,80,80,false );
+
+	int dir;
 };

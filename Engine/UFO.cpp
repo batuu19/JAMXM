@@ -1,10 +1,13 @@
 #include "UFO.h"
 
-UFO::UFO()
+UFO::UFO(const VecF2& pos,std::mt19937& rng)
 	:
-	dirD(0, DIRECTIONS_COUNT-1),
+	Entity(pos, 0, SpriteContainer({ "sprites\\ufo\\ufo3.bmp" }, 4, 2, 80, 80, false), { 0.f,0.f }, 400, 180.f),
+	rng(rng),
+	dirD(0, DIRECTIONS_COUNT - 1),
 	dir(dirD(rng))
 {
+	vel = vectorsNormalized[dir] * speed;
 }
 
 void UFO::update(float dt)
@@ -13,46 +16,20 @@ void UFO::update(float dt)
 	if (lastChanged > changeDirectionTimer)
 	{
 		dir = dirD(rng);
+		vel = vectorsNormalized[dir] * speed;
 		lastChanged = 0.f;
 	}
 	animTime += dt;
 	if (animTime > animTimer)
 	{
-		activeFrame = (activeFrame + 1) % framesCount;
+		spriteState = (spriteState + 1) % framesCount;
 		animTime = 0.f;
 	}
-	pos += vectorsNormalized[dir] * vel * dt;
-}
-
-void UFO::draw(Graphics & gfx,const VecF2& cameraPos) const
-{
-	if(!dead)
-		gfx.drawSprite(pos - cameraPos, sprite[activeFrame]);
+	Entity::update(dt);
 }
 
 void UFO::bounceBack()
 {
 	dir = getOpposite(dir);
-	lastChanged = 0.f;
-}
-
-bool UFO::damage(float amount)
-{
-	HP -= amount;
-	if (HP <= 0)
-	{
-		dead = true;
-		return true;
-	}
-	else return false;
-}
-
-RectF UFO::getHitbox() const
-{
-	return RectF(pos, 70.f, 70.f);
-}
-
-bool UFO::isDead() const
-{
-	return dead;
+	vel = vectorsNormalized[dir] * speed;
 }

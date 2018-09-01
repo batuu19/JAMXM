@@ -1,10 +1,11 @@
 #pragma once
 #include "Car.h"
+#include "BUtils.h"
 
 class Player
 {
 public:
-	Player(Car& car);
+	Player(Car&);
 	Player(const Player&) = delete;
 	void update(float dt);
 	void draw(Graphics&, VecF2 cameraPos) const;
@@ -15,10 +16,6 @@ private:
 	Car& car;
 	bool shooting = false;
 	Car::Speedup speedup = Car::Speedup::None;
-
-	//UI things
-	float HP = 100.f;//int?
-
 };
 
 class UI
