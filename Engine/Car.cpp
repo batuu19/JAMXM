@@ -119,14 +119,26 @@ void Car::changeWeapon()
 
 void Car::shoot(float dt)
 {
-	Rocket* nextRocket;
+	Rocket* nextRocket = nullptr;
 	switch (rocketType)
 	{
 	case Car::RocketType::SmallRocket:
-		nextRocket = new SmallRocket(pos, spriteState);
+		if (lastShot > SmallRocket::shootRate)
+		{
+			sndRocketShot.Play();
+			nextRocket = new SmallRocket(pos, spriteState);
+			lastShot = 0.f;
+		}
+		else return;
 		break;
 	case Car::RocketType::BigRocket:
-		nextRocket = new BigRocket(pos, spriteState);
+		if (lastShot > BigRocket::shootRate)
+		{
+			sndRocketShot.Play();
+			nextRocket = new BigRocket(pos, spriteState);
+			lastShot = 0.f;
+		}
+		else return;
 		break;
 	}
 

@@ -10,21 +10,21 @@ class Rocket : public Entity
 {
 public:
 	float getAttack() const;
-	float getShootRate() const;
 protected:
-	Rocket(const VecF2& pos, int spriteState, const VecF2& vel,const SpriteContainer&, float attackValue, float shootRate);
+	Rocket(const VecF2& pos, int spriteState, const VecF2& vel,const SpriteContainer&, float attackValue);
 	float attackValue;
-	float shootRate;
 };
 
 class BigRocket : public Rocket
 {
 public:
 	BigRocket(VecF2 pos,int dir);
+	static constexpr float shootRate = 0.45f;
 };
 
 class SmallRocket : public Rocket
 {
 public:
 	SmallRocket(VecF2 pos,int dir);
+	static constexpr float shootRate = 0.23f;
 };
