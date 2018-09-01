@@ -10,7 +10,7 @@ float Rocket::getShootRate() const
 	return shootRate;
 }
 
-Rocket::Rocket(VecF2 pos,int spriteState, VecF2 vel, SpriteContainer sprites, float attackValue,float shootRate)
+Rocket::Rocket(const VecF2& pos,int spriteState, const VecF2& vel, const SpriteContainer& sprites, float attackValue,float shootRate)
 	:
 	Entity(pos, spriteState, sprites,vel),
 	attackValue(attackValue),

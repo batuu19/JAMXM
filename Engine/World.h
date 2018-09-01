@@ -12,6 +12,8 @@ class World
 public:
 	World(const RectI& screenRect);
 	World(const World&) = delete;
+	World& operator=(const World&) = delete;
+	~World();
 	void handleInput(Keyboard&, Mouse&);
 	void update(float dt);
 	void draw(Graphics&) const;
@@ -20,7 +22,7 @@ public:
 private:
 	Camera camera;
 	Map map;
-	std::vector<Rocket> rockets;
+	std::vector<Rocket*> rockets;
 	Car car;
 	Player player;
 	std::vector<Animation> animations;

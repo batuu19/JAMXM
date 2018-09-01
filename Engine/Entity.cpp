@@ -36,7 +36,7 @@ const VecF2 & Entity::getPosConst() const
 	return pos;
 }
 
-Entity::Entity(VecF2 pos, int spriteState, SpriteContainer sprites, VecF2 vel, float HP, float speed, float maxVel)
+Entity::Entity(const VecF2 & pos, int spriteState, const SpriteContainer & sprites, const VecF2 & vel, float HP, float speed, float maxVel)
 	:
 	pos(pos),
 	vel(vel),

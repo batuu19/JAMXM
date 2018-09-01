@@ -13,10 +13,9 @@
 class Entity
 {
 public:
-	//Entity(const Entity&) = delete;
 
 	virtual void update(float dt);
-	void draw(Graphics&, VecF2 cameraPos) const;
+	virtual void draw(Graphics&, VecF2 cameraPos) const;
 	void reset();
 
 	void damage(float amount);
@@ -25,11 +24,13 @@ public:
 	RectF getHitbox() const;
 	const VecF2& getPosConst() const;
 protected:
-	Entity(VecF2 pos, int spriteState, SpriteContainer, VecF2 vel = { 0.f,0.f }, float HP = 300.f,float speed = 0.f, float maxVel = 0.f);
+	Entity(const VecF2& pos, int spriteState, const SpriteContainer&,const VecF2& vel = { 0.f,0.f }, float HP = 300.f,float speed = 0.f, float maxVel = 0.f);
+	Entity(const Entity&) = default;
+	Entity& operator=(const Entity&) = default;
 
 	VecF2 pos;
 	VecF2 vel;
-	const SpriteContainer sprites;
+	SpriteContainer sprites;
 	float speed;
 	float maxVel;
 	int spriteState;

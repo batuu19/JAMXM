@@ -11,8 +11,8 @@ class Rocket : public Entity
 public:
 	float getAttack() const;
 	float getShootRate() const;
-	Rocket(VecF2 pos, int spriteState, VecF2 vel, SpriteContainer sprites, float attackValue, float shootRate);
-protected: 
+protected:
+	Rocket(const VecF2& pos, int spriteState, const VecF2& vel,const SpriteContainer&, float attackValue, float shootRate);
 	float attackValue;
 	float shootRate;
 };

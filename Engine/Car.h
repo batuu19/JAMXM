@@ -13,7 +13,7 @@ class Car : public Entity
 {
 
 public:
-	Car(VecF2 pos, int startDirection, std::vector<Rocket>& rockets);
+	Car(VecF2 pos, int startDirection, std::vector<Rocket*>& rockets);
 
 	//make functors?
 	enum class Speedup {
@@ -36,7 +36,6 @@ public:
 	std::string getDebugInfo() const;
 
 	void changeWeapon();
-	Sound sndWeaponChange = Sound(L"sound//game//reload.wav");
 	void shoot(float dt);
 
 	int getDir() const;
@@ -51,6 +50,8 @@ private:
 	float turnSoundRate = turnRate * 3.1f;
 	float turnSoundTime = 0.f;
 
+
+	Sound sndWeaponChange = Sound(L"sound//game//reload.wav");
 
 	enum class TurnDirection {
 		Right,
@@ -67,7 +68,8 @@ private:
 		BigRocket
 	};
 	RocketType rocketType = RocketType::SmallRocket;
-	std::vector<Rocket>& rocketsFired;
+	std::vector<Rocket*>& rocketsFired;
 	float lastShot = 0.f;
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );
+	bool shooting = false;
 };

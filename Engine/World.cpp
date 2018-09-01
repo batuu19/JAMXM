@@ -10,6 +10,12 @@ World::World(const RectI & screenRect)
 	bgm.Play(1.f, 0.35f);
 }
 
+World::~World()
+{
+	for (auto r : rockets)delete r;
+	rockets.clear();
+}
+
 void World::handleInput(Keyboard & kbd, Mouse & mouse)
 {
 	camera.handleInput(kbd);
@@ -35,19 +41,19 @@ void World::update(float dt)
 	for (int i = 0; i < rockets.size(); i++)
 	{
 		int object = 0;
-		if (!ufo.isDead() && colliding(rockets[i], ufo))object = 2;
+		if (!ufo.isDead() && rockets[i] != nullptr && colliding(*rockets[i], ufo))object = 2;
 		if (object > 0)
 		{
 			indices.push_back(i);
 			sndBoom.Play();
-			const VecI2& rocketPos = rockets[i].getPosConst();
+			const VecI2& rocketPos = rockets[i]->getPosConst();
 			/*
 			const int rocketType = rockets[i].getType(); 
 			if (rocketType == 0)animations.emplace_back(rocketPos, "sprites\\small_explosion_240x40.bmp", 6, 240 / 6, 40);
 			else if (rocketType == 1)animations.emplace_back(rocketPos, "sprites\\big_explosion_336x55.bmp", 6, 336 / 6, 55);
 			if (object == 1)animations.emplace_back(rocketPos, "sprites\\small_fire_80x24.bmp", 4, 20, 24, true);*/
 
-			const float attack = rockets[i].getAttack();
+			const float attack = rockets[i]->getAttack();
 			switch (object)
 			{
 			case 2:
@@ -71,12 +77,12 @@ void World::update(float dt)
 			}
 		}
 
-		else if (!rockets[i].getHitbox().isOverlappingWith(mapRect))
+		else if (!rockets[i]->getHitbox().isOverlappingWith(mapRect))
 			indices.push_back(i);
 
 	}
 
-	//for (int i : indices)rockets.erase(rockets.begin() + i);
+	for (int i : indices)remove_element(rockets, i);
 
 	remove_erase_if(animations, [](Animation& a) {return a.isEnded(); });
 
@@ -88,9 +94,9 @@ void World::update(float dt)
 	if (!ufo.isDead() && colliding(car, ufo))
 		car.bounceBack(true);
 	//camera following car
-	const VecF2 center = VecF2( 400.f,300.f )  camera.pos;
+	const VecF2 center = VecF2( 400.f,300.f ) + camera.pos;
 
-	//FIXME: too fast car, error here
+	////FIXME: too fast car, error here
 	if (getDistanceSq(car, center) * car.getVelConst().getLengthSq() > 800000000.f )
 		camera.move((car.getPosConst() - center).getNormalized());
 	//don't let camera off map

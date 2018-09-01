@@ -9,21 +9,21 @@ Player::Player(Car& car)
 void Player::update(float dt)
 {
 	car.update(dt);
-	//if (shooting)
-	//{
-	//	car.shoot(dt);
-	//	shooting = false;
-	//}
-	/*if (speedup < Car::Speedup::None)
+	if (shooting)
+	{
+		car.shoot(dt);
+		shooting = false;
+	}
+	if (speedup < Car::Speedup::None)
 	{
 		car.speedup(dt, speedup);
 		speedup = Car::Speedup::None;
-	}*/
+	}
 }
 
 void Player::draw(Graphics & gfx, VecF2 cameraPos) const
 {
-	car.draw(gfx,-cameraPos);
+	car.draw(gfx,cameraPos);
 }
 
 
