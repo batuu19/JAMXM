@@ -5,8 +5,11 @@
 #include "Map.h"
 #include "Animation.h"
 #include "BUtils.h"
+#include "ContainerUtils.h"
+#include "PhysicsUtils.h"
 #include "Camera.h"
 #include "UFO.h"
+#include <exception>
 class World
 {
 public:
@@ -30,10 +33,12 @@ private:
 	Car* car = nullptr;
 	Player player;
 	std::vector<Animation> animations;
-	UFO* ufo = nullptr;
+	std::vector<UFO*> ufos;
 
 	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
 	bool musicPlaying = true;
 	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 
+	bool newUfoNeeded = false;
+	bool carDead = false;
 };

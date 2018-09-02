@@ -20,6 +20,7 @@ public:
 	void reset();
 
 	bool damage(float amount);//return true if destroyed
+	void kill();
 	bool isDead() const;
 	//TODO: fix - more accurate hitbox
 	RectF getHitbox() const;

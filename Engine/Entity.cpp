@@ -22,6 +22,11 @@ bool Entity::damage(float amount)
 	return HP <= 0;
 }
 
+void Entity::kill()
+{
+	HP = 0;
+}
+
 bool Entity::isDead() const
 {
 	return HP <= 0;

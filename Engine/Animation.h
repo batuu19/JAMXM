@@ -11,7 +11,6 @@ public:
 	Animation& operator=(const Animation&) = default;
 
 	void update(float dt);
-	void draw(Graphics&) const;
 	void draw(Graphics&, VecF2 cameraPos) const;
 	void stop();
 

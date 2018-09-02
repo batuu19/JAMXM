@@ -9,7 +9,6 @@ TO FIX
 -not needed things in code
 -camera
 TO DO
--ufo does damage to car
 -sprite effect
 -hitbox class
 -UI
@@ -31,4 +30,6 @@ MAYBE TO DO(LATER)
 -level editor
 -multiple levels(maps)
 -sprites on car showing damage
+-fullscreen
+-user can choose controls
 

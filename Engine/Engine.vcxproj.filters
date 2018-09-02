@@ -123,6 +123,12 @@
     <ClInclude Include="UFO.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="ContainerUtils.h">
+      <Filter>Header Files\GameUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsUtils.h">
+      <Filter>Header Files\GameUtils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

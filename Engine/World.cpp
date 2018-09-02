@@ -7,17 +7,16 @@ World::World(const RectI & screenRect)
 	mapRect(map.getRect()),
 	xDist(mapRect.left + 200, mapRect.right - 200),
 	yDist(mapRect.top + 200, mapRect.bottom - 200),
-	car(new Car(VecF2(400.f, 300.f), RIGHT, rockets)),
-	ufo(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng))
+	car(new Car(VecF2(400.f, 300.f), RIGHT, rockets))
 {
 	bgm.Play(1.f, 0.35f);
+	ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
 }
 
 World::~World()
 {
-	for (auto r : rockets)delete r;
-	rockets.clear();
-	delete ufo;
+	cleanAndClear(rockets);
+	cleanAndClear(ufos);
 }
 
 void World::handleInput(Keyboard & kbd, Mouse & mouse)
@@ -38,64 +37,71 @@ void World::update(float dt)
 	camera.update(dt);
 	player.update(dt);
 	for (auto& a : animations)a.update(dt);
-	ufo->update(dt);
+	for (auto u : ufos)u->update(dt);
 
-	//rockets exploding on wreck
+	//rockets physics
 	std::vector<int> indices;
 	for (int i = 0; i < rockets.size(); i++)
 	{
-		if (!ufo->isDead() && rockets[i] != nullptr && colliding(*rockets[i], *ufo))
+		for (auto ufo : ufos)
 		{
-			indices.push_back(i);
-			sndBoom.Play();
-			const VecI2 rocketPos = rockets[i]->getPosConst();
-
-			animations.push_back(rockets[i]->getBoomAnim());
-
-			const float attack = rockets[i]->getAttack();
-			if (ufo->damage(attack))
-				//ufo killed
+			if (colliding(rockets[i], ufo))
 			{
-				makeBigBoom(10, rocketPos, 70, rng, animations);
-				animations.emplace_back(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35, true);
-				//spawning new ufo
-				delete ufo;
-				ufo = new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng);
+				rockets[i]->kill();
+				sndBoom.Play();
+				animations.push_back(rockets[i]->getBoomAnim());
+
+				const VecI2 rocketPos = rockets[i]->getPosConst();
+				if (attack(rockets[i], ufo))
+					//ufo killed
+				{
+					makeBigBoom(10, rocketPos, 70, rng, animations);
+					animations.emplace_back(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35, true);
+					//spawning new ufo
+					ufo->kill();
+					newUfoNeeded = true;
+				}
 			}
 		}
-
-		else if (!rockets[i]->getHitbox().isOverlappingWith(mapRect))
-			indices.push_back(i);
+		if (collidingWithBoundsFixed(rockets[i], mapRect))
+			rockets[i]->kill();
 
 	}
 
-	for (int i : indices)
+	if (newUfoNeeded)
 	{
-		delete rockets[i];
-		remove_element(rockets, i);
+		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
+		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
+		newUfoNeeded = false;
 	}
+	cleanDead(rockets);
+	cleanDead(ufos);
 
 	remove_erase_if(animations, [](Animation& a) {return a.isEnded(); });
 
 	//ufo damages car
-	if (colliding(*car, *ufo) && attack(*ufo, *car))
-	{
-		delete car;
-		car = new Car({ 300.f,300.f }, 0, rockets);
-		camera.centerOn(*car,screenRect);
-	}
-		
+	for (auto ufo : ufos)
+		if (colliding(car, ufo) && attack(ufo, car))
+		{
+			carDead = true;
+			delete car;
+			car = new Car({ 300.f,300.f }, 0, rockets);
+			camera.centerOn(*car, screenRect);
+			carDead = false;
+		}
+
 	//car bouncing of map bounds
-	if (!collidingWithBounds(*car,mapRect))
+	if (!collidingWithBounds(car, mapRect))
 		car->bounceBack();
 
 	//car bouncing of ufo
-	if (!ufo->isDead() && colliding(*car, *ufo))
-		car->bounceBack(true);
+	for (auto ufo : ufos)
+		if (!ufo->isDead() && colliding(car, ufo))
+			car->bounceBack(true);
 	//camera following car
-	const VecF2 center = VecF2( 400.f,300.f ) + camera.pos;
+	const VecF2 center = VecF2(400.f, 300.f) + camera.pos;
 
-	if (getDistanceSq(*car, center) * car->getVelConst().getLengthSq() > 800000000.f )
+	if (getDistanceSq(*car, center) * car->getVelConst().getLengthSq() > 800000000.f)
 		camera.move((car->getPosConst() - center).getNormalized());
 	//don't let camera off map
 	if (camera.pos.x < mapRect.left)camera.pos.x = (float)mapRect.left;
@@ -104,16 +110,27 @@ void World::update(float dt)
 	if (camera.pos.y + screenRect.bottom > mapRect.bottom)camera.pos.y = (float)(mapRect.bottom - screenRect.bottom);
 
 	//ufo physics
-	if (!collidingWithBounds(*ufo, mapRect))
-		ufo->bounceBack();
+	for (auto ufo : ufos)
+		if (!collidingWithBounds(ufo, mapRect))
+			ufo->bounceBack();
 }
 
 void World::draw(Graphics & gfx) const
 {
 	map.draw(gfx, camera.pos);
-	player.draw(gfx, camera.pos);
-	for (auto& a : animations)a.draw(gfx, camera.pos);
-	ufo->draw(gfx,camera.pos);
+	if(!carDead)player.draw(gfx, camera.pos);
+	for (auto& a : animations)
+	{
+		try
+		{
+			a.draw(gfx, camera.pos);
+		}
+		catch (std::exception e)
+		{
+			throw e;
+		}
+	}
+	for(auto u : ufos)if(!u->isDead())u->draw(gfx,camera.pos);
 
 	//gfx.drawRect(RectI::fromCenter({ 400,300 }, 10, 10),Colors::Red);
 }
