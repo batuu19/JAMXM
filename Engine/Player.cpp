@@ -100,6 +100,6 @@ void UI::update(float dt)
 
 void UI::draw(Graphics & gfx, VecF2 cameraPos) const
 {
-	//gfx.drawRect(HPRect.getDisplacedBy(-cameraPos).getExpanded(0, HPRect.right*HPPercentage, 0, 0),Colors::Red);
+	gfx.drawSprite(pos, background);
 	gfx.drawRect(HPRect.getExpanded(0, (int)(HPRect.right*HPPercentage), 0, 0), HPcolor);
 }

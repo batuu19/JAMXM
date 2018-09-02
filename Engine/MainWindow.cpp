@@ -41,13 +41,13 @@ MainWindow::MainWindow( HINSTANCE hInst,wchar_t * pArgs )
 
 	// create window & get hWnd
 	RECT wr;
-	wr.left = 350;
+	wr.left = 0;
 	wr.right = Graphics::ScreenWidth + wr.left;
-	wr.top = 100;
+	wr.top = 40;
 	wr.bottom = Graphics::ScreenHeight + wr.top;
 	AdjustWindowRect( &wr,WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,FALSE );
 	hWnd = CreateWindow( wndClassName,L"Chili DirectX Framework",
-		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
+		WS_POPUP,
 		wr.left,wr.top,wr.right - wr.left,wr.bottom - wr.top,
 		nullptr,nullptr,hInst,this );
 
@@ -59,7 +59,7 @@ MainWindow::MainWindow( HINSTANCE hInst,wchar_t * pArgs )
 	}
 
 	// show and update
-	ShowWindow( hWnd,SW_SHOWDEFAULT );
+	ShowWindow( hWnd,SW_SHOWMAXIMIZED );
 	UpdateWindow( hWnd );
 }
 

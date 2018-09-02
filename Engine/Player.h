@@ -30,9 +30,10 @@ public:
 	void update(float dt);
 	void draw(Graphics&,VecF2 cameraPos) const;
 private:
+	Surface background = "Sprites\\interface\\interface_background.bmp";
 	Player& player;
 	const VecI2 pos = { 0.f,0.f };
 	float HPPercentage = 1.f;
-	RectI HPRect = RectI({ 0,0 },200,30);
+	RectI HPRect = RectI({ 18,14 },80,10);
 	Color HPcolor = Colors::Red;
 };
