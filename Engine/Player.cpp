@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Car& car)
+Player::Player(Car* car)
 	:
 	car(car)
 {
@@ -8,22 +8,25 @@ Player::Player(Car& car)
 
 void Player::update(float dt)
 {
-	car.update(dt);
-	if (shooting)
+	if (car != NULL)
 	{
-		car.shoot(dt);
-		shooting = false;
-	}
-	if (speedup < Car::Speedup::None)
-	{
-		car.speedup(dt, speedup);
-		speedup = Car::Speedup::None;
+		car->update(dt);
+		if (shooting)
+		{
+			car->shoot(dt);
+			shooting = false;
+		}
+		if (speedup < Car::Speedup::None)
+		{
+			car->speedup(dt, speedup);
+			speedup = Car::Speedup::None;
+		}
 	}
 }
 
 void Player::draw(Graphics & gfx, VecF2 cameraPos) const
 {
-	car.draw(gfx,cameraPos);
+	car->draw(gfx,cameraPos);
 }
 
 
@@ -38,7 +41,7 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 		if (e.IsPress())
 		{
 			if (e.GetCode() == 'Q')
-				car.changeWeapon();
+				car->changeWeapon();
 		}
 	}
 	if (kbd.KeyIsPressed(VK_UP))
@@ -51,11 +54,11 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 	}
 	if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		car.turnLeft();
+		car->turnLeft();
 	}
 	else if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		car.turnRight();
+		car->turnRight();
 	}
 
 	if (kbd.KeyIsPressed(VK_RETURN))
@@ -65,7 +68,7 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 
 	if (kbd.KeyIsPressed('R'))
 	{
-		car.reset();
+		car->reset();
 	}
 	if (kbd.KeyIsPressed(VK_CONTROL))
 	{
@@ -73,8 +76,9 @@ void Player::handleInput(Keyboard & kbd, Mouse & mouse)
 	}
 }
 
+//TODO: check if good
 const Car & Player::getCarConst() const
 {
-	return car;
+	return *car;
 }
 

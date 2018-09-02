@@ -5,7 +5,7 @@
 class Player
 {
 public:
-	Player(Car&);
+	Player(Car*);
 	Player(const Player&) = delete;
 	void update(float dt);
 	void draw(Graphics&, VecF2 cameraPos) const;
@@ -13,7 +13,7 @@ public:
 	const Car& getCarConst() const;
 
 private:
-	Car& car;
+	Car* car;
 	bool shooting = false;
 	Car::Speedup speedup = Car::Speedup::None;
 };

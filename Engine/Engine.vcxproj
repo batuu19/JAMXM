@@ -272,6 +272,7 @@
   <ItemGroup>
     <Text Include="config.txt" />
     <Text Include="debug.txt" />
+    <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

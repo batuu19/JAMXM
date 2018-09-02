@@ -20,19 +20,20 @@ public:
 	const Map& getMapConst() const;
 	const Player& getPlayerConst() const;
 private:
-	mutable std::mt19937 rng = std::mt19937(std::random_device{}());
-	Camera camera;
 	Map map;
+	RectI screenRect;
+	RectI mapRect;
+	mutable std::mt19937 rng = std::mt19937(std::random_device{}());
+	mutable std::uniform_int_distribution<int> xDist, yDist;
+	Camera camera;
 	std::vector<Rocket*> rockets;
-	Car car;
+	Car* car = nullptr;
 	Player player;
 	std::vector<Animation> animations;
-	UFO ufo;
+	UFO* ufo = nullptr;
 
 	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
 	bool musicPlaying = true;
 	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 
-	RectI screenRect;
-	RectI mapRect;
 };

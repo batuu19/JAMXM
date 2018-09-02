@@ -25,6 +25,9 @@
     <Filter Include="Header Files\GameUtils">
       <UniqueIdentifier>{a78a5c41-ac15-4e83-8a0b-21766f908c84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper Files">
+      <UniqueIdentifier>{d183e1a9-50c2-40d8-98f1-ae8f0d64545e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BMath.h">
@@ -118,7 +121,7 @@
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
     <ClInclude Include="UFO.h">
-      <Filter>Header Files\Framework</Filter>
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +243,9 @@
     </Text>
     <Text Include="debug.txt">
       <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TODO.txt">
+      <Filter>Helper Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

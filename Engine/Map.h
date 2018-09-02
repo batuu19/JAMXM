@@ -19,5 +19,6 @@ public:
 	const RectI& getRect() const;
 private:
 	Surface mapSprite = "sprites\\road_big_1500x1500.bmp";
+	//Surface mapSprite = "sprites\\road_800x600.bmp";
 	VecF2 pos = getZeroVec<float>();
 };

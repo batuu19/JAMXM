@@ -27,6 +27,12 @@ bool colliding(const T& first, const S& second)
 }
 
 template<typename T,typename S>
+bool attack(const T& attacker, S& defender)//return true if second is destroyed
+{
+	return defender.damage(attacker.getAttack());
+}
+
+template<typename T,typename S>
 bool collidingWithBounds(const T& object, Rect<S> rect)
 {
 	return object.getHitbox().isContainedBy(rect);

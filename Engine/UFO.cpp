@@ -33,3 +33,8 @@ void UFO::bounceBack()
 	dir = getOpposite(dir);
 	vel = vectorsNormalized[dir] * speed;
 }
+
+float UFO::getAttack() const
+{
+	return attackValue;
+}

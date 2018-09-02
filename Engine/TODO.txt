@@ -1,0 +1,34 @@
+TO LEARN
+-more about pointers
+-virtual
+-unique_ptr
+-method addresing
+TO FIX
+-bad bouncing
+-memory problems
+-not needed things in code
+-camera
+TO DO
+-ufo does damage to car
+-sprite effect
+-hitbox class
+-UI
+	-health bar
+	-show active weapon
+	-show ammo
+	-killed ufo's count
+-menu(with nice buttons)
+	-play game
+	-level editor(wip)
+	-leaderboards
+-bigger smoke
+-collectable ammo
+-more weapon unlocked with more points
+MAYBE TO DO(LATER)
+-ufo health bar
+-ufo attacking with homing rockets that targets player's car
+-ufo's "AI"
+-level editor
+-multiple levels(maps)
+-sprites on car showing damage
+

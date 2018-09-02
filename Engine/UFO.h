@@ -14,7 +14,7 @@ public:
 	void update(float dt) override;
 
 	void bounceBack();
-
+	float getAttack() const;
 private:
 	mutable std::mt19937 rng;
 	mutable std::uniform_int_distribution<int> dirD;
@@ -27,4 +27,6 @@ private:
 	int activeFrame = 0;
 
 	int dir;
+
+	float attackValue = 50.f;
 };
