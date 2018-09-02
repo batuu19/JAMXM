@@ -7,10 +7,13 @@ World::World(const RectI & screenRect)
 	mapRect(map.getRect()),
 	xDist(mapRect.left + 200, mapRect.right - 200),
 	yDist(mapRect.top + 200, mapRect.bottom - 200),
-	car(new Car(VecF2(400.f, 300.f), RIGHT, rockets))
+	car(new Car(VecF2(400.f, 300.f), RIGHT, rockets)),
+	ui(player)
 {
 	bgm.Play(1.f, 0.35f);
-	ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
+	const int count = 10;//for debuging
+	for (int i = 0; i < count; i++)
+		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
 }
 
 World::~World()
@@ -38,6 +41,7 @@ void World::update(float dt)
 	player.update(dt);
 	for (auto& a : animations)a.update(dt);
 	for (auto u : ufos)u->update(dt);
+	ui.update(dt);
 
 	//rockets physics
 	std::vector<int> indices;
@@ -71,24 +75,23 @@ void World::update(float dt)
 	if (newUfoNeeded)
 	{
 		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
-		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
 		newUfoNeeded = false;
 	}
 	cleanDead(rockets);
-	cleanDead(ufos);
+	//cleanDead(ufos);
 
 	remove_erase_if(animations, [](Animation& a) {return a.isEnded(); });
 
 	//ufo damages car
-	for (auto ufo : ufos)
-		if (colliding(car, ufo) && attack(ufo, car))
-		{
-			carDead = true;
-			delete car;
-			car = new Car({ 300.f,300.f }, 0, rockets);
-			camera.centerOn(*car, screenRect);
-			carDead = false;
-		}
+	//for (auto ufo : ufos)
+	//	if (colliding(car, ufo) && attack(ufo, car))
+	//	{
+	//		carDead = true;
+	//		delete car;
+	//		car = new Car({ 300.f,300.f }, 0, rockets);
+	//		camera.centerOn(*car, screenRect);
+	//		carDead = false;
+	//	}
 
 	//car bouncing of map bounds
 	if (!collidingWithBounds(car, mapRect))
@@ -118,18 +121,9 @@ void World::update(float dt)
 void World::draw(Graphics & gfx) const
 {
 	map.draw(gfx, camera.pos);
-	if(!carDead)player.draw(gfx, camera.pos);
-	for (auto& a : animations)
-	{
-		try
-		{
-			a.draw(gfx, camera.pos);
-		}
-		catch (std::exception e)
-		{
-			throw e;
-		}
-	}
+	ui.draw(gfx, camera.pos);
+	if(car != NULL)player.draw(gfx, camera.pos);
+	for (auto& a : animations)a.draw(gfx, camera.pos);
 	for(auto u : ufos)if(!u->isDead())u->draw(gfx,camera.pos);
 
 	//gfx.drawRect(RectI::fromCenter({ 400,300 }, 10, 10),Colors::Red);

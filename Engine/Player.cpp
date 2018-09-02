@@ -6,6 +6,10 @@ Player::Player(Car* car)
 {
 }
 
+Player::~Player()
+{
+}
+
 void Player::update(float dt)
 {
 	if (car != NULL)
@@ -24,8 +28,9 @@ void Player::update(float dt)
 	}
 }
 
-void Player::draw(Graphics & gfx, VecF2 cameraPos) const
+void Player::draw(Graphics & gfx, const VecF2&  cameraPos) const
 {
+	assert(car != NULL);
 	car->draw(gfx,cameraPos);
 }
 
@@ -82,3 +87,19 @@ const Car & Player::getCarConst() const
 	return *car;
 }
 
+UI::UI(Player & player)
+	:
+	player(player)
+{
+}
+
+void UI::update(float dt)
+{
+	HPPercentage = player.car->HP / player.car->maxHP;
+}
+
+void UI::draw(Graphics & gfx, VecF2 cameraPos) const
+{
+	//gfx.drawRect(HPRect.getDisplacedBy(-cameraPos).getExpanded(0, HPRect.right*HPPercentage, 0, 0),Colors::Red);
+	gfx.drawRect(HPRect.getExpanded(0, (int)(HPRect.right*HPPercentage), 0, 0), HPcolor);
+}

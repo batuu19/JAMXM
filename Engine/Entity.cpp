@@ -50,7 +50,8 @@ Entity::Entity(const VecF2 & pos, int spriteState, const SpriteContainer & sprit
 	sprites(sprites),
 	speed(speed),
 	maxVel(maxVel),
-	HP(HP)
+	HP(HP),
+	maxHP(HP)
 {
 }
 

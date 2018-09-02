@@ -30,11 +30,11 @@ private:
 	mutable std::uniform_int_distribution<int> xDist, yDist;
 	Camera camera;
 	std::vector<Rocket*> rockets;
-	Car* car = nullptr;
+	Car* car;
 	Player player;
 	std::vector<Animation> animations;
 	std::vector<UFO*> ufos;
-
+	UI ui;
 	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
 	bool musicPlaying = true;
 	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");

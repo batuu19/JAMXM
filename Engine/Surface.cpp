@@ -88,26 +88,26 @@ Surface & Surface::operator=(const Surface & rhs)
 }
 
 void Surface::putPixel(int x, int y, Color c)
-{
+{/*
 	assert(x >= 0);
 	assert(x < width);
 	assert(y >= 0);
-	assert(y < height);
+	assert(y < height);*/
 	pPixels[y * width + x] = c;
 }
 
 void Surface::putPixel(int i, Color c)
-{
-	assert(i < width * height);
+{/*
+	assert(i < width * height);*/
 	pPixels[i] = c;
 }
 
 Color Surface::getPixel(int x, int y) const
 {
-	assert(x >= 0);
-	assert(x < width);
-	assert(y >= 0);
-	assert(y < height);
+	//assert(x >= 0);
+	//assert(x < width);
+	//assert(y >= 0);
+	//assert(y < height);
 	return pPixels[y * width + x];
 }
 

@@ -18,7 +18,7 @@ public:
 	void draw(Graphics&, VecF2 cameraPos) const;
 	const RectI& getRect() const;
 private:
-	Surface mapSprite = "sprites\\road_big_1500x1500.bmp";
-	//Surface mapSprite = "sprites\\road_800x600.bmp";
+	//Surface mapSprite = "sprites\\road_big_1500x1500.bmp";
+	Surface mapSprite = "sprites\\road_800x600.bmp";
 	VecF2 pos = getZeroVec<float>();
 };

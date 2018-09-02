@@ -16,7 +16,7 @@ public:
 	void bounceBack();
 	float getAttack() const;
 private:
-	mutable std::mt19937 rng;
+	std::mt19937& rng;
 	mutable std::uniform_int_distribution<int> dirD;
 
 	float changeDirectionTimer = 4.f;

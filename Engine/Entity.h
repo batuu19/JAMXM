@@ -13,6 +13,8 @@
 class Entity
 {
 public:
+	friend class UI;
+public:
 	virtual ~Entity() = default;
 
 	virtual void update(float dt);
@@ -34,4 +36,5 @@ protected:
 	float maxVel;
 	int spriteState;
 	float HP;
+	float maxHP;
 };

@@ -58,6 +58,10 @@ public:
 	{
 		return Rect(left - offset, right + offset, top - offset, bottom + offset);
 	}
+	Rect getExpanded(T leftOffset, T rightOffset, T topOffset, T bottomOffset) const
+	{
+		return Rect(left - leftOffset, right + rightOffset, top - topOffset, bottom + bottomOffset);
+	}
 	Vec2<T> getCenter() const
 	{
 		return Vec2<T>((left + right) / (T)2, (top + bottom) / (T)2);
