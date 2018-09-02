@@ -24,7 +24,7 @@ public:
 	void update(float dt) override;
 	void speedup(float dt, Speedup speedupFlag = Speedup::Faster);
 	void draw(Graphics&, const VecF2& cameraPos) const override;
-	void reset();
+	void reset() override;
 	void stop();
 	void bounceBack(bool forceBounce = false);
 	void turnLeft();

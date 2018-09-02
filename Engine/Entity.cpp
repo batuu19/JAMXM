@@ -13,7 +13,7 @@ void Entity::draw(Graphics & gfx, const VecF2& cameraPos) const
 
 void Entity::reset()
 {
-	HP = 300.f;
+	HP = maxHP;
 }
 
 bool Entity::damage(float amount)

@@ -7,11 +7,10 @@ World::World(const RectI & screenRect)
 	mapRect(map.getRect()),
 	xDist(mapRect.left + 200, mapRect.right - 200),
 	yDist(mapRect.top + 200, mapRect.bottom - 200),
-	car(new Car(VecF2(400.f, 300.f), RIGHT, rockets)),
 	ui(player)
 {
 	bgm.Play(1.f, 0.35f);
-	const int count = 10;//for debuging
+	const int count = 2;//for debuging
 	for (int i = 0; i < count; i++)
 		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
 }
@@ -78,20 +77,21 @@ void World::update(float dt)
 		newUfoNeeded = false;
 	}
 	cleanDead(rockets);
-	//cleanDead(ufos);
+	cleanDead(ufos);
 
 	remove_erase_if(animations, [](Animation& a) {return a.isEnded(); });
 
 	//ufo damages car
-	//for (auto ufo : ufos)
-	//	if (colliding(car, ufo) && attack(ufo, car))
-	//	{
-	//		carDead = true;
-	//		delete car;
-	//		car = new Car({ 300.f,300.f }, 0, rockets);
-	//		camera.centerOn(*car, screenRect);
-	//		carDead = false;
-	//	}
+	for (auto ufo : ufos)
+		if (colliding(car, ufo) && attack(ufo, car))
+		{
+			//nie dzia³aaaaaaa
+			//delete car;
+			//car = new Car({ 300.f,300.f }, 0, rockets);
+			car->reset();
+			camera.centerOn(*car, screenRect);
+			carDead = false;
+		}
 
 	//car bouncing of map bounds
 	if (!collidingWithBounds(car, mapRect))
@@ -122,7 +122,7 @@ void World::draw(Graphics & gfx) const
 {
 	map.draw(gfx, camera.pos);
 	ui.draw(gfx, camera.pos);
-	if(car != NULL)player.draw(gfx, camera.pos);
+	player.draw(gfx, camera.pos);
 	for (auto& a : animations)a.draw(gfx, camera.pos);
 	for(auto u : ufos)if(!u->isDead())u->draw(gfx,camera.pos);
 

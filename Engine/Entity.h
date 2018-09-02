@@ -19,7 +19,7 @@ public:
 
 	virtual void update(float dt);
 	virtual void draw(Graphics&, const VecF2& cameraPos) const;
-	void reset();
+	virtual void reset();
 
 	bool damage(float amount);//return true if destroyed
 	void kill();

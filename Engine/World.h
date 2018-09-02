@@ -30,7 +30,7 @@ private:
 	mutable std::uniform_int_distribution<int> xDist, yDist;
 	Camera camera;
 	std::vector<Rocket*> rockets;
-	Car* car;
+	Car* car = new Car(VecF2(400.f, 300.f), RIGHT, rockets);
 	Player player;
 	std::vector<Animation> animations;
 	std::vector<UFO*> ufos;

@@ -2,7 +2,7 @@
 
 Car::Car(VecF2 pos, int startDirection, std::vector<Rocket*>& rockets)
 	:
-	Entity(pos, startDirection, SpriteContainer({ "Sprites\\cars\\car_black_350x70.bmp" }, 5, 1, 70, 70), { 0.f,0.f }, 100.f, 600.f, 300.f),
+	Entity(pos, startDirection, SpriteContainer({ "Sprites\\cars\\car_black_350x70.bmp" }, 5, 1, 70, 70), { 0.f,0.f }, 300.f, 600.f, 300.f),
 	rocketsFired(rockets)
 {
 }
@@ -89,6 +89,7 @@ void Car::reset()
 	vel = { 0.f,0.f };
 
 	rocketsFired.clear();
+	Entity::reset();
 }
 
 void Car::stop()
