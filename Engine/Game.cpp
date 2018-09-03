@@ -39,8 +39,6 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	const float dt = ft.mark();
-	//TODO
 	while (!wnd.kbd.KeyIsEmpty())
 	{
 		const Keyboard::Event e = wnd.kbd.ReadKey();
@@ -53,6 +51,7 @@ void Game::UpdateModel()
 
 		world.handleInput(e);
 	}
+	const float dt = ft.mark();
 	world.update(dt);
 }
 

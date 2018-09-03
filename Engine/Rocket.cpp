@@ -12,9 +12,10 @@ Rocket::Rocket(const VecF2& pos,int spriteState, const VecF2& vel, const SpriteC
 {
 }
 
-BigRocket::BigRocket(VecF2 pos, int dir)
+BigRocket::BigRocket(VecF2 pos, int dir,std::vector<Animation>& animations)
 	:
-	Rocket(pos, dir, (vectorsNormalized[dir] * 400.f), SpriteContainer({ "sprites//big_rocket_125x20.bmp" }, 5, 1, 25, 20), 100.f)
+	Rocket(pos, dir, (vectorsNormalized[dir] * 400.f), SpriteContainer({ "sprites//big_rocket_125x20.bmp" }, 5, 1, 25, 20), 100.f),
+	animations(animations)
 {
 }
 
@@ -26,32 +27,13 @@ Animation BigRocket::getBoomAnim() const
 void BigRocket::update(float dt)
 {
 	Rocket::update(dt);
-	if (smokeOn)
-	{
-		smokeShowTime += dt;
-		if (smokeShowTime > smokeShowTimer)
-		{
-			smokeOn = false;
-			smokeShowTime = 0.f;
-		}
-			
-		
-	}
 	smokeLastTime += dt;
 	if (smokeLastTime > smokeTimer)
 	{
-		smokePos = pos;
-		smokeOn = true;
+		animations.emplace_back(pos, "sprites\\smoke_anim.bmp", 4, 27, 23);
 		smokeLastTime = 0.f;
 	}
 
-}
-
-void BigRocket::draw(Graphics & gfx, const VecF2 & cameraPos) const
-{
-	Rocket::draw(gfx, cameraPos);
-	if (smokeOn)
-		gfx.drawSprite(smokePos - cameraPos, smoke);
 }
 
 SmallRocket::SmallRocket(VecF2 pos, int dir)

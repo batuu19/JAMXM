@@ -5,7 +5,6 @@ TO LEARN
 -method addresing
 TO FIX
 -bad bouncing
--memory problems
 -not needed things in code
 -camera
 TO DO
@@ -16,6 +15,10 @@ TO DO
 	-show active weapon
 	-show ammo
 	-killed ufo's count
+-pause menu
+	-resume
+	-back to main menu
+	-exit to windows
 -menu(with nice buttons)
 	-play game
 	-level editor(wip)

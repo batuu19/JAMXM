@@ -1,9 +1,10 @@
 #include "Car.h"
 
-Car::Car(VecF2 pos, int startDirection, std::vector<Rocket*>& rockets)
+Car::Car(VecF2 pos, int startDirection, std::vector<Rocket*>& rockets, std::vector<Animation>& animations)
 	:
 	Entity(pos, startDirection, SpriteContainer({ "Sprites\\cars\\car_black_350x70.bmp" }, 5, 1, 70, 70), { 0.f,0.f }, 300.f, 600.f, 300.f),
-	rocketsFired(rockets)
+	rocketsFired(rockets),
+	animations(animations)
 {
 }
 
@@ -137,7 +138,7 @@ void Car::shoot(float dt)
 		if (lastShot > BigRocket::shootRate)
 		{
 			sndRocketShot.Play();
-			nextRocket = new BigRocket(pos, spriteState);
+			nextRocket = new BigRocket(pos, spriteState,animations);
 			lastShot = 0.f;
 		}
 		else return;

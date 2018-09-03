@@ -13,7 +13,7 @@ class Car : public Entity
 {
 
 public:
-	Car(VecF2 pos, int startDirection, std::vector<Rocket*>& rockets);
+	Car(VecF2 pos, int startDirection, std::vector<Rocket*>& rockets,std::vector<Animation>&);
 
 	//make functors?
 	enum class Speedup {
@@ -72,4 +72,6 @@ private:
 	float lastShot = 0.f;
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );
 	bool shooting = false;
+
+	std::vector<Animation>& animations;
 };

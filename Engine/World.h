@@ -31,9 +31,9 @@ private:
 	mutable std::uniform_int_distribution<int> xDist, yDist;
 	Camera camera;
 	std::vector<Rocket*> rockets;
-	Car* car = new Car(VecF2(400.f, 300.f), RIGHT, rockets);
-	Player player;
 	std::vector<Animation> animations;
+	Car* car = new Car(VecF2(400.f, 300.f), RIGHT, rockets,animations);
+	Player player;
 	std::vector<UFO*> ufos;
 	UI ui;
 	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
