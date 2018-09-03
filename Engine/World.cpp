@@ -10,6 +10,7 @@ World::World(const RectI & screenRect)
 	ui(player)
 {
 	bgm.Play(1.f, 0.35f);
+	sndRaceStart.Play(rng);
 	const int count = 2;//for debuging
 	for (int i = 0; i < count; i++)
 		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
@@ -28,18 +29,13 @@ void World::handleInput(Keyboard::Event e)
 
 	if (e.IsPress())
 	{
-		if (e.GetCode() == 'R')
+		switch (e.GetCode())
 		{
+		case 'R':
 			reset();
-		
-			switch (e.GetCode())
-			{
-			case 'R':
-				reset();
-				break;
-			default:
-				break;
-			}
+			break;
+		default:
+			break;
 		}
 
 	}
@@ -69,6 +65,7 @@ void World::update(float dt)
 				if (attack(rockets[i], ufo))
 					//ufo killed
 				{
+					sndAfterBoom.Play(rng);
 					player.scorePoints();
 					makeBigBoom(10, rocketPos, 70, rng, animations);
 					animations.emplace_back(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35, true);
@@ -104,7 +101,6 @@ void World::update(float dt)
 			camera.centerOn(*car, screenRect);
 			carDead = false;
 		}
-
 	//car bouncing of map bounds
 	if (!collidingWithBounds(car, mapRect))
 		car->bounceBack();
@@ -133,10 +129,10 @@ void World::update(float dt)
 void World::draw(Graphics & gfx) const
 {
 	map.draw(gfx, camera.pos);
-	ui.draw(gfx, camera.pos);
 	player.draw(gfx, camera.pos);
 	for (auto& a : animations)a.draw(gfx, camera.pos);
 	for(auto u : ufos)if(!u->isDead())u->draw(gfx,camera.pos);
+	ui.draw(gfx, camera.pos);
 
 }
 
@@ -144,7 +140,8 @@ void World::reset()
 {
 	for (auto& a : animations)a.stop();
 	for (auto u : ufos)u->reset();
-	player.reset();
+	//dont reset player because points
+	car->reset();
 	camera.reset();
 }
 

@@ -26,6 +26,8 @@ private:
 	Car::Speedup speedup = Car::Speedup::None;
 	Car::TurnDirection turning = Car::TurnDirection::None;
 	int score = 0;
+
+
 };
 
 class UI

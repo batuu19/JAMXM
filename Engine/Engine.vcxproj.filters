@@ -117,9 +117,6 @@
     <ClInclude Include="Font.h">
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
-    <ClInclude Include="ChiliWin.h">
-      <Filter>Header Files\Framework\Graphics Things</Filter>
-    </ClInclude>
     <ClInclude Include="BMath.h">
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
@@ -134,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="MainWindow.h">
       <Filter>Header Files\Framework\Graphics Things</Filter>
+    </ClInclude>
+    <ClInclude Include="ChiliWin.h">
+      <Filter>Header Files\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

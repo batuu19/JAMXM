@@ -37,11 +37,29 @@ private:
 	Player player;
 	std::vector<UFO*> ufos;
 	UI ui;
-	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
 	bool musicPlaying = true;
-	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 	Font font;
 
 	bool newUfoNeeded = false;
 	bool carDead = false;
+
+	//sounds
+	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
+	Sound bgm = Sound(L"sound\\music\\music.wav", Sound::LoopType::AutoFullSound);
+	SoundEffect sndRaceStart = SoundEffect({
+		L"sound\\speech\\larry\\go_go_go.wav",
+		L"sound\\speech\\larry\\let_the_carnage_begin.wav",
+		L"sound\\speech\\larry\\lets_ride.wav"
+	});
+	SoundEffect sndAfterBoom = SoundEffect({
+		L"sound\\speech\\larry\\holy_transmission.wav",
+		L"sound\\speech\\larry\\smashed.wav",
+		L"sound\\speech\\larry\\terrific.wav",
+		L"sound\\speech\\larry\\what_a_blow.wav",
+		L"sound\\speech\\larry\\wipeout.wav"
+	});
+
+	Sound sndAboutBlow = Sound(L"sound\\speech\\larry\\p1_is_about_to_blow.wav");
+	bool aboutBlow = false;
+
 };
