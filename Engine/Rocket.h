@@ -27,7 +27,7 @@ public:
 	static constexpr float shootRate = 0.45f;
 private:
 	std::vector<Animation>& animations;
-	float smokeTimer = 0.4f;
+	float smokeTimer = 0.14f;
 	float smokeLastTime = 0.f;
 };
 

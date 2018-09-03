@@ -69,7 +69,7 @@ void World::update(float dt)
 				if (attack(rockets[i], ufo))
 					//ufo killed
 				{
-					player.scorePoint();
+					player.scorePoints();
 					makeBigBoom(10, rocketPos, 70, rng, animations);
 					animations.emplace_back(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35, true);
 					//spawning new ufo
@@ -96,11 +96,11 @@ void World::update(float dt)
 	//ufo damages car
 	for (auto ufo : ufos)
 		if (colliding(car, ufo) && attack(ufo, car))
+			//TODO: make car invincible for few secends
+			//car killed
 		{
-			//nie dzia³aaaaaaa
-			//delete car;
-			//car = new Car({ 300.f,300.f }, 0, rockets);
-			car->reset();
+
+			player.reset();
 			camera.centerOn(*car, screenRect);
 			carDead = false;
 		}
@@ -137,6 +137,7 @@ void World::draw(Graphics & gfx) const
 	player.draw(gfx, camera.pos);
 	for (auto& a : animations)a.draw(gfx, camera.pos);
 	for(auto u : ufos)if(!u->isDead())u->draw(gfx,camera.pos);
+
 }
 
 void World::reset()

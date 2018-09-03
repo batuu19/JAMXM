@@ -2,7 +2,7 @@
 
 UFO::UFO(const VecF2& pos,std::mt19937& rng)
 	:
-	Entity(pos, 0, SpriteContainer({ "sprites\\ufo\\ufo3.bmp" }, 4, 2, 80, 80, false), { 0.f,0.f }, 4.f, 180.f),
+	Entity(pos, 0, SpriteContainer({ "sprites\\ufo\\ufo3.bmp" }, 4, 2, 80, 80, false), { 0.f,0.f }, 400.f, 180.f),
 	rng(rng),
 	dirD(0, DIRECTIONS_COUNT - 1),
 	dir(dirD(rng))

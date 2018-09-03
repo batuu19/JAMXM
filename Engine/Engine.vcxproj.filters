@@ -28,18 +28,15 @@
     <Filter Include="Helper Files">
       <UniqueIdentifier>{d183e1a9-50c2-40d8-98f1-ae8f0d64545e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Framework\Graphics Things">
+      <UniqueIdentifier>{968ec720-b28d-46c9-8188-1c0c12001e12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BMath.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="Car.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="ChiliException.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="ChiliWin.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Colors.h">
@@ -66,13 +63,7 @@
     <ClInclude Include="FrameTimer.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="Keyboard.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="MainWindow.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
@@ -84,9 +75,6 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
@@ -94,9 +82,6 @@
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="SoundEffect.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Surface.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
@@ -131,6 +116,24 @@
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Header Files\GameUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="ChiliWin.h">
+      <Filter>Header Files\Framework\Graphics Things</Filter>
+    </ClInclude>
+    <ClInclude Include="BMath.h">
+      <Filter>Header Files\GameUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Header Files\GameUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Surface.h">
+      <Filter>Header Files\Framework\Graphics Things</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Header Files\Framework\Graphics Things</Filter>
+    </ClInclude>
+    <ClInclude Include="MainWindow.h">
+      <Filter>Header Files\Framework\Graphics Things</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

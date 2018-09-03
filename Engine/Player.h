@@ -16,7 +16,7 @@ public:
 	void update(float dt);
 	void draw(Graphics&, const VecF2& cameraPos) const;
 	void reset();
-	void scorePoint();
+	void scorePoints(int amount = 1);
 	void handleInput(Keyboard::Event);
 	const Car& getCarConst() const;
 
@@ -39,6 +39,7 @@ private:
 	Player& player;
 	const VecI2 pos = { 0.f,0.f };
 	float HPPercentage = 1.f;
-	RectI HPRect = RectI({ 18,14 },80,10);
+	const int HPbarLength = 170;
+	VecI2 HPRectPos = VecI2( 18,14 );
 	Color HPcolor = Colors::Red;
 };

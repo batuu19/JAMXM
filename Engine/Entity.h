@@ -28,7 +28,10 @@ public:
 	RectF getHitbox() const;
 	const VecF2& getPosConst() const;
 protected:
-	Entity(const VecF2& pos, int spriteState, const SpriteContainer&,const VecF2& vel = { 0.f,0.f }, float HP = 300.f,float speed = 0.f, float maxVel = 0.f);
+	Entity(const VecF2& pos, int spriteState, const SpriteContainer&,
+		const VecF2& vel = { 0.f,0.f }, float HP = 300.f, float speed = 0.f, float maxVel = 0.f,
+		float invincibilityTime = 0.f, bool invincibleAtStart = false
+	);
 	VecF2 pos;
 	VecF2 vel;
 	SpriteContainer sprites;
@@ -37,4 +40,7 @@ protected:
 	int spriteState;
 	float HP;
 	float maxHP;
+	bool invincible;
+	float invincibleTime = 0.f;
+	float invincibleTimer;
 };

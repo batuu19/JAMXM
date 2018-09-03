@@ -48,10 +48,11 @@ void Player::reset()
 	car->reset();
 }
 
-void Player::scorePoint()
+void Player::scorePoints(int amount)
 {
-	score++;
+	score += amount;
 }
+
 
 void Player::handleInput(Keyboard::Event e)
 {
@@ -126,6 +127,6 @@ void UI::update(float dt)
 void UI::draw(Graphics & gfx, VecF2 cameraPos) const
 {
 	gfx.drawSprite(pos, background);
-	gfx.drawRect(HPRect.getExpanded(0, (int)(HPRect.right*HPPercentage), 0, 0), HPcolor);
-	gfx.drawSprite(VecI2{ 100,50 }, Font::getChar('0' + player.score));
+	gfx.drawRect(RectI(HPRectPos,(int)(HPbarLength * HPPercentage),10),HPcolor);
+	Font::write(gfx, VecI2{ 165,50 }, std::to_string(player.score),false);
 }
