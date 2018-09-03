@@ -23,7 +23,6 @@ TO DO
 	-play game
 	-level editor(wip)
 	-leaderboards
--bigger smoke
 -collectable ammo
 -more weapon unlocked with more points
 MAYBE TO DO(LATER)

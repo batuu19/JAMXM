@@ -45,4 +45,3 @@ Animation SmallRocket::getBoomAnim() const
 {
 	return Animation(pos, "sprites\\small_explosion_240x40.bmp", 6, 240 / 6, 40);
 }
-

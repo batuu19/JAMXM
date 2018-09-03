@@ -2,6 +2,7 @@
 #include "Car.h"
 #include "BUtils.h"
 #include "Rect.h"
+#include "Font.h"
 
 class Player
 {
@@ -14,6 +15,8 @@ public:
 	~Player();
 	void update(float dt);
 	void draw(Graphics&, const VecF2& cameraPos) const;
+	void reset();
+	void scorePoint();
 	void handleInput(Keyboard::Event);
 	const Car& getCarConst() const;
 
@@ -22,6 +25,7 @@ private:
 	bool shooting = false;
 	Car::Speedup speedup = Car::Speedup::None;
 	Car::TurnDirection turning = Car::TurnDirection::None;
+	int score = 0;
 };
 
 class UI

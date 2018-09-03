@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "UFO.h"
 #include <exception>
+#include "Font.h"
 class World
 {
 public:
@@ -39,6 +40,7 @@ private:
 	Sound bgm = Sound(L"sound\\music\\music.wav",Sound::LoopType::AutoFullSound);
 	bool musicPlaying = true;
 	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
+	Font font;
 
 	bool newUfoNeeded = false;
 	bool carDead = false;

@@ -37,10 +37,20 @@ void Player::update(float dt)
 	}
 }
 
-void Player::draw(Graphics & gfx, const VecF2&  cameraPos) const
+void Player::draw(Graphics & gfx, const VecF2& cameraPos) const
 {
-	assert(car != NULL);
 	car->draw(gfx,cameraPos);
+}
+
+void Player::reset()
+{
+	score = 0;
+	car->reset();
+}
+
+void Player::scorePoint()
+{
+	score++;
 }
 
 void Player::handleInput(Keyboard::Event e)
@@ -97,54 +107,6 @@ void Player::handleInput(Keyboard::Event e)
 	}
 }
 
-//
-////TODO: better
-//void Player::handleInput(Keyboard & kbd, Mouse & mouse)
-//{
-//	//for one key at once
-//	while (!kbd.KeyIsEmpty())
-//	{
-//		const Keyboard::Event e = kbd.ReadKey();
-//
-//		if (e.IsPress())
-//		{
-//			if (e.GetCode() == 'Q')
-//				car->changeWeapon();
-//		}
-//	}
-//	if (kbd.KeyIsPressed(VK_UP))
-//	{
-//		speedup = Car::Speedup::Faster;
-//	}
-//	else if (kbd.KeyIsPressed(VK_DOWN))
-//	{
-//		speedup = Car::Speedup::Slower;
-//	}
-//	if (kbd.KeyIsPressed(VK_LEFT))
-//	{
-//		car->turnLeft();
-//	}
-//	else if (kbd.KeyIsPressed(VK_RIGHT))
-//	{
-//		car->turnRight();
-//	}
-//
-//	if (kbd.KeyIsPressed(VK_RETURN))
-//	{
-//		//Debug::writeMessage(car.getDebugInfo());
-//	}
-//
-//	if (kbd.KeyIsPressed('R'))
-//	{
-//		car->reset();
-//	}
-//	if (kbd.KeyIsPressed(VK_CONTROL))
-//	{
-//		shooting = true;
-//	}
-//}
-
-//TODO: check if good
 const Car & Player::getCarConst() const
 {
 	return *car;
@@ -165,4 +127,5 @@ void UI::draw(Graphics & gfx, VecF2 cameraPos) const
 {
 	gfx.drawSprite(pos, background);
 	gfx.drawRect(HPRect.getExpanded(0, (int)(HPRect.right*HPPercentage), 0, 0), HPcolor);
+	gfx.drawSprite(VecI2{ 100,50 }, Font::getChar('0' + player.score));
 }

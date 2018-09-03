@@ -31,7 +31,17 @@ void World::handleInput(Keyboard::Event e)
 		if (e.GetCode() == 'R')
 		{
 			reset();
+		
+			switch (e.GetCode())
+			{
+			case 'R':
+				reset();
+				break;
+			default:
+				break;
+			}
 		}
+
 	}
 }
 
@@ -59,6 +69,7 @@ void World::update(float dt)
 				if (attack(rockets[i], ufo))
 					//ufo killed
 				{
+					player.scorePoint();
 					makeBigBoom(10, rocketPos, 70, rng, animations);
 					animations.emplace_back(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35, true);
 					//spawning new ufo
@@ -126,15 +137,13 @@ void World::draw(Graphics & gfx) const
 	player.draw(gfx, camera.pos);
 	for (auto& a : animations)a.draw(gfx, camera.pos);
 	for(auto u : ufos)if(!u->isDead())u->draw(gfx,camera.pos);
-
-	//gfx.drawRect(RectI::fromCenter({ 400,300 }, 10, 10),Colors::Red);
 }
 
 void World::reset()
 {
 	for (auto& a : animations)a.stop();
 	for (auto u : ufos)u->reset();
-	car->reset();
+	player.reset();
 	camera.reset();
 }
 
