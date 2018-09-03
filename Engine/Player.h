@@ -14,13 +14,14 @@ public:
 	~Player();
 	void update(float dt);
 	void draw(Graphics&, const VecF2& cameraPos) const;
-	void handleInput(Keyboard&, Mouse&);
+	void handleInput(Keyboard::Event);
 	const Car& getCarConst() const;
 
 private:
 	Car* car;
 	bool shooting = false;
 	Car::Speedup speedup = Car::Speedup::None;
+	Car::TurnDirection turning = Car::TurnDirection::None;
 };
 
 class UI

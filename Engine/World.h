@@ -17,9 +17,10 @@ public:
 	World(const World&) = delete;
 	World& operator=(const World&) = delete;
 	~World();
-	void handleInput(Keyboard&, Mouse&);
+	void handleInput(Keyboard::Event);
 	void update(float dt);
 	void draw(Graphics&) const;
+	void reset();
 	const Map& getMapConst() const;
 	const Player& getPlayerConst() const;
 private:

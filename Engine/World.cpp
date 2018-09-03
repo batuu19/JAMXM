@@ -21,16 +21,17 @@ World::~World()
 	cleanAndClear(ufos);
 }
 
-void World::handleInput(Keyboard & kbd, Mouse & mouse)
+void World::handleInput(Keyboard::Event e)
 {
-	camera.handleInput(kbd);
-	player.handleInput(kbd, mouse);
+	camera.handleInput(e);
+	player.handleInput(e);
 
-	//reseting
-	if (kbd.KeyIsPressed('R'))
+	if (e.IsPress())
 	{
-		animations.clear();
-		camera.pos = { 0.f,0.f };
+		if (e.GetCode() == 'R')
+		{
+			reset();
+		}
 	}
 }
 
@@ -127,6 +128,14 @@ void World::draw(Graphics & gfx) const
 	for(auto u : ufos)if(!u->isDead())u->draw(gfx,camera.pos);
 
 	//gfx.drawRect(RectI::fromCenter({ 400,300 }, 10, 10),Colors::Red);
+}
+
+void World::reset()
+{
+	for (auto& a : animations)a.stop();
+	for (auto u : ufos)u->reset();
+	car->reset();
+	camera.reset();
 }
 
 const Map & World::getMapConst() const

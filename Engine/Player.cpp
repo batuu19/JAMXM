@@ -18,12 +18,21 @@ void Player::update(float dt)
 		if (shooting)
 		{
 			car->shoot(dt);
-			shooting = false;
 		}
 		if (speedup < Car::Speedup::None)
 		{
 			car->speedup(dt, speedup);
-			speedup = Car::Speedup::None;
+		}
+		switch (turning)
+		{
+		case Car::TurnDirection::Right:
+			car->turnRight();
+			break;
+		case Car::TurnDirection::Left:
+			car->turnLeft();
+			break;
+		case Car::TurnDirection::None:
+			break;
 		}
 	}
 }
@@ -34,52 +43,106 @@ void Player::draw(Graphics & gfx, const VecF2&  cameraPos) const
 	car->draw(gfx,cameraPos);
 }
 
-
-//TODO: better
-void Player::handleInput(Keyboard & kbd, Mouse & mouse)
+void Player::handleInput(Keyboard::Event e)
 {
-	//for one key at once
-	while (!kbd.KeyIsEmpty())
+	if (e.IsPress())
 	{
-		const Keyboard::Event e = kbd.ReadKey();
-
-		if (e.IsPress())
+		switch (e.GetCode())
 		{
-			if (e.GetCode() == 'Q')
-				car->changeWeapon();
+		case 'Q':
+			car->changeWeapon();
+			break;
+		case VK_CONTROL:
+			shooting = true;
+			break;
+		//controling car
+		case VK_UP:
+			speedup = Car::Speedup::Faster;
+			break;
+		case VK_DOWN:
+			speedup = Car::Speedup::Slower;
+			break;
+		case VK_LEFT:
+			turning = Car::TurnDirection::Left;
+			break;
+		case VK_RIGHT:
+			turning = Car::TurnDirection::Right;
+			break;
+		default:
+			break;
 		}
 	}
-	if (kbd.KeyIsPressed(VK_UP))
+	if (e.IsRelease())
 	{
-		speedup = Car::Speedup::Faster;
-	}
-	else if (kbd.KeyIsPressed(VK_DOWN))
-	{
-		speedup = Car::Speedup::Slower;
-	}
-	if (kbd.KeyIsPressed(VK_LEFT))
-	{
-		car->turnLeft();
-	}
-	else if (kbd.KeyIsPressed(VK_RIGHT))
-	{
-		car->turnRight();
-	}
-
-	if (kbd.KeyIsPressed(VK_RETURN))
-	{
-		//Debug::writeMessage(car.getDebugInfo());
-	}
-
-	if (kbd.KeyIsPressed('R'))
-	{
-		car->reset();
-	}
-	if (kbd.KeyIsPressed(VK_CONTROL))
-	{
-		shooting = true;
+		switch (e.GetCode())
+		{
+		case VK_CONTROL:
+			shooting = false;
+			break;
+		case VK_UP:
+			speedup = Car::Speedup::None;
+			break;
+		case VK_DOWN:
+			speedup = Car::Speedup::None;
+			break;
+		case VK_LEFT:
+			turning = Car::TurnDirection::None;
+			break;
+		case VK_RIGHT:
+			turning = Car::TurnDirection::None;
+			break;
+		default:
+			break;
+		}
 	}
 }
+
+//
+////TODO: better
+//void Player::handleInput(Keyboard & kbd, Mouse & mouse)
+//{
+//	//for one key at once
+//	while (!kbd.KeyIsEmpty())
+//	{
+//		const Keyboard::Event e = kbd.ReadKey();
+//
+//		if (e.IsPress())
+//		{
+//			if (e.GetCode() == 'Q')
+//				car->changeWeapon();
+//		}
+//	}
+//	if (kbd.KeyIsPressed(VK_UP))
+//	{
+//		speedup = Car::Speedup::Faster;
+//	}
+//	else if (kbd.KeyIsPressed(VK_DOWN))
+//	{
+//		speedup = Car::Speedup::Slower;
+//	}
+//	if (kbd.KeyIsPressed(VK_LEFT))
+//	{
+//		car->turnLeft();
+//	}
+//	else if (kbd.KeyIsPressed(VK_RIGHT))
+//	{
+//		car->turnRight();
+//	}
+//
+//	if (kbd.KeyIsPressed(VK_RETURN))
+//	{
+//		//Debug::writeMessage(car.getDebugInfo());
+//	}
+//
+//	if (kbd.KeyIsPressed('R'))
+//	{
+//		car->reset();
+//	}
+//	if (kbd.KeyIsPressed(VK_CONTROL))
+//	{
+//		shooting = true;
+//	}
+//}
 
 //TODO: check if good
 const Car & Player::getCarConst() const

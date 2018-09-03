@@ -21,6 +21,11 @@ public:
 		Slower,
 		None
 	};
+	enum class TurnDirection {
+		Right,
+		Left,
+		None
+	};
 	void update(float dt) override;
 	void speedup(float dt, Speedup speedupFlag = Speedup::Faster);
 	void draw(Graphics&, const VecF2& cameraPos) const override;
@@ -53,11 +58,6 @@ private:
 
 	Sound sndWeaponChange = Sound(L"sound//game//reload.wav");
 
-	enum class TurnDirection {
-		Right,
-		Left,
-		None
-	};
 	TurnDirection nextTurn = TurnDirection::None;
 
 	//rocket

@@ -1,22 +1,26 @@
 #include "Camera.h"
 
-void Camera::handleInput(Keyboard& kbd)
+void Camera::handleInput(Keyboard::Event e)
 {
-	if (kbd.KeyIsPressed('D'))
+	if (e.IsPress())
 	{
-		nextDir = vectorsNormalized[RIGHT];
-	}
-	if (kbd.KeyIsPressed('A'))
-	{
-		nextDir = vectorsNormalized[LEFT];
-	}
-	if (kbd.KeyIsPressed('S'))
-	{
-		nextDir = vectorsNormalized[DOWN];
-	}
-	if (kbd.KeyIsPressed('W'))
-	{
-		nextDir = vectorsNormalized[UP];
+		switch (e.GetCode())
+		{
+		case 'W':
+			nextDir = vectorsNormalized[UP];
+			break;
+		case 'S':
+			nextDir = vectorsNormalized[DOWN];
+			break;
+		case 'A':
+			nextDir = vectorsNormalized[LEFT];
+			break;
+		case 'D':
+			nextDir = vectorsNormalized[RIGHT];
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -43,4 +47,9 @@ void Camera::update(float dt)
 		nextDir = { 0.f,0.f };
 	}
 	
+}
+
+void Camera::reset()
+{
+	pos = { 0.f,0.f };
 }

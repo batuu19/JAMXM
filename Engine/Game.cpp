@@ -41,17 +41,18 @@ void Game::UpdateModel()
 {
 	const float dt = ft.mark();
 	//TODO
-	//while (!wnd.kbd.KeyIsEmpty())
-	//{
-	//	const Keyboard::Event e = wnd.kbd.ReadKey();
+	while (!wnd.kbd.KeyIsEmpty())
+	{
+		const Keyboard::Event e = wnd.kbd.ReadKey();
 
-	//	if (e.IsPress())
-	//	{
-	//		if (e.GetCode() == 'Q')
-	//			car->changeWeapon();
-	//	}
-	//}
-	world.handleInput(wnd.kbd, wnd.mouse);
+		if (e.IsPress())
+		{
+			if (e.GetCode() == VK_ESCAPE)
+				wnd.Kill();
+		}
+
+		world.handleInput(e);
+	}
 	world.update(dt);
 }
 
