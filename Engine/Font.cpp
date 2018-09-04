@@ -9,7 +9,7 @@ Surface Font::getChar(char c)
 	}
 }
 
-void Font::write(Graphics& gfx, VecI2 pos, std::string text, bool alignLeft)
+void Font::write(Graphics& gfx, VecI2 pos, std::string text,int padding, bool alignLeft)
 {
 
 	if (alignLeft)
@@ -18,7 +18,7 @@ void Font::write(Graphics& gfx, VecI2 pos, std::string text, bool alignLeft)
 		while (iter < text.end())
 		{
 			gfx.drawSprite(pos, getChar(*iter));
-			pos.x += characterSize;
+			pos.x += characterSize + padding;
 			iter++;
 		}
 	}
@@ -29,7 +29,7 @@ void Font::write(Graphics& gfx, VecI2 pos, std::string text, bool alignLeft)
 		while (iter < text.rend())
 		{
 			gfx.drawSprite(pos, getChar(*iter));
-			pos.x -= characterSize;
+			pos.x -= characterSize - padding;
 			iter++;
 		}
 	}

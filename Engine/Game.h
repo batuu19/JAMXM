@@ -43,25 +43,23 @@ private:
 	bool exitGame();
 	void handleInput(Keyboard::Event);
 	void handleInput(Mouse::Event);
+	void processAction(std::string action);
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	
-	FrameTimer ft;
-	World world;
-	Menu pauseMenu;
-	MainMenu menu;
-	Surface background = "sprites\\menu\\background.bmp";
-
-	bool paused = false;
 	enum class GameState
 	{
 		MainMenu,
 		Game,
 		GamePaused
 	};
+	FrameTimer ft;
+	World world;
+	Menu pauseMenu;
+	MainMenu menu;
+	Surface background = "sprites\\menu\\background.bmp";
 	GameState gameState = GameState::MainMenu;
 
 	/********************************/

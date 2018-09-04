@@ -25,7 +25,9 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	world(gfx.getScreenRect())
+	world(gfx.getScreenRect()),
+	pauseMenu(gfx.getScreenRect(),{"Resume","Menu","Quit"}),
+	menu(gfx.getScreenRect(), {"Play","Quit"})
 {
 }
 
@@ -50,12 +52,16 @@ void Game::UpdateModel()
 		handleInput(m);
 	}
 	
+
 	const float dt = ft.mark();
 	switch (gameState)
 	{
 	case Game::GameState::MainMenu:
+		processAction(menu.getActiveButtonAction());
+		menu.update(dt);
 		break;
 	case Game::GameState::GamePaused:
+		processAction(pauseMenu.getActiveButtonAction());
 		break;
 	case Game::GameState::Game:
 		world.update(dt);
@@ -63,24 +69,19 @@ void Game::UpdateModel()
 	default:
 		break;
 	}
-	//const float dt = ft.mark();
-	//if (!paused)
-	//{
-	//	world.update(dt);
-	//}
 }
 
 void Game::ComposeFrame()
 {
-	//world.draw(gfx);
 	switch (gameState)
 	{
 	case Game::GameState::MainMenu:
 		menu.draw(gfx);
 		break;
 	case Game::GameState::GamePaused:
-		//pauseMenu.draw(gfx);
-		//if game paused, draw menu and also game, but not updated
+		world.draw(gfx);
+		pauseMenu.draw(gfx);
+		break;
 	case Game::GameState::Game:
 		world.draw(gfx);
 		break;
@@ -96,13 +97,7 @@ void Game::handleInput(Keyboard::Event k)
 		switch (k.GetCode())
 		{
 		case VK_ESCAPE:
-			exitGame();
-			enterMainMenu();
 			pauseGame();
-			break;
-		case VK_RETURN:
-			enterGame();
-			unpauseGame();
 			break;
 		default:
 			break;
@@ -114,6 +109,33 @@ void Game::handleInput(Keyboard::Event k)
 
 void Game::handleInput(Mouse::Event m)
 {
+	switch (gameState)
+	{
+	case Game::GameState::MainMenu:
+		menu.handleInput(m);
+		break;
+	case Game::GameState::Game:
+		break;
+	case Game::GameState::GamePaused:
+		pauseMenu.handleInput(m);
+		break;
+	default:
+		break;
+	}
+	
+}
+
+void Game::processAction(std::string action)
+{
+	if (action == "Play")
+		enterGame();
+	else if (action == "Resume")
+		unpauseGame();
+	else if (action == "Menu")
+		enterMainMenu();
+	else if (action == "Quit")
+		exitGame();
+
 }
 
 //needed if here?
@@ -160,7 +182,7 @@ bool Game::enterMainMenu()
 
 bool Game::exitGame()
 {
-	if (gameState != GameState::MainMenu)return false;//can go only from GamePaused
+	if (gameState != GameState::GamePaused && gameState != GameState::GamePaused)return false;//can go only from GamePaused && GamePaused 
 	else
 	{
 		wnd.Kill();
