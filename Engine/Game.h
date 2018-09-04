@@ -21,6 +21,7 @@
 #pragma once
 #include "World.h"
 #include "FrameTimer.h"
+#include "Menu.h"
 
 class Game
 {
@@ -43,6 +44,10 @@ private:
 	
 	FrameTimer ft;
 	World world;
+	MainMenu menu;
+	Surface background = "sprites\\menu\\background.bmp";
+
+	bool paused = false;
 
 	/********************************/
 };

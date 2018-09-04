@@ -45,17 +45,31 @@ void Game::UpdateModel()
 
 		if (e.IsPress())
 		{
-			if (e.GetCode() == VK_ESCAPE)
+			switch (e.GetCode())
+			{
+			case VK_ESCAPE:
 				wnd.Kill();
+				break;
+			case 'P':
+				paused = !paused;
+				break;
+
+			default:
+				break;
+			}
 		}
 
-		world.handleInput(e);
+		//world.handleInput(e);
 	}
-	const float dt = ft.mark();
-	world.update(dt);
+	//const float dt = ft.mark();
+	//if (!paused)
+	//{
+	//	world.update(dt);
+	//}
 }
 
 void Game::ComposeFrame()
 {
-	world.draw(gfx);
+	//world.draw(gfx);
+	menu.draw(gfx);
 }
