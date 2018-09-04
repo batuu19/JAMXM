@@ -36,6 +36,13 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
+	bool pauseGame();
+	bool unpauseGame();
+	bool enterGame();
+	bool enterMainMenu();
+	bool exitGame();
+	void handleInput(Keyboard::Event);
+	void handleInput(Mouse::Event);
 private:
 	MainWindow& wnd;
 	Graphics gfx;
@@ -44,10 +51,18 @@ private:
 	
 	FrameTimer ft;
 	World world;
+	Menu pauseMenu;
 	MainMenu menu;
 	Surface background = "sprites\\menu\\background.bmp";
 
 	bool paused = false;
+	enum class GameState
+	{
+		MainMenu,
+		Game,
+		GamePaused
+	};
+	GameState gameState = GameState::MainMenu;
 
 	/********************************/
 };

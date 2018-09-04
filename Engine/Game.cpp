@@ -41,25 +41,27 @@ void Game::UpdateModel()
 {
 	while (!wnd.kbd.KeyIsEmpty())
 	{
-		const Keyboard::Event e = wnd.kbd.ReadKey();
-
-		if (e.IsPress())
-		{
-			switch (e.GetCode())
-			{
-			case VK_ESCAPE:
-				wnd.Kill();
-				break;
-			case 'P':
-				paused = !paused;
-				break;
-
-			default:
-				break;
-			}
-		}
-
-		//world.handleInput(e);
+		const Keyboard::Event k = wnd.kbd.ReadKey();
+		handleInput(k);
+	}
+	while (!wnd.mouse.IsEmpty())
+	{
+		const Mouse::Event m = wnd.mouse.Read();
+		handleInput(m);
+	}
+	
+	const float dt = ft.mark();
+	switch (gameState)
+	{
+	case Game::GameState::MainMenu:
+		break;
+	case Game::GameState::GamePaused:
+		break;
+	case Game::GameState::Game:
+		world.update(dt);
+		break;
+	default:
+		break;
 	}
 	//const float dt = ft.mark();
 	//if (!paused)
@@ -71,5 +73,101 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	//world.draw(gfx);
-	menu.draw(gfx);
+	switch (gameState)
+	{
+	case Game::GameState::MainMenu:
+		menu.draw(gfx);
+		break;
+	case Game::GameState::GamePaused:
+		//pauseMenu.draw(gfx);
+		//if game paused, draw menu and also game, but not updated
+	case Game::GameState::Game:
+		world.draw(gfx);
+		break;
+	default:
+		break;
+	}
 }
+
+void Game::handleInput(Keyboard::Event k)
+{
+	if (k.IsPress())
+	{
+		switch (k.GetCode())
+		{
+		case VK_ESCAPE:
+			exitGame();
+			enterMainMenu();
+			pauseGame();
+			break;
+		case VK_RETURN:
+			enterGame();
+			unpauseGame();
+			break;
+		default:
+			break;
+		}
+	}
+	if (gameState == GameState::Game)
+		world.handleInput(k);
+}
+
+void Game::handleInput(Mouse::Event m)
+{
+}
+
+//needed if here?
+bool Game::pauseGame()
+{
+	if (gameState != GameState::Game)return false;//can go only from Game
+	else
+	{
+		gameState = GameState::GamePaused;
+		return true;
+	}
+}
+
+bool Game::unpauseGame()
+{
+	if (gameState != GameState::GamePaused)return false;//can go only from GamePaused
+	else
+	{
+		gameState = GameState::Game;
+		return true;
+	}
+}
+
+bool Game::enterGame()
+{
+	if (gameState != GameState::MainMenu)return false;//can go only from MainMenu
+	else
+	{
+		world.reset();
+		gameState = GameState::Game;
+		return true;
+	}
+}
+
+bool Game::enterMainMenu()
+{
+	if (gameState != GameState::GamePaused)return false;//can go only from GamePaused
+	else
+	{
+		gameState = GameState::MainMenu;
+		return true;
+	}
+}
+
+bool Game::exitGame()
+{
+	if (gameState != GameState::MainMenu)return false;//can go only from GamePaused
+	else
+	{
+		wnd.Kill();
+		return true;//not needed?
+	}
+}
+
+
+
+
