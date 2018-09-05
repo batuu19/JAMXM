@@ -6,6 +6,8 @@ class Animation
 {
 public:
 	Animation(VecI2 pos,std::string filename,int frames, int frameWidth,int frameHeight,bool looping = false,float frameTime = 0.1f);
+	Animation(VecI2 pos, std::string filename, int frames, bool looping = false, float frameTime = 0.1f);
+	Animation(VecI2 pos, std::string filename, int frameWidth, int frameHeight, bool looping = false, float frameTime = 0.1f);
 	Animation(const Animation&) = delete;
 	Animation(Animation &&) = default;
 	Animation& operator=(const Animation&) = default;

@@ -69,6 +69,18 @@ SpriteContainer::SpriteContainer(const Surface& surf, int rows, int lines,
 	delete[] frames;
 }
 
+SpriteContainer::SpriteContainer(const Surface & surf, int rows, int lines, bool rotateAtCreate)
+	:
+	SpriteContainer(surf, rows, lines, surf.getWidth() / rows, surf.getHeight() / lines, rotateAtCreate)
+{
+}
+
+SpriteContainer::SpriteContainer(const Surface & surf, unsigned int width, unsigned int height, bool rotateAtCreate)
+	:
+	SpriteContainer(surf,surf.getWidth()/(int)width,surf.getHeight()/ (int)height,(int)width,(int)height,rotateAtCreate)
+{
+}
+
 Surface & SpriteContainer::operator[](int i)
 {
 	return sprites[i];

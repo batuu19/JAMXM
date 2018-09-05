@@ -6,6 +6,8 @@ class SpriteContainer
 {
 public:
 	SpriteContainer(const Surface& surf, int rows, int lines,int width, int height, bool rotateAtCreate = true);
+	SpriteContainer(const Surface& surf, int rows, int lines, bool rotateAtCreate = true);
+	SpriteContainer(const Surface& surf, unsigned int width, unsigned int height, bool rotateAtCreate = true);
 
 	Surface& operator[](int i);
 	const Surface& operator[](int i) const;

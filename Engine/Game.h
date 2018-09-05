@@ -22,6 +22,7 @@
 #include "World.h"
 #include "FrameTimer.h"
 #include "Menu.h"
+#include "GameUtils.h"
 
 class Game
 {
@@ -49,12 +50,6 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	enum class GameState
-	{
-		MainMenu,
-		Game,
-		GamePaused
-	};
 	FrameTimer ft;
 	World world;
 	Menu pauseMenu;

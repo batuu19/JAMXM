@@ -154,6 +154,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameUtils.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />

@@ -14,7 +14,7 @@ Rocket::Rocket(const VecF2& pos,int spriteState, const VecF2& vel, const SpriteC
 
 BigRocket::BigRocket(VecF2 pos, int dir,std::vector<Animation>& animations)
 	:
-	Rocket(pos, dir, (vectorsNormalized[dir] * 400.f), SpriteContainer({ "sprites//big_rocket_125x20.bmp" }, 5, 1, 25, 20), 100.f),
+	Rocket(pos, dir, (vectorsNormalized[dir] * 400.f), SpriteContainer({ "sprites//big_rocket_125x20.bmp" }, 5, 1), 100.f),
 	animations(animations)
 {
 }

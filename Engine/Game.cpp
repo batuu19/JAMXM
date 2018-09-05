@@ -56,14 +56,14 @@ void Game::UpdateModel()
 	const float dt = ft.mark();
 	switch (gameState)
 	{
-	case Game::GameState::MainMenu:
+	case GameState::MainMenu:
 		processAction(menu.getActiveButtonAction());
 		menu.update(dt);
 		break;
-	case Game::GameState::GamePaused:
+	case GameState::GamePaused:
 		processAction(pauseMenu.getActiveButtonAction());
 		break;
-	case Game::GameState::Game:
+	case GameState::Game:
 		world.update(dt);
 		break;
 	default:
@@ -75,14 +75,14 @@ void Game::ComposeFrame()
 {
 	switch (gameState)
 	{
-	case Game::GameState::MainMenu:
+	case GameState::MainMenu:
 		menu.draw(gfx);
 		break;
-	case Game::GameState::GamePaused:
+	case GameState::GamePaused:
 		world.draw(gfx);
 		pauseMenu.draw(gfx);
 		break;
-	case Game::GameState::Game:
+	case GameState::Game:
 		world.draw(gfx);
 		break;
 	default:
@@ -111,12 +111,12 @@ void Game::handleInput(Mouse::Event m)
 {
 	switch (gameState)
 	{
-	case Game::GameState::MainMenu:
+	case GameState::MainMenu:
 		menu.handleInput(m);
 		break;
-	case Game::GameState::Game:
+	case GameState::Game:
 		break;
-	case Game::GameState::GamePaused:
+	case GameState::GamePaused:
 		pauseMenu.handleInput(m);
 		break;
 	default:

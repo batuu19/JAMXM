@@ -1,6 +1,6 @@
 #include "Font.h"
 
-const SpriteContainer Font::chars = SpriteContainer({ "sprites//font.bmp" }, 16, 6, characterSize, characterSize);
+const SpriteContainer Font::chars = SpriteContainer({ "sprites//font.bmp" }, 16, 6,false);
 
 Surface Font::getChar(char c)
 {
