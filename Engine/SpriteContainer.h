@@ -16,6 +16,9 @@ public:
 
 
 	size_t getSize() const;
+	int getWidth() const;
+	int getHeight() const;
+	RectI getRect() const;
 private:
 	int rows;
 	int lines;

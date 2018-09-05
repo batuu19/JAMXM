@@ -2,14 +2,14 @@
 
 Menu::Menu(const RectI& screenRect, const std::initializer_list<std::string>& buttonNames)
 	:
-	pos(screenRect.getCenter() - VecI2(background.getWidth() / 2, background.getHeight() / 2))
+	pos(screenRect.getCenter() - VecI2(backgroundRect.getWidth() / 2, backgroundRect.getHeight() / 2))
 {
 	buttonCount = buttonNames.size();
-	Surface buttonSurf = "sprites\\menu\\buttonBackground.bmp";
-	int padding = (background.getHeight() - (buttonCount * buttonSurf.getHeight())) / (buttonCount + 1);
+	SpriteContainer buttonSurf = { {"sprites\\menu\\buttonAnim.bmp"},1,2,false };
+	int padding = (backgroundRect.getHeight() - (buttonCount * buttonSurf.getHeight())) / (buttonCount + 1);
 	VecI2 butPos;
 	butPos = VecI2{ 
-		(background.getWidth() - buttonSurf.getWidth()) / 2,
+		(backgroundRect.getWidth() - buttonSurf.getWidth()) / 2,
 		padding 
 	} +pos;
 
@@ -22,8 +22,12 @@ Menu::Menu(const RectI& screenRect, const std::initializer_list<std::string>& bu
 
 void Menu::draw(Graphics & gfx) const
 {
-	gfx.drawSprite(pos, background);
 	for (auto b : buttons)b.draw(gfx);
+}
+
+void Menu::update(float dt)
+{
+	//for (auto& b : buttons)b.buttonState = Button::State::Default;
 }
 
 void Menu::handleInput(Mouse::Event m)
@@ -32,8 +36,14 @@ void Menu::handleInput(Mouse::Event m)
 	{
 		if (b.getRect().contains(m.GetPos()))
 		{
-			if(m.LeftIsPressed())action = b.text;
+			b.buttonState = Button::State::Active;
+			if(m.LeftIsPressed())
+				action = b.text;
 			return;
+		}
+		else
+		{
+			b.buttonState = Button::State::Default;
 		}
 	}
 	action = "";
@@ -46,32 +56,41 @@ std::string Menu::getActiveButtonAction()
 	return tempAction;
 }
 
-Menu::Button::Button(const VecI2 & butPos, const Surface & background, std::string text)
+Menu::Button::Button(const VecI2 & butPos, const SpriteContainer & sprites, std::string text)
 	:
 	butPos(butPos),
-	background(background),
+	sprites(sprites),
 	text(text)
 {
 }
 
 void Menu::Button::draw(Graphics & gfx) const
 {
-	gfx.drawSprite(butPos, background);
-	Font::write(gfx, butPos + VecI2(0, background.getHeight() - Font::characterSize),text,-8);
+	switch (buttonState)
+	{
+	case Menu::Button::State::Default:
+		gfx.drawSprite(butPos, sprites[0]);
+		break;
+	case Menu::Button::State::Active:
+		gfx.drawSprite(butPos, sprites[1]);
+		break;
+	//case Menu::Button::State::Pressed:
+	//	break;
+	default:
+		gfx.drawSprite(butPos, sprites[0]);
+		break;
+	}
+	Font::write(gfx, butPos + VecI2(0, sprites.getHeight() - Font::characterSize),text,-8);
 }
 
 RectI Menu::Button::getRect() const
 {
-	return background.getRect().displaceBy(butPos);
+	return sprites.getRect().displaceBy(butPos);
 }
 
 MainMenu::MainMenu(const RectI & screenRect, const std::initializer_list<std::string>& buttonNames)
 	:
 	Menu(screenRect,buttonNames)
-{
-}
-
-void MainMenu::update(float dt)
 {
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Graphics.h"
-#include "Surface.h"
+#include "SpriteContainer.h"
 #include "Rect.h"
 #include "Font.h"
 #include <vector>
@@ -14,7 +14,8 @@ public:
 	Menu(const RectI& screenRect,const std::initializer_list<std::string>& buttonNames);
 	Menu(const Menu&) = delete;
 	Menu& operator=(const Menu&) = delete;
-	void draw(Graphics&) const;
+	virtual void draw(Graphics&) const;
+	virtual void update(float dt);
 	void handleInput(Mouse::Event m);
 	std::string getActiveButtonAction();
 protected:
@@ -23,18 +24,26 @@ protected:
 	public:
 		friend class Menu;
 	public:
-		Button(const VecI2& butPos,const Surface&, std::string text = "");
+		Button(const VecI2& butPos,const SpriteContainer&, std::string text = "");
 		void draw(Graphics&) const;
 		RectI getRect() const;
 	private:
 		VecI2 butPos;
-		Surface background;
+		SpriteContainer sprites;
 		std::string text;
+		enum class State
+		{
+			Default,
+			Active,
+			Pressed
+		};
+		State buttonState = State::Default;
+
 	};
 
 protected:
 	std::vector<Button> buttons;
-	Surface background = "sprites\\menu\\submenuBackground.bmp";
+	RectI backgroundRect = {0,400,0,700};
 	VecI2 pos;
 	int buttonCount;
 
@@ -45,8 +54,7 @@ class MainMenu : public Menu
 {
 public:
 	MainMenu(const RectI& screenRect,const std::initializer_list<std::string>& buttonNames);
-	void update(float dt);
-	void draw(Graphics&) const;
+	void draw(Graphics&) const override;
 private:
 	Surface background = "sprites\\menu\\background.bmp";
 };

@@ -182,7 +182,7 @@ bool Game::enterMainMenu()
 
 bool Game::exitGame()
 {
-	if (gameState != GameState::GamePaused && gameState != GameState::GamePaused)return false;//can go only from GamePaused && GamePaused 
+	if (gameState != GameState::MainMenu && gameState != GameState::GamePaused)return false;//can go only from MainMenu && GamePaused 
 	else
 	{
 		wnd.Kill();

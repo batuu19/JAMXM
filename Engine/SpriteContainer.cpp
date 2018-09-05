@@ -105,3 +105,18 @@ size_t SpriteContainer::getSize() const
 {
 	return sprites.size();
 }
+
+int SpriteContainer::getWidth() const
+{
+	return width;
+}
+
+int SpriteContainer::getHeight() const
+{
+	return height;
+}
+
+RectI SpriteContainer::getRect() const
+{
+	return sprites[0].getRect();
+}
