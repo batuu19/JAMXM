@@ -10,7 +10,6 @@ World::World(const RectI & screenRect)
 	ui(player)
 {
 	bgm.Play(1.f, 0.35f);
-	sndRaceStart.Play(rng);
 	const int count = 2;//for debuging
 	for (int i = 0; i < count; i++)
 		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));

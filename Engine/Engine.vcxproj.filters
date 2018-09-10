@@ -239,40 +239,22 @@
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="trasa.bmp">
+    <Image Include="Sprites\maps\road_big_1500x1500.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="car.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sprites\car.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sprites\rocket1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sprites\rocket2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sprites\trasa.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sprites\wreck.bmp">
+    <Image Include="Sprites\maps\w0.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="config.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="debug.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="TODO.txt">
       <Filter>Helper Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Sprites\maps\w0.ai">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

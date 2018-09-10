@@ -138,7 +138,6 @@ void Game::processAction(std::string action)
 
 }
 
-//needed if here?
 bool Game::pauseGame()
 {
 	if (gameState != GameState::Game)return false;//can go only from Game

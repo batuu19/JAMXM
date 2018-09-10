@@ -267,22 +267,16 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="car.bmp" />
     <Image Include="Chili.ico" />
-    <Image Include="Sprites\car.bmp" />
-    <Image Include="Sprites\rocket1.bmp" />
-    <Image Include="Sprites\rocket2.bmp" />
-    <Image Include="Sprites\trasa.bmp" />
-    <Image Include="Sprites\wreck.bmp" />
-    <Image Include="trasa.bmp" />
+    <Image Include="Sprites\maps\road_big_1500x1500.bmp" />
+    <Image Include="Sprites\maps\w0.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="config.txt" />
-    <Text Include="debug.txt" />
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Sprites\maps\w0.ai" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

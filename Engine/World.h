@@ -46,11 +46,11 @@ private:
 	//sounds
 	Sound sndBoom = Sound(L"sound\\game\\explosion.wav");
 	Sound bgm = Sound(L"sound\\music\\music.wav", Sound::LoopType::AutoFullSound);
-	SoundEffect sndRaceStart = SoundEffect({
-		L"sound\\speech\\larry\\go_go_go.wav",
-		L"sound\\speech\\larry\\let_the_carnage_begin.wav",
-		L"sound\\speech\\larry\\lets_ride.wav"
-	});
+	//SoundEffect sndRaceStart = SoundEffect({
+	//	L"sound\\speech\\larry\\go_go_go.wav",
+	//	L"sound\\speech\\larry\\let_the_carnage_begin.wav",
+	//	L"sound\\speech\\larry\\lets_ride.wav"
+	//});
 	SoundEffect sndAfterBoom = SoundEffect({
 		L"sound\\speech\\larry\\holy_transmission.wav",
 		L"sound\\speech\\larry\\smashed.wav",
