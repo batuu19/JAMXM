@@ -86,6 +86,18 @@ public:
 	{
 		return Rect(*this).displaceBy(d);
 	}
+	Rect& fix()
+	{
+		if (left > right)
+			std::swap(left, right);
+		if (top > bottom)
+			std::swap(top, bottom);
+		return *this;
+	}
+	Rect getFixed() const
+	{
+		return Rect(*this).fix();
+	}
 public:
 	T left;
 	T right;

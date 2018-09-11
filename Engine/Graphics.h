@@ -60,17 +60,28 @@ public:
 	}
 	void putPixel( int x,int y,Color c );
 
-	void drawRect(int x0, int y0, int x1, int y1, Color c);
+
+	void drawRect(RectI rect, RectI clip, Color c);
+	void drawRect(int x0, int y0, int x1, int y1, Color c)
+	{
+		drawRect({ x0,x1,y0,y1 }, c);
+	}
 	void drawRect(RectI rect,Color c) 
 	{
-		drawRect(rect.left, rect.top, rect.right, rect.bottom, c);
+		drawRect(rect,getScreenRect(),c);
 	}
 	void drawRectDim(int x0, int y0, int width, int height, Color c)
 	{
 		drawRect(x0, y0, x0 + width, y0 + height, c);
 	}
-	void drawSpriteNonChroma(int x, int y, const Surface& s);
-	void drawSpriteNonChroma(int x, int y, const RectI& srcRect, const Surface& s);
+	void drawSpriteNonChroma(int x, int y, const Surface& s) 
+	{
+		drawSpriteNonChroma(x, y, s.getRect(), s);
+	}
+	void drawSpriteNonChroma(int x, int y, const RectI& srcRect, const Surface& s)
+	{
+		drawSpriteNonChroma(x, y, srcRect, getScreenRect(), s);
+	}
 	void drawSpriteNonChroma(int x, int y, RectI srcRect, const RectI& clip, const Surface& s);
 	void drawSpriteNonChroma(const VecI2& pos, const Surface& s)
 	{
@@ -86,8 +97,14 @@ public:
 	}
 
 
-	void drawSprite(int x, int y, const Surface& s, Color chroma = Colors::Magenta);
-	void drawSprite(int x, int y, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta);
+	void drawSprite(int x, int y, const Surface& s, Color chroma = Colors::Magenta)
+	{
+		drawSprite(x, y, s.getRect(), s, chroma);
+	}
+	void drawSprite(int x, int y, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta)
+	{
+		drawSprite(x, y, srcRect, getScreenRect(), s, chroma);
+	}
 	void drawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
 	void drawSprite(const VecI2& pos, const Surface& s, Color chroma = Colors::Magenta)
 	{
@@ -117,7 +134,9 @@ private:
 	D3D11_MAPPED_SUBRESOURCE							mappedSysBufferTexture;
 	Color*                                              pSysBuffer = nullptr;
 public:
-	static constexpr int ScreenWidth = 1920;
-	static constexpr int ScreenHeight = 1080;
+	//static constexpr int ScreenWidth = 1920;
+	//static constexpr int ScreenHeight = 1080;
+	static constexpr int ScreenWidth = 1024;
+	static constexpr int ScreenHeight = 720;
 	static RectI getScreenRect();
 };
