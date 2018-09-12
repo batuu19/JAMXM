@@ -18,6 +18,8 @@ public:
 	Map(const Map&) = delete;
 	void draw(Graphics&, VecF2 cameraPos) const;
 	const RectI& getRect() const;
+
+	Hitbox getHitbox() const;
 private:
 	class AI
 	{
@@ -38,5 +40,5 @@ private:
 	//Surface mapSprite = "sprites\\road_800x600.bmp";
 	Surface mapSprite;
 	VecF2 pos = getZeroVec<float>();
-	std::vector<VecI2> points;
+	Hitbox hitbox;
 };

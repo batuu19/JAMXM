@@ -1,6 +1,7 @@
 #pragma once
 #include <math.h>
 #include <algorithm>
+#include <vector>
 
 template<typename T>
 T sq(T x){	return x*x;}
@@ -133,3 +134,14 @@ Vec2<T> getInBounds(const Vec2<T>& point, const Vec2<T>& leftBound, const Vec2<T
 		return rightBound;
 	return point;
 }
+
+class Hitbox {
+public:
+	Hitbox() = default;
+	Hitbox(std::vector<VecI2>& points);
+
+	bool contains(VecI2 point);
+	bool isOverlappingWith(const Hitbox& second);
+private:
+	std::vector<VecI2> points;
+};

@@ -3,7 +3,7 @@
 #include <algorithm>
 
 template<typename T, typename S>
-bool colliding(const T first, const S second)
+bool colliding(const T& first, const S& second)
 {
 	return first->getHitbox().isOverlappingWith(second->getHitbox());
 }

@@ -9,6 +9,7 @@ Map::Map(int mapNumber)
 {
 	std::ifstream in(getMapHitboxFilename(mapNumber), std::ios::binary);
 	if (!in.good())return;
+	std::vector<VecI2> points;
 	char data;
 	while (in.get(data))
 	{
@@ -21,11 +22,11 @@ Map::Map(int mapNumber)
 				y = val / 800;
 				x = val % 1600;
 				points.emplace_back(x, y);
-				mapSprite.putPixel(x, y, Colors::Cyan);
 
 			}
 		}
 	}
+	hitbox = { points };
 }
 
 void Map::draw(Graphics & gfx, VecF2 cameraPos) const
@@ -37,6 +38,11 @@ void Map::draw(Graphics & gfx, VecF2 cameraPos) const
 const RectI& Map::getRect() const
 {
 	return mapSprite.getRect();
+}
+
+Hitbox Map::getHitbox() const
+{
+	return hitbox;
 }
 
 Map::AI::AI(std::string filename)

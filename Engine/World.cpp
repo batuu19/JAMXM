@@ -4,11 +4,10 @@ World::World(const RectI & screenRect)
 	:
 	player(car),
 	screenRect(screenRect),
-	mapRect(map.getRect()),
+	mapRect(map->getRect()),
 	xDist(mapRect.left + 200, mapRect.right - 200),
 	yDist(mapRect.top + 200, mapRect.bottom - 200),
-	ui(player),
-	map(0)
+	ui(player)
 {
 	bgm.Play(1.f, 0.35f);
 	const int count = 2;//for debuging
@@ -20,6 +19,8 @@ World::~World()
 {
 	cleanAndClear(rockets);
 	cleanAndClear(ufos);
+	delete map;
+	delete car;
 }
 
 void World::handleInput(Keyboard::Event e)
@@ -124,11 +125,15 @@ void World::update(float dt)
 	for (auto ufo : ufos)
 		if (!collidingWithBounds(ufo, mapRect))
 			ufo->bounceBack();
+
+	//testing map
+	if (colliding(map, car))
+		car->bounceBack();
 }
 
 void World::draw(Graphics & gfx) const
 {
-	map.draw(gfx, camera.pos);
+	map->draw(gfx, camera.pos);
 	player.draw(gfx, camera.pos);
 	for (auto& a : animations)a.draw(gfx, camera.pos);
 	for(auto u : ufos)if(!u->isDead())u->draw(gfx,camera.pos);
@@ -147,7 +152,7 @@ void World::reset()
 
 const Map & World::getMapConst() const
 {
-	return map;
+	return *map;
 }
 
 const Player & World::getPlayerConst() const

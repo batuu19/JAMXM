@@ -25,7 +25,7 @@ public:
 	const Map& getMapConst() const;
 	const Player& getPlayerConst() const;
 private:
-	Map map;
+	Map* map = new Map(0);
 	RectI screenRect;
 	RectI mapRect;
 	mutable std::mt19937 rng = std::mt19937(std::random_device{}());
@@ -33,7 +33,7 @@ private:
 	Camera camera;
 	std::vector<Rocket*> rockets;
 	std::vector<Animation> animations;
-	Car* car = new Car(VecF2(400.f, 300.f), RIGHT, rockets,animations);
+	Car* car = new Car(VecF2(216.f, 867.f), RIGHT, rockets,animations);
 	Player player;
 	std::vector<UFO*> ufos;
 	UI ui;
