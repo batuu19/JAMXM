@@ -7,7 +7,8 @@ World::World(const RectI & screenRect)
 	mapRect(map.getRect()),
 	xDist(mapRect.left + 200, mapRect.right - 200),
 	yDist(mapRect.top + 200, mapRect.bottom - 200),
-	ui(player)
+	ui(player),
+	map(0)
 {
 	bgm.Play(1.f, 0.35f);
 	const int count = 2;//for debuging

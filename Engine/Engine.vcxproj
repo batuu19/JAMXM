@@ -159,6 +159,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapHelper.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="PhysicsUtils.h" />
@@ -276,6 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Sprites\maps\r0.map" />
     <None Include="Sprites\maps\w0.ai" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

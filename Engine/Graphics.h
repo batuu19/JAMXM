@@ -58,7 +58,11 @@ public:
 	{
 		putPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
-	void putPixel( int x,int y,Color c );
+	void putPixel(int x, int y, Color c)
+	{
+		putPixel(Graphics::ScreenWidth * y + x, c);
+	}
+	void putPixel(int i, Color c);
 
 
 	void drawRect(RectI rect, RectI clip, Color c);

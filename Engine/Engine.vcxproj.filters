@@ -141,6 +141,9 @@
     <ClInclude Include="GameUtils.h">
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
+    <ClInclude Include="MapHelper.h">
+      <Filter>Header Files\GameUtils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -254,6 +257,9 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="Sprites\maps\w0.ai">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Sprites\maps\r0.map">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

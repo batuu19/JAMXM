@@ -7,13 +7,14 @@
 #include <assert.h>
 #include "Camera.h"
 #include <string>
+#include "MapHelper.h"
 
 //open maps during game not at beginning 
 
 class Map
 {
 public:
-	Map() = default;
+	Map(int mapNumber);
 	Map(const Map&) = delete;
 	void draw(Graphics&, VecF2 cameraPos) const;
 	const RectI& getRect() const;
@@ -22,6 +23,7 @@ private:
 	{
 	public:
 		AI(std::string filename);
+		AI(int mapNumber);
 
 		void draw(Graphics&, VecF2 cameraPos) const;
 	private:
@@ -31,9 +33,10 @@ private:
 		std::vector<VecF2> points;
 	};
 private:
-	AI mapAI = "sprites\\maps\\w0.ai";
+	AI mapAI;
 	//Surface mapSprite = "sprites\\maps\\road_big_1500x1500.bmp";
 	//Surface mapSprite = "sprites\\road_800x600.bmp";
-	Surface mapSprite = "sprites\\maps\\w0.bmp";
+	Surface mapSprite;
 	VecF2 pos = getZeroVec<float>();
+	std::vector<VecI2> points;
 };
