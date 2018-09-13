@@ -26,7 +26,7 @@ Animation::Animation(VecI2 pos, std::string filename, int frameWidth, int frameH
 	pos(pos),
 	sprites({ filename },(unsigned int)frameWidth, (unsigned int)frameHeight, false),
 	frameTimer(frameTime),
-	allFrames(sprites.getSize()),
+	allFrames((int)sprites.getSize()),
 	looping(looping)
 {
 }

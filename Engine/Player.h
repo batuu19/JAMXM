@@ -39,7 +39,7 @@ public:
 private:
 	Surface background = "Sprites\\interface\\interface_background.bmp";
 	Player& player;
-	const VecI2 pos = { 0.f,0.f };
+	const VecI2 pos = { 0,0 };
 	float HPPercentage = 1.f;
 	const int HPbarLength = 170;
 	VecI2 HPRectPos = VecI2( 18,14 );

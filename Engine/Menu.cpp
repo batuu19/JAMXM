@@ -4,7 +4,7 @@ Menu::Menu(const RectI& screenRect, const std::initializer_list<std::string>& bu
 	:
 	pos(screenRect.getCenter() - VecI2(backgroundRect.getWidth() / 2, backgroundRect.getHeight() / 2))
 {
-	buttonCount = buttonNames.size();
+	buttonCount = (int)buttonNames.size();
 	SpriteContainer buttonSurf = { {"sprites\\menu\\buttonAnim.bmp"},1,2,false };
 	int padding = (backgroundRect.getHeight() - (buttonCount * buttonSurf.getHeight())) / (buttonCount + 1);
 	VecI2 butPos;

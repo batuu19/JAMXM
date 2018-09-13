@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Framework\Graphics Things">
       <UniqueIdentifier>{968ec720-b28d-46c9-8188-1c0c12001e12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameUtils\Physics">
+      <UniqueIdentifier>{44d0559a-9dbd-4a6d-9919-ad021bc52b9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h">
@@ -144,6 +147,9 @@
     <ClInclude Include="MapHelper.h">
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
+    <ClInclude Include="Hitbox.h">
+      <Filter>Header Files\GameUtils\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -225,6 +231,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hitbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

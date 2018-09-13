@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include <string>
 #include "MapHelper.h"
+#include "Hitbox.h"
 
 //open maps during game not at beginning 
 

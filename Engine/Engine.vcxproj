@@ -156,6 +156,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameUtils.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Hitbox.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Map.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />

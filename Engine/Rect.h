@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BMath.h"
+#include <vector>
 
 template<typename T>
 class Rect
@@ -86,6 +87,18 @@ public:
 	{
 		return Rect(*this).displaceBy(d);
 	}
+	Rect& moveTo0()
+	{
+		right -= left;
+		left = 0;
+		bottom -= top;
+		top = 0;
+		return *this;
+	}
+	Rect getMovedTo0() const
+	{
+		return Rect(*this).moveTo0();
+	}
 	Rect& fix()
 	{
 		if (left > right)
@@ -97,6 +110,18 @@ public:
 	Rect getFixed() const
 	{
 		return Rect(*this).fix();
+	}
+	std::vector<Vec2<T>> getPoints()
+	{
+		std::vector<Vec2<T>> out;
+		for (T y = left; y < right; y++)
+		{
+			for (T x = top; x < bottom; x++)
+			{
+				out.push_back(Vec2<T>(x, y));
+			}
+		}
+		return out;
 	}
 public:
 	T left;

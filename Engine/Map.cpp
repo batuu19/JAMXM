@@ -18,7 +18,7 @@ Map::Map(int mapNumber)
 			if (data >> (i * 4))
 			{
 				int x, y;
-				int val = in.tellg() * 2 + i;
+				int val = (int)in.tellg() * 2 + i;
 				y = val / 800;
 				x = val % 1600;
 				points.emplace_back(x, y);

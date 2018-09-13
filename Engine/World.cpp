@@ -126,9 +126,9 @@ void World::update(float dt)
 		if (!collidingWithBounds(ufo, mapRect))
 			ufo->bounceBack();
 
-	//testing map
-	if (colliding(map, car))
-		car->bounceBack();
+	////testing map
+	//if (colliding(map, car))
+	//	car->bounceBack();
 }
 
 void World::draw(Graphics & gfx) const
