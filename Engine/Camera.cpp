@@ -1,5 +1,11 @@
 #include "Camera.h"
 
+Camera::Camera(const VecF2 & startPos)
+	:
+	pos(startPos)
+{
+}
+
 void Camera::handleInput(Keyboard::Event e)
 {
 	if (e.IsPress())

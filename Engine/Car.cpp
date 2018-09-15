@@ -84,6 +84,7 @@ void Car::draw(Graphics & gfx, const VecF2& cameraPos) const
 	{
 		r->draw(gfx,cameraPos);
 	}
+	hitbox.testDraw(gfx, cameraPos);
 }
 
 void Car::reset()

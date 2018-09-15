@@ -3,7 +3,7 @@
 #include <algorithm>
 
 template<typename T, typename S>
-bool colliding(const T& first, const S& second)
+bool colliding(const T first, const S second)
 {
 	return first->getHitbox().isOverlappingWith(second->getHitbox());
 }
@@ -28,4 +28,10 @@ template<typename T, typename S>
 bool collidingWithBoundsFixed(const T object, Rect<S> rect)
 {
 	return !object->getHitbox().isOverlappingWith(rect);
+}
+
+template<typename T,typename S>
+bool isAllIn(const T object, const S in)
+{
+	return in->getHitbox().containsAll(*object);
 }

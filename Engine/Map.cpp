@@ -22,6 +22,7 @@ Map::Map(int mapNumber)
 				y = val / 800;
 				x = val % 1600;
 				points.emplace_back(x, y);
+				points.emplace_back(x, y + 1);
 
 			}
 		}
@@ -33,6 +34,7 @@ void Map::draw(Graphics & gfx, VecF2 cameraPos) const
 {
 	gfx.drawSprite(pos - cameraPos, mapSprite);
 	mapAI.draw(gfx,cameraPos);
+	hitbox.testDraw(gfx, cameraPos,Colors::White);
 }
 
 const RectI& Map::getRect() const
@@ -40,7 +42,7 @@ const RectI& Map::getRect() const
 	return mapSprite.getRect();
 }
 
-Hitbox Map::getHitbox() const
+const Hitbox& Map::getHitbox() const
 {
 	return hitbox;
 }
@@ -74,14 +76,14 @@ Map::AI::AI(int mapNumber)
 
 void Map::AI::draw(Graphics & gfx,VecF2 cameraPos) const
 {
-	auto draw = [&](VecF2 p,Color c = Colors::Red)
-	{
-		gfx.drawRect(Rect<int>::fromCenter(p, width, 10), c);
-	};
-	for (auto& p : points)
-	{
-		draw(p - cameraPos);
-	}
-	draw(points[0] - cameraPos, Colors::Yellow);
+	//auto draw = [&](VecF2 p,Color c = Colors::Red)
+	//{
+	//	gfx.drawRect(Rect<int>::fromCenter(p, width, 10), c);
+	//};
+	//for (auto& p : points)
+	//{
+	//	draw(p - cameraPos);
+	//}
+	//draw(points[0] - cameraPos, Colors::Yellow);
 	
 }

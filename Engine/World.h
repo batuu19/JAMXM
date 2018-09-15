@@ -62,4 +62,6 @@ private:
 	Sound sndAboutBlow = Sound(L"sound\\speech\\larry\\p1_is_about_to_blow.wav");
 	bool aboutBlow = false;
 
+
+	bool carOnRoad = false;
 };

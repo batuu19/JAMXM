@@ -8,6 +8,7 @@ class Camera
 {
 public:
 	Camera() = default;
+	Camera(const VecF2& startPos);
 	Camera(const Camera&) = delete;
 	void handleInput(Keyboard::Event);
 	void move(int dir);
@@ -17,7 +18,7 @@ public:
 	void centerOn(const T& object, const RectI& screenRect);
 	void update(float dt);
 	void reset();
-	VecF2 pos = getZeroVec<float>();
+	VecF2 pos = { 0.f,0.f };
 private:
 	float cameraMoveSpeed = 270.f;
 	VecF2 nextDir = { 0.f,0.f };

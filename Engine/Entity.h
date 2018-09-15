@@ -6,6 +6,7 @@
 #include "Surface.h"
 #include "Directions.h"
 #include "SpriteContainer.h"
+#include "Hitbox.h"
 #include <stdexcept>
 
 //for car and rocket
@@ -14,6 +15,7 @@ class Entity
 {
 public:
 	friend class UI;
+private:
 public:
 	virtual ~Entity() = default;
 
@@ -25,7 +27,7 @@ public:
 	void kill();
 	bool isDead() const;
 	//TODO: fix - more accurate hitbox
-	RectF getHitbox() const;
+	const RectHitbox& getHitbox() const;
 	const VecF2& getPosConst() const;
 protected:
 	Entity(const VecF2& pos, int spriteState, const SpriteContainer&,
@@ -43,4 +45,6 @@ protected:
 	bool invincible;
 	float invincibleTime = 0.f;
 	float invincibleTimer;
+
+	RectHitbox hitbox;
 };

@@ -20,7 +20,7 @@ public:
 	void draw(Graphics&, VecF2 cameraPos) const;
 	const RectI& getRect() const;
 
-	Hitbox getHitbox() const;
+	const Hitbox& getHitbox() const;
 private:
 	class AI
 	{
@@ -40,6 +40,6 @@ private:
 	//Surface mapSprite = "sprites\\maps\\road_big_1500x1500.bmp";
 	//Surface mapSprite = "sprites\\road_800x600.bmp";
 	Surface mapSprite;
-	VecF2 pos = getZeroVec<float>();
+	VecF2 pos = { 0.f,0.f };
 	Hitbox hitbox;
 };
