@@ -2,26 +2,21 @@
 //
 
 #include "stdafx.h"
-#include <fstream>
+#include <vector>
+#include <algorithm>
 #include <iostream>
+#include <functional>
 
 int main()
 {
-	std::ifstream in("r0.map", std::ios::binary);
-	if (!in.good())return -1;
-	char data;
-	while (in.get(data))
-	{
-		for (int i = 6; i >= 0; i -= 2)
-		{
-			if ((data >> i) & 3)
-			{
-				std::cout << (int)data << " "<<in.tellg()<<"\n";
-				std::cin.ignore();
-			}
-		}
-	}
+	std::vector<int> vec1 = { 1,2,3,4,5,6,7,8,9 };
+	std::vector<int> vec2 = { 3,4,8,9 };
 
+	auto vec3 = std::transform(vec1.begin(), vec1.end(), vec1.begin(), [](int i) {return i + 111; });
+	bool data = std::includes(vec1.begin(), vec1.end(), vec2.begin(), vec2.end());
+
+	std::cout << data << "\n";
+	std::cin.ignore();
     return 0;
 }
 

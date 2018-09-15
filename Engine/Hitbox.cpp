@@ -7,14 +7,23 @@ Hitbox::Hitbox(const std::vector<VecI2>& pointsIn)
 
 bool Hitbox::contains(const VecI2& point) const
 {
-	auto data = points.find(point - pos);
-	return data != points.end();
+	return points.find(point - pos) != points.end();
+}
+
+bool Hitbox::contains(const Hitbox & other) const
+{
+	//includes here?
+	auto pos = other.pos;
+	return std::all_of(other.points.begin(), other.points.end(), [&](VecI2 point) {
+		return contains(point + pos);
+	});
 }
 
 bool Hitbox::isOverlappingWith(const Hitbox & other) const
 {
-	for (auto& p : other.points)
+	for (auto p : other.points)
 	{
+		p -= other.pos;
 		if (contains(p))
 			return true;
 	}
@@ -53,10 +62,5 @@ bool RectHitbox::isContainedBy(const RectHitbox & other) const
 bool RectHitbox::contains(const VecI2& point) const
 {
 	return rect.getDisplacedBy(pos).contains(point);
-}
-
-bool RectHitbox::isOverlappingWith(const RectHitbox & other) const
-{
-	return rect.getDisplacedBy(pos).isOverlappingWith(other.rect.getDisplacedBy(other.pos));
 }
 

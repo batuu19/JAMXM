@@ -24,8 +24,7 @@ public:
 	Hitbox(const std::vector<VecI2>& pointsIn);
 
 	virtual bool contains(const VecI2& point) const;
-	template<typename T>
-	bool containsAll(const T& object) const;
+	virtual bool contains(const Hitbox& other) const;
 	virtual bool isOverlappingWith(const Hitbox& other) const;
 	virtual void updatePos(const VecI2& newPos);
 
@@ -44,17 +43,7 @@ public:
 	bool isContainedBy(const RectHitbox& other) const;
 	bool contains(const VecI2& point) const override;
 
-	bool isOverlappingWith(const RectHitbox& other) const;
 private:
 	RectI rect;
 };
 
-template<typename T>
-inline bool Hitbox::containsAll(const T & object) const
-{
-	const auto& hitbox = object.getHitbox();
-	return !std::any_of(points.begin(), points.end(), [&](const VecI2& point)
-	{
-		return hitbox.contains(point);
-	});
-}

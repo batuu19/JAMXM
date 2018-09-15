@@ -8,17 +8,11 @@ TO FIX
 -not needed things in code
 -camera
 TO DO
--sprite effect
--hitbox class
+-hitbox loaded from file
 -UI
 	-show active weapon
 	-show ammo
--pause menu
-	-resume
-	-back to main menu
-	-exit to windows
 -menu(with nice buttons)
-	-play game
 	-level editor(wip)
 	-leaderboards
 -collectable ammo
@@ -29,7 +23,6 @@ MAYBE TO DO(LATER)
 -ufo attacking with homing rockets that targets player's car
 -ufo's "AI"
 -level editor
--multiple levels(maps)
 -sprites on car showing damage
 -fullscreen
 -user can choose controls

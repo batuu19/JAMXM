@@ -78,8 +78,8 @@ void World::update(float dt)
 				}
 			}
 		}
-		if (collidingWithBoundsFixed(rockets[i], mapRect))
-			rockets[i]->kill();
+		//if (collidingWithBoundsFixed(rockets[i], mapRect))
+		//	rockets[i]->kill();
 
 	}
 
@@ -130,8 +130,8 @@ void World::update(float dt)
 
 
 	//testing map
-	carOnRoad = map->getHitbox().containsAll(*car);
-	if (carOnRoad)car->bounceBack();
+	carOnRoad = map->getHitbox().contains(car->getHitbox());
+	if (!carOnRoad)car->bounceBack();
 
 		
 }
@@ -145,7 +145,7 @@ void World::draw(Graphics & gfx) const
 	ui.draw(gfx, camera.pos);
 
 
-	if (carOnRoad)gfx.drawRect({ car->getPosConst() - camera.pos,30,30 }, Colors::Black);
+	//if (carOnRoad)gfx.drawRect({ car->getPosConst() - camera.pos,30,30 }, Colors::Black);
 }
 
 void World::reset()
