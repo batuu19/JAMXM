@@ -34,7 +34,7 @@ void Map::draw(Graphics & gfx, VecF2 cameraPos) const
 {
 	gfx.drawSprite(pos - cameraPos, mapSprite);
 	mapAI.draw(gfx,cameraPos);
-	//hitbox.testDraw(gfx, cameraPos,Colors::White);
+	hitbox.testDraw(gfx, cameraPos,Colors::White);
 }
 
 const RectI& Map::getRect() const

@@ -120,3 +120,23 @@ RectI SpriteContainer::getRect() const
 {
 	return sprites[0].getRect();
 }
+
+//iterator SpriteContainer::begin()
+//{
+//	return sprites.begin();
+//}
+//
+//iterator SpriteContainer::end()
+//{
+//	return sprites.end();
+//}
+
+const_iterator SpriteContainer::begin() const
+{
+	return sprites.begin();
+}
+
+const_iterator SpriteContainer::end() const
+{
+	return sprites.end();
+}

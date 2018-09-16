@@ -199,3 +199,19 @@ Surface Surface::getPart(const RectI& srcRect) const
 
 	return surf;
 }
+
+std::vector<VecI2>& Surface::getHitablePoints(Color chroma) const
+{
+	std::vector<VecI2> data;
+
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			auto p = pPixels[y*width + x];
+			if (p != chroma)
+				data.emplace_back(x, y);
+		}
+	}
+	return data;
+}

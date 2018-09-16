@@ -20,7 +20,7 @@ struct setPointsCompare {
 class Hitbox {
 public:
 	Hitbox() = default;
-	Hitbox(const Hitbox&) = delete;
+	//Hitbox(const Hitbox&) = delete;
 	Hitbox(const std::vector<VecI2>& pointsIn);
 
 	virtual bool contains(const VecI2& point) const;

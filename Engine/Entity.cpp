@@ -13,7 +13,10 @@ void Entity::update(float dt)
 	}
 	pos += vel * dt;
 
-	hitbox.updatePos(pos);
+	for (auto& h : hitbox)
+	{
+		h.updatePos(pos);
+	}
 }
 
 void Entity::draw(Graphics & gfx, const VecF2& cameraPos) const
@@ -50,9 +53,9 @@ bool Entity::isDead() const
 	return HP <= 0;
 }
 
-const RectHitbox& Entity::getHitbox() const
+const Hitbox& Entity::getHitbox() const
 {
-	return hitbox;
+	return hitbox[spriteState];
 }
 
 const VecF2 & Entity::getPosConst() const
@@ -74,8 +77,12 @@ Entity::Entity(const VecF2 & pos, int spriteState, const SpriteContainer & sprit
 	HP(HP),
 	maxHP(HP),
 	invincibleTimer(invincibilityTime),
-	invincible(invincibleAtStart),
-	hitbox(RectI({0,0},sprites.getWidth(),sprites.getHeight()))
+	invincible(invincibleAtStart)
 {
+	for (auto& s : sprites)
+	{
+		auto points = s.getHitablePoints();
+		hitbox.emplace_back(points);
+	}
 }
 

@@ -1,6 +1,10 @@
 #pragma once
 #include "Surface.h"
 #include <vector>
+#include <iterator>
+
+typedef std::vector<Surface>::iterator iterator;
+typedef std::vector<Surface>::const_iterator const_iterator;
 
 class SpriteContainer
 {
@@ -14,7 +18,6 @@ public:
 	Surface get(int i) const;
 	Surface get(int row, int line) const;
 
-
 	size_t getSize() const;
 	int getWidth() const;
 	int getHeight() const;
@@ -25,4 +28,9 @@ private:
 	int height;
 	int width;
 	std::vector<Surface> sprites;
+public:
+	//iterator begin();
+	//iterator end();
+	const_iterator begin() const;
+	const_iterator end() const;
 };
