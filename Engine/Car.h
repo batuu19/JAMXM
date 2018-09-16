@@ -52,8 +52,6 @@ private:
 	float rightTurnTime = turnRate;
 	int turnValue = 1;//how many directions at once
 	Sound sndFriction = Sound( L"sound\\game\\friction.wav" );
-	float turnSoundRate = turnRate * 3.1f;
-	float turnSoundTime = 0.f;
 
 
 	Sound sndWeaponChange = Sound(L"sound//game//reload.wav");

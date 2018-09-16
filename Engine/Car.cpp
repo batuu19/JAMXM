@@ -16,7 +16,6 @@ void Car::update(float dt)
 	//TODO: one turn time
 	rightTurnTime += dt;
 	leftTurnTime += dt;
-	turnSoundTime += dt;
 	lastShot += dt;
 	for (auto r : rocketsFired)
 	{
@@ -28,11 +27,6 @@ void Car::update(float dt)
 		{
 			spriteState = (spriteState + turnValue) % DIRECTIONS_COUNT;
 			rightTurnTime = 0.f;
-			if (turnSoundTime >= turnSoundRate)
-			{
-				sndFriction.Play();
-				turnSoundTime = 0.f;
-			}
 			vel = vectorsNormalized[spriteState] * (vel * vectorsNormalized[spriteState]);
 		}
 		nextTurn = TurnDirection::None;
@@ -43,11 +37,6 @@ void Car::update(float dt)
 		{
 			spriteState = (spriteState - turnValue + DIRECTIONS_COUNT) % DIRECTIONS_COUNT;
 			leftTurnTime = 0.f;
-			if (turnSoundTime >= turnSoundRate)
-			{
-				sndFriction.Play();
-				turnSoundTime = 0.f;
-			}
 
 			vel = vectorsNormalized[spriteState] * (vel * vectorsNormalized[spriteState]);
 		}
