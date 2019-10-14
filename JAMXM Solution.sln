@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RawEngine", "RawEngine\Engine.vcxproj", "{A0EF34DF-6DE4-474C-B904-E0FE434B24DD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapCreator", "MapCreator\MapCreator.vcxproj", "{D863F8B8-ABBF-44CE-87D8-187E9D66B004}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{A0EF34DF-6DE4-474C-B904-E0FE434B24DD}.Release|x64.Build.0 = Release|x64
 		{A0EF34DF-6DE4-474C-B904-E0FE434B24DD}.Release|x86.ActiveCfg = Release|Win32
 		{A0EF34DF-6DE4-474C-B904-E0FE434B24DD}.Release|x86.Build.0 = Release|Win32
+		{D863F8B8-ABBF-44CE-87D8-187E9D66B004}.Debug|x64.ActiveCfg = Debug|x64
+		{D863F8B8-ABBF-44CE-87D8-187E9D66B004}.Debug|x64.Build.0 = Debug|x64
+		{D863F8B8-ABBF-44CE-87D8-187E9D66B004}.Debug|x86.ActiveCfg = Debug|Win32
+		{D863F8B8-ABBF-44CE-87D8-187E9D66B004}.Debug|x86.Build.0 = Debug|Win32
+		{D863F8B8-ABBF-44CE-87D8-187E9D66B004}.Release|x64.ActiveCfg = Release|x64
+		{D863F8B8-ABBF-44CE-87D8-187E9D66B004}.Release|x64.Build.0 = Release|x64
+		{D863F8B8-ABBF-44CE-87D8-187E9D66B004}.Release|x86.ActiveCfg = Release|Win32
+		{D863F8B8-ABBF-44CE-87D8-187E9D66B004}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
