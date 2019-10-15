@@ -12,16 +12,25 @@ void Map::loadFromFile(std::string inputFile)
 	std::ifstream file;
 	file.open(inputFile);
 	int value;
-	do
+	while (!file.eof()) 
 	{
-		for (int i = 0; i < 4; i++)
+		value = file.get() - '0';
+		if (isValidForTile(value)) 
 		{
-			value = file.get() - '0';
-			values.push_back(value);
+			tiles.push_back(value);
 		}
-	} while (file.get() != -1);
+	}
 }
 
 void Map::saveToFile(std::string outputFile)
 {
+}
+
+bool Map::isValidForTile(int value)
+{
+	for (int i = 0; i < UNKNOWN; i++)
+	{
+		if (value == i)return true;
+	}
+	return false;
 }

@@ -6,6 +6,8 @@
 #include "Tile.h"
 #include "OpenCV.h"
 
+constexpr int VALUE_BREAK_LINE = 10;
+
 class Map
 {
 public:
@@ -19,4 +21,5 @@ private:
 
 	void loadFromFile(std::string inputFile);
 	void saveToFile(std::string outputFile);
+	bool isValidForTile(int value);
 };

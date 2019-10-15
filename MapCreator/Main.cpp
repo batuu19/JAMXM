@@ -4,6 +4,6 @@
 int main()
 {
 	Map map = Map();
-	map.generateFile("testNumbers.txt", "ttt");
+	map.generateFile("testMap.txt", "ttt");
 	system("pause");
 }
