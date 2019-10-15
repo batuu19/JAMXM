@@ -3,9 +3,13 @@
 #include<iostream>
 #include<fstream>
 
-#include "Tile.h"
-#include "OpenCV.h"
+#include <opencv/cv.h>
+#include <opencv2/core/core.hpp>
+#include <opencv/highgui.h>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 
+#include "Tile.h"
 constexpr int VALUE_BREAK_LINE = 10;
 
 class Map

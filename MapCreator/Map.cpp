@@ -4,6 +4,16 @@ void Map::generateFile(std::string inputFile, std::string outputFile)
 {
 	loadFromFile(inputFile);
 	//magic
+
+	cv::Mat image;
+	image.create(x * 100, y * 100, CV_8UC3);
+
+	cv::line(image, cv::Point(0, 0), cv::Point(100, 200), cv::Scalar(255, 0, 0));
+
+	cv::imwrite(outputFile, image);
+	
+
+
 	saveToFile(outputFile);
 }
 
@@ -16,9 +26,7 @@ void Map::loadFromFile(std::string inputFile)
 	{
 		value = file.get() - '0';
 		if (isValidForTile(value)) 
-		{
 			tiles.push_back(value);
-		}
 	}
 }
 
