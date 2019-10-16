@@ -26,6 +26,7 @@
   <ItemGroup>
     <ClInclude Include="Main.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="OpenCV.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>

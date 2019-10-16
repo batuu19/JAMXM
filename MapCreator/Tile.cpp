@@ -1,10 +1,30 @@
 #include "Tile.h"
 
 Tile::Tile()
-	:Tile(0)
+	//TODO
+	:Tile(0,Rect())
 {}
 
-Tile::Tile(int raw)
+Tile::Tile(int raw, Rect rect)
+	:
+	type((TileType)raw),
+	rect(rect)
+{}
+
+Rect Tile::getRect() const
 {
-	type = (TileType)raw;
+	return rect;
+}
+
+Scalar Tile::getScalar() const
+{
+	switch (type)
+	{
+	case GRASS:
+		return Scalar(0, 255, 0);
+	case ROAD:
+		return Scalar(200);
+	default:
+		return Scalar(0);
+	}
 }

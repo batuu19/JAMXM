@@ -1,6 +1,7 @@
 #pragma once
 
-#include <opencv/cv.h>
+#include "OpenCV.h"
+using namespace cv;
 enum TileType
 {
 	GRASS, //0
@@ -12,8 +13,10 @@ class Tile
 {
 public:
 	Tile();
-	Tile(int raw);
+	Tile(int raw,Rect rect);
 
+	Rect getRect() const;
+	Scalar getScalar() const;
 
 private:
 	TileType type;

@@ -1,21 +1,42 @@
 #include "Map.h"
 
+Map::Map()
+	:
+	Map(DEFAULT_TILE_SIZE, DEFAULT_TILE_SIZE, DEFAULT_MAP_COLS_ROWS, DEFAULT_MAP_COLS_ROWS)
+{}
+
+Map::Map(int tileWidth, int tileHeight, int cols, int rows)
+	:
+	tileRect(0, 0, tileWidth, tileHeight),
+	cols(cols),
+	rows(rows)
+{
+	tiles.reserve((size_t)cols*(size_t)rows);
+}
+
 void Map::generateFile(std::string inputFile, std::string outputFile)
 {
 	loadFromFile(inputFile);
 	//magic
 
-	cv::Mat image(500, 500, CV_8UC3, cv::Scalar(0, 0, 255));
+	cv::Mat image(tileRect.width * rows, tileRect.height * cols, CV_8UC3, Scalar(0, 0, 0));
 
-	cv::line(image, cv::Point(0, 0), cv::Point(100, 200), cv::Scalar(255, 0, 0));
-	
 
-	std::vector<cv::Point> pts = { {10,10},{10,20},{20,30},{40,50},{10,40} };
-
-	std::vector<std::vector<cv::Point>> vpts;
-	vpts.push_back(pts);
-
-	cv::fillPoly(image, vpts, cv::Scalar(255, 0, 0));
+	std::vector<Point> pts(4);
+	std::vector<std::vector<Point>> vpts;
+	for (auto& tile : tiles) {
+		auto r = tile.getRect();
+		pts.clear();
+		vpts.clear();
+		pts.push_back({ r.x,r.y });;
+		pts.push_back({ r.x + r.width,r.y });
+		pts.push_back({ r.x + r.width,r.y + r.height });
+		pts.push_back({ r.x,r.y + r.height });
+		vpts.push_back(pts);
+		//rectangle(image, tile.getRect(), tile.getScalar());
+		fillPoly(image, vpts, tile.getScalar());
+		
+	}
 
 	cv::imwrite(outputFile, image);
 
@@ -27,16 +48,24 @@ void Map::loadFromFile(std::string inputFile)
 	std::ifstream file;
 	file.open(inputFile);
 	int value;
-	while (!file.eof()) 
+	Rect tRect(tileRect);
+	int count = 0;
+	while (!file.eof())
 	{
-		value = file.get() - '0';
-		if (isValidForTile(value)) 
-			tiles.push_back(value);
-	}
-}
 
-void Map::saveToFile(std::string outputFile)
-{
+		value = file.get() - '0';
+		if (isValidForTile(value)) {
+			tiles.push_back({ value,tRect });
+			count++;
+			if (count % cols == 0 && count != 0) {//end of row
+				tRect.x = 0;
+				tRect.y += tRect.width;
+			}
+			else {
+				tRect.x += tRect.height;
+			}
+		}
+	}
 }
 
 bool Map::isValidForTile(int value)
