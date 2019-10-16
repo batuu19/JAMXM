@@ -5,16 +5,21 @@ void Map::generateFile(std::string inputFile, std::string outputFile)
 	loadFromFile(inputFile);
 	//magic
 
-	cv::Mat image;
-	image.create(x * 100, y * 100, CV_8UC3);
+	cv::Mat image(500, 500, CV_8UC3, cv::Scalar(0, 0, 255));
 
 	cv::line(image, cv::Point(0, 0), cv::Point(100, 200), cv::Scalar(255, 0, 0));
-
-	cv::imwrite(outputFile, image);
 	
 
+	std::vector<cv::Point> pts = { {10,10},{10,20},{20,30},{40,50},{10,40} };
 
-	saveToFile(outputFile);
+	std::vector<std::vector<cv::Point>> vpts;
+	vpts.push_back(pts);
+
+	cv::fillPoly(image, vpts, cv::Scalar(255, 0, 0));
+
+	cv::imwrite(outputFile, image);
+
+	//saveToFile(outputFile);
 }
 
 void Map::loadFromFile(std::string inputFile)

@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include <opencv/cv.h>
 enum TileType
 {
 	GRASS, //0
@@ -17,8 +17,7 @@ public:
 
 private:
 	TileType type;
-	int xCoord = 0;
-	int yCoord = 0;
+	cv::Rect rect;
 
 };
 
