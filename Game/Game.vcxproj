@@ -151,6 +151,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Directions.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTimer.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Hitbox.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapHelper.h" />
@@ -169,9 +171,11 @@
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Rocket.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteContainer.h" />
+    <ClInclude Include="StaticEntity.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="UFO.h" />
     <ClInclude Include="World.h" />
@@ -193,6 +197,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -200,6 +205,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rocket.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteContainer.cpp" />
     <ClCompile Include="Surface.cpp" />

@@ -9,7 +9,7 @@ Map::Map(int mapNumber)
 {
 }
 
-void Map::draw(Graphics & gfx, VecF2 cameraPos) const
+void Map::draw(Graphics & gfx, const VecF2& cameraPos) const
 {
 	gfx.drawSprite(pos - cameraPos, mapSprite);
 	//mapAI.draw(gfx,cameraPos);

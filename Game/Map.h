@@ -14,12 +14,12 @@
 
 static constexpr char DEBUG_MAP_SPRITE[] = "Sprites\\maps\\trasa.bmp";
 
-class Map
+class Map : public StaticEntity
 {
 public:
 	Map(int mapNumber);
 	Map(const Map&) = delete;
-	void draw(Graphics&, VecF2 cameraPos) const;
+	void draw(Graphics&, const VecF2& cameraPos) const override;
 	const RectI& getRect() const;
 
 private:

@@ -3,8 +3,9 @@
 #include "Rect.h"
 #include "Keyboard.h"
 #include "Directions.h"
+#include "Entity.h"
 
-class Camera
+class Camera : public DynamicEntity
 {
 public:
 	Camera() = default;

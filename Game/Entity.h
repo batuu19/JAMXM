@@ -8,10 +8,12 @@
 #include "SpriteContainer.h"
 #include "Hitbox.h"
 #include <stdexcept>
+#include "StaticEntity.h"
+#include "DynamicEntity.h"
 
 //for car and rocket
 //TODO: what about explosion and other?
-class Entity
+class Entity : public DynamicEntity,public StaticEntity
 {
 public:
 	friend class UI;
@@ -19,7 +21,7 @@ public:
 	virtual ~Entity() = default;
 
 	virtual void update(float dt);
-	virtual void draw(Graphics&, const VecF2& cameraPos) const;
+	virtual void draw(Graphics&, const VecF2& cameraPos) const override;
 	virtual void reset();
 
 	bool damage(float amount);//return true if destroyed

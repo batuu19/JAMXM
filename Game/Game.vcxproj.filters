@@ -34,6 +34,12 @@
     <Filter Include="Header Files\GameUtils\Physics">
       <UniqueIdentifier>{44d0559a-9dbd-4a6d-9919-ad021bc52b9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects\Scene">
+      <UniqueIdentifier>{2f3fc653-d3b3-4f98-b1ed-44ca508b39b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameUtils\Interfaces">
+      <UniqueIdentifier>{dd350dc5-1c42-4d2f-b127-62d4bcd71dad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h">
@@ -87,9 +93,6 @@
     <ClInclude Include="SoundEffect.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="BUtils.h">
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
@@ -138,9 +141,6 @@
     <ClInclude Include="ChiliWin.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="GameUtils.h">
       <Filter>Header Files\GameUtils</Filter>
     </ClInclude>
@@ -149,6 +149,24 @@
     </ClInclude>
     <ClInclude Include="Hitbox.h">
       <Filter>Header Files\GameUtils\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files\GameObjects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\GameObjects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\GameObjects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\GameObjects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticEntity.h">
+      <Filter>Header Files\GameUtils\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicEntity.h">
+      <Filter>Header Files\GameUtils\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +252,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hitbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

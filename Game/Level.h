@@ -3,6 +3,8 @@
 
 class Level
 {
+public:
+	//Level();
 private:
 	Map map;
 };
