@@ -54,7 +54,7 @@ private:
 	Sound sndFriction = Sound( L"sound\\game\\friction.wav" );
 
 
-	Sound sndWeaponChange = Sound(L"sound//game//reload.wav");
+	Sound sndWeaponChange = Sound(L"sound\\game\\reload.wav");
 
 	TurnDirection nextTurn = TurnDirection::None;
 

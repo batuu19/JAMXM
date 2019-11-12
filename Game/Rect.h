@@ -37,8 +37,8 @@ public:
 	}
 	bool isOverlappingWith(const Rect& other) const
 	{
-		return right > other.left && left < other.right
-			&& bottom > other.top && top < other.bottom;
+		return right > other.left&& left < other.right
+			&& bottom > other.top&& top < other.bottom;
 	}
 	bool isContainedBy(const Rect& other) const
 	{
@@ -49,6 +49,11 @@ public:
 	{
 		return left <= point.x && right >= point.x &&
 			top <= point.y && bottom >= point.y;
+	}
+	bool contains(const Rect& other) const//unchecked
+	{
+		return left < other.left && right > other.right &&
+			top < other.top && bottom > other.bottom;
 	}
 	static Rect fromCenter(const Vec2<T>& center, T halfWidth, T halfHeight)
 	{
@@ -66,6 +71,10 @@ public:
 	Vec2<T> getCenter() const
 	{
 		return Vec2<T>((left + right) / (T)2, (top + bottom) / (T)2);
+	}
+	Vec2<T> getOrigin() const //top left corner
+	{
+		return Vec2<T>(left, top);
 	}
 	T getWidth() const
 	{

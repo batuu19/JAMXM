@@ -12,6 +12,8 @@
 
 //open maps during game not at beginning 
 
+static constexpr char DEBUG_MAP_SPRITE[] = "Sprites\\maps\\trasa.bmp";
+
 class Map
 {
 public:
@@ -20,26 +22,10 @@ public:
 	void draw(Graphics&, VecF2 cameraPos) const;
 	const RectI& getRect() const;
 
-	const Hitbox& getHitbox() const;
 private:
-	class AI
-	{
-	public:
-		AI(std::string filename);
-		AI(int mapNumber);
-
-		void draw(Graphics&, VecF2 cameraPos) const;
-	private:
-		int width;
-		int branch;
-		RectI bounds;
-		std::vector<VecF2> points;
-	};
-private:
-	AI mapAI;
+	//AI mapAI;
 	//Surface mapSprite = "sprites\\maps\\road_big_1500x1500.bmp";
 	//Surface mapSprite = "sprites\\road_800x600.bmp";
 	Surface mapSprite;
 	VecF2 pos = { 0.f,0.f };
-	Hitbox hitbox;
 };

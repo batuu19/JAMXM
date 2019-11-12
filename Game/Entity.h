@@ -45,5 +45,5 @@ protected:
 	float invincibleTime = 0.f;
 	float invincibleTimer;
 
-	std::vector<Hitbox> hitbox;
+	Hitbox hitbox;
 };

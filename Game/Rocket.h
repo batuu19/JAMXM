@@ -7,6 +7,15 @@
 #include "Entity.h"
 #include "Animation.h"
 
+
+//TODO static strings and values(static config?)
+static constexpr char SPRITES_DIR[] = "sprites\\";
+static constexpr char BIG_ROCKET_SPRITE[] = "sprites\\big_rocket_125x20.bmp";
+static constexpr char BIG_EXPLOSION_SPRITE[] = "sprites\\big_explosion_336x55.bmp";
+static constexpr char SMOKE_ANIM[] = "sprites\\smoke_anim.bmp";
+static constexpr char SMALL_ROCKET_SPRITE[] = "sprites\\small_rocket_175x35.bmp";
+static constexpr char SMALL_EXPLOSION_SPRITE[] = "sprites\\small_explosion_240x40.bmp";
+
 class Rocket : public Entity
 {
 public:

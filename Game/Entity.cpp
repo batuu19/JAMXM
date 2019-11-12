@@ -13,10 +13,7 @@ void Entity::update(float dt)
 	}
 	pos += vel * dt;
 
-	for (auto& h : hitbox)
-	{
-		h.updatePos(pos);
-	}
+	hitbox.updatePos(pos);
 }
 
 void Entity::draw(Graphics & gfx, const VecF2& cameraPos) const
@@ -26,6 +23,7 @@ void Entity::draw(Graphics & gfx, const VecF2& cameraPos) const
 		if ((int)(invincibleTime * 20.f) % 4 == 0)
 			gfx.drawSprite(pos - cameraPos, sprites[spriteState]);
 	}
+	//gfx.drawRect(hitbox.getRect().getDisplacedBy(-cameraPos), Colors::Cyan);
 }
 
 void Entity::reset()
@@ -55,7 +53,7 @@ bool Entity::isDead() const
 
 const Hitbox& Entity::getHitbox() const
 {
-	return hitbox[spriteState];
+	return hitbox;
 }
 
 const VecF2 & Entity::getPosConst() const
@@ -63,10 +61,10 @@ const VecF2 & Entity::getPosConst() const
 	return pos;
 }
 
-Entity::Entity(const VecF2 & pos, int spriteState, const SpriteContainer & sprites, 
-	const VecF2 & vel, float HP, float speed, float maxVel,
+Entity::Entity(const VecF2& pos, int spriteState, const SpriteContainer& sprites,
+	const VecF2& vel, float HP, float speed, float maxVel,
 	float invincibilityTime, bool invincibleAtStart
-	)
+)
 	:
 	pos(pos),
 	vel(vel),
@@ -77,12 +75,8 @@ Entity::Entity(const VecF2 & pos, int spriteState, const SpriteContainer & sprit
 	HP(HP),
 	maxHP(HP),
 	invincibleTimer(invincibilityTime),
-	invincible(invincibleAtStart)
+	invincible(invincibleAtStart),
+	hitbox(sprites.getRect(), VecI2(pos))
 {
-	for (auto& s : sprites)
-	{
-		auto points = s.getHitablePoints();
-		hitbox.emplace_back(points);
-	}
 }
 

@@ -11,6 +11,8 @@
 #include "UFO.h"
 #include <exception>
 #include "Font.h"
+
+//TODO cache?
 class World
 {
 public:
@@ -33,7 +35,7 @@ private:
 	Camera camera;
 	std::vector<Rocket*> rockets;
 	std::vector<Animation> animations;
-	Car* car = new Car(VecF2(216.f, 867.f), RIGHT, rockets,animations);
+	Car* car = new Car(VecF2(216.f, 467.f), RIGHT, rockets,animations);
 	Player player;
 	std::vector<UFO*> ufos;
 	UI ui;

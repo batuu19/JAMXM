@@ -10,7 +10,7 @@ World::World(const RectI & screenRect)
 	ui(player)
 {
 	//bgm.Play(1.f, 0.35f);
-	const int count = 0;//for debuging
+	const int count = 1;//for debuging
 	for (int i = 0; i < count; i++)
 		ufos.push_back(new UFO(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
 
@@ -78,8 +78,8 @@ void World::update(float dt)
 				}
 			}
 		}
-		//if (collidingWithBoundsFixed(rockets[i], mapRect))
-		//	rockets[i]->kill();
+		if (collidingWithBoundsFixed(rockets[i], mapRect))
+			rockets[i]->kill();
 
 	}
 
@@ -104,9 +104,9 @@ void World::update(float dt)
 			camera.centerOn(*car, screenRect);
 			carDead = false;
 		}
-	////car bouncing of map bounds
-	//if (!collidingWithBounds(car, mapRect))
-	//	car->bounceBack();
+	//car bouncing of map bounds
+	if (!collidingWithBounds(car, mapRect))
+		car->bounceBack();
 
 	////car bouncing of ufo
 	//for (auto ufo : ufos)
@@ -123,15 +123,15 @@ void World::update(float dt)
 	if (camera.pos.y < mapRect.top)camera.pos.y = (float)mapRect.top;
 	if (camera.pos.y + screenRect.bottom > mapRect.bottom)camera.pos.y = (float)(mapRect.bottom - screenRect.bottom);
 
-	////ufo physics
-	//for (auto ufo : ufos)
-	//	if (!collidingWithBounds(ufo, mapRect))
-	//		ufo->bounceBack();
+	//ufo physics
+	for (auto ufo : ufos)
+		if (!collidingWithBounds(ufo, mapRect))
+			ufo->bounceBack();
 
 
 	//testing map
-	carOnRoad = map->getHitbox().contains(car->getHitbox());
-	if (!carOnRoad)car->bounceBack();
+	/*carOnRoad = map->getHitbox().contains(car->getHitbox());
+	if (!carOnRoad)car->bounceBack();*/
 
 		
 }

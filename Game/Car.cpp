@@ -73,7 +73,8 @@ void Car::draw(Graphics & gfx, const VecF2& cameraPos) const
 	{
 		r->draw(gfx,cameraPos);
 	}
-	hitbox[spriteState].testDraw(gfx, cameraPos);
+
+	//gfx.drawRect(hitbox.rect.getDisplacedBy(hitbox.pos - cameraPos), Colors::Green);
 }
 
 void Car::reset()

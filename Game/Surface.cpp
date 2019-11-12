@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <fstream>
 
-Surface::Surface(const std::string & filename)
+Surface::Surface(const std::string& filename)
 {
 	std::ifstream file(filename, std::ios::binary);
 
@@ -19,12 +19,12 @@ Surface::Surface(const std::string & filename)
 	width = bmInfoHeader.biWidth;
 	height = bmInfoHeader.biHeight;
 
-	pPixels = new Color[width*height];
+	pPixels = new Color[width * height];
 
 	file.seekg(bmFileHeader.bfOffBits);
 	const int padding = (4 - (width * 3) % 4) % 4;
 
-	for (int y = height - 1; y >= 0;y--)
+	for (int y = height - 1; y >= 0; y--)
 	{
 		for (int x = 0; x < width; x++)
 		{
@@ -38,27 +38,27 @@ Surface::Surface(int width, int height)
 	:
 	width(width),
 	height(height),
-	pPixels( new Color[width*height])
+	pPixels(new Color[width * height])
 {
 }
 
-Surface::Surface(int width, int height, Color * pPixels)
+Surface::Surface(int width, int height, Color* pPixels)
 	:
 	width(width),
 	height(height),
-	pPixels(new Color[width*height])
+	pPixels(new Color[width * height])
 {
-	for (int i = 0; i < width*height; i++)
+	for (int i = 0; i < width * height; i++)
 	{
 		this->pPixels[i] = pPixels[i];
 	}
 }
 
-Surface::Surface(const Surface & rhs)
+Surface::Surface(const Surface& rhs)
 	:
 	Surface(rhs.width, rhs.height)
 {
-	const int nPixels = width*height;
+	const int nPixels = width * height;
 	for (int i = 0; i < nPixels; i++)
 	{
 		pPixels[i] = rhs.pPixels[i];
@@ -71,7 +71,7 @@ Surface::~Surface()
 	pPixels = nullptr;
 }
 
-Surface & Surface::operator=(const Surface & rhs)
+Surface& Surface::operator=(const Surface& rhs)
 {
 	width = rhs.width;
 	height = rhs.height;
@@ -79,7 +79,7 @@ Surface & Surface::operator=(const Surface & rhs)
 	delete[] pPixels;
 	pPixels = new Color[width * height];
 
-	const int nPixels = width*height;
+	const int nPixels = width * height;
 	for (int i = 0; i < nPixels; i++)
 	{
 		pPixels[i] = rhs.pPixels[i];
@@ -141,12 +141,12 @@ Surface Surface::rotateVertically() const
 	{
 		for (int x = 0; x < width; x++)
 		{
-			newPPixels[(height - y - 1)*width + x] = pPixels[y*width + x];
+			newPPixels[(height - y - 1) * width + x] = pPixels[y * width + x];
 		}
 	}
 
-	Surface surf(width,height, newPPixels);
-	delete newPPixels;
+	Surface surf(width, height, newPPixels);
+	delete[]newPPixels;
 	return surf;
 }
 
@@ -159,12 +159,12 @@ Surface Surface::rotateHorizontally() const
 	{
 		for (int x = 0; x < width; x++)
 		{
-			newPPixels[y*width + (width - x - 1)] = pPixels[y*width + x];
+			newPPixels[y * width + (width - x - 1)] = pPixels[y * width + x];
 		}
 	}
 
 	Surface surf(width, height, newPPixels);
-	delete newPPixels;
+	delete[] newPPixels;
 	return surf;
 }
 
@@ -179,7 +179,7 @@ Surface Surface::rotateVertAndHor() const
 	}
 
 	Surface surf(width, height, newPPixels);
-	delete newPPixels;
+	delete[]newPPixels;
 	return surf;
 }
 
@@ -193,7 +193,7 @@ Surface Surface::getPart(const RectI& srcRect) const
 	{
 		for (int x = 0; x < width; x++)
 		{
-			surf.pPixels[y*width + x] = pPixels[(y + srcRect.top)* this->width + (x + srcRect.left)];
+			surf.pPixels[y * width + x] = pPixels[(y + srcRect.top) * this->width + (x + srcRect.left)];
 		}
 	}
 
@@ -208,7 +208,7 @@ std::vector<VecI2>& Surface::getHitablePoints(Color chroma) const
 	{
 		for (int x = 0; x < width; x++)
 		{
-			auto p = pPixels[y*width + x];
+			auto p = pPixels[y * width + x];
 			if (p != chroma)
 				data.emplace_back(x, y);
 		}
