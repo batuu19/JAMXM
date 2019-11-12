@@ -25,25 +25,10 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	config("config.txt"),
-	map(config, gfx),
-	player(
-		Car(
-	VecF2((float)config.carStartXPos,(float)config.carStartYPos ),
-	config.carStartVelocity,
-	config.carSpeed,
-	config.carMaxVelocity,
-	config.carStartDir,
-	config.carTurnRate,
-	config.rocketVelocity,
-	config.rocketImageFileName,
-	35,35,
-	config.carImageFileName,
-	70,70
-		))
+	world(gfx.getScreenRect()),
+	pauseMenu(gfx.getScreenRect(),{"Resume","Menu","Quit"}),
+	menu(gfx.getScreenRect(), {"Play","Quit"})
 {
-	Debug::clear();
-	sndMusic.Play();
 }
 
 void Game::Go()
@@ -56,32 +41,154 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	while (!wnd.kbd.KeyIsEmpty())
+	{
+		const Keyboard::Event k = wnd.kbd.ReadKey();
+		handleInput(k);
+	}
+	while (!wnd.mouse.IsEmpty())
+	{
+		const Mouse::Event m = wnd.mouse.Read();
+		handleInput(m);
+	}
+	
 
-	player.update(wnd.kbd);
-	//do sprawdzania wymiarów
-	//int x, y;
-
-	//if (wnd.mouse.LeftIsPressed())
-	//{
-	//	if(!pressed)
-	//	{
-	//		x = wnd.mouse.GetPosX();
-	//		y = wnd.mouse.GetPosY();
-
-	//		std::stringstream ss;
-	//		ss << "Mouse at " << x << " " << y;
-	//		Debug::writeInfo(ss.str());
-
-	//		pressed = true;
-	//	}
-	//	
-	//}
-	//else 
-	//	pressed = false;
+	const float dt = ft.mark();
+	switch (gameState)
+	{
+	case GameState::MainMenu:
+		processAction(menu.getActiveButtonAction());
+		menu.update(dt);
+		break;
+	case GameState::GamePaused:
+		processAction(pauseMenu.getActiveButtonAction());
+		break;
+	case GameState::Game:
+		world.update(dt);
+		break;
+	default:
+		break;
+	}
 }
 
 void Game::ComposeFrame()
 {
-	map.draw();
-	player.draw(gfx);
+	switch (gameState)
+	{
+	case GameState::MainMenu:
+		menu.draw(gfx);
+		break;
+	case GameState::GamePaused:
+		world.draw(gfx);
+		pauseMenu.draw(gfx);
+		break;
+	case GameState::Game:
+		world.draw(gfx);
+		break;
+	default:
+		break;
+	}
 }
+
+void Game::handleInput(Keyboard::Event k)
+{
+	if (k.IsPress())
+	{
+		switch (k.GetCode())
+		{
+		case VK_ESCAPE:
+			pauseGame();
+			break;
+		default:
+			break;
+		}
+	}
+	if (gameState == GameState::Game)
+		world.handleInput(k);
+}
+
+void Game::handleInput(Mouse::Event m)
+{
+	switch (gameState)
+	{
+	case GameState::MainMenu:
+		menu.handleInput(m);
+		break;
+	case GameState::Game:
+		break;
+	case GameState::GamePaused:
+		pauseMenu.handleInput(m);
+		break;
+	default:
+		break;
+	}
+	
+}
+
+void Game::processAction(std::string action)
+{
+	if (action == "Play")
+		enterGame();
+	else if (action == "Resume")
+		unpauseGame();
+	else if (action == "Menu")
+		enterMainMenu();
+	else if (action == "Quit")
+		exitGame();
+
+}
+
+bool Game::pauseGame()
+{
+	if (gameState != GameState::Game)return false;//can go only from Game
+	else
+	{
+		gameState = GameState::GamePaused;
+		return true;
+	}
+}
+
+bool Game::unpauseGame()
+{
+	if (gameState != GameState::GamePaused)return false;//can go only from GamePaused
+	else
+	{
+		gameState = GameState::Game;
+		return true;
+	}
+}
+
+bool Game::enterGame()
+{
+	if (gameState != GameState::MainMenu)return false;//can go only from MainMenu
+	else
+	{
+		world.reset();
+		gameState = GameState::Game;
+		return true;
+	}
+}
+
+bool Game::enterMainMenu()
+{
+	if (gameState != GameState::GamePaused)return false;//can go only from GamePaused
+	else
+	{
+		gameState = GameState::MainMenu;
+		return true;
+	}
+}
+
+bool Game::exitGame()
+{
+	if (gameState != GameState::MainMenu && gameState != GameState::GamePaused)return false;//can go only from MainMenu && GamePaused 
+	else
+	{
+		wnd.Kill();
+		return true;//not needed?
+	}
+}
+
+
+
+

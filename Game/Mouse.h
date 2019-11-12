@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #pragma once
 #include <queue>
+#include "BMath.h"
 
 class Mouse
 {
@@ -70,7 +71,7 @@ public:
 		{
 			return type;
 		}
-		std::pair<int,int> GetPos() const
+		VecI2 GetPos() const
 		{
 			return{ x,y };
 		}

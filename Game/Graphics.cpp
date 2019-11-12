@@ -312,52 +312,49 @@ void Graphics::BeginFrame()
 	memset( pSysBuffer,0u,sizeof( Color ) * Graphics::ScreenHeight * Graphics::ScreenWidth );
 }
 
-void Graphics::putPixel( int x,int y,Color c )
+void Graphics::putPixel(int i, Color c)
 {
-	assert( x >= 0 );
-	assert( x < int( Graphics::ScreenWidth ) );
-	assert( y >= 0 );
-	assert( y < int( Graphics::ScreenHeight ) );
-	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
+	pSysBuffer[i] = c;
 }
 
-void Graphics::drawRect(int x0, int y0, int x1, int y1, Color c)
+void Graphics::drawRect(RectI rect, RectI clip, Color c)
 {
-	if (x0 > x1)
+	rect.fix();
+	VecI2 rectPos = { rect.left,rect.top };
+
+	if (rect.left < clip.left)
 	{
-		std::swap(x0, x1);
+		rect.left = clip.left;
 	}
-	if (y0 > y1)
+	if (rect.top < clip.top)
 	{
-		std::swap(y0, y1);
+		rect.top = clip.top;
+	}
+	if (rect.right > clip.right)
+	{
+		rect.right = clip.right;
+	}
+	if (rect.bottom > clip.bottom)
+	{
+		rect.bottom = clip.bottom;
 	}
 
-	for (int y = y0; y < y1; ++y)
+	for (int y = rect.top; y < rect.bottom; ++y)
 	{
-		for (int x = x0; x < x1; ++x)
+		for (int x = rect.left; x < rect.right; ++x)
 		{
 			putPixel(x, y, c);
 		}
 	}
 }
 
-void Graphics::drawSpriteNonChroma(int x, int y, const Surface & s)
-{
-	drawSpriteNonChroma(x, y, s.getRect(), s);
-}
-
-void Graphics::drawSpriteNonChroma(int x, int y, const RectI & srcRect, const Surface & s)
-{
-	drawSpriteNonChroma(x, y, srcRect, getScreenRect(), s);
-}
-
 void Graphics::drawSpriteNonChroma(int x, int y, RectI srcRect, const RectI & clip, const Surface & s)
-{
+{/*
 	assert(srcRect.left >= 0);
 	assert(srcRect.right <= s.getWidth());
 	assert(srcRect.top >= 0);
 	assert(srcRect.bottom <= s.getHeight());
-
+*/
 	if (x < clip.left)
 	{
 		srcRect.left += clip.left - x;
@@ -386,22 +383,12 @@ void Graphics::drawSpriteNonChroma(int x, int y, RectI srcRect, const RectI & cl
 	}
 }
 
-void Graphics::drawSprite(int x, int y, const Surface & s, Color chroma)
-{
-	drawSprite(x, y, s.getRect(), s, chroma);
-}
-
-void Graphics::drawSprite(int x, int y, const RectI & srcRect, const Surface & s, Color chroma)
-{
-	drawSprite(x, y, srcRect, getScreenRect(), s, chroma);
-}
-
 void Graphics::drawSprite(int x, int y, RectI srcRect, const RectI & clip, const Surface & s, Color chroma)
-{
+{/*
 	assert(srcRect.left >= 0);
 	assert(srcRect.right <= s.getWidth());
 	assert(srcRect.top >= 0);
-	assert(srcRect.bottom <= s.getHeight());
+	assert(srcRect.bottom <= s.getHeight());*/
 
 	if (x < clip.left)
 	{

@@ -1,16 +1,47 @@
 #pragma once
-#include "Keyboard.h"
 #include "Car.h"
-#include "FrameTimer.h"
-#include "Debug.h"
+#include "BUtils.h"
+#include "Rect.h"
+#include "Font.h"
 
 class Player
 {
 public:
-	Player(Car & car);
-	void update(Keyboard &);
-	void draw(Graphics &);
-private:
-	Car car;
+	friend class UI;
+public:
+	Player(Car*);
+	Player(const Player&) = delete;
+	Player& operator=(const Player&) = delete;
+	~Player();
+	void update(float dt);
+	void draw(Graphics&, const VecF2& cameraPos) const;
+	void reset();
+	void scorePoints(int amount = 1);
+	void handleInput(Keyboard::Event);
+	const Car& getCarConst() const;
 
+private:
+	Car* car;
+	bool shooting = false;
+	Car::Speedup speedup = Car::Speedup::None;
+	Car::TurnDirection turning = Car::TurnDirection::None;
+	int score = 0;
+
+
+};
+
+class UI
+{
+public:
+	UI(Player&);
+	void update(float dt);
+	void draw(Graphics&,VecF2 cameraPos) const;
+private:
+	Surface background = "Sprites\\interface\\interface_background.bmp";
+	Player& player;
+	const VecI2 pos = { 0,0 };
+	float HPPercentage = 1.f;
+	const int HPbarLength = 170;
+	VecI2 HPRectPos = VecI2( 18,14 );
+	Color HPcolor = Colors::Red;
 };

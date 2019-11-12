@@ -23,16 +23,16 @@ SpriteContainer::SpriteContainer(const Surface& surf, int rows, int lines,
 		for (int x = 0; x < rows; x++)
 		{
 			frames[y*rows + x] = { left,right,up,down };
-			left += 2 * width;
-			std::swap(left, right);
+			left += width;
+			right += width;
 		}
-		down += 2 * height;
-		std::swap(up, down);
+		down += height;
+		up += height;
 		left = 0;
 		right = width;
 	}
 	//for example car
-	if (rotateAtCreate)
+	if (rotateAtCreate && rows == 5 && lines == 1)
 	{
 		sprites.emplace_back(surf.getPart(frames[0]));//UP
 
@@ -63,10 +63,22 @@ SpriteContainer::SpriteContainer(const Surface& surf, int rows, int lines,
 	{
 		for (int i = 0; i < framesCount; i++)
 		{
-			sprites.emplace_back(surf.getPart(frames[i]));
+			sprites.push_back(surf.getPart(frames[i]));
 		}
 	}
-	delete frames;
+	delete[] frames;
+}
+
+SpriteContainer::SpriteContainer(const Surface & surf, int rows, int lines, bool rotateAtCreate)
+	:
+	SpriteContainer(surf, rows, lines, surf.getWidth() / rows, surf.getHeight() / lines, rotateAtCreate)
+{
+}
+
+SpriteContainer::SpriteContainer(const Surface & surf, unsigned int width, unsigned int height, bool rotateAtCreate)
+	:
+	SpriteContainer(surf,surf.getWidth()/(int)width,surf.getHeight()/ (int)height,(int)width,(int)height,rotateAtCreate)
+{
 }
 
 Surface & SpriteContainer::operator[](int i)
@@ -92,4 +104,39 @@ Surface SpriteContainer::get(int row, int line) const
 size_t SpriteContainer::getSize() const
 {
 	return sprites.size();
+}
+
+int SpriteContainer::getWidth() const
+{
+	return width;
+}
+
+int SpriteContainer::getHeight() const
+{
+	return height;
+}
+
+RectI SpriteContainer::getRect() const
+{
+	return sprites[0].getRect();
+}
+
+//iterator SpriteContainer::begin()
+//{
+//	return sprites.begin();
+//}
+//
+//iterator SpriteContainer::end()
+//{
+//	return sprites.end();
+//}
+
+const_iterator SpriteContainer::begin() const
+{
+	return sprites.begin();
+}
+
+const_iterator SpriteContainer::end() const
+{
+	return sprites.end();
 }

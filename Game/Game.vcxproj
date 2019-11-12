@@ -137,25 +137,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BMath.h" />
+    <ClInclude Include="BUtils.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="ContainerUtils.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Directions.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameUtils.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Hitbox.h" />
     <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="Level.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapHelper.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="PhysicsUtils.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
@@ -164,27 +173,38 @@
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteContainer.h" />
     <ClInclude Include="Surface.h" />
+    <ClInclude Include="UFO.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BMath.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Directions.cpp" />
     <ClCompile Include="DXErr.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteContainer.cpp" />
     <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="UFO.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -252,17 +272,17 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="car.bmp" />
     <Image Include="Chili.ico" />
-    <Image Include="Sprites\car.bmp" />
-    <Image Include="Sprites\rocket1.bmp" />
-    <Image Include="Sprites\rocket2.bmp" />
-    <Image Include="Sprites\trasa.bmp" />
-    <Image Include="trasa.bmp" />
+    <Image Include="Sprites\maps\road_big_1500x1500.bmp" />
+    <Image Include="Sprites\maps\w0.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="config.txt" />
-    <Text Include="debug.txt" />
+    <Text Include="TODO.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="Sprites\maps\r0.map" />
+    <None Include="Sprites\maps\w0.ai" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

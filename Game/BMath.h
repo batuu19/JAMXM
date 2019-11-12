@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 #include <algorithm>
+#include <vector>
 
 template<typename T>
 T sq(T x){	return x*x;}
@@ -16,7 +17,8 @@ public:
 		y(y_in)
 	{
 	}
-	Vec2(const Vec2<float>& src)
+	template<typename S>
+	Vec2(const Vec2<S>& src)
 		:
 		x((T)src.x),
 		y((T)src.y)
@@ -50,6 +52,13 @@ public:
 	{
 		return *this = *this * rhs;
 	}
+	Vec2 operator-() const
+	{
+		Vec2 v;
+		v.x = -x;
+		v.y = -y;
+		return v;
+	}
 	Vec2 operator-(const Vec2& rhs) const
 	{
 		return Vec2(x - rhs.x, y - rhs.y);
@@ -66,6 +75,14 @@ public:
 	Vec2& operator-=(const T rhs)
 	{
 		return *this = *this - rhs;
+	}
+	bool operator==(const Vec2& rhs)
+	{
+		return rhs.x == x && rhs.y == rhs.y;
+	}
+	bool operator!=(const Vec2& rhs)
+	{
+		return !((*this) == rhs);
 	}
 	T getLength() const
 	{
@@ -88,10 +105,6 @@ public:
 		}
 		return *this;
 	}
-	static Vec2 getZeroVec()
-	{
-		return Vec2((T)0, (T)0);
-	}
 public:
 	T x;
 	T y;
@@ -99,3 +112,25 @@ public:
 
 typedef Vec2<int> VecI2;
 typedef Vec2<float> VecF2;
+
+template<typename T>
+Vec2<T> getZeroVec()
+{
+	return{ (T)0,(T)0 };
+}
+
+template<typename T,typename S>
+S getDistanceSq(const T& obj, const Vec2<S>& point)
+{
+	return (obj.getPosConst() - point).getLengthSq();
+}
+
+template<typename T>
+Vec2<T> getInBounds(const Vec2<T>& point, const Vec2<T>& leftBound, const Vec2<T>& rightBound)
+{
+	if (point < leftBound)
+		return leftBound;
+	if (point > rightBound)
+		return rightBound;
+	return point;
+}

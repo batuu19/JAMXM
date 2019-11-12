@@ -3,6 +3,7 @@
 #include "Colors.h"
 #include <string>
 #include "Rect.h"
+#include <vector>
 
 //pPixels[y*width + x];
 class Surface
@@ -26,6 +27,8 @@ public:
 	Surface rotateHorizontally() const;
 	Surface rotateVertAndHor() const;
 	Surface getPart(const RectI& srcRect) const;
+
+	std::vector<VecI2>& getHitablePoints(Color chroma = Colors::Magenta) const;
 private:
 	Color* pPixels = nullptr;
 	int width;

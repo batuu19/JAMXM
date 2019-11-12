@@ -88,26 +88,26 @@ Surface & Surface::operator=(const Surface & rhs)
 }
 
 void Surface::putPixel(int x, int y, Color c)
-{
+{/*
 	assert(x >= 0);
 	assert(x < width);
 	assert(y >= 0);
-	assert(y < height);
+	assert(y < height);*/
 	pPixels[y * width + x] = c;
 }
 
 void Surface::putPixel(int i, Color c)
-{
-	assert(i < width * height);
+{/*
+	assert(i < width * height);*/
 	pPixels[i] = c;
 }
 
 Color Surface::getPixel(int x, int y) const
 {
-	assert(x >= 0);
-	assert(x < width);
-	assert(y >= 0);
-	assert(y < height);
+	//assert(x >= 0);
+	//assert(x < width);
+	//assert(y >= 0);
+	//assert(y < height);
 	return pPixels[y * width + x];
 }
 
@@ -198,4 +198,20 @@ Surface Surface::getPart(const RectI& srcRect) const
 	}
 
 	return surf;
+}
+
+std::vector<VecI2>& Surface::getHitablePoints(Color chroma) const
+{
+	std::vector<VecI2> data;
+
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			auto p = pPixels[y*width + x];
+			if (p != chroma)
+				data.emplace_back(x, y);
+		}
+	}
+	return data;
 }
