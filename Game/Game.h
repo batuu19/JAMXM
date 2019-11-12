@@ -55,7 +55,7 @@ private:
 	Menu pauseMenu;
 	MainMenu menu;
 	Surface background = "sprites\\menu\\background.bmp";
-	GameState gameState = GameState::Game;
+	GameState gameState = GameState::MainMenu;
 
 	/********************************/
 };
