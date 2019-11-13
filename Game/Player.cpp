@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Car* car)
+Player::Player(std::shared_ptr<Car> car)
 	:
 	car(car)
 {

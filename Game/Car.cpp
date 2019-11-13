@@ -1,6 +1,8 @@
 #include "Car.h"
 
-Car::Car(VecF2 pos, int startDirection, std::vector<Rocket*>& rockets, std::vector<Animation>& animations)
+Car::Car(VecF2 pos, int startDirection, 
+	std::shared_ptr<std::vector<std::shared_ptr<Rocket>>> rockets,
+	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations)
 	:
 	Entity(pos, startDirection, SpriteContainer({ "Sprites\\cars\\car_black.bmp" }, 5, 1),
 		{ 0.f,0.f }, 300.f, 600.f, 300.f,
@@ -17,7 +19,7 @@ void Car::update(float dt)
 	rightTurnTime += dt;
 	leftTurnTime += dt;
 	lastShot += dt;
-	for (auto r : rocketsFired)
+	for (auto r : *rocketsFired)
 	{
 		r->update(dt);
 	}
@@ -59,19 +61,19 @@ void Car::turnRight()
 void Car::speedup(float dt, Speedup speedupFlag)
 {
 	float value = vel * vectorsNormalized[spriteState];
-	if(value < maxVel  && (speedupFlag == Speedup::Faster))
+	if (value < maxVel && (speedupFlag == Speedup::Faster))
 		vel += vectorsNormalized[spriteState] * speed * dt;
-	else if (value > -maxVel  && (speedupFlag == Speedup::Slower))
+	else if (value > -maxVel && (speedupFlag == Speedup::Slower))
 		vel += vectorsNormalized[spriteState] * -speed * dt;
 }
 
 
-void Car::draw(Graphics & gfx, const VecF2& cameraPos) const
+void Car::draw(Graphics& gfx, const VecF2& cameraPos) const
 {
 	Entity::draw(gfx, cameraPos);
-	for (auto r : rocketsFired)
+	for (auto r : *rocketsFired)
 	{
-		r->draw(gfx,cameraPos);
+		r->draw(gfx, cameraPos);
 	}
 
 	//gfx.drawRect(hitbox.rect.getDisplacedBy(hitbox.pos - cameraPos), Colors::Green);
@@ -83,7 +85,7 @@ void Car::reset()
 	spriteState = RIGHT;
 	vel = { 0.f,0.f };
 
-	rocketsFired.clear();
+	rocketsFired->clear();
 	Entity::reset();
 }
 
@@ -95,15 +97,15 @@ void Car::stop()
 void Car::bounceBack(bool forceBounce)
 {
 	vel = -vel;
-	if (forceBounce)vel += vectorsNormalized[getOpposite(spriteState)] *  200.f;
+	if (forceBounce)vel += vectorsNormalized[getOpposite(spriteState)] * 200.f;
 }
 
-const VecF2 & Car::getVelConst() const
+const VecF2& Car::getVelConst() const
 {
 	return vel;
 }
 
-const VecF2 & Car::getPosConst() const
+const VecF2& Car::getPosConst() const
 {
 	return pos;
 }
@@ -114,33 +116,33 @@ void Car::changeWeapon()
 	sndWeaponChange.Play();
 }
 
-Rocket* Car::shoot(float dt)
+void Car::shoot(float dt)
 {
-	Rocket* nextRocket = nullptr;
+	//Rocket* nextRocket = nullptr;
+	std::shared_ptr<Rocket> nextRocket;
 	switch (rocketType)
 	{
 	case Car::RocketType::SmallRocket:
 		if (lastShot > SmallRocket::shootRate)
 		{
 			sndRocketShot.Play();
-			nextRocket = new SmallRocket(pos, spriteState);
+			nextRocket = std::make_shared<SmallRocket>(pos, spriteState);
 			lastShot = 0.f;
 		}
-		else return nullptr;
+		else return;
 		break;
 	case Car::RocketType::BigRocket:
 		if (lastShot > BigRocket::shootRate)
 		{
 			sndRocketShot.Play();
-			nextRocket = new BigRocket(pos, spriteState,animations);
+			nextRocket = std::make_shared<BigRocket>(pos, spriteState, animations);
 			lastShot = 0.f;
 		}
-		else return nullptr;
+		else return;
 		break;
 	}
 
-	rocketsFired.push_back(nextRocket);
-	return nextRocket;
+	rocketsFired->push_back(nextRocket);
 }
 
 int Car::getDir() const
@@ -152,8 +154,8 @@ std::string Car::getDebugInfo() const
 {
 	std::stringstream ss;
 
-	ss  << "x=" << pos.x << " y=" << pos.y 
-	    << " velX=" << vel.x << " velY=" << vel.y 
+	ss << "x=" << pos.x << " y=" << pos.y
+		<< " velX=" << vel.x << " velY=" << vel.y
 		<< " maxVel=" << maxVel;
 
 	return ss.str();

@@ -14,7 +14,9 @@ class Car : public Entity
 {
 
 public:
-	Car(VecF2 pos, int startDirection, std::vector<Rocket*>& rockets,std::vector<Animation>&);
+	Car(VecF2 pos, int startDirection, 
+		std::shared_ptr<std::vector<std::shared_ptr<Rocket>>>,
+		std::shared_ptr<std::vector<std::shared_ptr<Animation>>>);
 
 	//make functors?
 	enum class Speedup {
@@ -42,7 +44,7 @@ public:
 	std::string getDebugInfo() const;
 
 	void changeWeapon();
-	std::shared_ptr<std::shared_ptr<Rocket>> shoot(float dt);
+	void shoot(float dt);
 
 	int getDir() const;
 
@@ -67,10 +69,10 @@ private:
 		BigRocket
 	};
 	RocketType rocketType = RocketType::SmallRocket;
-	std::vector<Rocket*>& rocketsFired;
+	std::shared_ptr<std::vector<std::shared_ptr<Rocket>>> rocketsFired;
 	float lastShot = 0.f;
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );
 	bool shooting = false;
 
-	std::shared_ptr<std::vector<Animation>> animations;
+	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations;
 };

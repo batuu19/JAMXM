@@ -18,7 +18,7 @@ public:
 	Scene& operator=(const Scene&) = delete;
 	virtual ~Scene() = default;
 	virtual void update(float dt);
-	virtual void draw(Graphics&, const VecF2& cameraPos);//not const, changes static entities
+	virtual void draw(Graphics&, const VecF2& cameraPos = { 0.f,0.f });//not const, changes static entities
 	virtual void handleInput(Keyboard::Event);
 protected:
 	std::vector<std::weak_ptr<DynamicEntity>> dynamics;//update

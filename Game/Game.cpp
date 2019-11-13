@@ -25,7 +25,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	world(gfx.getScreenRect()),
+	level(gfx.getScreenRect()),
 	pauseMenu(gfx.getScreenRect(),{"Resume","Menu","Quit"}),
 	menu(gfx.getScreenRect(), {"Play","Quit"})
 {
@@ -64,7 +64,7 @@ void Game::UpdateModel()
 		processAction(pauseMenu.getActiveButtonAction());
 		break;
 	case GameState::Game:
-		world.update(dt);
+		level.update(dt);
 		break;
 	default:
 		break;
@@ -79,11 +79,11 @@ void Game::ComposeFrame()
 		menu.draw(gfx);
 		break;
 	case GameState::GamePaused:
-		world.draw(gfx);
+		level.draw(gfx);
 		pauseMenu.draw(gfx);
 		break;
 	case GameState::Game:
-		world.draw(gfx);
+		level.draw(gfx);
 		break;
 	default:
 		break;
@@ -104,7 +104,7 @@ void Game::handleInput(Keyboard::Event k)
 		}
 	}
 	if (gameState == GameState::Game)
-		world.handleInput(k);
+		level.handleInput(k);
 }
 
 void Game::handleInput(Mouse::Event m)
@@ -160,13 +160,14 @@ bool Game::unpauseGame()
 
 bool Game::enterGame()
 {
-	if (gameState != GameState::MainMenu)return false;//can go only from MainMenu
-	else
-	{
-		world.reset();
-		gameState = GameState::Game;
-		return true;
-	}
+	return false;
+	//if (gameState != GameState::MainMenu)return false;//can go only from MainMenu
+	//else
+	//{
+	//	world.reset();
+	//	gameState = GameState::Game;
+	//	return true;
+	//}
 }
 
 bool Game::enterMainMenu()

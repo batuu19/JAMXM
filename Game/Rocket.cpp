@@ -12,7 +12,8 @@ Rocket::Rocket(const VecF2& pos,int spriteState, const VecF2& vel, const SpriteC
 {
 }
 
-BigRocket::BigRocket(VecF2 pos, int dir,std::vector<Animation>& animations)
+BigRocket::BigRocket(VecF2 pos, int dir,
+	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations)
 	:
 	Rocket(pos, dir, (vectorsNormalized[dir] * 400.f), SpriteContainer({ BIG_ROCKET_SPRITE }, 5, 1), 100.f),
 	animations(animations)
@@ -30,7 +31,7 @@ void BigRocket::update(float dt)
 	smokeLastTime += dt;
 	if (smokeLastTime > smokeTimer)
 	{
-		animations.emplace_back(pos, SMOKE_ANIM, 4, 27, 23);
+		animations->push_back(std::make_shared<Animation>(pos, SMOKE_ANIM, 4, 27, 23));
 		smokeLastTime = 0.f;
 	}
 

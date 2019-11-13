@@ -20,9 +20,11 @@
  ******************************************************************************************/
 #pragma once
 #include "World.h"
+#include "Level.h";
 #include "FrameTimer.h"
 #include "Menu.h"
 #include "GameUtils.h"
+
 
 class Game
 {
@@ -51,11 +53,11 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
-	World world;
+	Level level;
 	Menu pauseMenu;
 	MainMenu menu;
 	Surface background = "sprites\\menu\\background.bmp";
-	GameState gameState = GameState::MainMenu;
+	GameState gameState = GameState::Game;
 
 	/********************************/
 };

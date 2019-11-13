@@ -15,7 +15,7 @@ class Player :
 public:
 	friend class UI;
 public:
-	Player(Car*);
+	Player(std::shared_ptr<Car>);
 	Player(const Player&) = delete;
 	Player& operator=(const Player&) = delete;
 	~Player();

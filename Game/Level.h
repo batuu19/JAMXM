@@ -4,19 +4,24 @@
 #include "Player.h"
 #include "Animation.h"
 #include "UFO.h"
+#include "Font.h"
 #include "LevelConfig.h"
 
-
+#include "BUtils.h"
+#include "ContainerUtils.h"
+#include "PhysicsUtils.h"
+#include "Sound.h"
 
 class Level : public Scene
 {
 public:
+	Level(const RectI& screenRect);
 	Level(const RectI& screenRect, LevelConfig levelConfig);
 	Level(Level&) = delete;
 	Level& operator=(Level&) = delete;
 	//~Level();
 	void update(float dt) override;
-	void draw(Graphics&, const VecF2& cameraPos) const override;
+	void draw(Graphics&, const VecF2& cameraPos = { 0.f,0.f }) override;
 	void handleInput(Keyboard::Event) override;
 public:
 	void reset();
@@ -32,10 +37,10 @@ private://objects
 	std::vector<std::shared_ptr<UFO>> ufos;
 	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations;
 private://sound
-	Sound sndRaceStart;
+	SoundEffect sndRaceStart;
 	Sound sndBoom;
 	Sound sndEngine;
-	Sound sndAfterBoom;
+	SoundEffect sndAfterBoom;
 private:
 	RectI mapRect;
 	bool newUfoNeeded = false;
