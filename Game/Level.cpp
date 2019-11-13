@@ -31,10 +31,10 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 		L"sound\\speech\\larry\\wipeout.wav"
 		})
 {
+	dynamics.push_back(camera);
 	//dynamics.push_back(car);
 	dynamics.push_back(player);
 	dynamics.push_back(ui);
-	dynamics.push_back(camera);
 
 	statics.push_back(map);
 	//statics.push_back(car);
@@ -42,8 +42,6 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 	statics.push_back(ui);
 
 	playables.push_back(player);
-
-	rockets = std::make_shared< std::vector<std::shared_ptr<Rocket>>>();
 
 	camera->centerOn(*car, screenRect);
 }
@@ -139,9 +137,9 @@ void Level::update(float dt)
 
 void Level::draw(Graphics& gfx, const VecF2& cameraPos)
 {
-	Scene::draw(gfx,cameraPos);
+	Scene::draw(gfx,camera->pos);
 	for (auto& a : *animations)
-		a->draw(gfx, cameraPos);
+		a->draw(gfx, camera->pos);
 }
 
 void Level::handleInput(Keyboard::Event e)
