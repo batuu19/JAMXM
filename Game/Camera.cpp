@@ -6,30 +6,6 @@ Camera::Camera(const VecF2 & startPos)
 {
 }
 
-void Camera::handleInput(Keyboard::Event e)
-{
-	if (e.IsPress())
-	{
-		switch (e.GetCode())
-		{
-		case 'W':
-			nextDir = vectorsNormalized[UP];
-			break;
-		case 'S':
-			nextDir = vectorsNormalized[DOWN];
-			break;
-		case 'A':
-			nextDir = vectorsNormalized[LEFT];
-			break;
-		case 'D':
-			nextDir = vectorsNormalized[RIGHT];
-			break;
-		default:
-			break;
-		}
-	}
-}
-
 void Camera::move(int dir)
 {
 	nextDir = vectorsNormalized[dir];

@@ -9,12 +9,8 @@ Scene::Scene(const RectI& screenRect)
 
 Scene::~Scene()
 {
-	for (auto d : dynamics)
-		delete d;
-	for (auto s : statics)
-		delete s;
-	dynamics.clear();
-	statics.clear();
+	cleanAndClear(dynamics);
+	cleanAndClear(statics);
 }
 
 void Scene::update(float dt)
@@ -27,4 +23,10 @@ void Scene::draw(Graphics&gfx, const VecF2& cameraPos) const
 {
 	for (auto s : statics)
 		s->draw(gfx, cameraPos);
+}
+
+void Scene::handleInput(Keyboard::Event e)
+{
+	for (auto p : playables)
+		p->handleInput(e);
 }

@@ -10,17 +10,20 @@
 #include <stdexcept>
 #include "StaticEntity.h"
 #include "DynamicEntity.h"
+#include "PlayableEntity.h"
 
 //for car and rocket
 //TODO: what about explosion and other?
-class Entity : public DynamicEntity,public StaticEntity
+class Entity : 
+	public DynamicEntity,
+	public StaticEntity
 {
 public:
 	friend class UI;
 public:
 	virtual ~Entity() = default;
 
-	virtual void update(float dt);
+	virtual void update(float dt) override;
 	virtual void draw(Graphics&, const VecF2& cameraPos) const override;
 	virtual void reset();
 

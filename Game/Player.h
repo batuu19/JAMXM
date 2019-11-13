@@ -3,8 +3,12 @@
 #include "BUtils.h"
 #include "Rect.h"
 #include "Font.h"
+#include "Entity.h"
 
-class Player
+class Player : 
+	public DynamicEntity, 
+	public StaticEntity,
+	public PlayableEntity
 {
 public:
 	friend class UI;
@@ -13,11 +17,11 @@ public:
 	Player(const Player&) = delete;
 	Player& operator=(const Player&) = delete;
 	~Player();
-	void update(float dt);
-	void draw(Graphics&, const VecF2& cameraPos) const;
+	void update(float dt) override;
+	void draw(Graphics&, const VecF2& cameraPos) const override;
 	void reset();
 	void scorePoints(int amount = 1);
-	void handleInput(Keyboard::Event);
+	void handleInput(Keyboard::Event) override;
 	const Car& getCarConst() const;
 
 private:
@@ -30,18 +34,18 @@ private:
 
 };
 
-class UI
+class UI : public DynamicEntity, public StaticEntity
 {
 public:
 	UI(Player&);
-	void update(float dt);
-	void draw(Graphics&,VecF2 cameraPos) const;
+	void update(float dt) override;
+	void draw(Graphics&, const VecF2& cameraPos) const override;
 private:
 	Surface background = "Sprites\\interface\\interface_background.bmp";
 	Player& player;
 	const VecI2 pos = { 0,0 };
 	float HPPercentage = 1.f;
 	const int HPbarLength = 170;
-	VecI2 HPRectPos = VecI2( 18,14 );
+	VecI2 HPRectPos = VecI2(18, 14);
 	Color HPcolor = Colors::Red;
 };

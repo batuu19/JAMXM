@@ -41,7 +41,7 @@ public:
 	std::string getDebugInfo() const;
 
 	void changeWeapon();
-	void shoot(float dt);
+	Rocket* shoot(float dt);
 
 	int getDir() const;
 

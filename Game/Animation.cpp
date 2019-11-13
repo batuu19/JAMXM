@@ -1,6 +1,6 @@
 #include "Animation.h"
 
-Animation::Animation(VecI2 pos,std::string filename, int frames, int frameWidth, int frameHeight,bool looping, float frameTime)
+Animation::Animation(VecI2 pos, std::string filename, int frames, int frameWidth, int frameHeight, bool looping, float frameTime)
 	:
 	pos(pos),
 	sprites({ filename }, frames, 1, frameWidth, frameHeight, false),
@@ -13,7 +13,7 @@ Animation::Animation(VecI2 pos,std::string filename, int frames, int frameWidth,
 Animation::Animation(VecI2 pos, std::string filename, int frames, bool looping, float frameTime)
 	:
 	pos(pos),
-	sprites({ filename }, frames, 1,false),
+	sprites({ filename }, frames, 1, false),
 	frameTimer(frameTime),
 	allFrames(frames),
 	looping(looping)
@@ -24,7 +24,7 @@ Animation::Animation(VecI2 pos, std::string filename, int frames, bool looping, 
 Animation::Animation(VecI2 pos, std::string filename, int frameWidth, int frameHeight, bool looping, float frameTime)
 	:
 	pos(pos),
-	sprites({ filename },(unsigned int)frameWidth, (unsigned int)frameHeight, false),
+	sprites({ filename }, (unsigned int)frameWidth, (unsigned int)frameHeight, false),
 	frameTimer(frameTime),
 	allFrames((int)sprites.getSize()),
 	looping(looping)
@@ -43,15 +43,15 @@ void Animation::update(float dt)
 			if (activeFrame >= allFrames)
 			{
 				activeFrame = 0;
-				if(!looping)
-				endOfAnimation = true;
+				if (!looping)
+					endOfAnimation = true;
 			}
 		}
 	}
-	
+
 }
 
-void Animation::draw(Graphics & gfx, VecF2 cameraPos) const
+void Animation::draw(Graphics& gfx, const VecF2& cameraPos) const
 {
 	if (!endOfAnimation)
 	{

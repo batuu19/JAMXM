@@ -27,7 +27,6 @@ World::~World()
 
 void World::handleInput(Keyboard::Event e)
 {
-	camera.handleInput(e);
 	player.handleInput(e);
 
 	if (e.IsPress())

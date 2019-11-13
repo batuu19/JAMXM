@@ -37,9 +37,9 @@ void Player::update(float dt)
 	}
 }
 
-void Player::draw(Graphics & gfx, const VecF2& cameraPos) const
+void Player::draw(Graphics& gfx, const VecF2& cameraPos) const
 {
-	car->draw(gfx,cameraPos);
+	car->draw(gfx, cameraPos);
 }
 
 void Player::reset()
@@ -66,7 +66,7 @@ void Player::handleInput(Keyboard::Event e)
 		case VK_CONTROL:
 			shooting = true;
 			break;
-		//controling car
+			//controling car
 		case VK_UP:
 			speedup = Car::Speedup::Faster;
 			break;
@@ -108,12 +108,12 @@ void Player::handleInput(Keyboard::Event e)
 	}
 }
 
-const Car & Player::getCarConst() const
+const Car& Player::getCarConst() const
 {
 	return *car;
 }
 
-UI::UI(Player & player)
+UI::UI(Player& player)
 	:
 	player(player)
 {
@@ -124,9 +124,9 @@ void UI::update(float dt)
 	HPPercentage = player.car->HP / player.car->maxHP;
 }
 
-void UI::draw(Graphics & gfx, VecF2 cameraPos) const
+void UI::draw(Graphics& gfx, const VecF2& cameraPos) const
 {
 	gfx.drawSprite(pos, background);
-	gfx.drawRect(RectI(HPRectPos,(int)(HPbarLength * HPPercentage),10),HPcolor);
-	Font::write(gfx, VecI2{ 165,50 }, std::to_string(player.score),0,false);
+	gfx.drawRect(RectI(HPRectPos, (int)(HPbarLength * HPPercentage), 10), HPcolor);
+	Font::write(gfx, VecI2{ 165,50 }, std::to_string(player.score), 0, false);
 }

@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include "Keyboard.h"
 #include "Entity.h"
+#include "ContainerUtils.h"
 
 
 class Scene
@@ -16,9 +17,11 @@ public:
 	virtual ~Scene();
 	virtual void update(float dt);
 	virtual void draw(Graphics&, const VecF2& cameraPos) const;
-	virtual void handleInput(Keyboard::Event) = 0;
+	virtual void handleInput(Keyboard::Event);
 protected:
+	//map?
 	std::vector<DynamicEntity*> dynamics;
 	std::vector<StaticEntity*>  statics;
+	std::vector<PlayableEntity*> playables;
 	RectI screenRect;
 };

@@ -114,7 +114,7 @@ void Car::changeWeapon()
 	sndWeaponChange.Play();
 }
 
-void Car::shoot(float dt)
+Rocket* Car::shoot(float dt)
 {
 	Rocket* nextRocket = nullptr;
 	switch (rocketType)
@@ -126,7 +126,7 @@ void Car::shoot(float dt)
 			nextRocket = new SmallRocket(pos, spriteState);
 			lastShot = 0.f;
 		}
-		else return;
+		else return nullptr;
 		break;
 	case Car::RocketType::BigRocket:
 		if (lastShot > BigRocket::shootRate)
@@ -135,11 +135,12 @@ void Car::shoot(float dt)
 			nextRocket = new BigRocket(pos, spriteState,animations);
 			lastShot = 0.f;
 		}
-		else return;
+		else return nullptr;
 		break;
 	}
 
 	rocketsFired.push_back(nextRocket);
+	return nextRocket;
 }
 
 int Car::getDir() const

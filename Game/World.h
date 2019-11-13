@@ -13,6 +13,8 @@
 #include "Font.h"
 
 //TODO cache?
+//use it for choosing levels
+//move resposibility to Level
 class World
 {
 public:

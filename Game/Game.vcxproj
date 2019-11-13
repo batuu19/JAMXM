@@ -161,12 +161,14 @@
     <ClInclude Include="Hitbox.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelConfig.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapHelper.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="PhysicsUtils.h" />
+    <ClInclude Include="PlayableEntity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />

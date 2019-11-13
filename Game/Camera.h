@@ -5,13 +5,13 @@
 #include "Directions.h"
 #include "Entity.h"
 
-class Camera : public DynamicEntity
+class Camera : 
+	public DynamicEntity
 {
 public:
 	Camera() = default;
 	Camera(const VecF2& startPos);
 	Camera(const Camera&) = delete;
-	void handleInput(Keyboard::Event);
 	void move(int dir);
 	void move(const VecF2& dir);
 	void centerOn(const VecF2& point,const RectI& screenRect);
