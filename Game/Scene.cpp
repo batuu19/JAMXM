@@ -41,6 +41,7 @@ void Scene::handleInput(Keyboard::Event e)
 			if (auto p = ptr.lock())
 			{
 				p->handleInput(e);
+				return false;
 			}
 			else return true;
 		});

@@ -10,6 +10,8 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 	Scene(screenRect),
 	map(std::make_shared<Map>(levelConfig.mapNumber)),
 	camera(std::make_shared<Camera>()),
+	rockets(std::make_shared<std::vector<std::shared_ptr<Rocket>>>()),
+	animations(std::make_shared< std::vector<std::shared_ptr<Animation>>>()),
 	car(std::make_shared<Car>(levelConfig.carStartPos, levelConfig.carStartDir, rockets, animations)),//memory problems with shared ptrs
 	player(std::make_shared<Player>(car)),
 	ui(std::make_shared<UI>(*player)),
@@ -29,10 +31,10 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 		L"sound\\speech\\larry\\wipeout.wav"
 		})
 {
-	dynamics.push_back(camera);
 	//dynamics.push_back(car);
 	dynamics.push_back(player);
 	dynamics.push_back(ui);
+	dynamics.push_back(camera);
 
 	statics.push_back(map);
 	//statics.push_back(car);
@@ -41,11 +43,14 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 
 	playables.push_back(player);
 
+	rockets = std::make_shared< std::vector<std::shared_ptr<Rocket>>>();
+
 	camera->centerOn(*car, screenRect);
 }
 
 void Level::update(float dt)
 {
+	Scene::update(dt);
 	std::vector<int> indices;
 	for (int i = 0; i < rockets->size(); i++)
 	{
@@ -126,20 +131,22 @@ void Level::update(float dt)
 	for (auto ufo : ufos)
 		if (!collidingWithBounds(ufo, mapRect))
 			ufo->bounceBack();
-
-
-	//testing map
-	/*carOnRoad = map->getHitbox().contains(car->getHitbox());
-	if (!carOnRoad)car->bounceBack();*/
+	
+	for (auto& a : *animations)
+		a->update(dt);
 
 }
 
 void Level::draw(Graphics& gfx, const VecF2& cameraPos)
 {
+	Scene::draw(gfx,cameraPos);
+	for (auto& a : *animations)
+		a->draw(gfx, cameraPos);
 }
 
 void Level::handleInput(Keyboard::Event e)
 {
+	Scene::handleInput(e);
 	if (e.IsPress())
 	{
 		switch (e.GetCode())

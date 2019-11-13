@@ -17,7 +17,7 @@ public:
 	void centerOn(const VecF2& point,const RectI& screenRect);
 	template<typename T>
 	void centerOn(const T& object, const RectI& screenRect);
-	void update(float dt);
+	void update(float dt) override;
 	void reset();
 	VecF2 pos = { 0.f,0.f };
 private:

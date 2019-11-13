@@ -30,12 +30,12 @@ public:
 private://objects
 	std::shared_ptr<Map> map;
 	std::shared_ptr<Camera> camera;
+	std::shared_ptr<std::vector<std::shared_ptr<Rocket>>> rockets;
+	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations;
 	std::shared_ptr<Car> car;
 	std::shared_ptr<Player> player;
 	std::shared_ptr<UI> ui;
-	std::shared_ptr<std::vector<std::shared_ptr<Rocket>>> rockets;
 	std::vector<std::shared_ptr<UFO>> ufos;
-	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations;
 private://sound
 	SoundEffect sndRaceStart;
 	Sound sndBoom;
