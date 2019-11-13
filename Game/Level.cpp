@@ -3,25 +3,26 @@
 Level::Level(const RectI& screenRect,LevelConfig levelConfig)
 	:
 	Scene(screenRect),
-	map(new Map(levelConfig.mapNumber)),
-	camera(new Camera()),
-	car(new Car(levelConfig.carStartPos, levelConfig.carStartDir, rockets, animations)),
-	player(new Player(car)),
-	ui(new UI(*player)),
+	map(std::make_shared<Map>(levelConfig.mapNumber)),
+	camera(std::make_shared<Camera>()),
+	car(std::make_shared<Car>(levelConfig.carStartPos, levelConfig.carStartDir, rockets, animations)),
+	player(std::make_shared<Player>(car)),
+	ui(std::make_shared<UI>(*player)),
 	mapRect(map->getRect())
 {
-	camera->centerOn(*car, screenRect);
-}
+	dynamics.push_back(camera);
+	//dynamics.push_back(car);
+	dynamics.push_back(player);
+	dynamics.push_back(ui);
 
-Level::~Level()
-{
-	delete ui;
-	delete player;
-	delete car;
-	delete camera;
-	delete map;
-	cleanAndClear(rockets);
-	cleanAndClear(ufos);
+	statics.push_back(map);
+	//statics.push_back(car);
+	statics.push_back(player);
+	statics.push_back(ui);
+
+	playables.push_back(player);
+
+	camera->centerOn(*car, screenRect);
 }
 
 void Level::update(float dt)

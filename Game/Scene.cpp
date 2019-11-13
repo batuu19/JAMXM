@@ -3,30 +3,46 @@
 Scene::Scene(const RectI& screenRect)
 	:
 	screenRect(screenRect)
-{
-
-}
-
-Scene::~Scene()
-{
-	cleanAndClear(dynamics);
-	cleanAndClear(statics);
-}
+{}
 
 void Scene::update(float dt)
 {
-	for (auto d : dynamics)
-		d->update(dt);
+	auto it = std::remove_if(dynamics.begin(), dynamics.end(), [&dt](std::weak_ptr<DynamicEntity> ptr)
+		{
+			if (auto d = ptr.lock())
+			{
+				d->update(dt);
+				return false;
+			}
+			else return true;
+		});
+	dynamics.erase(it, dynamics.end());
+
 }
 
-void Scene::draw(Graphics&gfx, const VecF2& cameraPos) const
+void Scene::draw(Graphics& gfx, const VecF2& cameraPos)
 {
-	for (auto s : statics)
-		s->draw(gfx, cameraPos);
+	auto it = std::remove_if(statics.begin(), statics.end(), [&gfx,&cameraPos](std::weak_ptr<StaticEntity> ptr)
+		{
+			if (auto s = ptr.lock())
+			{
+				s->draw(gfx, cameraPos);
+				return false;
+			}
+			else return true;
+		});
+	statics.erase(it, statics.end());
 }
 
 void Scene::handleInput(Keyboard::Event e)
 {
-	for (auto p : playables)
-		p->handleInput(e);
+	auto it = std::remove_if(playables.begin(), playables.end(), [&e](std::weak_ptr<PlayableEntity> ptr)
+		{
+			if (auto p = ptr.lock())
+			{
+				p->handleInput(e);
+			}
+			else return true;
+		});
+	playables.erase(it, playables.end());
 }

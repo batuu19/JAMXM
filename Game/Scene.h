@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "BMath.h"
 #include "Rect.h"
 #include "Graphics.h"
@@ -14,14 +16,13 @@ public:
 	Scene(const RectI& screenRect);
 	Scene(Scene&) = delete;
 	Scene& operator=(const Scene&) = delete;
-	virtual ~Scene();
+	virtual ~Scene() = default;
 	virtual void update(float dt);
-	virtual void draw(Graphics&, const VecF2& cameraPos) const;
+	virtual void draw(Graphics&, const VecF2& cameraPos);//not const, changes static entities
 	virtual void handleInput(Keyboard::Event);
 protected:
-	//map?
-	std::vector<DynamicEntity*> dynamics;
-	std::vector<StaticEntity*>  statics;
-	std::vector<PlayableEntity*> playables;
+	std::vector<std::weak_ptr<DynamicEntity>> dynamics;//update
+	std::vector<std::weak_ptr<StaticEntity>>  statics;//draw
+	std::vector<std::weak_ptr<PlayableEntity>> playables;//handleInput
 	RectI screenRect;
 };

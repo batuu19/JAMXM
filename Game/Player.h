@@ -5,6 +5,8 @@
 #include "Font.h"
 #include "Entity.h"
 
+#include<memory>
+
 class Player : 
 	public DynamicEntity, 
 	public StaticEntity,
@@ -25,7 +27,7 @@ public:
 	const Car& getCarConst() const;
 
 private:
-	Car* car;
+	std::shared_ptr<Car> car;
 	bool shooting = false;
 	Car::Speedup speedup = Car::Speedup::None;
 	Car::TurnDirection turning = Car::TurnDirection::None;

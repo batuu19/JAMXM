@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <sstream>
+#include <memory>
 #include "SpriteContainer.h"
 #include "Rocket.h"
 #include "SoundEffect.h"
@@ -41,7 +42,7 @@ public:
 	std::string getDebugInfo() const;
 
 	void changeWeapon();
-	Rocket* shoot(float dt);
+	std::shared_ptr<std::shared_ptr<Rocket>> shoot(float dt);
 
 	int getDir() const;
 
@@ -71,5 +72,5 @@ private:
 	Sound sndRocketShot = Sound( L"sound\\game\\rocketshot.wav" );
 	bool shooting = false;
 
-	std::vector<Animation>& animations;
+	std::shared_ptr<std::vector<Animation>> animations;
 };
