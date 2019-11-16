@@ -31,5 +31,5 @@ private:
 
 
 	//sounds
-	Sound bgm = Sound(L"sound\\music\\music.wav", Sound::LoopType::AutoFullSound);
+	//Sound bgm = Sound(L"sound\\music\\music.wav", Sound::LoopType::AutoFullSound);
 };

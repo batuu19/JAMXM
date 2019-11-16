@@ -12,9 +12,10 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 	camera(std::make_shared<Camera>()),
 	rockets(std::make_shared<std::vector<std::shared_ptr<Rocket>>>()),
 	animations(std::make_shared< std::vector<std::shared_ptr<Animation>>>()),
-	car(std::make_shared<Car>(levelConfig.carStartPos, levelConfig.carStartDir, rockets, animations)),//memory problems with shared ptrs
+	car(std::make_shared<Car>()),
 	player(std::make_shared<Player>(car)),
-	ui(std::make_shared<UI>(*player)),
+	carController(std::make_shared<CarController>(car, *map,rockets,animations)),
+	//ui(std::make_shared<UI>(player)),
 	mapRect(map->getRect()),
 	sndRaceStart({
 		L"sound\\speech\\larry\\go_go_go.wav",
@@ -31,19 +32,19 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 		L"sound\\speech\\larry\\wipeout.wav"
 		})
 {
+	//add animations here
 	dynamics.push_back(camera);
 	//dynamics.push_back(car);
-	dynamics.push_back(player);
+	dynamics.push_back(carController);
 	dynamics.push_back(ui);
 
 	statics.push_back(map);
 	//statics.push_back(car);
-	statics.push_back(player);
+	statics.push_back(carController);
 	statics.push_back(ui);
 
-	playables.push_back(player);
-
-	camera->centerOn(*car, screenRect);
+	playables.push_back(carController);
+	camera->centerOn(*carController, screenRect);
 }
 
 void Level::update(float dt)
@@ -66,7 +67,7 @@ void Level::update(float dt)
 					//ufo killed
 				{
 					sndAfterBoom.Play(rng);
-					player->scorePoints();
+					carController->scorePoints();
 					auto booms = makeBigBoom(10, rocketPos, 70, rng);//TODO
 					for (auto& a : booms)
 						animations->push_back(std::make_shared<Animation>(std::move(a)));
@@ -97,18 +98,18 @@ void Level::update(float dt)
 
 	//ufo damages car
 	for (auto ufo : ufos)
-		if (colliding(car, ufo) && attack(ufo, car))
+		if (colliding(carController, ufo) && attack(ufo, carController))
 			//TODO: make car invincible for few secends
 			//car killed
 		{
 
 			player.reset();
-			camera->centerOn(*car, screenRect);
+			camera->centerOn(*carController, screenRect);
 			carDead = false;
 		}
 	//car bouncing of map bounds
-	if (!collidingWithBounds(car, mapRect))
-		car->bounceBack();
+	if (!collidingWithBounds(carController, mapRect))
+		carController->bounceBack();
 
 	////car bouncing of ufo
 	//for (auto ufo : ufos)
@@ -117,8 +118,8 @@ void Level::update(float dt)
 	//camera following car
 	const VecF2 center = VecF2(400.f, 300.f) + camera->pos;
 
-	if (getDistanceSq(*car, center) * car->getVelConst().getLengthSq() > 800000000.f)
-		camera->move((car->getPosConst() - center).getNormalized());
+	if (getDistanceSq(*carController, center) * carController->getVelConst().getLengthSq() > 800000000.f)
+		camera->move((carController->getPosConst() - center).getNormalized());
 	//don't let camera off map
 	if (camera->pos.x < mapRect.left)camera->pos.x = (float)mapRect.left;
 	if (camera->pos.x + screenRect.right > mapRect.right)camera->pos.x = (float)(mapRect.right - screenRect.right);
@@ -129,7 +130,7 @@ void Level::update(float dt)
 	for (auto ufo : ufos)
 		if (!collidingWithBounds(ufo, mapRect))
 			ufo->bounceBack();
-	
+
 	for (auto& a : *animations)
 		a->update(dt);
 
@@ -137,7 +138,7 @@ void Level::update(float dt)
 
 void Level::draw(Graphics& gfx, const VecF2& cameraPos)
 {
-	Scene::draw(gfx,camera->pos);
+	Scene::draw(gfx, camera->pos);
 	for (auto& a : *animations)
 		a->draw(gfx, camera->pos);
 }
@@ -150,6 +151,7 @@ void Level::handleInput(Keyboard::Event e)
 		switch (e.GetCode())
 		{
 		case 'R':
+			carController->reset();
 			reset();
 			break;
 		default:

@@ -1,16 +1,21 @@
 #include "CarController.h"
 
-CarController::CarController(std::shared_ptr<Car> car, const Map& map, const Level& level)
+CarController::CarController(std::shared_ptr<Car> car, const Map& map,
+	std::shared_ptr<std::vector<std::shared_ptr<Rocket>>> rocketsFired,
+	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations)
 	:
 	Entity(VecF2(map.getCarStartPos()), map.getCarStartDirection(),
-		SpriteContainer({ car->getSpriteFilename() }, 5, 1),
+		SpriteContainer({ car->spriteSrc }, 5, 1),
 		{ 0.f,0.f }, car->maxHP, car->speed, car->maxVel,
 		1.f, true),
-	level(level),
 	car(car),
 	carStartPos(map.getCarStartPos()),
 	carStartDirection(map.getCarStartDirection()),
-	turnRate(car->turnValue)
+	turnRate(car->turnRate),
+	turnValue(car->turnValue),
+	rocketsFired(rocketsFired),
+	animations(animations)
+
 {
 }
 
@@ -20,7 +25,7 @@ void CarController::update(float dt)//make it shorter and divide in parts?
 	rightTurnTime += dt;
 	leftTurnTime += dt;
 	lastShot += dt;
-	for (auto& r : *rocketsFired)
+	for (auto r : *rocketsFired)
 	{
 		r->update(dt);
 	}
@@ -102,7 +107,7 @@ void CarController::handleInput(Keyboard::Event e)
 void CarController::reset()
 {
 	score = 0;
-	car->pos = VecF2(carStartPos);
+	pos = VecF2(carStartPos);
 	spriteState = carStartDirection;
 	vel = VecF2::zero();
 
@@ -179,7 +184,7 @@ void CarController::turn(float dt)
 			rightTurnTime = 0.f;
 			vel = vectorsNormalized[spriteState] * (vel * vectorsNormalized[spriteState]);
 		}
-		turnFlag = TurnDirection::None;
+		//turnFlag = TurnDirection::None;
 	}
 	else if (turnFlag == TurnDirection::Left)
 	{
@@ -190,7 +195,7 @@ void CarController::turn(float dt)
 
 			vel = vectorsNormalized[spriteState] * (vel * vectorsNormalized[spriteState]);
 		}
-		turnFlag = TurnDirection::None;
+		//turnFlag = TurnDirection::None;
 	}
 }
 

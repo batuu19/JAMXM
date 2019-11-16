@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <initializer_list>
 #include <string>
+#include <random>
 template<typename T, typename S>
 bool attack(const T attacker, S defender)//return true if second is destroyed
 {

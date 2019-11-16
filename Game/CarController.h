@@ -3,7 +3,8 @@
 #include "Entity.h"
 #include "Car.h"
 #include "Map.h"
-#include "Level.h"
+#include "Rocket.h"
+#include <memory>
 
 static constexpr unsigned char INPUT_ACC = VK_UP;
 static constexpr unsigned char INPUT_BREAKE = VK_DOWN;
@@ -19,7 +20,10 @@ class CarController :
 	public PlayableEntity
 {
 public:
-	CarController(std::shared_ptr<Car> car, const Map& map,const Level& level);
+	CarController(std::shared_ptr<Car> car, const Map& map,
+		std::shared_ptr<std::vector<std::shared_ptr<Rocket>>> rocketsFired,
+		std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations
+		);
 	void update(float dt) override;
 	void draw(Graphics&, const VecF2& cameraPos) const override;
 	void handleInput(Keyboard::Event) override;
@@ -49,14 +53,13 @@ public:
 		None
 	};
 private:
-	const Level& level;
 	std::shared_ptr<Car> car;
 	VecI2 carStartPos;
 	int carStartDirection;
 	float turnRate;
 	float leftTurnTime = turnRate;
 	float rightTurnTime = turnRate;
-	int turnValue = 1;//how many directions at once
+	int turnValue;//how many directions at once
 	Speedup speedupFlag = Speedup::None;
 	bool shootFlag = false;
 	TurnDirection turnFlag = TurnDirection::None;

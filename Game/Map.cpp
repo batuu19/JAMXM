@@ -21,3 +21,13 @@ const RectI& Map::getRect() const
 	return mapSprite.getRect();
 }
 
+const VecI2 Map::getCarStartPos() const
+{
+	return { 400,300 };
+}
+
+const int Map::getCarStartDirection() const
+{
+	return RIGHT;
+}
+

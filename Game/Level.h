@@ -2,11 +2,13 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Player.h"
+#include "CarController.h"
 #include "Animation.h"
 #include "UI.h"
 #include "UFO.h"
 #include "Font.h"
 #include "LevelConfig.h"
+#include "Rocket.h"
 
 #include "BUtils.h"
 #include "ContainerUtils.h"
@@ -35,6 +37,7 @@ private://objects
 	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations;
 	std::shared_ptr<Car> car;
 	std::shared_ptr<Player> player;
+	std::shared_ptr<CarController> carController;
 	std::shared_ptr<UI> ui;
 	std::vector<std::shared_ptr<UFO>> ufos;
 private://sound
