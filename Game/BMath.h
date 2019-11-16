@@ -105,6 +105,10 @@ public:
 		}
 		return *this;
 	}
+	static Vec2 zero()
+	{
+		return{ (T)0,(T)0 };
+	}
 public:
 	T x;
 	T y;
@@ -112,12 +116,6 @@ public:
 
 typedef Vec2<int> VecI2;
 typedef Vec2<float> VecF2;
-
-template<typename T>
-Vec2<T> getZeroVec()
-{
-	return{ (T)0,(T)0 };
-}
 
 template<typename T,typename S>
 S getDistanceSq(const T& obj, const Vec2<S>& point)

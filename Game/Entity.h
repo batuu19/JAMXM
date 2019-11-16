@@ -3,11 +3,9 @@
 #include "Graphics.h"
 #include "BMath.h"
 #include <vector>
-#include "Surface.h"
 #include "Directions.h"
 #include "SpriteContainer.h"
 #include "Hitbox.h"
-#include <stdexcept>
 #include "StaticEntity.h"
 #include "DynamicEntity.h"
 #include "PlayableEntity.h"
@@ -19,8 +17,6 @@ class Entity :
 	public StaticEntity
 {
 public:
-	friend class UI;
-public:
 	virtual ~Entity() = default;
 
 	virtual void update(float dt) override;
@@ -30,9 +26,10 @@ public:
 	bool damage(float amount);//return true if destroyed
 	void kill();
 	bool isDead() const;
-	//TODO: fix - more accurate hitbox
+
 	const Hitbox& getHitbox() const;
 	const VecF2& getPosConst() const;
+	const VecF2& getVelConst() const;
 protected:
 	Entity(const VecF2& pos, int spriteState, const SpriteContainer&,
 		const VecF2& vel = { 0.f,0.f }, float HP = 300.f, float speed = 0.f, float maxVel = 0.f,

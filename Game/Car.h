@@ -12,7 +12,8 @@
 #include "Entity.h"
 class Car : public Entity
 {
-
+public:
+	friend class CarController;
 public:
 	Car(VecF2 pos, int startDirection, 
 		std::shared_ptr<std::vector<std::shared_ptr<Rocket>>>,
@@ -47,14 +48,14 @@ public:
 	void shoot(float dt);
 
 	int getDir() const;
-
+	const std::string& getSpriteFilename() const;
 private:
 	//make it dependent on velocity
 	float turnRate = 0.1f;
 	float leftTurnTime = turnRate;
 	float rightTurnTime = turnRate;
 	int turnValue = 1;//how many directions at once
-	Sound sndFriction = Sound( L"sound\\game\\friction.wav" );
+	Sound sndFriction = Sound( L"sound\\game\\friction.wav" );//make it string, load only when load car controller
 
 
 	Sound sndWeaponChange = Sound(L"sound\\game\\reload.wav");

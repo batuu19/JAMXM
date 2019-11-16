@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "UI.h"
 
 Player::Player(std::shared_ptr<Car> car)
 	:
@@ -113,20 +114,3 @@ const Car& Player::getCarConst() const
 	return *car;
 }
 
-UI::UI(Player& player)
-	:
-	player(player)
-{
-}
-
-void UI::update(float dt)
-{
-	HPPercentage = player.car->HP / player.car->maxHP;
-}
-
-void UI::draw(Graphics& gfx, const VecF2& cameraPos) const
-{
-	gfx.drawSprite(pos, background);
-	gfx.drawRect(RectI(HPRectPos, (int)(HPbarLength * HPPercentage), 10), HPcolor);
-	Font::write(gfx, VecI2{ 165,50 }, std::to_string(player.score), 0, false);
-}

@@ -47,3 +47,18 @@ void Scene::handleInput(Keyboard::Event e)
 		});
 	playables.erase(it, playables.end());
 }
+
+void Scene::addDynamic(std::shared_ptr<DynamicEntity> ptr)
+{
+	dynamics.push_back(ptr);
+}
+
+void Scene::addStatic(std::shared_ptr<StaticEntity> ptr)
+{
+	statics.push_back(ptr);
+}
+
+void Scene::addPlayable(std::shared_ptr<PlayableEntity> ptr)
+{
+	playables.push_back(ptr);
+}

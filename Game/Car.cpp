@@ -91,7 +91,7 @@ void Car::reset()
 
 void Car::stop()
 {
-	vel = getZeroVec<float>();
+	vel = Vec2<float>::zero();
 }
 
 void Car::bounceBack(bool forceBounce)

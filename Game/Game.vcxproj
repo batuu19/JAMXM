@@ -142,6 +142,7 @@
     <ClInclude Include="BUtils.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Car.h" />
+    <ClInclude Include="CarController.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
@@ -180,13 +181,14 @@
     <ClInclude Include="StaticEntity.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="UFO.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="BMath.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="CarController.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -212,6 +214,7 @@
     <ClCompile Include="SpriteContainer.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="UFO.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>

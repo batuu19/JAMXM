@@ -20,6 +20,9 @@ public:
 	virtual void update(float dt);
 	virtual void draw(Graphics&, const VecF2& cameraPos = { 0.f,0.f });//not const, changes static entities
 	virtual void handleInput(Keyboard::Event);
+	void addDynamic(std::shared_ptr<DynamicEntity>);
+	void addStatic(std::shared_ptr<StaticEntity>);
+	void addPlayable(std::shared_ptr<PlayableEntity>);
 protected:
 	std::vector<std::weak_ptr<DynamicEntity>> dynamics;//update
 	std::vector<std::weak_ptr<StaticEntity>>  statics;//draw

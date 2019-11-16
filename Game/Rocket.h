@@ -19,11 +19,19 @@ static constexpr char SMALL_EXPLOSION_SPRITE[] = "sprites\\small_explosion_240x4
 class Rocket : public Entity
 {
 public:
+	virtual ~Rocket() = default;
 	float getAttack() const;
 	virtual Animation getBoomAnim() const = 0;
+	enum class Type
+	{
+		SmallRocket,
+		BigRocket,
+		None
+	};
 protected:
 	Rocket(const VecF2& pos, int spriteState, const VecF2& vel,const SpriteContainer&, float attackValue);
 	float attackValue;
+	Sound sndShot = Sound(L"sound\\game\\rocketshot.wav");
 };
 
 class BigRocket : public Rocket

@@ -21,7 +21,8 @@ public:
 	Map(const Map&) = delete;
 	void draw(Graphics&, const VecF2& cameraPos) const override;
 	const RectI& getRect() const;
-
+	const VecI2 getCarStartPos() const;
+	const int getCarStartDirection() const;
 private:
 	//AI mapAI;
 	//Surface mapSprite = "sprites\\maps\\road_big_1500x1500.bmp";

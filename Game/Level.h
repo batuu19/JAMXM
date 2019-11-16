@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Animation.h"
+#include "UI.h"
 #include "UFO.h"
 #include "Font.h"
 #include "LevelConfig.h"

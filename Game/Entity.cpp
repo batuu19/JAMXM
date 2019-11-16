@@ -61,6 +61,11 @@ const VecF2 & Entity::getPosConst() const
 	return pos;
 }
 
+const VecF2& Entity::getVelConst() const
+{
+	return vel;
+}
+
 Entity::Entity(const VecF2& pos, int spriteState, const SpriteContainer& sprites,
 	const VecF2& vel, float HP, float speed, float maxVel,
 	float invincibilityTime, bool invincibleAtStart
