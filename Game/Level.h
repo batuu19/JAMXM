@@ -43,7 +43,7 @@ private://objects
 private://sound
 	SoundEffect sndRaceStart;
 	Sound sndBoom;
-	Sound sndEngine;
+	//Sound sndEngine;
 	SoundEffect sndAfterBoom;
 private:
 	RectI mapRect;

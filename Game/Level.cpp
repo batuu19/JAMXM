@@ -23,7 +23,7 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 		L"sound\\speech\\larry\\lets_ride.wav"
 		}),
 	sndBoom(L"sound\\game\\explosion.wav"),
-	sndEngine(L"sound\\game\\engine.wav"),
+	//sndEngine(L"sound\\game\\engine.wav"),
 	sndAfterBoom({
 		L"sound\\speech\\larry\\holy_transmission.wav",
 		L"sound\\speech\\larry\\smashed.wav",
