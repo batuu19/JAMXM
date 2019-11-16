@@ -41,6 +41,7 @@ public:
 
 	const Car& getCarConst() const;
 	int getDir() const;
+	int getScore() const;
 public:
 	enum class Speedup {
 		Faster,
@@ -71,6 +72,7 @@ private:
 	std::shared_ptr<std::vector<std::shared_ptr<Rocket>>> rocketsFired;
 	float lastShot = 0.f;
 	Sound sndRocketShot;
+	Sound sndWeaponChange;
 
 	std::shared_ptr<std::vector<std::shared_ptr<Animation>>> animations;
 

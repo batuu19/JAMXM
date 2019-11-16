@@ -14,8 +14,9 @@ CarController::CarController(std::shared_ptr<Car> car, const Map& map,
 	turnRate(car->turnRate),
 	turnValue(car->turnValue),
 	rocketsFired(rocketsFired),
+	sndRocketShot(car->sndRocketShotSrc),
+	sndWeaponChange(car->sndWeaponChangeSrc),
 	animations(animations)
-
 {
 }
 
@@ -134,7 +135,7 @@ void CarController::scorePoints(int amount)
 void CarController::changeWeapon()
 {
 	rocketType = static_cast<Rocket::Type>((static_cast<int>(rocketType) + 1) % rocketCount);//next weapon
-	//sndWeaponChange.Play();//TODO
+	sndWeaponChange.Play();
 }
 
 void CarController::speedup(float dt)
@@ -207,4 +208,9 @@ const Car& CarController::getCarConst() const
 int CarController::getDir() const
 {
 	return spriteState;
+}
+
+int CarController::getScore() const
+{
+	return score;
 }

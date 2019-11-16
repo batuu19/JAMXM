@@ -15,7 +15,7 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 	car(std::make_shared<Car>()),
 	player(std::make_shared<Player>(car)),
 	carController(std::make_shared<CarController>(car, *map,rockets,animations)),
-	//ui(std::make_shared<UI>(player)),
+	ui(std::make_shared<UI>(carController)),
 	mapRect(map->getRect()),
 	sndRaceStart({
 		L"sound\\speech\\larry\\go_go_go.wav",
@@ -30,7 +30,9 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 		L"sound\\speech\\larry\\terrific.wav",
 		L"sound\\speech\\larry\\what_a_blow.wav",
 		L"sound\\speech\\larry\\wipeout.wav"
-		})
+		}),
+	xDist(mapRect.left + 200, mapRect.right - 200),
+	yDist(mapRect.top + 200, mapRect.bottom - 200)
 {
 	//add animations here
 	dynamics.push_back(camera);
@@ -45,6 +47,10 @@ Level::Level(const RectI& screenRect, LevelConfig levelConfig)
 
 	playables.push_back(carController);
 	camera->centerOn(*carController, screenRect);
+	auto ufo = std::make_shared<UFO>(VecF2((float)xDist(rng),(float)yDist(rng)), rng);
+	ufos.push_back(ufo);
+	dynamics.push_back(ufo);
+	statics.push_back(ufo);
 }
 
 void Level::update(float dt)
@@ -59,8 +65,8 @@ void Level::update(float dt)
 			{
 				rockets->at(i)->kill();
 				sndBoom.Play();
-				animations->push_back(
-					std::make_shared<Animation>((*rockets)[i]->getBoomAnim()));
+				auto boomAnim = std::make_shared<Animation>((*rockets)[i]->getBoomAnim());
+				animations->push_back(boomAnim);
 
 				const VecI2 rocketPos = (*rockets)[i]->getPosConst();
 				if (attack((*rockets)[i], ufo))
@@ -69,10 +75,13 @@ void Level::update(float dt)
 					sndAfterBoom.Play(rng);
 					carController->scorePoints();
 					auto booms = makeBigBoom(10, rocketPos, 70, rng);//TODO
-					for (auto& a : booms)
-						animations->push_back(std::make_shared<Animation>(std::move(a)));
-					animations->push_back(
-						std::make_shared<Animation>(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35, true));
+					for (auto& boom : booms)
+					{
+						auto anim = std::make_shared<Animation>(std::move(boom));
+						animations->push_back(anim);
+					}
+					auto bigFire = std::make_shared<Animation>(rocketPos, "sprites\\big_fire.bmp", 4, 30, 35, true);
+					animations->push_back(bigFire);
 					//spawning new ufo
 					ufo->kill();
 					newUfoNeeded = true;
@@ -86,7 +95,10 @@ void Level::update(float dt)
 
 	if (newUfoNeeded)
 	{
-		ufos.push_back(std::make_shared<UFO>(VecF2(float(xDist(rng)), float(yDist(rng))), rng));
+		auto nextUFO = std::make_shared<UFO>(VecF2(float(xDist(rng)), float(yDist(rng))), rng);
+		ufos.push_back(nextUFO);
+		dynamics.push_back(nextUFO);
+		statics.push_back(nextUFO);
 		newUfoNeeded = false;
 	}
 

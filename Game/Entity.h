@@ -30,6 +30,7 @@ public:
 	const Hitbox& getHitbox() const;
 	const VecF2& getPosConst() const;
 	const VecF2& getVelConst() const;
+	float getHPPercentage() const;
 protected:
 	Entity(const VecF2& pos, int spriteState, const SpriteContainer&,
 		const VecF2& vel = { 0.f,0.f }, float HP = 300.f, float speed = 0.f, float maxVel = 0.f,

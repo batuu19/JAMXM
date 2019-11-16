@@ -8,6 +8,7 @@
 #include "Keyboard.h"
 #include "Entity.h"
 #include "ContainerUtils.h"
+#include "Animation.h"
 
 
 class Scene
@@ -27,5 +28,6 @@ protected:
 	std::vector<std::weak_ptr<DynamicEntity>> dynamics;//update
 	std::vector<std::weak_ptr<StaticEntity>>  statics;//draw
 	std::vector<std::weak_ptr<PlayableEntity>> playables;//handleInput
+	//std::vector<std::weak_ptr<Animation>> animations;//here?
 	RectI screenRect;
 };
