@@ -1,8 +1,9 @@
-#include "Main.h"
+#pragma once
+#include <iostream>
 #include "Map.h"
 
 int main()
 {
-	Map map = Map(100,100,5,5);
+	Map map = Map();
 	map.generateFile("testMap.txt", "out.jpg");
 }
